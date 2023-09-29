@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
 import { observer } from 'mobx-react-lite'
-import shmirastack from './Shmira Stack.png'
+import shmirastack from '../images/Shmira Stack.png'
 import { Grid } from 'semantic-ui-react'
-import BetterIcon from './BetterIcon/index'
+import BetterIcon from '../images/BetterIcon/index'
 import Icon from '../shared/components/Icon'
-import IssueTypeIcon from './IssueTypeIcon'
-import LinkedInProfile from './LinkedInProfile.jpeg'
+import IssueTypeIcon from '../images/IssueTypeIcon'
 import Avatar from 'react-avatar'
 
 export default observer(function AboutPage() {
@@ -180,7 +179,7 @@ export default observer(function AboutPage() {
                         style={{ marginLeft: '10px', display: 'flex' }}
                         size="100"
                         round="100px"
-                        src={require('./linkedinprofile.jpeg')}
+                        src={require('../images/linkedinprofile.jpeg')}
                     />
                 </div>
             </Grid.Column>

@@ -2,17 +2,17 @@ import React, { Component, useEffect, useLayoutEffect } from 'react'
 import { Input, Menu, Dropdown, Button } from 'semantic-ui-react'
 import Avatar from 'react-avatar'
 import { runInAction } from 'mobx'
-import { Project } from '../models/project'
-import { Assignee } from '../models/assignee'
-import Icon from './Icon'
+import { Project } from '../../models/project'
+import { Assignee } from '../../models/assignee'
+import Icon from '../../images/Icon'
 import styled from 'styled-components'
-import { useStore } from '../stores/store'
+import { useStore } from '../../stores/store'
 import { observer } from 'mobx-react-lite'
-import NewCreateIssueForm from '../features/forms/NewCreateIssueForm'
-import EditProfileForm from '../features/forms/EditProfileForm'
-import InviteCollaboratorForm from '../features/forms/InviteCollaborator'
-import ProjectForm from '../features/forms/ProjectForm'
-import InviteConfirmationForm from '../features/forms/InviteConfirmationForm'
+import NewCreateIssueForm from '../../features/forms/NewCreateIssueForm'
+import EditProfileForm from '../../features/forms/EditProfileForm'
+import InviteCollaboratorForm from '../../features/forms/InviteCollaborator'
+import ProjectForm from '../../features/forms/ProjectForm'
+import InviteConfirmationForm from '../../features/forms/InviteConfirmationForm'
 import { v4 as uuid } from 'uuid'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
@@ -179,7 +179,7 @@ const NavBarTop = () => {
         allProjects!.map((project, index) => {
             if (
                 project.assignees.filter(
-                    (assignee) => assignee.id === commonStore.assignee_id
+                    (assignee: any) => assignee.id === commonStore.assignee_id
                 ).length > 0
             ) {
                 var option_obj = {

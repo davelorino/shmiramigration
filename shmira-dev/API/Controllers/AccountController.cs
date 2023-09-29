@@ -30,9 +30,13 @@ namespace API.Controllers
 
         private readonly IMapper _mapper;
         
-        public AccountController(UserManager<AppUser> userManager, 
-            SignInManager<AppUser> signInManager, TokenService tokenService, DataContext context,
-            IMapper mapper)
+        public AccountController(
+            UserManager<AppUser> userManager, 
+            SignInManager<AppUser> signInManager, 
+            TokenService tokenService, 
+            DataContext context,
+            IMapper mapper
+            )
         {
             _signInManager = signInManager;
             _userManager = userManager;
