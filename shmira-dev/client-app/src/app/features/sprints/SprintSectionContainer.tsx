@@ -282,24 +282,24 @@ export default observer(function SprintSectionContainer({ sprint }: Props) {
                             </SprintSectionIssueContainer>    
                         }
                         <div></div>
-                        <Item 
-                            onClick={() => 
-                                modalStore.openModal(<NewCreateIssueForm />)
-                            }>
-                            <Icon 
-                                left={'11'} 
-                                top={'0'} 
-                                type='plus' 
-                                size='14' 
-                            />
-                            <ItemText 
-                                style={{
-                                    paddingLeft: '36px', 
-                                    bottom: '4px'
-                                }}>
-                                Create issue
-                            </ItemText>
-                        </Item>
+                            <Item 
+                                onClick={() => 
+                                    modalStore.openModal(<NewCreateIssueForm />)
+                                }>
+                                <Icon 
+                                    left={'11'} 
+                                    top={'0'} 
+                                    type='plus' 
+                                    size='14' 
+                                />
+                                <ItemText 
+                                    style={{
+                                        paddingLeft: '36px', 
+                                        bottom: '4px'
+                                    }}>
+                                    Create issue
+                                </ItemText>
+                            </Item>
                         </SprintSection>
                         <br/>
                     </>

@@ -28,7 +28,7 @@ namespace API.Controllers
 
         private readonly DataContext _context;
 
-         private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
         
         public AccountController(UserManager<AppUser> userManager, 
             SignInManager<AppUser> signInManager, TokenService tokenService, DataContext context,

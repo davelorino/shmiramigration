@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Wy/NvH4oFn/tJQ37Iviih9ozLN2mdjEiayBZfO6pswQ=",
+  "Hash": "OOkHRzwHm2q5mBkPSPg2kW8SlimmL1nVRljwsWzai/I=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "API/wwwroot",
       "Source": "API",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/asset-manifest.json",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/asset-manifest.json",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "asset-manifest.json",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot/asset-manifest.json"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/darkmode.css",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/darkmode.css",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "darkmode.css",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot/darkmode.css"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/favicon.ico",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/favicon.ico",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/index.html",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/index.html",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot/index.html"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/logo192.png",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/logo192.png",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "logo192.png",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot/logo192.png"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/logo512.png",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/logo512.png",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "logo512.png",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot/logo512.png"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/manifest.json",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/manifest.json",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "manifest.json",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot/manifest.json"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/robots.txt",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/robots.txt",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "robots.txt",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot/robots.txt"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/css/main.2ef67368.css",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/css/main.2ef67368.css",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/css/main.2ef67368.css",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot/static/css/main.2ef67368.css"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/css/main.2ef67368.css.map",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/css/main.2ef67368.css.map",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/css/main.2ef67368.css.map",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot/static/css/main.2ef67368.css.map"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/js/main.11a36924.js",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/js/main.11a36924.js",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/js/main.11a36924.js",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot/static/js/main.11a36924.js"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/js/main.11a36924.js.LICENSE.txt",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/js/main.11a36924.js.LICENSE.txt",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/js/main.11a36924.js.LICENSE.txt",
       "AssetKind": "All",
@@ -221,10 +221,10 @@
       "OriginalItemSpec": "wwwroot/static/js/main.11a36924.js.LICENSE.txt"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/js/main.11a36924.js.map",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/js/main.11a36924.js.map",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/js/main.11a36924.js.map",
       "AssetKind": "All",
@@ -238,10 +238,10 @@
       "OriginalItemSpec": "wwwroot/static/js/main.11a36924.js.map"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/CircularStd-Black.00cb4881193e9281e57a.woff2",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/CircularStd-Black.00cb4881193e9281e57a.woff2",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/CircularStd-Black.00cb4881193e9281e57a.woff2",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot/static/media/CircularStd-Black.00cb4881193e9281e57a.woff2"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/CircularStd-Black.4a2c5eeb3ab64924ab01.woff",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/CircularStd-Black.4a2c5eeb3ab64924ab01.woff",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/CircularStd-Black.4a2c5eeb3ab64924ab01.woff",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot/static/media/CircularStd-Black.4a2c5eeb3ab64924ab01.woff"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/CircularStd-Bold.0b58ca4241eda42cff1f.woff2",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/CircularStd-Bold.0b58ca4241eda42cff1f.woff2",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/CircularStd-Bold.0b58ca4241eda42cff1f.woff2",
       "AssetKind": "All",
@@ -289,10 +289,10 @@
       "OriginalItemSpec": "wwwroot/static/media/CircularStd-Bold.0b58ca4241eda42cff1f.woff2"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/CircularStd-Bold.4bae1919c290b4010366.woff",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/CircularStd-Bold.4bae1919c290b4010366.woff",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/CircularStd-Bold.4bae1919c290b4010366.woff",
       "AssetKind": "All",
@@ -306,10 +306,10 @@
       "OriginalItemSpec": "wwwroot/static/media/CircularStd-Bold.4bae1919c290b4010366.woff"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/CircularStd-Book.b9b1abe339ba6639afff.woff",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/CircularStd-Book.b9b1abe339ba6639afff.woff",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/CircularStd-Book.b9b1abe339ba6639afff.woff",
       "AssetKind": "All",
@@ -323,10 +323,10 @@
       "OriginalItemSpec": "wwwroot/static/media/CircularStd-Book.b9b1abe339ba6639afff.woff"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/CircularStd-Book.da91211bb1fd4f1d09d8.woff2",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/CircularStd-Book.da91211bb1fd4f1d09d8.woff2",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/CircularStd-Book.da91211bb1fd4f1d09d8.woff2",
       "AssetKind": "All",
@@ -340,10 +340,10 @@
       "OriginalItemSpec": "wwwroot/static/media/CircularStd-Book.da91211bb1fd4f1d09d8.woff2"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/CircularStd-Medium.06dce1b52a24a6dfe3a2.woff2",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/CircularStd-Medium.06dce1b52a24a6dfe3a2.woff2",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/CircularStd-Medium.06dce1b52a24a6dfe3a2.woff2",
       "AssetKind": "All",
@@ -357,10 +357,10 @@
       "OriginalItemSpec": "wwwroot/static/media/CircularStd-Medium.06dce1b52a24a6dfe3a2.woff2"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/CircularStd-Medium.e39d4081b339f42a2a55.woff",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/CircularStd-Medium.e39d4081b339f42a2a55.woff",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/CircularStd-Medium.e39d4081b339f42a2a55.woff",
       "AssetKind": "All",
@@ -374,10 +374,10 @@
       "OriginalItemSpec": "wwwroot/static/media/CircularStd-Medium.e39d4081b339f42a2a55.woff"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/jira.a0a4f40ff1c6bad40875.svg",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/jira.a0a4f40ff1c6bad40875.svg",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/jira.a0a4f40ff1c6bad40875.svg",
       "AssetKind": "All",
@@ -391,10 +391,10 @@
       "OriginalItemSpec": "wwwroot/static/media/jira.a0a4f40ff1c6bad40875.svg"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/jira.ba8c1c53b0ec8bc7a044.woff",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/jira.ba8c1c53b0ec8bc7a044.woff",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/jira.ba8c1c53b0ec8bc7a044.woff",
       "AssetKind": "All",
@@ -408,10 +408,10 @@
       "OriginalItemSpec": "wwwroot/static/media/jira.ba8c1c53b0ec8bc7a044.woff"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/jira.c920b0e90777bed859c0.ttf",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/jira.c920b0e90777bed859c0.ttf",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/jira.c920b0e90777bed859c0.ttf",
       "AssetKind": "All",
@@ -425,10 +425,10 @@
       "OriginalItemSpec": "wwwroot/static/media/jira.c920b0e90777bed859c0.ttf"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/linkedinprofile.3ff0204f279ff3084d51.jpeg",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/linkedinprofile.3ff0204f279ff3084d51.jpeg",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/linkedinprofile.3ff0204f279ff3084d51.jpeg",
       "AssetKind": "All",
@@ -442,10 +442,10 @@
       "OriginalItemSpec": "wwwroot/static/media/linkedinprofile.3ff0204f279ff3084d51.jpeg"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/Shmira Stack.87ef4692112a326dceb9.png",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/Shmira Stack.87ef4692112a326dceb9.png",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/Shmira Stack.87ef4692112a326dceb9.png",
       "AssetKind": "All",
@@ -459,10 +459,10 @@
       "OriginalItemSpec": "wwwroot/static/media/Shmira Stack.87ef4692112a326dceb9.png"
     },
     {
-      "Identity": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/static/media/shmirabackground3.eae7dccc1ef939dc386f.jpg",
+      "Identity": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/static/media/shmirabackground3.eae7dccc1ef939dc386f.jpg",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/wwwroot/",
+      "ContentRoot": "/Users/davidelorino/shmiramigration/shmira-dev/API/wwwroot/",
       "BasePath": "_content/API",
       "RelativePath": "static/media/shmirabackground3.eae7dccc1ef939dc386f.jpg",
       "AssetKind": "All",

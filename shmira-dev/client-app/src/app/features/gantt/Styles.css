@@ -1,0 +1,28 @@
+.gantt-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .months-container {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .month-bar {
+    flex: 1;  /* This ensures that each month takes up equal width */
+    /* Other stylings for month */
+  }
+  
+  .today-indicator {
+    position: absolute;
+    height: 100%;
+    width: 1px; /* or desired width for the today line */
+    background-color: red;
+    /* add other stylings as necessary */
+  }
+  
+  .sprints-row {
+    display: flex;
+    flex-direction: row;
+  }
+  

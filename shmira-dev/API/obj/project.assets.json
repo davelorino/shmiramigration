@@ -2541,19 +2541,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/Davide/.nuget/packages/": {}
+    "/Users/davidelorino/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/API.csproj",
+      "projectUniqueName": "/Users/davidelorino/shmiramigration/shmira-dev/API/API.csproj",
       "projectName": "API",
-      "projectPath": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/API.csproj",
-      "packagesPath": "/Users/Davide/.nuget/packages/",
-      "outputPath": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/API/obj/",
+      "projectPath": "/Users/davidelorino/shmiramigration/shmira-dev/API/API.csproj",
+      "packagesPath": "/Users/davidelorino/.nuget/packages/",
+      "outputPath": "/Users/davidelorino/shmiramigration/shmira-dev/API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/Davide/.nuget/NuGet/NuGet.Config"
+        "/Users/davidelorino/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -2565,11 +2565,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/Application/Application.csproj": {
-              "projectPath": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/Application/Application.csproj"
+            "/Users/davidelorino/shmiramigration/shmira-dev/Application/Application.csproj": {
+              "projectPath": "/Users/davidelorino/shmiramigration/shmira-dev/Application/Application.csproj"
             },
-            "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/Infrastructure/Infrastructure.csproj": {
-              "projectPath": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/Infrastructure/Infrastructure.csproj"
+            "/Users/davidelorino/shmiramigration/shmira-dev/Infrastructure/Infrastructure.csproj": {
+              "projectPath": "/Users/davidelorino/shmiramigration/shmira-dev/Infrastructure/Infrastructure.csproj"
             }
           }
         }
@@ -2646,7 +2646,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.411/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.414/RuntimeIdentifierGraph.json"
       }
     }
   }

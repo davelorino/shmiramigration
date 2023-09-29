@@ -186,6 +186,14 @@ export default observer(function NavbarRight() {
       <Icon type="calendar" size={18} top={0} left={3} />
       <ItemText>Sprint</ItemText>
     </Item>
+    <Item style={{marginLeft: '-42px'}} onClick={() => 
+        
+        history.push(`/gantt`)
+        }>
+        <Icon style={{display: 'inline-block'}} type="gantt" size={18} top={1} left={0} />
+        <ItemText style={{display: 'inline-block', marginBottom: '30px', marginLeft: '24px'}}>Gantt</ItemText>
+    </Item>
+
     <Item onClick={() => mediumModalStore.openMediumModal(<EditProjectForm />)} >
       <Icon type="settings" size={18} top={0} left={3} />
       <ItemText>Project</ItemText>

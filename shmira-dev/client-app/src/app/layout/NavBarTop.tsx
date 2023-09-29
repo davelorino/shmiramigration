@@ -180,7 +180,7 @@ function addProjectIdToLegacyTickets() {
           <a onClick={() => mediumModalStore.openMediumModal(<ProjectForm />) }>
             <Icon type="duck" size={'18'} ></Icon>
           
-            <ItemText>Shmira Software</ItemText>
+            <ItemText style={{color: 'white'}}>Shmira Software</ItemText>
           </a>
          </FirstItem>
            <Dropdown 

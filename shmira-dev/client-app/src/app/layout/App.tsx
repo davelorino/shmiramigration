@@ -6,6 +6,7 @@ import './fontStyles.css';
 import IssueDashboard from '../features/sprints/dashboard/IssuesDashboard';
 import InsightsDashboard from '../features/sprints/dashboard/InsightsDashboard';
 import SprintPage from '../features/sprints/SprintPage';
+import GanttPage from  '../features/gantt/GanttPage';
 import LoadingComponent from './LoadingComponent';
 import NavBarTop from './NavBarTop';
 import { useStore } from '../stores/store';
@@ -53,13 +54,15 @@ if(commonStore.token === null && !accountStore.accountsLoading && !issueStore.lo
     backgroundSize: 'cover',  
     display: 'flex', 
     flexWrap: 'wrap', 
-    justifyContent: 'center' 
+    justifyContent: 'center',
+    backgroundPosition: 'center',
+    //backgroundRepeat: 'no-repeat'
     }}>
     <div 
       className='modal' 
       style={{        
         backgroundColor: `transparent`, 
-        width: '40%',
+        width: '500px',
         height: '500px',
         marginTop: '280px',
         backdropFilter: `brightness(125%) saturate(150%) blur(10px)`}} 
@@ -70,6 +73,7 @@ if(commonStore.token === null && !accountStore.accountsLoading && !issueStore.lo
         <Route path='/sprints' component={LoginForm} />
         <Route path='/login' component={LoginForm} />
         <Route path='/invite' component={LoginForm} />
+        <Route path='/gantt' component={LoginForm} />
         <Route path='/insights' component={LoginForm} />
         <Route path='/activate' component={ActivateAccountForm} />
       </div>
@@ -85,16 +89,23 @@ if(commonStore.token === null && !accountStore.accountsLoading && !issueStore.lo
     return (
       <div>
       {
-        <div>
+        <div style={{
+          filter: 'brightness(130%)', 
+          marginTop: '0px', 
+          marginBottom: '0px',
+          paddingTop: '0px',
+          paddingBottom: '0px'
+          }}>
           <ModalContainer />
           <SmallModalContainer />
           <MediumModalContainer />
           <NavBarTop />
           <NavbarRight />
-          <Container style={{marginTop: '7em'}}>
+          <Container style={{paddingTop: '7em'}}>
             <Route exact path='/' component={IssueDashboard} />
             <Route path='/insights' component={InsightsDashboard} />
             <Route path='/sprints' component={SprintPage} />
+            <Route path='/gantt' component={GanttPage} />
             <Route path='/about' component={AboutPage} />
           </Container>    
         </div>

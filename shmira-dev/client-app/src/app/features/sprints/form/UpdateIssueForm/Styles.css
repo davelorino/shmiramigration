@@ -1,0 +1,16 @@
+
+
+.comment-default {
+    width: 100%;
+    margin-bottom: 5px;
+    border: 1px solid white;
+    filter: brightness(130%);
+    transition: filter 0.0s; 
+}
+
+.comment-hovered {
+    filter: brightness(165%);
+    width: 100%;
+    margin-bottom: 5px;
+    border: 1px solid white;
+}

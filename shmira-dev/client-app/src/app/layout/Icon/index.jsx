@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { ReactComponent as GanttSVG } from '../gantt.svg';
 import { StyledIcon } from './Styles';
 
 const fontIconCodes = {
@@ -37,7 +37,8 @@ const fontIconCodes = {
   [`arrow-left`]: '\\e91e',
   [`arrow-right`]: '\\e91f',
   [`duck`]: '\\1F986',
-  ['cartwheel']: '\\1F938'
+  ['cartwheel']: '\\1F938',
+  ['gantt']: GanttSVG
 };
 
 const propTypes = {
@@ -55,9 +56,24 @@ const defaultProps = {
   top: 0,
 };
 
-const Icon = ({ type, ...iconProps }) => (
-  <StyledIcon {...iconProps} data-testid={`icon:${type}`} code={fontIconCodes[type]} />
-);
+const Icon = ({ type, ...iconProps }) => {
+  if (typeof fontIconCodes[type] === 'string') {
+    return (
+      <StyledIcon {...iconProps} data-testid={`icon:${type}`} code={fontIconCodes[type]} />
+    );
+  } else {
+    // If it's an SVG component, merge in SVG-specific props.
+    const svgProps = {
+      width: iconProps.size,
+      height: iconProps.size,
+      marginLeft: '-50px',
+      paddingLeft: '-50px',
+      fill: "white",  // or any other default fill you desire
+      ...iconProps,  // This spreads all other props that you might have passed
+    };
+    return React.createElement(fontIconCodes[type], svgProps);
+  }
+};
 
 Icon.propTypes = propTypes;
 Icon.defaultProps = defaultProps;

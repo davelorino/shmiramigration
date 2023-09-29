@@ -2,14 +2,10 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useStore } from '../../../../stores/store';
 import { observer } from 'mobx-react-lite';
-import CreateIssueForm from '../../../../features/sprints/form/CreateIssueForm';
-import UpdateIssueForm from '../../../../features/sprints/form/UpdateIssueForm';
-import NewUpdateIssueForm from '../../../../features/sprints/form/NewUpdateIssueForm';
+import NewUpdateIssueForm from '../../../../features/sprints/form/UpdateIssueForm/NewUpdateIssueForm';
 import { StyledAvatar, AvatarIsActiveLabelBorder } from '../../../../features/sprints/dashboard/Filters/Styles';
-import { Label } from 'semantic-ui-react';
 import IssuePriorityIcon from '../../../../layout/IssuePriorityIcon';
 import IssueTypeIcon from '../../../../layout/IssueTypeIcon';
-import Icon from '../../../Icon';
 
 //import { IssueTypeIcon, IssuePriorityIcon } from 'shared/components';
 

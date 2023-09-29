@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import { Button, Label, Grid, Dropdown, Input, TextArea} from 'semantic-ui-react';
 import { Formik, Form, ErrorMessage, Field } from 'formik';
-import { useStore } from '../../../stores/store';
+import { useStore } from '../../../../stores/store';
 import { observer } from 'mobx-react-lite';
-import { Sprint } from '../../../models/sprint';
-import { Issue } from '../../../models/issue';
-import { Comment } from '../../../models/comment';
+import { Sprint } from '../../../../models/sprint';
+import { Issue } from '../../../../models/issue';
 import * as Yup from 'yup';
-import { Assignee } from '../../../models/assignee';
-import { StyledLabelAvatar, StyledAvatar, AvatarIsActiveLabelBorder } from '../dashboard/Filters/Styles';
-import {InvisibleTextInput, StyledInput} from '../../../shared/form/Styles';
+import { Assignee } from '../../../../models/assignee';
+import { StyledLabelAvatar, StyledAvatar, AvatarIsActiveLabelBorder } from '../../dashboard/Filters/Styles';
+import {InvisibleTextInput, StyledInput} from '../../../../shared/form/Styles';
 import ReactQuill from 'react-quill';
 import  "react-quill/dist/quill.snow.css";
 import parse from 'html-react-parser';
-import Icon from '../../../layout/Icon/index';
-import IssuePriorityIcon from '../../../layout/IssuePriorityIcon';
-import IssueTypeIcon from '../../../layout/IssueTypeIcon';
-import {StyledLabel} from './Styles';
-import {HoverDiv} from './Styles';
-import UpdateIssueFormTrackingWidget from './UpdateIssueFormTimeTrackingWidget';
+import Icon from '../../../../layout/Icon/index';
+import IssuePriorityIcon from '../../../../layout/IssuePriorityIcon';
+import IssueTypeIcon from '../../../../layout/IssueTypeIcon';
+import {StyledLabel} from '../Styles';
+import {HoverDiv} from '../Styles';
+import UpdateIssueFormTrackingWidget from '../UpdateIssueFormTimeTrackingWidget';
 import moment from 'moment';
 import "quill-mention/dist/quill.mention.css";
 import "quill-mention";
 import { v4 as uuid } from 'uuid';
+import './Styles.css'
 
 
 export default observer(function NewUpdateIssueForm() {
@@ -76,6 +76,30 @@ export default observer(function NewUpdateIssueForm() {
     var [selectedIssueRemainingMinutes, setSelectedIssueRemainingMinutes] = useState(0);
     var [comment_edit_state, setCommentEditState] = useState(false);
     var [comment_state, setCommentState] = useState("");
+    const [commentHoveredIndex, setCommentHoveredIndex] = useState(99); // To track which div is hovered
+    const [isSprintHovered, setIsSprintHovered] = useState(false);
+    const [isReporterHovered, setIsReporterHovered] = useState(false);
+    const [isAssigneeHovered, setIsAssigneeHovered] = useState(false);
+    const [isLogtimeHovered, setIsLogtimeHovered] = useState(false);
+    const [isPriorityHovered, setIsPriorityHovered] = useState(false);
+    const [isStatusHovered, setIsStatusHovered] = useState(false);
+    const baseStyle = {
+        transition: 'brightness 0.0s', // smooth transition for the brightness change
+    };
+    const hoveredStyle = {
+        filter: 'brightness(165%)',
+        backgroundFilter: 'brightness(165%)'
+    };
+
+    const divStyles = {
+        border: '1px solid white', 
+        width: '100%', 
+        paddingLeft: '10px', 
+        paddingTop: '10px', 
+        paddingBottom: '10px',
+        filter: 'brightness(130%)'
+    };
+
 
     function toggleLogTimeEditState() {
         setLogTimeEditState(!log_time_edit_state);
@@ -279,9 +303,11 @@ export default observer(function NewUpdateIssueForm() {
                         >
                         <IssueTypeIcon color='#65BA43'type='story' size={14} />
                         <div style={{
+                            color: "#FFFFFF",
                             paddingLeft: '7px', 
                             alignContent: 'center', 
-                            display: 'inline-block'
+                            display: 'inline-block',
+                            marginRight: '0px'
                             }}>
                             Story
                         </div> 
@@ -304,6 +330,7 @@ export default observer(function NewUpdateIssueForm() {
                             size={14} 
                             />
                         <div style={{
+                            color: "#FFFFFF",
                             paddingLeft: '7px', 
                             alignContent: 'center', 
                             display: 'inline-block'
@@ -329,6 +356,7 @@ export default observer(function NewUpdateIssueForm() {
                             size={14} 
                             />
                         <div style={{
+                            color: "#FFFFFF",
                             paddingLeft: '7px', 
                             alignContent: 'center', 
                             display: 'inline-block'
@@ -592,7 +620,6 @@ export default observer(function NewUpdateIssueForm() {
         updated_issue.reporter = "";
 
         issueStore.updateIssue(updated_issue);
-
     }
 
     const addReporterToIssue = (user_id: string) => {
@@ -670,7 +697,6 @@ export default observer(function NewUpdateIssueForm() {
         } 
 
         issueStore.removeAssigneeFromIssue(issue_assignee_to_remove);
-
     }
 
 
@@ -798,13 +824,6 @@ export default observer(function NewUpdateIssueForm() {
             ':' + 
             '00';
 
-        console.log("First time span");
-        console.log(first_time_span);
-        console.log("Second time span");
-        console.log(second_time_span);
-        console.log("Final timespan");
-        console.log(finalTimespan);
-
         return( finalTimespan )
     }
       
@@ -821,15 +840,11 @@ export default observer(function NewUpdateIssueForm() {
             selectedIssueLoggedHours, 
             selectedIssueLoggedMinutes
             );
-        console.log("updateLoggedTime:: Time logged =");
-        console.log(time_logged);
+
         current_issue.time_logged = addTimeSpans(
             time_logged, 
             current_issue.time_logged
             );
-        console.log("updateLoggedTime:: Time added =");
-        console.log(current_issue.time_logged);
-
 
         var time_remaining = calculateIssueTimespan(
             selectedIssueRemainingDays, 
@@ -971,6 +986,7 @@ export default observer(function NewUpdateIssueForm() {
                 <Grid>
                 <Grid.Column width={10}>
                     {renderSelectedIssueType()}
+                
                     <div style={{display: 'inline-block'}}>
                     <Dropdown 
                         downward 
@@ -981,24 +997,23 @@ export default observer(function NewUpdateIssueForm() {
                         label='Status' 
                         name='status' 
                         options={issueTypeOptions}
+                        style={{color: "#FFFFFF", marginTop: "15px", marginBottom: "5px"}}
                         //onChange={(e) => handleChangeAssignees(e)} 
                         />
                     </div>
-                    
                     {!issue_title_edit_state &&
                     <InvisibleTextInput 
-                        style={{cursor: 'pointer'}} 
-                        fontsize={20} 
+                        style={{cursor: 'pointer', marginBottom: "5px", marginTop: "5px"}} 
+                        fontsize={17} 
                         onClick={() => 
                             toggleIssueTitleEditor(issue_title_edit_state)
                         }>
-                    <h1 style={{
-                            paddingTop: "10px", 
-                            paddingBottom: "10px", 
+                    <h3 style={{
+                            paddingTop: "15px",  
                             paddingLeft: "5px"
                             }}>
                             {selectedIssue!.name} 
-                        </h1>
+                        </h3>
                     </InvisibleTextInput>
                     }
                     {issue_title_edit_state &&
@@ -1012,6 +1027,7 @@ export default observer(function NewUpdateIssueForm() {
                     />      
                     }                
                     
+                
                     <h5 style={{
                         marginLeft: '10px', 
                         marginBottom: '0px', 
@@ -1019,6 +1035,11 @@ export default observer(function NewUpdateIssueForm() {
                         }}>
                         Description
                     </h5>
+                    <div style={{
+                    border: '1px solid white',
+                    marginTop: '10px',
+                    paddingBottom: '15px'
+                    }}>
                     {!description_edit_state && 
                     <InvisibleTextInput 
                         style={{
@@ -1047,19 +1068,21 @@ export default observer(function NewUpdateIssueForm() {
                         description_edit_state &&
                         <>
                             <ReactQuill style={{
-                                minHeight: "300px", 
-                                maxHeight: "700px"
+                                minHeight: "100px", 
+                                maxHeight: "700px",
+                                marginBottom: '0px',
+                                paddingBottom: '10px'
                                 }} 
                                 theme="snow" 
                                 defaultValue={selectedIssue!.description} 
                                 onChange={setQuillDescriptionEditText}
                             />
                             
-                            <br/>
                             <Button 
                                 size="mini" 
                                 content="Save" 
-                                color="blue" 
+                                color="blue"
+                                style={{marginLeft: '15px'}} 
                                 onClick={() => {
                                     updateIssueDescription(); 
                                     toggleDescriptionEditor(description_edit_state)
@@ -1072,15 +1095,22 @@ export default observer(function NewUpdateIssueForm() {
                                 }/>
                         </>
                     }
-
+                    </div>
                     <h5>Comments</h5>
                     {
-                        selectedIssue!.comments!.map(comment => 
+                        selectedIssue!.comments!.map((comment, index) => 
                             (
-                                <div style={{width: '100%'}}>
+                            <div 
+                                key={index}
+                                className={commentHoveredIndex === index ? 'comment-hovered' : 'comment-default'}
+                                onMouseEnter={() => setCommentHoveredIndex(index)} 
+                                onMouseLeave={() => setCommentHoveredIndex(99)} 
+                                >
                                     <div style={{
                                         verticalAlign: 'top', 
-                                        display: 'inline-block'
+                                        display: 'inline-block',
+                                        paddingLeft: '10px',
+                                        paddingTop: '10px'
                                         }}> 
                                         <StyledAvatar 
                                             size="30" 
@@ -1105,8 +1135,9 @@ export default observer(function NewUpdateIssueForm() {
                                     </div>
                                     <div 
                                         style={{
-                                            paddingLeft: '15px', 
-                                            display: 'inline-block', 
+                                            paddingLeft: '20px', 
+                                            display: 'inline-block',
+                                            paddingTop: '10px',
                                             width: '90%'
                                         }}>
                                         <h5>{selectedProject!.assignees
@@ -1117,13 +1148,14 @@ export default observer(function NewUpdateIssueForm() {
                                                     .find(assignee => 
                                                         assignee.id === comment.commenter_assignee_id)!
                                                             .second_name, 
-                                                            '    ', 
+                                                            '            ', 
                                                             moment(comment.comment_posted)
                                                             .fromNow()
                                                 )
                                             }</h5>
-                                        <p>{comment.comment}</p>
-                                        <br/>
+                                        <div style={{marginBottom: '10px'}}>
+                                            <p>{comment.comment}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -1160,17 +1192,19 @@ export default observer(function NewUpdateIssueForm() {
                     <div style={{
                         display: "inline-block", 
                         paddingLeft: "15px", 
-                        width: "90%"
+                        width: "95%"
+                        
                         }}>
                         <TextArea 
+                            style={{border: '1px solid white'}}
                             onChange={(e) => setCommentState(e.target.value)} 
                             placeholder="Add a comment..."/>
                     </div>
 
                     <div style={{
                         marginTop: '10px', 
-                        marginRight: '30px', 
-                        float: 'right', 
+                        marginRight: '0px', 
+                        float: 'right',
                         display: 'inline-block'
                         }}>
                         <Button 
@@ -1180,10 +1214,24 @@ export default observer(function NewUpdateIssueForm() {
                             onClick={() => submitComment()}
                         />
                     </div>
+                
                 </Grid.Column>
+                
                 <Grid.Column width={6}>
+                
                 <div style={{paddingTop: "10px"}}></div>
-                <Label>{selectedIssue!.status}</Label>
+                <div style={{
+                    ...divStyles,
+                    ...baseStyle,
+                    ...{position: 'relative', zIndex: '99'},
+                    ...(isStatusHovered ? hoveredStyle : {})
+                    }}
+                    onMouseEnter={() => setIsStatusHovered(true)}
+                    onMouseLeave={() => setIsStatusHovered(false)}
+                >
+                    <h5 style={{paddingLeft: '10px', paddingTop: '10px'}}>STATUS</h5>
+                    <hr style={{border: '1px solid white', width: '95%'}}/>
+                    <Label>{selectedIssue!.status}</Label>
                 <Dropdown 
                     downward 
                     multiple
@@ -1193,10 +1241,23 @@ export default observer(function NewUpdateIssueForm() {
                     label='Status' 
                     name='status' 
                     options={statusOptions}
+                    style={{position: 'relative', zIndex: '99'}}
                     //onChange={(e) => handleChangeAssignees(e)} 
                     />
                 <br/>
-                <h5>ASSIGNEES</h5>
+                </div>
+                <div style={{marginBottom: '20px'}}/>
+                <div style={{
+                    ...divStyles,
+                    ...baseStyle,
+                    ...{position: 'relative', zIndex: '98'},
+                    ...(isAssigneeHovered ? hoveredStyle : {})
+                    }}
+                    onMouseEnter={() => setIsAssigneeHovered(true)}
+                    onMouseLeave={() => setIsAssigneeHovered(false)}
+                >
+                <h5 style={{paddingLeft: '10px', paddingTop: '10px'}}>ASSIGNEES</h5>
+                <hr style={{border: '1px solid white', width: '95%'}}/>
                 {selectedIssue!.assignees.map( (user, index) => (
                     <StyledLabel 
                         style={{
@@ -1238,14 +1299,26 @@ export default observer(function NewUpdateIssueForm() {
                     value='' 
                     label='Assign' 
                     name='assignees' 
+                    style={{position: 'relative', zIndex: '99'}}
                     options={
                         formatProjectAssignees(projectAssignees, 
                         selectedIssue!
                     )} 
                     onChange={(e) => handleChangeAssignees(e)} 
                     />
-
-                <h5>REPORTER</h5>
+                </div>
+                <div style={{marginTop: '20px'}}/>
+                <div style={{
+                    ...divStyles,
+                    ...baseStyle,
+                    ...{position: 'relative', zIndex: '90'},
+                    ...(isReporterHovered ? hoveredStyle : {})
+                    }}
+                    onMouseEnter={() => setIsReporterHovered(true)}
+                    onMouseLeave={() => setIsReporterHovered(false)}
+                >
+                <h5 style={{paddingLeft: '10px', paddingTop: '10px'}}>REPORTER</h5>
+                <hr style={{border: '1px solid white', width: '95%'}}/>
                  {selectedIssue!.reporter_id !== null && 
                  selectedIssue!.reporter_id.length !== 0 &&
                     <StyledLabel 
@@ -1313,15 +1386,23 @@ export default observer(function NewUpdateIssueForm() {
                     value='' 
                     label='Assign' 
                     name='reporter' 
+                    style={{position: 'relative', zIndex: '99'}}
                     options={
                         formatProjectReporters(projectAssignees, selectedIssue!)
                     } 
                     onChange={(e) => handleChangeReporter(e)} 
                     />
                 <div></div>
-                   
+                </div>
                 <br/>
-
+                <div style={{
+                        ...divStyles,
+                        ...baseStyle,
+                        ...(isSprintHovered ? hoveredStyle : {})
+                        }}
+                        onMouseEnter={() => setIsSprintHovered(true)}
+                        onMouseLeave={() => setIsSprintHovered(false)}
+                >
                 <InvisibleTextInput 
                     onClick={toggleLogTimeEditState} 
                     fontsize={12} 
@@ -1332,12 +1413,16 @@ export default observer(function NewUpdateIssueForm() {
                         paddingBottom: '10px'
                         }}>
                         <h5 style={{
-                            marginLeft: "0px", 
-                            marginBottom: "5px"
+                            marginLeft: "5px",
+                            //paddingLeft: '5px', 
+                            marginBottom: "5px",
+                            paddingBottom: '5px'
                             }}>LOG TIME
                         </h5> 
-                        
-                        <UpdateIssueFormTrackingWidget/>
+                        <hr style={{border: '1px solid white', width: '95%'}}/>
+                        <div style={{paddingRight: '10px'}}>
+                            <UpdateIssueFormTrackingWidget/>
+                        </div>
                     </div>
                 </InvisibleTextInput>
 
@@ -1433,10 +1518,21 @@ export default observer(function NewUpdateIssueForm() {
                                 
                         </>
                     }
+                    </div>
                     <div style={{width: '100%', marginTop: '20px'}}>
-                        <div style={{ width: '100%' }}>
+                        <div style={{
+                            ...divStyles,
+                            ...baseStyle,
+                            ...{position: 'relative', zIndex: '98'},
+                            ...(isLogtimeHovered ? hoveredStyle : {})
+                            }}
+                            onMouseEnter={() => setIsLogtimeHovered(true)}
+                            onMouseLeave={() => setIsLogtimeHovered(false)}
+                            >
+                            
                             <h5 style={{verticalAlign: 'top'}}>SPRINT</h5>
-                            <StyledLabel>
+                            <hr style={{border: '1px solid white', width: '95%'}}/>
+                            <StyledLabel style={{marginRight: '0px'}}>
                                 <p style={{
                                     verticalAlign: 'top', 
                                     paddingBottom: "3px", 
@@ -1455,14 +1551,23 @@ export default observer(function NewUpdateIssueForm() {
                             placeholder='' 
                             value='' 
                             label='Sprint' 
-                            name='sprint' 
+                            name='sprint'
+                            style={{marginLeft: '0px', paddingLeft: '0px', position: 'relative', zIndex: '99'}} 
                             options={
                                 reformatSprintOptions(selectedProject!.sprints)
                             } 
                             />
                     </div>
-                    <div style={{marginTop: '20px', width: '100%'}}>
+                    <div style={{marginBottom: '20px'}}/>
+                    <div style={{
+                            ...divStyles,
+                            ...baseStyle,
+                            ...(isPriorityHovered ? hoveredStyle : {})
+                            }}
+                            onMouseEnter={() => setIsPriorityHovered(true)}
+                            onMouseLeave={() => setIsPriorityHovered(false)}>
                         <h5>PRIORITY</h5>
+                        <hr style={{border: '1px solid white'}}/>
                         <StyledLabel> 
                             <IssuePriorityIcon priority={selectedIssue!.priority}/>
                             <p style={{
@@ -1498,8 +1603,9 @@ export default observer(function NewUpdateIssueForm() {
                     }}>
                     {'Last updated '.concat(moment(selectedIssue!.updated_at)?.fromNow())}
                 </p>
-                
-            </Grid.Column>   
+            
+            </Grid.Column> 
+              
             </Grid>   
         </Form>
         )}

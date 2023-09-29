@@ -4,7 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { useStore } from '../../../../stores/store';
 import { observer } from 'mobx-react-lite';
 import { Issue } from '../../../../models/issue';
-import NewUpdateIssueForm from '../../../../features/sprints/form/NewUpdateIssueForm';
+import NewUpdateIssueForm from '../../../../features/sprints/form/UpdateIssueForm/NewUpdateIssueForm';
 import { StyledAvatar, AvatarIsActiveLabelBorder } from '../../../../features/sprints/dashboard/Filters/Styles';
 import { StyledLabel } from '../../../../features/sprints/form/Styles';
 import IssuePriorityIcon from '../../../../layout/IssuePriorityIcon';

@@ -171,6 +171,7 @@ export default observer(function SprintPage() {
                 {
                     selectedProject!.sprints
                         .filter(sprint => sprint.name !== "Backlog" && sprint.is_active)
+                        .sort((a: any, b: any) => new Date(a.date_start).getTime() - new Date(b.date_end).getTime())
                         .map( (sprint, index) => (
                             <SprintSectionContainer 
                                 sprintDetailsExpanded={sprintDetailsExpanded} 
@@ -184,6 +185,7 @@ export default observer(function SprintPage() {
                 {
                     selectedProject!.sprints
                         .filter(sprint => sprint.name !== "Backlog" && !sprint.is_active)
+                        .sort((a: any, b: any) => new Date(a.date_start).getTime() - new Date(b.date_end).getTime())
                         .map( (sprint, index) => (
                         <SprintSectionContainer 
                             sprintDetailsExpanded={sprintDetailsExpanded} 

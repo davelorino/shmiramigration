@@ -51,35 +51,6 @@ export default observer(function AddDatesToSprintForm() {
         setSprintTitleEditState(!sprint_title_edit_state);
     }
 
-    function handleUpdateSprintDates(selectedSprint: any) {
-        
-        var updated_sprint_details: any = {
-            ...selectedSprint
-        }
-
-        delete updated_sprint_details['issues'];
-        updated_sprint_details.date_start = sprint_start_date;
-        updated_sprint_details.date_end = sprint_end_date;
-        updated_sprint_details.description = sprint_description;
-        updateSprint(updated_sprint_details);
-    }
-
-    function handleFormSubmit(values: any) {
-        
-        var new_sprint = {
-            ...values,
-            id: uuid()
-        }
-        
-        var newProjectSprint = {
-            project_name: selectedProject!.name,
-            sprint_name: values.name
-        }
-        
-        selectedProject!.sprints.push(new_sprint);
-        createSprint(new_sprint, newProjectSprint);
-    }
-
     function handleAddSprintDates() {
         
         var current_sprint: Partial<Sprint> = {

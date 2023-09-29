@@ -92,7 +92,7 @@ export default observer(function LoginForm() {
                     position: 'relative', 
                     zIndex: '1'
                     }}>
-                    <div style={{
+                    {/*<div style={{
                             paddingTop: '0px', 
                             marginTop: '20px', 
                             width: '100%', 
@@ -102,7 +102,8 @@ export default observer(function LoginForm() {
                         }}>
                         <Icon top={0} type='duck' size={40} />
                     </div>
-                    <h2 style={{marginTop: '5px'}}>Welcome to Shmira</h2>
+                    */}
+                    <h2 style={{marginTop: '20px', color: "#FFFFFF"}}>Welcome to Shmira</h2>
                 
                     <input 
                         type='email' 
@@ -130,7 +131,7 @@ export default observer(function LoginForm() {
                     <input 
                         type='password' 
                         name='password' 
-                        placeholder='password' 
+                        placeholder='Password' 
                         onChange={(e) => {
                             setError(''); 
                             updatePasswordState(e.target.value)
@@ -172,11 +173,11 @@ export default observer(function LoginForm() {
                             lineHeight: '2', 
                             position: 'relative', 
                             paddingRight: '150px', 
-                            bottom: '3px', 
+                            bottom: '1px', 
                             paddingLeft: '5px', 
                             cursor: 'pointer'
                             }}>
-                            remember me
+                            Stay signed in.
                         </label>
                     </div>
                     <div style={{
@@ -187,50 +188,56 @@ export default observer(function LoginForm() {
                         }}>
                         <Button 
                             type='submit' 
-                            content='Sign In' 
+                            content='Login' 
                             size='tiny' 
                             loading={loginLoading} 
                             onClick={() => login()} 
                             style={{
-                                marginTop: '10px', 
-                                marginBottom: '10px', 
-                                position: 'relative', 
-                                clear: 'both', 
-                                float: 'right',
-                                lineHeight: '1.2', 
-                                height: '32px'
+                                //marginTop: '10px', 
+                                //marginBottom: '10px', 
+                                //position: 'relative', 
+                                fontSize: '14px',
+                                display: 'flex',
+                                color: "#FFFFFF",
+                                //clear: 'both', 
+                                //float: 'right',
+                                //lineHeight: '1.2', 
+                                height: '35px'
                             }}/>  
                     </div>
                    
                     {
                         loginError.length > 1 &&
-                        <label style={{color: 'red'}}>Wrong email or password</label>
+                        <label style={{color: 'red'}}>Wrong email or password.</label>
                     }
-                    <hr style={{width: '100%', borderColor: 'grey'}} />
+                    <hr style={{width: '100%', borderColor: 'white'}} />
                     <div style={{
                         textAlign: 'center', 
                         paddingTop: '0px', 
                         marginTop: '0px', 
                         width: '100%', 
+                        color: "#FFFFFF",
                         display: 'flex', 
                         flexWrap: 'wrap', 
                         justifyContent: 'center'
                         }}>
-                        <SignUpButton 
+                        <Button 
                             onClick={() => guestLogin()} 
                             iconSize='20px' 
                             style={{
-                                textAlign: 'center', 
-                                fontSize: '12px', 
+                                textAlign: 'center',
+                                color: "#FFFFFF", 
+                                fontSize: '14px', 
                                 height: '37px'
                                 }}>
                             <span style={{
-                                display: 'table', 
+                                //textAlign: 'center',
+                                display: 'table',
                                 margin:'auto'
                                 }}>
-                                Explore as guest
+                                Explore as Guest
                             </span>
-                        </SignUpButton>
+                        </Button>
                     </div>
                     {/*
                     <div style={{textAlign: 'center', paddingTop: '0px', marginTop: '0px', width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}} >

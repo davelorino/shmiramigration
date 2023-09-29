@@ -1880,19 +1880,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/Davide/.nuget/packages/": {}
+    "/Users/davidelorino/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/Persistence/Persistence.csproj",
+      "projectUniqueName": "/Users/davidelorino/shmiramigration/shmira-dev/Persistence/Persistence.csproj",
       "projectName": "Persistence",
-      "projectPath": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/Persistence/Persistence.csproj",
-      "packagesPath": "/Users/Davide/.nuget/packages/",
-      "outputPath": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/Persistence/obj/",
+      "projectPath": "/Users/davidelorino/shmiramigration/shmira-dev/Persistence/Persistence.csproj",
+      "packagesPath": "/Users/davidelorino/.nuget/packages/",
+      "outputPath": "/Users/davidelorino/shmiramigration/shmira-dev/Persistence/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/Davide/.nuget/NuGet/NuGet.Config"
+        "/Users/davidelorino/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -1904,8 +1904,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/Domain/Domain.csproj": {
-              "projectPath": "/Users/Davide/Downloads/shmirajuly2023/shmira-dev/Domain/Domain.csproj"
+            "/Users/davidelorino/shmiramigration/shmira-dev/Domain/Domain.csproj": {
+              "projectPath": "/Users/davidelorino/shmiramigration/shmira-dev/Domain/Domain.csproj"
             }
           }
         }
@@ -1965,7 +1965,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.411/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.414/RuntimeIdentifierGraph.json"
       }
     }
   }
