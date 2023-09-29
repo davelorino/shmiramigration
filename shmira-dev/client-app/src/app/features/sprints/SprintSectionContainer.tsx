@@ -3,14 +3,14 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../../stores/store';
 import { Sprint } from '../../models/sprint';
 import { SprintSection, SprintSectionIssueContainer, Item, ItemText } from './Styles';
-import Icon from '../../layout/Icon';
-import BetterIcon from '../../layout/BetterIcon';
-import SprintDashboardIssue from '../../layout/Lists/List/Issue/SprintDashboardIssue';
+import Icon from '../../images/Icon';
+import BetterIcon from '../../images/BetterIcon';
+import SprintDashboardIssue from '../lists/list/Issue/SprintDashboardIssue';
 import { Droppable } from 'react-beautiful-dnd';
-import SprintForm from './form/SprintForm';
-import AddDatesToSprintForm from './form/AddDatesToSprintForm';
-import ConfirmCloseSprintForm from './form/ConfirmCloseSprintForm';
-import NewCreateIssueForm from './form/NewCreateIssueForm';
+import SprintForm from '../forms/SprintForm';
+import AddDatesToSprintForm from '../forms/AddDatesToSprintForm';
+import ConfirmCloseSprintForm from '../forms/ConfirmCloseSprintForm';
+import NewCreateIssueForm from '../forms/NewCreateIssueForm';
 import moment from 'moment';
 
 interface Props {

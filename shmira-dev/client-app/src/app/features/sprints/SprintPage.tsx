@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { SprintSectionBacklog } from './Styles';
 import { observer } from 'mobx-react-lite';
-import Filters from '../sprints/dashboard/Filters/Filters';
+import Filters from '../filters/Filters';
 import { useStore } from '../../stores/store';
 import SprintSectionContainer from './SprintSectionContainer';
 import {DragDropContext, DropResult} from 'react-beautiful-dnd';
