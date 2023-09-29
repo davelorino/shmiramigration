@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
-import { color, font, mixin } from 'shared/utils/styles';
+import { color, font, mixin } from 'shared/utils/styles'
 
 export default createGlobalStyle`
   html, body, #root {
@@ -107,4 +107,4 @@ export default createGlobalStyle`
   }
 
   ${mixin.placeholderColor(color.textLight)}
-`;
+`

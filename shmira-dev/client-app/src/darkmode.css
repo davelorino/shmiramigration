@@ -28,10 +28,21 @@ html {
 html {
     color-scheme: dark !important;
 }
-html, body, input, textarea, select, button, dialog {
+html,
+body,
+input,
+textarea,
+select,
+button,
+dialog {
     background-color: #181a1b;
 }
-html, body, input, textarea, select, button {
+html,
+body,
+input,
+textarea,
+select,
+button {
     border-color: #736b5e;
     color: #e8e6e3;
 }
@@ -60,23 +71,25 @@ select:-webkit-autofill {
 }
 
 /* Invert Style */
-.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, #bit-notification-bar-iframe, ::-webkit-calendar-picker-indicator {
+.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, #bit-notification-bar-iframe, ::-webkit-calendar-picker-indicator
+{
     filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
 }
 
 /* Variables Style */
 :root {
-   --darkreader-neutral-background: #131516;
-   --darkreader-neutral-text: #d8d4cf;
-   --darkreader-selection-background: #004daa;
-   --darkreader-selection-text: #e8e6e3;
+    --darkreader-neutral-background: #131516;
+    --darkreader-neutral-text: #d8d4cf;
+    --darkreader-selection-background: #004daa;
+    --darkreader-selection-text: #e8e6e3;
 }
 
 /* Modified CSS */
 .ql-editor {
-    outline-color: initial; 
+    outline-color: initial;
 }
-.ql-editor ul[data-checked="false"] > li::before, .ql-editor ul[data-checked="true"] > li::before {
+.ql-editor ul[data-checked='false'] > li::before,
+.ql-editor ul[data-checked='true'] > li::before {
     color: rgb(157, 148, 136);
 }
 .ql-editor .ql-bg-black {
@@ -309,9 +322,9 @@ select:-webkit-autofill {
     background-color: rgb(24, 26, 27);
     border-color: rgb(62, 68, 70);
     box-shadow: rgb(43, 47, 49) 0px 0px 5px;
-    color: rgb(189, 183, 175); 
+    color: rgb(189, 183, 175);
 }
-.ql-snow .ql-tooltip input[type="text"] {
+.ql-snow .ql-tooltip input[type='text'] {
     border-color: rgb(62, 68, 70);
 }
 .ql-snow .ql-tooltip a.ql-action::after {
@@ -385,7 +398,7 @@ input:focus::placeholder {
     background-color: rgb(0, 87, 173);
 }
 .cropper-bg {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiPjxkZWZzPjxmaWx0ZXIgaWQ9ImRhcmtyZWFkZXItaW1hZ2UtZmlsdGVyIj48ZmVDb2xvck1hdHJpeCB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMC4zMzMgLTAuNjY3IC0wLjY2NyAwLjAwMCAxLjAwMCAtMC42NjcgMC4zMzMgLTAuNjY3IDAuMDAwIDEuMDAwIC0wLjY2NyAtMC42NjcgMC4zMzMgMC4wMDAgMS4wMDAgMC4wMDAgMC4wMDAgMC4wMDAgMS4wMDAgMC4wMDAiIC8+PC9maWx0ZXI+PC9kZWZzPjxpbWFnZSB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbHRlcj0idXJsKCNkYXJrcmVhZGVyLWltYWdlLWZpbHRlcikiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQkFBQUFBUUFRTUFBQUFsUFcwaUFBQUFBM05DU1ZRSUNBamI0VS9nQUFBQUJsQk1WRVhNek16Ly8vL1RqUlYyQUFBQUNYQklXWE1BQUFyckFBQUs2d0dDaXcxYUFBQUFISFJGV0hSVGIyWjBkMkZ5WlFCQlpHOWlaU0JHYVhKbGQyOXlhM01nUTFNMjZMeXlqQUFBQUJGSlJFRlVDSmxqK00vQWdCVmhGLzBQQUg2L0QvSGtEeE9HQUFBQUFFbEZUa1N1UW1DQyIgLz48L3N2Zz4=");
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiPjxkZWZzPjxmaWx0ZXIgaWQ9ImRhcmtyZWFkZXItaW1hZ2UtZmlsdGVyIj48ZmVDb2xvck1hdHJpeCB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMC4zMzMgLTAuNjY3IC0wLjY2NyAwLjAwMCAxLjAwMCAtMC42NjcgMC4zMzMgLTAuNjY3IDAuMDAwIDEuMDAwIC0wLjY2NyAtMC42NjcgMC4zMzMgMC4wMDAgMS4wMDAgMC4wMDAgMC4wMDAgMC4wMDAgMS4wMDAgMC4wMDAiIC8+PC9maWx0ZXI+PC9kZWZzPjxpbWFnZSB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbHRlcj0idXJsKCNkYXJrcmVhZGVyLWltYWdlLWZpbHRlcikiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQkFBQUFBUUFRTUFBQUFsUFcwaUFBQUFBM05DU1ZRSUNBamI0VS9nQUFBQUJsQk1WRVhNek16Ly8vL1RqUlYyQUFBQUNYQklXWE1BQUFyckFBQUs2d0dDaXcxYUFBQUFISFJGV0hSVGIyWjBkMkZ5WlFCQlpHOWlaU0JHYVhKbGQyOXlhM01nUTFNMjZMeXlqQUFBQUJGSlJFRlVDSmxqK00vQWdCVmhGLzBQQUg2L0QvSGtEeE9HQUFBQUFFbEZUa1N1UW1DQyIgLz48L3N2Zz4=');
 }
 :root {
     --darkreader-bg--toastify-color-light: #181a1b;
@@ -413,7 +426,15 @@ input:focus::placeholder {
     --darkreader-text--toastify-text-color-error: #e8e6e3;
     --darkreader-border--toastify-spinner-color: #6c6459;
     --toastify-spinner-color-empty-area: #e0e0e0;
-    --darkreader-bgimg--toastify-color-progress-light: linear-gradient(90deg, #20954c, #056895, #0062cc, #1c7da5, #24238e, #b10022);
+    --darkreader-bgimg--toastify-color-progress-light: linear-gradient(
+        90deg,
+        #20954c,
+        #056895,
+        #0062cc,
+        #1c7da5,
+        #24238e,
+        #b10022
+    );
     --darkreader-bg--toastify-color-progress-dark: #39037a;
     --toastify-color-progress-info: var(--toastify-color-info);
     --toastify-color-progress-success: var(--toastify-color-success);
@@ -424,8 +445,9 @@ input:focus::placeholder {
     color: rgb(232, 230, 227);
 }
 .Toastify__toast {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 10px 0px,
-    rgba(0, 0, 0, 0.05) 0px 2px 15px 0px;
+    box-shadow:
+        rgba(0, 0, 0, 0.1) 0px 1px 10px 0px,
+        rgba(0, 0, 0, 0.05) 0px 2px 15px 0px;
 }
 .Toastify__toast-theme--dark {
     color: var(--darkreader-text--toastify-text-color-dark);
@@ -496,25 +518,44 @@ input:focus::placeholder {
 .react-datepicker__month-year-read-view--down-arrow,
 .react-datepicker__navigation-icon::before,
 .react-datepicker__year-read-view--down-arrow {
-    border-color: rgb(62, 68, 70); 
+    border-color: rgb(62, 68, 70);
 }
-.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::after, .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::after, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before {
-    border-color: transparent; 
+.react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::after,
+.react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::before,
+.react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::after,
+.react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::before {
+    border-color: transparent;
 }
-.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before {
-    border-bottom-color: rgb(71, 77, 80); 
+.react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::before,
+.react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::before {
+    border-bottom-color: rgb(71, 77, 80);
 }
-.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::after, .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
-    border-bottom-color: rgb(52, 57, 59); border-top-color: initial; 
+.react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::after,
+.react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::before {
+    border-bottom-color: rgb(52, 57, 59);
+    border-top-color: initial;
 }
-.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
-    border-bottom-color: rgb(71, 77, 80); 
+.react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::before {
+    border-bottom-color: rgb(71, 77, 80);
 }
-.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::after, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before {
+.react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::after,
+.react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::before {
     border-bottom-color: initial;
-    border-top-color: rgb(48, 52, 54); 
+    border-top-color: rgb(48, 52, 54);
 }
-.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before {
+.react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::before {
     border-top-color: rgb(71, 77, 80);
 }
 .react-datepicker-wrapper {
@@ -555,23 +596,46 @@ input:focus::placeholder {
     background-image: initial;
     background-color: rgb(24, 26, 27);
 }
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+.react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list {
     list-style-image: initial;
 }
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {
+.react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list
+    li.react-datepicker__time-list-item:hover {
     background-color: rgb(32, 35, 37);
 }
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+.react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list
+    li.react-datepicker__time-list-item--selected {
     background-color: rgb(26, 86, 132);
     color: rgb(232, 230, 227);
 }
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected:hover {
+.react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list
+    li.react-datepicker__time-list-item--selected:hover {
     background-color: rgb(26, 86, 132);
 }
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled {
+.react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list
+    li.react-datepicker__time-list-item--disabled {
     color: rgb(200, 195, 188);
 }
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled:hover {
+.react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    ul.react-datepicker__time-list
+    li.react-datepicker__time-list-item--disabled:hover {
     background-color: initial;
 }
 .react-datepicker__week-number {
@@ -683,16 +747,60 @@ input:focus::placeholder {
 .react-datepicker__year-text--keyboard-selected:hover {
     background-color: rgb(23, 74, 115);
 }
-.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range),
-.react-datepicker__month-text--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range),
-.react-datepicker__quarter-text--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range),
-.react-datepicker__year-text--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range) {
+.react-datepicker__day--in-selecting-range:not(
+        .react-datepicker__day--in-range,
+        .react-datepicker__month-text--in-range,
+        .react-datepicker__quarter-text--in-range,
+        .react-datepicker__year-text--in-range
+    ),
+.react-datepicker__month-text--in-selecting-range:not(
+        .react-datepicker__day--in-range,
+        .react-datepicker__month-text--in-range,
+        .react-datepicker__quarter-text--in-range,
+        .react-datepicker__year-text--in-range
+    ),
+.react-datepicker__quarter-text--in-selecting-range:not(
+        .react-datepicker__day--in-range,
+        .react-datepicker__month-text--in-range,
+        .react-datepicker__quarter-text--in-range,
+        .react-datepicker__year-text--in-range
+    ),
+.react-datepicker__year-text--in-selecting-range:not(
+        .react-datepicker__day--in-range,
+        .react-datepicker__month-text--in-range,
+        .react-datepicker__quarter-text--in-range,
+        .react-datepicker__year-text--in-range
+    ) {
     background-color: rgba(26, 86, 132, 0.5);
 }
-.react-datepicker__month--selecting-range .react-datepicker__day--in-range:not(.react-datepicker__day--in-selecting-range, .react-datepicker__month-text--in-selecting-range, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__year-text--in-selecting-range),
-.react-datepicker__month--selecting-range .react-datepicker__month-text--in-range:not(.react-datepicker__day--in-selecting-range, .react-datepicker__month-text--in-selecting-range, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__year-text--in-selecting-range),
-.react-datepicker__month--selecting-range .react-datepicker__quarter-text--in-range:not(.react-datepicker__day--in-selecting-range, .react-datepicker__month-text--in-selecting-range, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__year-text--in-selecting-range),
-.react-datepicker__month--selecting-range .react-datepicker__year-text--in-range:not(.react-datepicker__day--in-selecting-range, .react-datepicker__month-text--in-selecting-range, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__year-text--in-selecting-range) {
+.react-datepicker__month--selecting-range
+    .react-datepicker__day--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+    ),
+.react-datepicker__month--selecting-range
+    .react-datepicker__month-text--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+    ),
+.react-datepicker__month--selecting-range
+    .react-datepicker__quarter-text--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+    ),
+.react-datepicker__month--selecting-range
+    .react-datepicker__year-text--in-range:not(
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__month-text--in-selecting-range,
+        .react-datepicker__quarter-text--in-selecting-range,
+        .react-datepicker__year-text--in-selecting-range
+    ) {
     background-color: rgb(32, 35, 37);
     color: rgb(232, 230, 227);
 }
@@ -727,12 +835,18 @@ input:focus::placeholder {
 .react-datepicker__year-read-view {
     border-color: transparent;
 }
-.react-datepicker__month-read-view:hover .react-datepicker__month-read-view--down-arrow,
-.react-datepicker__month-read-view:hover .react-datepicker__year-read-view--down-arrow,
-.react-datepicker__month-year-read-view:hover .react-datepicker__month-read-view--down-arrow,
-.react-datepicker__month-year-read-view:hover .react-datepicker__year-read-view--down-arrow,
-.react-datepicker__year-read-view:hover .react-datepicker__month-read-view--down-arrow,
-.react-datepicker__year-read-view:hover .react-datepicker__year-read-view--down-arrow {
+.react-datepicker__month-read-view:hover
+    .react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-read-view:hover
+    .react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-year-read-view:hover
+    .react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-year-read-view:hover
+    .react-datepicker__year-read-view--down-arrow,
+.react-datepicker__year-read-view:hover
+    .react-datepicker__month-read-view--down-arrow,
+.react-datepicker__year-read-view:hover
+    .react-datepicker__year-read-view--down-arrow {
     border-top-color: rgb(69, 75, 78);
 }
 .react-datepicker__month-dropdown,
@@ -746,14 +860,20 @@ input:focus::placeholder {
 .react-datepicker__year-option:hover {
     background-color: rgb(53, 57, 59);
 }
-.react-datepicker__month-option:hover .react-datepicker__navigation--years-upcoming,
-.react-datepicker__month-year-option:hover .react-datepicker__navigation--years-upcoming,
-.react-datepicker__year-option:hover .react-datepicker__navigation--years-upcoming {
+.react-datepicker__month-option:hover
+    .react-datepicker__navigation--years-upcoming,
+.react-datepicker__month-year-option:hover
+    .react-datepicker__navigation--years-upcoming,
+.react-datepicker__year-option:hover
+    .react-datepicker__navigation--years-upcoming {
     border-bottom-color: rgb(69, 75, 78);
 }
-.react-datepicker__month-option:hover .react-datepicker__navigation--years-previous,
-.react-datepicker__month-year-option:hover .react-datepicker__navigation--years-previous,
-.react-datepicker__year-option:hover .react-datepicker__navigation--years-previous {
+.react-datepicker__month-option:hover
+    .react-datepicker__navigation--years-previous,
+.react-datepicker__month-year-option:hover
+    .react-datepicker__navigation--years-previous,
+.react-datepicker__year-option:hover
+    .react-datepicker__navigation--years-previous {
     border-top-color: rgb(69, 75, 78);
 }
 .react-datepicker__close-icon {
@@ -817,9 +937,9 @@ body {
 }
 .bNhTnc:hover {
     background-image: initial;
-    background-color: rgba(24, 26, 27, 0.1); 
+    background-color: rgba(24, 26, 27, 0.1);
 }
-[data-rbd-drag-handle-context-id="0"] {
+[data-rbd-drag-handle-context-id='0'] {
     -webkit-tap-highlight-color: rgba(232, 230, 227, 0);
 }
 a {
@@ -907,15 +1027,17 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
     color: rgba(232, 230, 227, 0.6);
     text-shadow: none;
     text-decoration-color: initial;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 1px inset,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
+    box-shadow:
+        rgba(0, 0, 0, 0) 0px 0px 0px 1px inset,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
     -webkit-tap-highlight-color: transparent;
 }
 .ui.button:hover {
     background-color: rgb(53, 58, 60);
     background-image: none;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 1px inset,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
+    box-shadow:
+        rgba(0, 0, 0, 0) 0px 0px 0px 1px inset,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
     color: rgba(232, 230, 227, 0.8);
 }
 .ui.button:focus {
@@ -1154,24 +1276,27 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
 }
 .ui.basic.button:hover,
 .ui.basic.buttons .button:hover {
-    box-shadow: rgba(27, 29, 30, 0.35) 0px 0px 0px 1px inset,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
+    box-shadow:
+        rgba(27, 29, 30, 0.35) 0px 0px 0px 1px inset,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
     background-image: initial !important;
     background-color: rgb(24, 26, 27) !important;
     color: rgba(232, 230, 227, 0.8) !important;
 }
 .ui.basic.button:focus,
 .ui.basic.buttons .button:focus {
-    box-shadow: rgba(27, 29, 30, 0.35) 0px 0px 0px 1px inset,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
+    box-shadow:
+        rgba(27, 29, 30, 0.35) 0px 0px 0px 1px inset,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
     background-image: initial !important;
     background-color: rgb(24, 26, 27) !important;
     color: rgba(232, 230, 227, 0.8) !important;
 }
 .ui.basic.button:active,
 .ui.basic.buttons .button:active {
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset,
-    rgba(27, 29, 30, 0.15) 0px 1px 4px 0px inset;
+    box-shadow:
+        rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset,
+        rgba(27, 29, 30, 0.15) 0px 1px 4px 0px inset;
     background-image: initial !important;
     background-color: rgb(28, 30, 31) !important;
     color: rgba(232, 230, 227, 0.9) !important;
@@ -1233,9 +1358,9 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
 .ui.labeled.icon.button > .icon,
 .ui.labeled.icon.buttons > .button > .icon {
     background-color: rgba(0, 0, 0, 0.05);
-    box-shadow: rgba(0, 0, 0, 0) -1px 0px 0px 0px inset; 
+    box-shadow: rgba(0, 0, 0, 0) -1px 0px 0px 0px inset;
 }
-.ui[class*="right labeled"].icon.button > .icon {
+.ui[class*='right labeled'].icon.button > .icon {
     box-shadow: rgba(0, 0, 0, 0) 1px 0px 0px 0px inset;
 }
 .ui.button.toggle.active,
@@ -3352,8 +3477,9 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
 }
 .ui.buttons:not(.basic):not(.inverted) > .button,
 .ui.buttons > .ui.button:not(.basic):not(.inverted) {
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 1px inset,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
+    box-shadow:
+        rgba(0, 0, 0, 0) 0px 0px 0px 1px inset,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 0px inset;
 }
 .ui.buttons .button:first-child {
     border-left-color: initial;
@@ -3394,25 +3520,26 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
 .ui.divider.inverted,
 .ui.divider.inverted::after,
 .ui.divider.inverted::before {
-    border-color: rgba(128, 119, 105, 0.15) rgba(48, 52, 54, 0.15) rgba(48, 52, 54, 0.15) rgba(128, 119, 105, 0.15) !important;
+    border-color: rgba(128, 119, 105, 0.15) rgba(48, 52, 54, 0.15)
+        rgba(48, 52, 54, 0.15) rgba(128, 119, 105, 0.15) !important;
 }
 .ui.horizontal.divider::after,
 .ui.horizontal.divider::before {
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAACCAYAAACuTHuKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1OThBRDY4OUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1OThBRDY4QUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU5OEFENjg3Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU5OEFENjg4Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+VU513gAAADVJREFUeNrs0DENACAQBDBIWLGBJQby/mUcJn5sJXQmOQMAAAAAAJqt+2prAAAAAACg2xdgANk6BEVuJgyMAAAAAElFTkSuQmCC");
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAACCAYAAACuTHuKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1OThBRDY4OUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1OThBRDY4QUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU5OEFENjg3Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU5OEFENjg4Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+VU513gAAADVJREFUeNrs0DENACAQBDBIWLGBJQby/mUcJn5sJXQmOQMAAAAAAJqt+2prAAAAAACg2xdgANk6BEVuJgyMAAAAAElFTkSuQmCC');
 }
 @media only screen and (max-width: 767px) {
     .ui.grid .stackable.row .ui.vertical.divider::after,
     .ui.grid .stackable.row .ui.vertical.divider::before,
     .ui.stackable.grid .ui.vertical.divider::after,
     .ui.stackable.grid .ui.vertical.divider::before {
-        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAACCAYAAACuTHuKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1OThBRDY4OUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1OThBRDY4QUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU5OEFENjg3Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU5OEFENjg4Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+VU513gAAADVJREFUeNrs0DENACAQBDBIWLGBJQby/mUcJn5sJXQmOQMAAAAAAJqt+2prAAAAAACg2xdgANk6BEVuJgyMAAAAAElFTkSuQmCC");
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAACCAYAAACuTHuKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1OThBRDY4OUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1OThBRDY4QUNDMTYxMUU0OUE3NUVGOEJDMzMzMjE2NyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjU5OEFENjg3Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU5OEFENjg4Q0MxNjExRTQ5QTc1RUY4QkMzMzMyMTY3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+VU513gAAADVJREFUeNrs0DENACAQBDBIWLGBJQby/mUcJn5sJXQmOQMAAAAAAJqt+2prAAAAAACg2xdgANk6BEVuJgyMAAAAAElFTkSuQmCC');
     }
 }
 i.flag:not(.icon) {
     text-decoration-color: inherit;
 }
 i.flag:not(.icon)::before {
-    background-image: url("https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/themes/default/assets/images/flags.png");
+    background-image: url('https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/themes/default/assets/images/flags.png');
     background-color: initial;
 }
 .ui.header {
@@ -3429,15 +3556,13 @@ i.flag:not(.icon)::before {
     color: rgba(232, 230, 227, 0.8);
 }
 .ui.inverted.attached.header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.05));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
     background-color: rgb(63, 69, 71);
     box-shadow: none;
     border-color: transparent;
 }
 .ui.inverted.block.header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.05));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
     background-color: rgb(63, 69, 71);
     box-shadow: none;
 }
@@ -3825,16 +3950,18 @@ i.inverted.circular.black.icon {
     color: rgb(232, 230, 227) !important;
 }
 i.icons .corner.icon {
-    text-shadow: rgb(24, 26, 27) -1px -1px 0px,
-    rgb(24, 26, 27) 1px -1px 0px,
-    rgb(24, 26, 27) -1px 1px 0px,
-    rgb(24, 26, 27) 1px 1px 0px;
+    text-shadow:
+        rgb(24, 26, 27) -1px -1px 0px,
+        rgb(24, 26, 27) 1px -1px 0px,
+        rgb(24, 26, 27) -1px 1px 0px,
+        rgb(24, 26, 27) 1px 1px 0px;
 }
 i.icons .inverted.corner.icon {
-    text-shadow: rgb(21, 23, 24) -1px -1px 0px,
-    rgb(21, 23, 24) 1px -1px 0px,
-    rgb(21, 23, 24) -1px 1px 0px,
-    rgb(21, 23, 24) 1px 1px 0px;
+    text-shadow:
+        rgb(21, 23, 24) -1px -1px 0px,
+        rgb(21, 23, 24) 1px -1px 0px,
+        rgb(21, 23, 24) -1px 1px 0px,
+        rgb(21, 23, 24) 1px 1px 0px;
 }
 .ui.image {
     background-color: transparent;
@@ -3915,28 +4042,30 @@ img.ui.bordered.image {
 .ui.transparent.inverted.input > input::-webkit-input-placeholder {
     color: rgba(232, 230, 227, 0.5);
 }
-.ui.labeled.input:not([class*="corner labeled"]) .label:first-child + input {
+.ui.labeled.input:not([class*='corner labeled']) .label:first-child + input {
     border-left-color: transparent;
 }
-.ui.labeled.input:not([class*="corner labeled"]) .label:first-child + input:focus {
-    border-left-color: rgb(36, 83, 114); 
+.ui.labeled.input:not([class*='corner labeled'])
+    .label:first-child
+    + input:focus {
+    border-left-color: rgb(36, 83, 114);
 }
-.ui[class*="right labeled"].input > input {
-    border-right-color: transparent !important; 
-}
-.ui[class*="right labeled"].input > input:focus {
-    border-right-color: rgb(36, 83, 114) !important;
-}
-.ui.action.input:not([class*="left action"]) > input {
+.ui[class*='right labeled'].input > input {
     border-right-color: transparent !important;
 }
-.ui.action.input:not([class*="left action"]) > input:focus {
-    border-right-color: rgb(36, 83, 114) !important; 
+.ui[class*='right labeled'].input > input:focus {
+    border-right-color: rgb(36, 83, 114) !important;
 }
-.ui[class*="left action"].input > input {
-    border-left-color: transparent !important; 
+.ui.action.input:not([class*='left action']) > input {
+    border-right-color: transparent !important;
 }
-.ui[class*="left action"].input > input:focus {
+.ui.action.input:not([class*='left action']) > input:focus {
+    border-right-color: rgb(36, 83, 114) !important;
+}
+.ui[class*='left action'].input > input {
+    border-left-color: transparent !important;
+}
+.ui[class*='left action'].input > input:focus {
     border-left-color: rgb(36, 83, 114) !important;
 }
 .ui.inverted.input > input {
@@ -3990,12 +4119,16 @@ img.ui.bordered.image {
     border-top-color: inherit;
 }
 .ui.ribbon.label {
-    border-color: rgba(140, 130, 115, 0.15); 
+    border-color: rgba(140, 130, 115, 0.15);
 }
 .ui.ribbon.label::after {
-    border-top-color: transparent; border-bottom-color: transparent; border-left-color: transparent; border-right-color: inherit; background-color: transparent !important; 
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: inherit;
+    background-color: transparent !important;
 }
-.ui[class*="right ribbon"].label::after {
+.ui[class*='right ribbon'].label::after {
     border-right-color: transparent;
     border-bottom-color: transparent;
     border-left-color: transparent;
@@ -4722,10 +4855,12 @@ ol.ui.inverted.list li::before {
 }
 .ui.placeholder {
     background-color: rgb(24, 26, 27);
-    background-image: linear-gradient(to right,
-    rgba(0, 0, 0, 0.08) 0px,
-    rgba(0, 0, 0, 0.15) 15%,
-    rgba(0, 0, 0, 0.08) 30%);
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.08) 0px,
+        rgba(0, 0, 0, 0.15) 15%,
+        rgba(0, 0, 0, 0.08) 30%
+    );
 }
 .ui.placeholder,
 .ui.placeholder .image.header::after,
@@ -4739,10 +4874,12 @@ ol.ui.inverted.list li::before {
     background-color: inherit;
 }
 .ui.inverted.placeholder {
-    background-image: linear-gradient(to right,
-    rgba(24, 26, 27, 0.08) 0px,
-    rgba(24, 26, 27, 0.14) 15%,
-    rgba(24, 26, 27, 0.08) 30%);
+    background-image: linear-gradient(
+        to right,
+        rgba(24, 26, 27, 0.08) 0px,
+        rgba(24, 26, 27, 0.14) 15%,
+        rgba(24, 26, 27, 0.08) 30%
+    );
 }
 .ui.inverted.placeholder,
 .ui.inverted.placeholder .image.header::after,
@@ -4814,8 +4951,9 @@ ol.ui.inverted.list li::before {
 }
 .ui.raised.segment,
 .ui.raised.segments {
-    box-shadow: rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
-    rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
+    box-shadow:
+        rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
+        rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
 }
 .ui.segments {
     border-color: rgba(128, 119, 105, 0.15);
@@ -4876,7 +5014,8 @@ ol.ui.inverted.list li::before {
     background-color: rgba(24, 26, 27, 0.8);
 }
 .ui.loading.segment::after {
-    border-color: rgb(101, 94, 83) rgba(140, 130, 115, 0.1) rgba(140, 130, 115, 0.1);
+    border-color: rgb(101, 94, 83) rgba(140, 130, 115, 0.1)
+        rgba(140, 130, 115, 0.1);
     box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 1px;
 }
 .ui.basic.segment {
@@ -5001,8 +5140,10 @@ ol.ui.inverted.list li::before {
     color: rgba(232, 230, 227, 0.6);
 }
 .ui.secondary.inverted.segment {
-    background-image: linear-gradient(rgba(24, 26, 27, 0.2) 0px,
-    rgba(24, 26, 27, 0.2) 100%);
+    background-image: linear-gradient(
+        rgba(24, 26, 27, 0.2) 0px,
+        rgba(24, 26, 27, 0.2) 100%
+    );
     background-color: rgb(59, 64, 67);
     color: rgba(232, 230, 227, 0.8);
 }
@@ -5012,8 +5153,10 @@ ol.ui.inverted.list li::before {
     color: rgba(232, 230, 227, 0.6);
 }
 .ui.tertiary.inverted.segment {
-    background-image: linear-gradient(rgba(24, 26, 27, 0.35) 0px,
-    rgba(24, 26, 27, 0.35) 100%);
+    background-image: linear-gradient(
+        rgba(24, 26, 27, 0.35) 0px,
+        rgba(24, 26, 27, 0.35) 100%
+    );
     background-color: rgb(88, 95, 99);
     color: rgba(232, 230, 227, 0.8);
 }
@@ -5123,7 +5266,18 @@ ol.ui.inverted.list li::before {
 .ui.form .field > label {
     color: rgba(232, 230, 227, 0.87);
 }
-.ui.form input:not([type]), .ui.form input[type="date"], .ui.form input[type="datetime-local"], .ui.form input[type="email"], .ui.form input[type="file"], .ui.form input[type="number"], .ui.form input[type="password"], .ui.form input[type="search"], .ui.form input[type="tel"], .ui.form input[type="text"], .ui.form input[type="time"], .ui.form input[type="url"] {
+.ui.form input:not([type]),
+.ui.form input[type='date'],
+.ui.form input[type='datetime-local'],
+.ui.form input[type='email'],
+.ui.form input[type='file'],
+.ui.form input[type='number'],
+.ui.form input[type='password'],
+.ui.form input[type='search'],
+.ui.form input[type='tel'],
+.ui.form input[type='text'],
+.ui.form input[type='time'],
+.ui.form input[type='url'] {
     outline-color: initial;
     background-image: initial;
     background-color: rgb(24, 26, 27);
@@ -5176,7 +5330,18 @@ ol.ui.inverted.list li::before {
 .ui.form .error :focus::-webkit-input-placeholder {
     color: rgb(216, 145, 144);
 }
-.ui.form input:not([type]):focus, .ui.form input[type="date"]:focus, .ui.form input[type="datetime-local"]:focus, .ui.form input[type="email"]:focus, .ui.form input[type="file"]:focus, .ui.form input[type="number"]:focus, .ui.form input[type="password"]:focus, .ui.form input[type="search"]:focus, .ui.form input[type="tel"]:focus, .ui.form input[type="text"]:focus, .ui.form input[type="time"]:focus, .ui.form input[type="url"]:focus {
+.ui.form input:not([type]):focus,
+.ui.form input[type='date']:focus,
+.ui.form input[type='datetime-local']:focus,
+.ui.form input[type='email']:focus,
+.ui.form input[type='file']:focus,
+.ui.form input[type='number']:focus,
+.ui.form input[type='password']:focus,
+.ui.form input[type='search']:focus,
+.ui.form input[type='tel']:focus,
+.ui.form input[type='text']:focus,
+.ui.form input[type='time']:focus,
+.ui.form input[type='url']:focus {
     color: rgba(232, 230, 227, 0.95);
     border-color: rgb(36, 83, 114);
     background-image: initial;
@@ -5201,10 +5366,32 @@ ol.ui.inverted.list li::before {
     border-color: rgb(141, 51, 50);
     color: rgb(232, 230, 227);
 }
-.ui.form .field.error input:not([type]), .ui.form .field.error input[type="date"], .ui.form .field.error input[type="datetime-local"], .ui.form .field.error input[type="email"], .ui.form .field.error input[type="file"], .ui.form .field.error input[type="number"], .ui.form .field.error input[type="password"], .ui.form .field.error input[type="search"], .ui.form .field.error input[type="tel"], .ui.form .field.error input[type="text"], .ui.form .field.error input[type="time"], .ui.form .field.error input[type="url"],
+.ui.form .field.error input:not([type]),
+.ui.form .field.error input[type='date'],
+.ui.form .field.error input[type='datetime-local'],
+.ui.form .field.error input[type='email'],
+.ui.form .field.error input[type='file'],
+.ui.form .field.error input[type='number'],
+.ui.form .field.error input[type='password'],
+.ui.form .field.error input[type='search'],
+.ui.form .field.error input[type='tel'],
+.ui.form .field.error input[type='text'],
+.ui.form .field.error input[type='time'],
+.ui.form .field.error input[type='url'],
 .ui.form .field.error select,
 .ui.form .field.error textarea,
-.ui.form .fields.error .field input:not([type]), .ui.form .fields.error .field input[type="date"], .ui.form .fields.error .field input[type="datetime-local"], .ui.form .fields.error .field input[type="email"], .ui.form .fields.error .field input[type="file"], .ui.form .fields.error .field input[type="number"], .ui.form .fields.error .field input[type="password"], .ui.form .fields.error .field input[type="search"], .ui.form .fields.error .field input[type="tel"], .ui.form .fields.error .field input[type="text"], .ui.form .fields.error .field input[type="time"], .ui.form .fields.error .field input[type="url"],
+.ui.form .fields.error .field input:not([type]),
+.ui.form .fields.error .field input[type='date'],
+.ui.form .fields.error .field input[type='datetime-local'],
+.ui.form .fields.error .field input[type='email'],
+.ui.form .fields.error .field input[type='file'],
+.ui.form .fields.error .field input[type='number'],
+.ui.form .fields.error .field input[type='password'],
+.ui.form .fields.error .field input[type='search'],
+.ui.form .fields.error .field input[type='tel'],
+.ui.form .fields.error .field input[type='text'],
+.ui.form .fields.error .field input[type='time'],
+.ui.form .fields.error .field input[type='url'],
 .ui.form .fields.error .field select,
 .ui.form .fields.error .field textarea {
     background-image: initial;
@@ -5213,7 +5400,18 @@ ol.ui.inverted.list li::before {
     color: rgb(203, 108, 106);
     box-shadow: none;
 }
-.ui.form .field.error input:not([type]):focus, .ui.form .field.error input[type="date"]:focus, .ui.form .field.error input[type="datetime-local"]:focus, .ui.form .field.error input[type="email"]:focus, .ui.form .field.error input[type="file"]:focus, .ui.form .field.error input[type="number"]:focus, .ui.form .field.error input[type="password"]:focus, .ui.form .field.error input[type="search"]:focus, .ui.form .field.error input[type="tel"]:focus, .ui.form .field.error input[type="text"]:focus, .ui.form .field.error input[type="time"]:focus, .ui.form .field.error input[type="url"]:focus,
+.ui.form .field.error input:not([type]):focus,
+.ui.form .field.error input[type='date']:focus,
+.ui.form .field.error input[type='datetime-local']:focus,
+.ui.form .field.error input[type='email']:focus,
+.ui.form .field.error input[type='file']:focus,
+.ui.form .field.error input[type='number']:focus,
+.ui.form .field.error input[type='password']:focus,
+.ui.form .field.error input[type='search']:focus,
+.ui.form .field.error input[type='tel']:focus,
+.ui.form .field.error input[type='text']:focus,
+.ui.form .field.error input[type='time']:focus,
+.ui.form .field.error input[type='url']:focus,
 .ui.form .field.error select:focus,
 .ui.form .field.error textarea:focus {
     background-image: initial;
@@ -5269,7 +5467,11 @@ ol.ui.inverted.list li::before {
 .ui.form .field.error .checkbox:not(.toggle):not(.slider) .box::before,
 .ui.form .field.error .checkbox:not(.toggle):not(.slider) label::before,
 .ui.form .fields.error .field .checkbox:not(.toggle):not(.slider) .box::before,
-.ui.form .fields.error .field .checkbox:not(.toggle):not(.slider) label::before {
+.ui.form
+    .fields.error
+    .field
+    .checkbox:not(.toggle):not(.slider)
+    label::before {
     background-image: initial;
     background-color: rgb(56, 0, 0);
     border-color: rgb(95, 39, 39);
@@ -5285,7 +5487,8 @@ ol.ui.inverted.list li::before {
     background-color: rgba(24, 26, 27, 0.8);
 }
 .ui.loading.form::after {
-    border-color: rgb(101, 94, 83) rgba(140, 130, 115, 0.1) rgba(140, 130, 115, 0.1);
+    border-color: rgb(101, 94, 83) rgba(140, 130, 115, 0.1)
+        rgba(140, 130, 115, 0.1);
     box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 1px;
 }
 .ui.form .required.field > .checkbox::after,
@@ -5308,7 +5511,18 @@ ol.ui.inverted.list li::before {
 .ui.inverted.form label {
     color: rgba(232, 230, 227, 0.9);
 }
-.ui.inverted.form input:not([type]), .ui.inverted.form input[type="date"], .ui.inverted.form input[type="datetime-local"], .ui.inverted.form input[type="email"], .ui.inverted.form input[type="file"], .ui.inverted.form input[type="number"], .ui.inverted.form input[type="password"], .ui.inverted.form input[type="search"], .ui.inverted.form input[type="tel"], .ui.inverted.form input[type="text"], .ui.inverted.form input[type="time"], .ui.inverted.form input[type="url"] {
+.ui.inverted.form input:not([type]),
+.ui.inverted.form input[type='date'],
+.ui.inverted.form input[type='datetime-local'],
+.ui.inverted.form input[type='email'],
+.ui.inverted.form input[type='file'],
+.ui.inverted.form input[type='number'],
+.ui.inverted.form input[type='password'],
+.ui.inverted.form input[type='search'],
+.ui.inverted.form input[type='tel'],
+.ui.inverted.form input[type='text'],
+.ui.inverted.form input[type='time'],
+.ui.inverted.form input[type='url'] {
     background-image: initial;
     background-color: rgb(24, 26, 27);
     border-color: rgba(48, 52, 54, 0.1);
@@ -5336,35 +5550,41 @@ ol.ui.inverted.list li::before {
 .ui.celled.page.grid {
     box-shadow: none;
 }
-.ui.divided.grid:not([class*="vertically divided"]) > .column:not(.row),
-.ui.divided.grid:not([class*="vertically divided"]) > .row > .column {
+.ui.divided.grid:not([class*='vertically divided']) > .column:not(.row),
+.ui.divided.grid:not([class*='vertically divided']) > .row > .column {
     box-shadow: rgba(27, 29, 30, 0.15) -1px 0px 0px 0px;
 }
-.ui.divided.grid:not([class*="vertically divided"]) > .column:first-child,
-.ui.divided.grid:not([class*="vertically divided"]) > .row > .column:first-child {
+.ui.divided.grid:not([class*='vertically divided']) > .column:first-child,
+.ui.divided.grid:not([class*='vertically divided'])
+    > .row
+    > .column:first-child {
     box-shadow: none;
 }
 .ui.grid > .divided.row > .column {
-    box-shadow: rgba(27, 29, 30, 0.15) -1px 0px 0px 0px; 
+    box-shadow: rgba(27, 29, 30, 0.15) -1px 0px 0px 0px;
 }
 .ui.grid > .divided.row > .column:first-child {
-    box-shadow: none; 
-}
-.ui[class*="vertically divided"].grid > .row::before {
-    box-shadow: rgba(27, 29, 30, 0.15) 0px -1px 0px 0px; 
-}
-.ui[class*="vertically divided"].grid > .row:first-child::before {
     box-shadow: none;
 }
-.ui.inverted.divided.grid:not([class*="vertically divided"]) > .column:not(.row),
-.ui.inverted.divided.grid:not([class*="vertically divided"]) > .row > .column {
+.ui[class*='vertically divided'].grid > .row::before {
+    box-shadow: rgba(27, 29, 30, 0.15) 0px -1px 0px 0px;
+}
+.ui[class*='vertically divided'].grid > .row:first-child::before {
+    box-shadow: none;
+}
+.ui.inverted.divided.grid:not([class*='vertically divided'])
+    > .column:not(.row),
+.ui.inverted.divided.grid:not([class*='vertically divided']) > .row > .column {
     box-shadow: rgba(24, 26, 27, 0.1) -1px 0px 0px 0px;
 }
-.ui.inverted.divided.grid:not([class*="vertically divided"]) > .column:not(.row):first-child,
-.ui.inverted.divided.grid:not([class*="vertically divided"]) > .row > .column:first-child {
-    box-shadow: none; 
+.ui.inverted.divided.grid:not([class*='vertically divided'])
+    > .column:not(.row):first-child,
+.ui.inverted.divided.grid:not([class*='vertically divided'])
+    > .row
+    > .column:first-child {
+    box-shadow: none;
 }
-.ui.inverted[class*="vertically divided"].grid > .row::before {
+.ui.inverted[class*='vertically divided'].grid > .row::before {
     box-shadow: rgba(24, 26, 27, 0.1) 0px -1px 0px 0px;
 }
 .ui.celled.grid {
@@ -5375,18 +5595,19 @@ ol.ui.inverted.list li::before {
 }
 .ui.celled.grid > .column:not(.row),
 .ui.celled.grid > .row > .column {
-    box-shadow: rgb(48, 52, 54) -1px 0px 0px 0px; 
+    box-shadow: rgb(48, 52, 54) -1px 0px 0px 0px;
 }
-.ui.celled.grid > .column:first-child, .ui.celled.grid > .row > .column:first-child {
-    box-shadow: none; 
+.ui.celled.grid > .column:first-child,
+.ui.celled.grid > .row > .column:first-child {
+    box-shadow: none;
 }
-.ui[class*="internally celled"].grid {
-    box-shadow: none; 
+.ui[class*='internally celled'].grid {
+    box-shadow: none;
 }
-.ui[class*="internally celled"].grid > .row:first-child {
-    box-shadow: none; 
+.ui[class*='internally celled'].grid > .row:first-child {
+    box-shadow: none;
 }
-.ui[class*="internally celled"].grid > .row > .column:first-child {
+.ui[class*='internally celled'].grid > .row > .column:first-child {
     box-shadow: none;
 }
 .ui.grid > .red.column,
@@ -5468,62 +5689,116 @@ ol.ui.inverted.list li::before {
     background-color: rgb(21, 23, 24) !important;
 }
 @media only screen and (max-width: 767px) {
-    .ui[class*="mobile reversed"].divided.grid:not([class*="vertically divided"]) > .column:first-child, .ui[class*="mobile reversed"].divided.grid:not([class*="vertically divided"]) > .row > .column:first-child {
-        box-shadow: rgba(27, 29, 30, 0.15) -1px 0px 0px 0px; 
+    .ui[class*='mobile reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .column:first-child,
+    .ui[class*='mobile reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .row
+        > .column:first-child {
+        box-shadow: rgba(27, 29, 30, 0.15) -1px 0px 0px 0px;
     }
-    .ui[class*="mobile reversed"].divided.grid:not([class*="vertically divided"]) > .column:last-child, .ui[class*="mobile reversed"].divided.grid:not([class*="vertically divided"]) > .row > .column:last-child {
-        box-shadow: none; 
+    .ui[class*='mobile reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .column:last-child,
+    .ui[class*='mobile reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .row
+        > .column:last-child {
+        box-shadow: none;
     }
-    .ui.grid[class*="vertically divided"][class*="mobile vertically reversed"] > .row:first-child::before {
-        box-shadow: rgba(27, 29, 30, 0.15) 0px -1px 0px 0px; 
+    .ui.grid[class*='vertically divided'][class*='mobile vertically reversed']
+        > .row:first-child::before {
+        box-shadow: rgba(27, 29, 30, 0.15) 0px -1px 0px 0px;
     }
-    .ui.grid[class*="vertically divided"][class*="mobile vertically reversed"] > .row:last-child::before {
-        box-shadow: none; 
+    .ui.grid[class*='vertically divided'][class*='mobile vertically reversed']
+        > .row:last-child::before {
+        box-shadow: none;
     }
-    .ui[class*="mobile reversed"].celled.grid > .row > .column:first-child {
-        box-shadow: rgb(48, 52, 54) -1px 0px 0px 0px; 
+    .ui[class*='mobile reversed'].celled.grid > .row > .column:first-child {
+        box-shadow: rgb(48, 52, 54) -1px 0px 0px 0px;
     }
-    .ui[class*="mobile reversed"].celled.grid > .row > .column:last-child {
+    .ui[class*='mobile reversed'].celled.grid > .row > .column:last-child {
         box-shadow: none;
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .ui[class*="tablet reversed"].divided.grid:not([class*="vertically divided"]) > .column:first-child, .ui[class*="tablet reversed"].divided.grid:not([class*="vertically divided"]) > .row > .column:first-child {
-        box-shadow: rgba(27, 29, 30, 0.15) -1px 0px 0px 0px; 
+    .ui[class*='tablet reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .column:first-child,
+    .ui[class*='tablet reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .row
+        > .column:first-child {
+        box-shadow: rgba(27, 29, 30, 0.15) -1px 0px 0px 0px;
     }
-    .ui[class*="tablet reversed"].divided.grid:not([class*="vertically divided"]) > .column:last-child, .ui[class*="tablet reversed"].divided.grid:not([class*="vertically divided"]) > .row > .column:last-child {
-        box-shadow: none; 
+    .ui[class*='tablet reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .column:last-child,
+    .ui[class*='tablet reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .row
+        > .column:last-child {
+        box-shadow: none;
     }
-    .ui.grid[class*="vertically divided"][class*="tablet vertically reversed"] > .row:first-child::before {
-        box-shadow: rgba(27, 29, 30, 0.15) 0px -1px 0px 0px; 
+    .ui.grid[class*='vertically divided'][class*='tablet vertically reversed']
+        > .row:first-child::before {
+        box-shadow: rgba(27, 29, 30, 0.15) 0px -1px 0px 0px;
     }
-    .ui.grid[class*="vertically divided"][class*="tablet vertically reversed"] > .row:last-child::before {
-        box-shadow: none; 
+    .ui.grid[class*='vertically divided'][class*='tablet vertically reversed']
+        > .row:last-child::before {
+        box-shadow: none;
     }
-    .ui[class*="tablet reversed"].celled.grid > .row > .column:first-child {
-        box-shadow: rgb(48, 52, 54) -1px 0px 0px 0px; 
+    .ui[class*='tablet reversed'].celled.grid > .row > .column:first-child {
+        box-shadow: rgb(48, 52, 54) -1px 0px 0px 0px;
     }
-    .ui[class*="tablet reversed"].celled.grid > .row > .column:last-child {
+    .ui[class*='tablet reversed'].celled.grid > .row > .column:last-child {
         box-shadow: none;
     }
 }
 @media only screen and (min-width: 992px) {
-    .ui[class*="computer reversed"].divided.grid:not([class*="vertically divided"]) > .column:first-child, .ui[class*="computer reversed"].divided.grid:not([class*="vertically divided"]) > .row > .column:first-child {
-        box-shadow: rgba(27, 29, 30, 0.15) -1px 0px 0px 0px; 
+    .ui[class*='computer reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .column:first-child,
+    .ui[class*='computer reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .row
+        > .column:first-child {
+        box-shadow: rgba(27, 29, 30, 0.15) -1px 0px 0px 0px;
     }
-    .ui[class*="computer reversed"].divided.grid:not([class*="vertically divided"]) > .column:last-child, .ui[class*="computer reversed"].divided.grid:not([class*="vertically divided"]) > .row > .column:last-child {
-        box-shadow: none; 
+    .ui[class*='computer reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .column:last-child,
+    .ui[class*='computer reversed'].divided.grid:not(
+            [class*='vertically divided']
+        )
+        > .row
+        > .column:last-child {
+        box-shadow: none;
     }
-    .ui.grid[class*="vertically divided"][class*="computer vertically reversed"] > .row:first-child::before {
-        box-shadow: rgba(27, 29, 30, 0.15) 0px -1px 0px 0px; 
+    .ui.grid[class*='vertically divided'][class*='computer vertically reversed']
+        > .row:first-child::before {
+        box-shadow: rgba(27, 29, 30, 0.15) 0px -1px 0px 0px;
     }
-    .ui.grid[class*="vertically divided"][class*="computer vertically reversed"] > .row:last-child::before {
-        box-shadow: none; 
+    .ui.grid[class*='vertically divided'][class*='computer vertically reversed']
+        > .row:last-child::before {
+        box-shadow: none;
     }
-    .ui[class*="computer reversed"].celled.grid > .row > .column:first-child {
-        box-shadow: rgb(48, 52, 54) -1px 0px 0px 0px; 
+    .ui[class*='computer reversed'].celled.grid > .row > .column:first-child {
+        box-shadow: rgb(48, 52, 54) -1px 0px 0px 0px;
     }
-    .ui[class*="computer reversed"].celled.grid > .row > .column:last-child {
+    .ui[class*='computer reversed'].celled.grid > .row > .column:last-child {
         box-shadow: none;
     }
 }
@@ -5640,7 +5915,9 @@ ol.ui.inverted.list li::before {
     background-color: initial !important;
 }
 @media only screen and (min-width: 768px) {
-    .ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless) > .container > .item:not(.right):not(.borderless):first-child {
+    .ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless)
+        > .container
+        > .item:not(.right):not(.borderless):first-child {
         border-left-color: rgba(128, 119, 105, 0.1);
     }
 }
@@ -6261,21 +6538,30 @@ ol.ui.inverted.list li::before {
     background-color: rgba(27, 29, 30, 0.1);
 }
 .ui.inverted.grey.menu .active.item {
-    background-color: rgba(0, 0, 0, 0.1) !important; 
+    background-color: rgba(0, 0, 0, 0.1) !important;
 }
-.ui.borderless.menu .item .menu .item::before, .ui.borderless.menu .item::before, .ui.menu .borderless.item::before {
-    background-image: initial !important; background-color: initial !important; 
+.ui.borderless.menu .item .menu .item::before,
+.ui.borderless.menu .item::before,
+.ui.menu .borderless.item::before {
+    background-image: initial !important;
+    background-color: initial !important;
 }
-.ui[class*="top fixed"].menu {
-    border-top-color: initial; border-left-color: initial; border-right-color: initial; 
+.ui[class*='top fixed'].menu {
+    border-top-color: initial;
+    border-left-color: initial;
+    border-right-color: initial;
 }
-.ui[class*="right fixed"].menu {
-    border-top-color: initial; border-bottom-color: initial; border-right-color: initial; 
+.ui[class*='right fixed'].menu {
+    border-top-color: initial;
+    border-bottom-color: initial;
+    border-right-color: initial;
 }
-.ui[class*="bottom fixed"].menu {
-    border-bottom-color: initial; border-left-color: initial; border-right-color: initial; 
+.ui[class*='bottom fixed'].menu {
+    border-bottom-color: initial;
+    border-left-color: initial;
+    border-right-color: initial;
 }
-.ui[class*="left fixed"].menu {
+.ui[class*='left fixed'].menu {
     border-top-color: initial;
     border-bottom-color: initial;
     border-left-color: initial;
@@ -6328,20 +6614,23 @@ ol.ui.inverted.list li::before {
     background-image: initial;
     background-color: rgb(28, 30, 31);
     color: rgba(232, 230, 227, 0.87);
-    box-shadow: rgba(27, 29, 30, 0.22) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgba(27, 29, 30, 0.22) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.attached.message {
     box-shadow: rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset;
 }
 .ui.bottom.attached.message {
-    box-shadow: rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset,
-    rgba(27, 29, 30, 0.15) 0px 1px 2px 0px;
+    box-shadow:
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset,
+        rgba(27, 29, 30, 0.15) 0px 1px 2px 0px;
 }
 .ui.floating.message {
-    box-shadow: rgba(27, 29, 30, 0.22) 0px 0px 0px 1px inset,
-    rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
-    rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
+    box-shadow:
+        rgba(27, 29, 30, 0.22) 0px 0px 0px 1px inset,
+        rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
+        rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
 }
 .ui.black.message {
     background-color: rgb(21, 23, 24);
@@ -6353,8 +6642,9 @@ ol.ui.inverted.list li::before {
 }
 .ui.attached.positive.message,
 .ui.positive.message {
-    box-shadow: rgb(76, 97, 55) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(76, 97, 55) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.positive.message .header {
     color: rgb(158, 225, 159);
@@ -6365,8 +6655,9 @@ ol.ui.inverted.list li::before {
 }
 .ui.attached.negative.message,
 .ui.negative.message {
-    box-shadow: rgb(81, 34, 34) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(81, 34, 34) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.negative.message .header {
     color: rgb(213, 116, 114);
@@ -6377,8 +6668,9 @@ ol.ui.inverted.list li::before {
 }
 .ui.attached.info.message,
 .ui.info.message {
-    box-shadow: rgb(34, 79, 88) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(34, 79, 88) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.info.message .header {
     color: rgb(134, 215, 239);
@@ -6389,8 +6681,9 @@ ol.ui.inverted.list li::before {
 }
 .ui.attached.warning.message,
 .ui.warning.message {
-    box-shadow: rgb(70, 59, 38) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(70, 59, 38) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.warning.message .header {
     color: rgb(253, 201, 120);
@@ -6401,8 +6694,9 @@ ol.ui.inverted.list li::before {
 }
 .ui.attached.error.message,
 .ui.error.message {
-    box-shadow: rgb(81, 34, 34) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(81, 34, 34) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.error.message .header {
     color: rgb(213, 116, 114);
@@ -6413,8 +6707,9 @@ ol.ui.inverted.list li::before {
 }
 .ui.attached.success.message,
 .ui.success.message {
-    box-shadow: rgb(76, 97, 55) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(76, 97, 55) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.success.message .header {
     color: rgb(158, 225, 159);
@@ -6427,8 +6722,9 @@ ol.ui.inverted.list li::before {
 .ui.red.message {
     background-color: rgb(66, 5, 0);
     color: rgb(222, 61, 61);
-    box-shadow: rgb(173, 29, 29) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(173, 29, 29) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.red.message .header {
     color: rgb(225, 71, 71);
@@ -6436,8 +6732,9 @@ ol.ui.inverted.list li::before {
 .ui.orange.message {
     background-color: rgb(71, 32, 0);
     color: rgb(243, 125, 48);
-    box-shadow: rgb(184, 80, 11) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(184, 80, 11) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.orange.message .header {
     color: rgb(243, 124, 45);
@@ -6445,8 +6742,9 @@ ol.ui.inverted.list li::before {
 .ui.yellow.message {
     background-color: rgb(54, 44, 0);
     color: rgb(250, 199, 79);
-    box-shadow: rgb(145, 103, 4) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(145, 103, 4) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.yellow.message .header {
     color: rgb(251, 205, 96);
@@ -6454,8 +6752,9 @@ ol.ui.inverted.list li::before {
 .ui.olive.message {
     background-color: rgb(37, 41, 5);
     color: rgb(180, 227, 79);
-    box-shadow: rgb(110, 150, 24) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(110, 150, 24) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.olive.message .header {
     color: rgb(187, 230, 95);
@@ -6463,8 +6762,9 @@ ol.ui.inverted.list li::before {
 .ui.green.message {
     background-color: rgb(13, 57, 27);
     color: rgb(79, 227, 96);
-    box-shadow: rgb(24, 150, 38) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(24, 150, 38) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.green.message .header {
     color: rgb(95, 230, 110);
@@ -6472,8 +6772,9 @@ ol.ui.inverted.list li::before {
 .ui.teal.message {
     background-color: rgb(16, 58, 58);
     color: rgb(94, 239, 239);
-    box-shadow: rgb(13, 130, 130) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(13, 130, 130) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.teal.message .header {
     color: rgb(111, 241, 241);
@@ -6481,8 +6782,9 @@ ol.ui.inverted.list li::before {
 .ui.blue.message {
     background-color: rgb(33, 36, 37);
     color: rgb(86, 168, 228);
-    box-shadow: rgb(26, 106, 166) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(26, 106, 166) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.blue.message .header {
     color: rgb(99, 175, 230);
@@ -6490,8 +6792,9 @@ ol.ui.inverted.list li::before {
 .ui.violet.message {
     background-color: rgb(31, 33, 35);
     color: rgb(116, 74, 207);
-    box-shadow: rgb(80, 42, 161) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(80, 42, 161) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.violet.message .header {
     color: rgb(127, 88, 211);
@@ -6499,8 +6802,9 @@ ol.ui.inverted.list li::before {
 .ui.purple.message {
     background-color: rgb(31, 33, 35);
     color: rgb(176, 74, 209);
-    box-shadow: rgb(130, 41, 160) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(130, 41, 160) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.purple.message .header {
     color: rgb(181, 88, 212);
@@ -6508,8 +6812,9 @@ ol.ui.inverted.list li::before {
 .ui.pink.message {
     background-color: rgb(68, 0, 58);
     color: rgb(226, 72, 159);
-    box-shadow: rgb(163, 26, 103) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(163, 26, 103) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.pink.message .header {
     color: rgb(224, 57, 151);
@@ -6517,8 +6822,9 @@ ol.ui.inverted.list li::before {
 .ui.brown.message {
     background-color: rgb(65, 43, 21);
     color: rgb(197, 140, 103);
-    box-shadow: rgb(132, 82, 50) 0px 0px 0px 1px inset,
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow:
+        rgb(132, 82, 50) 0px 0px 0px 1px inset,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 .ui.brown.message .header {
     color: rgb(202, 148, 115);
@@ -6685,13 +6991,17 @@ ol.ui.inverted.list li::before {
     color: rgba(207, 203, 196, 0.3);
 }
 @media only screen and (max-width: 991px) {
-    .ui[class*="tablet stackable"].table tr {
-        box-shadow: rgba(0, 0, 0, 0.1) 0px -1px 0px 0px inset !important; 
+    .ui[class*='tablet stackable'].table tr {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px -1px 0px 0px inset !important;
     }
-    .ui[class*="tablet stackable"].table tr > td, .ui[class*="tablet stackable"].table tr > th {
-        background-image: initial; background-color: initial; border-color: initial !important; box-shadow: none !important; 
+    .ui[class*='tablet stackable'].table tr > td,
+    .ui[class*='tablet stackable'].table tr > th {
+        background-image: initial;
+        background-color: initial;
+        border-color: initial !important;
+        box-shadow: none !important;
     }
-    .ui.definition[class*="tablet stackable"].table thead th:first-child {
+    .ui.definition[class*='tablet stackable'].table thead th:first-child {
         box-shadow: none !important;
     }
 }
@@ -6885,14 +7195,12 @@ ol.ui.inverted.list li::before {
     color: rgba(232, 230, 227, 0.95);
 }
 .ui.inverted.sortable.table thead th.sorted {
-    background-image: linear-gradient(rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.05));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
     background-color: rgba(24, 26, 27, 0.15);
     color: rgb(232, 230, 227);
 }
 .ui.inverted.sortable.table thead th:hover {
-    background-image: linear-gradient(rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.05));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
     background-color: rgba(24, 26, 27, 0.08);
     color: rgb(232, 230, 227);
 }
@@ -6953,9 +7261,9 @@ ol.ui.inverted.list li::before {
     background-color: initial;
 }
 .ui.basic.striped.table tbody tr:nth-child(2n) {
-    background-color: rgba(0, 0, 0, 0.05) !important; 
+    background-color: rgba(0, 0, 0, 0.05) !important;
 }
-.ui[class*="very basic"].table {
+.ui[class*='very basic'].table {
     border-color: initial;
 }
 .ui.celled.table tr td,
@@ -6981,8 +7289,9 @@ ol.ui.inverted.list li::before {
     background-image: initial;
     background-color: rgb(24, 26, 27);
     border-color: initial;
-    box-shadow: rgb(48, 52, 54) 0px 1px 3px 0px,
-    rgb(48, 52, 54) 0px 0px 0px 1px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 1px 3px 0px,
+        rgb(48, 52, 54) 0px 0px 0px 1px;
 }
 .ui.card > :first-child,
 .ui.cards > .card > :first-child {
@@ -7069,23 +7378,26 @@ ol.ui.inverted.list li::before {
 }
 .ui.raised.card,
 .ui.raised.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
-    rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
+        rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
 }
 .ui.link.cards .raised.card:hover,
 .ui.link.raised.card:hover,
 .ui.raised.cards a.card:hover,
 a.ui.raised.card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgba(27, 29, 30, 0.15) 0px 2px 4px 0px,
-    rgba(27, 29, 30, 0.25) 0px 2px 10px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgba(27, 29, 30, 0.15) 0px 2px 4px 0px,
+        rgba(27, 29, 30, 0.25) 0px 2px 10px 0px;
 }
 .ui.raised.card,
 .ui.raised.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
-    rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
+        rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
 }
 .ui.cards a.card:hover,
 .ui.link.card:hover,
@@ -7094,190 +7406,217 @@ a.ui.card:hover {
     background-image: initial;
     background-color: rgb(24, 26, 27);
     border-color: initial;
-    box-shadow: rgb(62, 67, 69) 0px 1px 3px 0px,
-    rgb(48, 52, 54) 0px 0px 0px 1px;
+    box-shadow:
+        rgb(62, 67, 69) 0px 1px 3px 0px,
+        rgb(48, 52, 54) 0px 0px 0px 1px;
 }
 .ui.cards > .red.card,
 .ui.red.card,
 .ui.red.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(173, 29, 29) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(173, 29, 29) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .red.card:hover,
 .ui.red.card:hover,
 .ui.red.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(166, 20, 20) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(166, 20, 20) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.cards > .orange.card,
 .ui.orange.card,
 .ui.orange.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(184, 80, 11) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(184, 80, 11) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .orange.card:hover,
 .ui.orange.card:hover,
 .ui.orange.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(194, 78, 2) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(194, 78, 2) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.cards > .yellow.card,
 .ui.yellow.card,
 .ui.yellow.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(149, 111, 2) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(149, 111, 2) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .yellow.card:hover,
 .ui.yellow.card:hover,
 .ui.yellow.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(187, 139, 0) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(187, 139, 0) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.cards > .olive.card,
 .ui.olive.card,
 .ui.olive.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(145, 163, 19) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(145, 163, 19) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .olive.card:hover,
 .ui.olive.card:hover,
 .ui.olive.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(134, 151, 10) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(134, 151, 10) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.cards > .green.card,
 .ui.green.card,
 .ui.green.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(26, 149, 55) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(26, 149, 55) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .green.card:hover,
 .ui.green.card:hover,
 .ui.green.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(18, 137, 46) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(18, 137, 46) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.cards > .teal.card,
 .ui.teal.card,
 .ui.teal.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(0, 145, 138) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(0, 145, 138) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .teal.card:hover,
 .ui.teal.card:hover,
 .ui.teal.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(0, 125, 119) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(0, 125, 119) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.blue.card,
 .ui.blue.cards > .card,
 .ui.cards > .blue.card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(26, 106, 166) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(26, 106, 166) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.blue.card:hover,
 .ui.blue.cards > .card:hover,
 .ui.cards > .blue.card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(18, 96, 155) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(18, 96, 155) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.cards > .violet.card,
 .ui.violet.card,
 .ui.violet.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(80, 42, 161) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(80, 42, 161) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .violet.card:hover,
 .ui.violet.card:hover,
 .ui.violet.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(70, 33, 150) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(70, 33, 150) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.cards > .purple.card,
 .ui.purple.card,
 .ui.purple.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(130, 41, 160) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(130, 41, 160) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .purple.card:hover,
 .ui.purple.card:hover,
 .ui.purple.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(120, 31, 149) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(120, 31, 149) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.cards > .pink.card,
 .ui.pink.card,
 .ui.pink.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(163, 26, 103) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(163, 26, 103) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .pink.card:hover,
 .ui.pink.card:hover,
 .ui.pink.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(183, 20, 112) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(183, 20, 112) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.brown.card,
 .ui.brown.cards > .card,
 .ui.cards > .brown.card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(132, 82, 50) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(132, 82, 50) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.brown.card:hover,
 .ui.brown.cards > .card:hover,
 .ui.cards > .brown.card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(121, 73, 41) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(121, 73, 41) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.cards > .grey.card,
 .ui.grey.card,
 .ui.grey.cards > .card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(89, 96, 100) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(89, 96, 100) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.cards > .grey.card:hover,
 .ui.grey.card:hover,
 .ui.grey.cards > .card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(94, 102, 106) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(94, 102, 106) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.black.card,
 .ui.black.cards > .card,
 .ui.cards > .black.card {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(21, 23, 24) 0px 2px 0px 0px,
-    rgb(48, 52, 54) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(21, 23, 24) 0px 2px 0px 0px,
+        rgb(48, 52, 54) 0px 1px 3px 0px;
 }
 .ui.black.card:hover,
 .ui.black.cards > .card:hover,
 .ui.cards > .black.card:hover {
-    box-shadow: rgb(48, 52, 54) 0px 0px 0px 1px,
-    rgb(30, 33, 34) 0px 2px 0px 0px,
-    rgb(62, 67, 69) 0px 1px 3px 0px;
+    box-shadow:
+        rgb(48, 52, 54) 0px 0px 0px 1px,
+        rgb(30, 33, 34) 0px 2px 0px 0px,
+        rgb(62, 67, 69) 0px 1px 3px 0px;
 }
 .ui.comments .comment {
     background-image: initial;
@@ -7575,8 +7914,9 @@ a.ui.card:hover {
 .ui.styled.accordion .accordion {
     background-image: initial;
     background-color: rgb(24, 26, 27);
-    box-shadow: rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 1px;
+    box-shadow:
+        rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 1px;
 }
 .ui.styled.accordion .accordion .title,
 .ui.styled.accordion .title {
@@ -7612,12 +7952,13 @@ a.ui.card:hover {
     color: rgba(232, 230, 227, 0.95);
 }
 .ui.inverted.accordion .title:not(.ui) {
-    color: rgba(232, 230, 227, 0.9); 
+    color: rgba(232, 230, 227, 0.9);
 }
 .ui.checkbox {
-    outline-color: initial; 
+    outline-color: initial;
 }
-.ui.checkbox input[type="checkbox"], .ui.checkbox input[type="radio"] {
+.ui.checkbox input[type='checkbox'],
+.ui.checkbox input[type='radio'] {
     outline-color: initial;
 }
 .ui.checkbox .box,
@@ -7684,28 +8025,28 @@ a.ui.card:hover {
 .ui.checkbox input:checked ~ label::after {
     color: rgba(232, 230, 227, 0.95);
 }
-.ui.checkbox input:not([type="radio"]):indeterminate ~ .box::before,
-.ui.checkbox input:not([type="radio"]):indeterminate ~ label::before {
+.ui.checkbox input:not([type='radio']):indeterminate ~ .box::before,
+.ui.checkbox input:not([type='radio']):indeterminate ~ label::before {
     background-image: initial;
     background-color: rgb(24, 26, 27);
     border-color: rgba(128, 119, 105, 0.35);
 }
-.ui.checkbox input:not([type="radio"]):indeterminate ~ .box::after,
-.ui.checkbox input:not([type="radio"]):indeterminate ~ label::after {
+.ui.checkbox input:not([type='radio']):indeterminate ~ .box::after,
+.ui.checkbox input:not([type='radio']):indeterminate ~ label::after {
     color: rgba(232, 230, 227, 0.95);
 }
 .ui.checkbox input:checked:focus ~ .box::before,
 .ui.checkbox input:checked:focus ~ label::before,
-.ui.checkbox input:not([type="radio"]):indeterminate:focus ~ .box::before,
-.ui.checkbox input:not([type="radio"]):indeterminate:focus ~ label::before {
+.ui.checkbox input:not([type='radio']):indeterminate:focus ~ .box::before,
+.ui.checkbox input:not([type='radio']):indeterminate:focus ~ label::before {
     background-image: initial;
     background-color: rgb(24, 26, 27);
     border-color: rgb(38, 89, 107);
 }
 .ui.checkbox input:checked:focus ~ .box::after,
 .ui.checkbox input:checked:focus ~ label::after,
-.ui.checkbox input:not([type="radio"]):indeterminate:focus ~ .box::after,
-.ui.checkbox input:not([type="radio"]):indeterminate:focus ~ label::after {
+.ui.checkbox input:not([type='radio']):indeterminate:focus ~ .box::after,
+.ui.checkbox input:not([type='radio']):indeterminate:focus ~ label::after {
     color: rgba(232, 230, 227, 0.95);
 }
 .ui.checkbox input[disabled] ~ .box::after,
@@ -7757,12 +8098,12 @@ a.ui.card:hover {
 }
 .ui.slider.checkbox .box::after,
 .ui.slider.checkbox label::after {
-    background-image: linear-gradient(rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.05));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
     background-color: rgb(24, 26, 27);
     border-color: initial;
-    box-shadow: rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset;
+    box-shadow:
+        rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset;
 }
 .ui.slider.checkbox input:focus ~ .box::before,
 .ui.slider.checkbox input:focus ~ label::before {
@@ -7807,17 +8148,18 @@ a.ui.card:hover {
 }
 .ui.toggle.checkbox .box::after,
 .ui.toggle.checkbox label::after {
-    background-image: linear-gradient(rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.05));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
     background-color: rgb(24, 26, 27);
     border-color: initial;
-    box-shadow: rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset;
+    box-shadow:
+        rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset;
 }
 .ui.toggle.checkbox input ~ .box::after,
 .ui.toggle.checkbox input ~ label::after {
-    box-shadow: rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset;
+    box-shadow:
+        rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset;
 }
 .ui.toggle.checkbox input:focus ~ .box::before,
 .ui.toggle.checkbox input:focus ~ label::before {
@@ -7839,8 +8181,9 @@ a.ui.card:hover {
 }
 .ui.toggle.checkbox input:checked ~ .box::after,
 .ui.toggle.checkbox input:checked ~ label::after {
-    box-shadow: rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
-    rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset;
+    box-shadow:
+        rgba(27, 29, 30, 0.15) 0px 1px 2px 0px,
+        rgba(27, 29, 30, 0.15) 0px 0px 0px 1px inset;
 }
 .ui.toggle.checkbox input:focus:checked ~ .box,
 .ui.toggle.checkbox input:focus:checked ~ label {
@@ -8097,8 +8440,9 @@ select.ui.dropdown {
     border-top-color: initial;
 }
 .ui.floating.dropdown .menu {
-    box-shadow: rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
-    rgba(27, 29, 30, 0.15) 0px 2px 10px 0px !important;
+    box-shadow:
+        rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
+        rgba(27, 29, 30, 0.15) 0px 2px 10px 0px !important;
 }
 .ui.pointing.dropdown > .menu::after {
     box-shadow: rgba(27, 29, 30, 0.15) -1px -1px 0px 0px;
@@ -8125,8 +8469,7 @@ select.ui.dropdown {
     border-color: initial;
 }
 .ui.embed > .icon::after {
-    background-image: radial-gradient(rgba(0, 0, 0, 0) 45%,
-    rgba(0, 0, 0, 0.3));
+    background-image: radial-gradient(rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.3));
     background-color: initial;
 }
 .ui.embed > .icon::before {
@@ -8134,8 +8477,7 @@ select.ui.dropdown {
     text-shadow: rgba(27, 29, 30, 0.2) 0px 2px 10px;
 }
 .ui.embed .icon:hover::after {
-    background-image: radial-gradient(rgba(0, 0, 0, 0) 45%,
-    rgba(0, 0, 0, 0.3));
+    background-image: radial-gradient(rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.3));
     background-color: initial;
 }
 .ui.embed .icon:hover::before {
@@ -8145,8 +8487,9 @@ select.ui.dropdown {
     background-image: initial;
     background-color: rgb(24, 26, 27);
     border-color: initial;
-    box-shadow: rgba(0, 0, 0, 0.2) 1px 3px 3px 0px,
-    rgba(0, 0, 0, 0.2) 1px 3px 15px 2px;
+    box-shadow:
+        rgba(0, 0, 0, 0.2) 1px 3px 3px 0px,
+        rgba(0, 0, 0, 0.2) 1px 3px 15px 2px;
 }
 .ui.modal > .close {
     color: rgb(232, 230, 227);
@@ -8240,8 +8583,9 @@ select.ui.dropdown {
     background-image: initial;
     background-color: rgb(24, 26, 27);
     color: rgba(232, 230, 227, 0.87);
-    box-shadow: rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
-    rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
+    box-shadow:
+        rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
+        rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
 }
 .ui.popup::before {
     background-image: initial;
@@ -8258,8 +8602,9 @@ select.ui.dropdown {
     background-image: initial;
     background-color: rgb(24, 26, 27);
     color: rgba(232, 230, 227, 0.87);
-    box-shadow: rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
-    rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
+    box-shadow:
+        rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
+        rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
 }
 [data-tooltip]:not([data-position])::before {
     background-image: initial;
@@ -8275,47 +8620,49 @@ select.ui.dropdown {
 [data-tooltip][data-inverted]::after {
     background-image: initial;
     background-color: rgb(21, 23, 24);
-    color: rgb(232, 230, 227); border-color: initial; box-shadow: none; 
+    color: rgb(232, 230, 227);
+    border-color: initial;
+    box-shadow: none;
 }
-[data-position="top center"][data-tooltip]::before {
-    background-image: initial;
-    background-color: rgb(24, 26, 27); 
-}
-[data-position~="bottom"][data-tooltip]::before {
+[data-position='top center'][data-tooltip]::before {
     background-image: initial;
     background-color: rgb(24, 26, 27);
-    box-shadow: rgb(62, 68, 70) -1px -1px 0px 0px; 
 }
-[data-position="left center"][data-tooltip]::before {
+[data-position~='bottom'][data-tooltip]::before {
     background-image: initial;
     background-color: rgb(24, 26, 27);
-    box-shadow: rgb(62, 68, 70) 1px -1px 0px 0px; 
+    box-shadow: rgb(62, 68, 70) -1px -1px 0px 0px;
 }
-[data-position="right center"][data-tooltip]::before {
+[data-position='left center'][data-tooltip]::before {
     background-image: initial;
     background-color: rgb(24, 26, 27);
-    box-shadow: rgb(62, 68, 70) -1px 1px 0px 0px; 
+    box-shadow: rgb(62, 68, 70) 1px -1px 0px 0px;
 }
-[data-position~="top"][data-tooltip]::before {
+[data-position='right center'][data-tooltip]::before {
     background-image: initial;
-    background-color: rgb(24, 26, 27); 
+    background-color: rgb(24, 26, 27);
+    box-shadow: rgb(62, 68, 70) -1px 1px 0px 0px;
 }
-[data-inverted][data-position~="bottom"][data-tooltip]::before {
+[data-position~='top'][data-tooltip]::before {
     background-image: initial;
-    background-color: rgb(21, 23, 24);
-    box-shadow: rgb(62, 68, 70) -1px -1px 0px 0px; 
+    background-color: rgb(24, 26, 27);
 }
-[data-inverted][data-position="left center"][data-tooltip]::before {
-    background-image: initial;
-    background-color: rgb(21, 23, 24);
-    box-shadow: rgb(62, 68, 70) 1px -1px 0px 0px; 
-}
-[data-inverted][data-position="right center"][data-tooltip]::before {
+[data-inverted][data-position~='bottom'][data-tooltip]::before {
     background-image: initial;
     background-color: rgb(21, 23, 24);
-    box-shadow: rgb(62, 68, 70) -1px 1px 0px 0px; 
+    box-shadow: rgb(62, 68, 70) -1px -1px 0px 0px;
 }
-[data-inverted][data-position~="top"][data-tooltip]::before {
+[data-inverted][data-position='left center'][data-tooltip]::before {
+    background-image: initial;
+    background-color: rgb(21, 23, 24);
+    box-shadow: rgb(62, 68, 70) 1px -1px 0px 0px;
+}
+[data-inverted][data-position='right center'][data-tooltip]::before {
+    background-image: initial;
+    background-color: rgb(21, 23, 24);
+    box-shadow: rgb(62, 68, 70) -1px 1px 0px 0px;
+}
+[data-inverted][data-position~='top'][data-tooltip]::before {
     background-image: initial;
     background-color: rgb(21, 23, 24);
 }
@@ -8389,48 +8736,73 @@ select.ui.dropdown {
     text-shadow: none;
 }
 .ui.progress > .label {
-    color: rgba(232, 230, 227, 0.87); text-shadow: none; 
+    color: rgba(232, 230, 227, 0.87);
+    text-shadow: none;
 }
-.ui.indicating.progress[data-percent^="1"] .bar, .ui.indicating.progress[data-percent^="2"] .bar {
-    background-color: rgb(139, 32, 32); 
+.ui.indicating.progress[data-percent^='1'] .bar,
+.ui.indicating.progress[data-percent^='2'] .bar {
+    background-color: rgb(139, 32, 32);
 }
-.ui.indicating.progress[data-percent^="3"] .bar {
-    background-color: rgb(130, 83, 15); 
+.ui.indicating.progress[data-percent^='3'] .bar {
+    background-color: rgb(130, 83, 15);
 }
-.ui.indicating.progress[data-percent^="4"] .bar, .ui.indicating.progress[data-percent^="5"] .bar {
-    background-color: rgb(116, 89, 16); 
+.ui.indicating.progress[data-percent^='4'] .bar,
+.ui.indicating.progress[data-percent^='5'] .bar {
+    background-color: rgb(116, 89, 16);
 }
-.ui.indicating.progress[data-percent^="6"] .bar {
-    background-color: rgb(130, 118, 21); 
+.ui.indicating.progress[data-percent^='6'] .bar {
+    background-color: rgb(130, 118, 21);
 }
-.ui.indicating.progress[data-percent^="7"] .bar, .ui.indicating.progress[data-percent^="8"] .bar {
-    background-color: rgb(87, 104, 24); 
+.ui.indicating.progress[data-percent^='7'] .bar,
+.ui.indicating.progress[data-percent^='8'] .bar {
+    background-color: rgb(87, 104, 24);
 }
-.ui.indicating.progress[data-percent^="100"] .bar, .ui.indicating.progress[data-percent^="9"] .bar {
-    background-color: rgb(32, 133, 75); 
+.ui.indicating.progress[data-percent^='100'] .bar,
+.ui.indicating.progress[data-percent^='9'] .bar {
+    background-color: rgb(32, 133, 75);
 }
-.ui.indicating.progress[data-percent^="1"] .label, .ui.indicating.progress[data-percent^="2"] .label {
-    color: rgba(232, 230, 227, 0.87); 
+.ui.indicating.progress[data-percent^='1'] .label,
+.ui.indicating.progress[data-percent^='2'] .label {
+    color: rgba(232, 230, 227, 0.87);
 }
-.ui.indicating.progress[data-percent^="3"] .label {
-    color: rgba(232, 230, 227, 0.87); 
+.ui.indicating.progress[data-percent^='3'] .label {
+    color: rgba(232, 230, 227, 0.87);
 }
-.ui.indicating.progress[data-percent^="4"] .label, .ui.indicating.progress[data-percent^="5"] .label {
-    color: rgba(232, 230, 227, 0.87); 
+.ui.indicating.progress[data-percent^='4'] .label,
+.ui.indicating.progress[data-percent^='5'] .label {
+    color: rgba(232, 230, 227, 0.87);
 }
-.ui.indicating.progress[data-percent^="6"] .label {
-    color: rgba(232, 230, 227, 0.87); 
+.ui.indicating.progress[data-percent^='6'] .label {
+    color: rgba(232, 230, 227, 0.87);
 }
-.ui.indicating.progress[data-percent^="7"] .label, .ui.indicating.progress[data-percent^="8"] .label {
-    color: rgba(232, 230, 227, 0.87); 
+.ui.indicating.progress[data-percent^='7'] .label,
+.ui.indicating.progress[data-percent^='8'] .label {
+    color: rgba(232, 230, 227, 0.87);
 }
-.ui.indicating.progress[data-percent^="100"] .label, .ui.indicating.progress[data-percent^="9"] .label {
-    color: rgba(232, 230, 227, 0.87); 
+.ui.indicating.progress[data-percent^='100'] .label,
+.ui.indicating.progress[data-percent^='9'] .label {
+    color: rgba(232, 230, 227, 0.87);
 }
-.ui.indicating.progress[data-percent="1"] .bar, .ui.indicating.progress[data-percent="2"] .bar, .ui.indicating.progress[data-percent="3"] .bar, .ui.indicating.progress[data-percent="4"] .bar, .ui.indicating.progress[data-percent="5"] .bar, .ui.indicating.progress[data-percent="6"] .bar, .ui.indicating.progress[data-percent="7"] .bar, .ui.indicating.progress[data-percent="8"] .bar, .ui.indicating.progress[data-percent="9"] .bar {
-    background-color: rgb(139, 32, 32); 
+.ui.indicating.progress[data-percent='1'] .bar,
+.ui.indicating.progress[data-percent='2'] .bar,
+.ui.indicating.progress[data-percent='3'] .bar,
+.ui.indicating.progress[data-percent='4'] .bar,
+.ui.indicating.progress[data-percent='5'] .bar,
+.ui.indicating.progress[data-percent='6'] .bar,
+.ui.indicating.progress[data-percent='7'] .bar,
+.ui.indicating.progress[data-percent='8'] .bar,
+.ui.indicating.progress[data-percent='9'] .bar {
+    background-color: rgb(139, 32, 32);
 }
-.ui.indicating.progress[data-percent="1"] .label, .ui.indicating.progress[data-percent="2"] .label, .ui.indicating.progress[data-percent="3"] .label, .ui.indicating.progress[data-percent="4"] .label, .ui.indicating.progress[data-percent="5"] .label, .ui.indicating.progress[data-percent="6"] .label, .ui.indicating.progress[data-percent="7"] .label, .ui.indicating.progress[data-percent="8"] .label, .ui.indicating.progress[data-percent="9"] .label {
+.ui.indicating.progress[data-percent='1'] .label,
+.ui.indicating.progress[data-percent='2'] .label,
+.ui.indicating.progress[data-percent='3'] .label,
+.ui.indicating.progress[data-percent='4'] .label,
+.ui.indicating.progress[data-percent='5'] .label,
+.ui.indicating.progress[data-percent='6'] .label,
+.ui.indicating.progress[data-percent='7'] .label,
+.ui.indicating.progress[data-percent='8'] .label,
+.ui.indicating.progress[data-percent='9'] .label {
     color: rgba(232, 230, 227, 0.87);
 }
 .ui.indicating.progress.success .label {
@@ -8591,20 +8963,22 @@ select.ui.dropdown {
     background-image: initial !important;
     background-color: initial !important;
     color: rgb(255, 232, 50) !important;
-    text-shadow: rgb(177, 158, 6) 0px -1px 0px,
-    rgb(177, 158, 6) -1px 0px 0px,
-    rgb(177, 158, 6) 0px 1px 0px,
-    rgb(177, 158, 6) 1px 0px 0px !important;
+    text-shadow:
+        rgb(177, 158, 6) 0px -1px 0px,
+        rgb(177, 158, 6) -1px 0px 0px,
+        rgb(177, 158, 6) 0px 1px 0px,
+        rgb(177, 158, 6) 1px 0px 0px !important;
 }
 .ui.star.rating .icon.selected,
 .ui.star.rating .icon.selected.active {
     background-image: initial !important;
     background-color: initial !important;
     color: rgb(255, 209, 26) !important;
-    text-shadow: rgb(184, 130, 0) 0px -1px 0px,
-    rgb(184, 130, 0) -1px 0px 0px,
-    rgb(184, 130, 0) 0px 1px 0px,
-    rgb(184, 130, 0) 1px 0px 0px !important;
+    text-shadow:
+        rgb(184, 130, 0) 0px -1px 0px,
+        rgb(184, 130, 0) -1px 0px 0px,
+        rgb(184, 130, 0) 0px 1px 0px,
+        rgb(184, 130, 0) 1px 0px 0px !important;
 }
 .ui.heart.rating .icon {
     background-image: initial;
@@ -8616,20 +8990,22 @@ select.ui.dropdown {
     background-image: initial !important;
     background-color: initial !important;
     color: rgb(255, 102, 110) !important;
-    text-shadow: rgb(164, 6, 6) 0px -1px 0px,
-    rgb(164, 6, 6) -1px 0px 0px,
-    rgb(164, 6, 6) 0px 1px 0px,
-    rgb(164, 6, 6) 1px 0px 0px !important;
+    text-shadow:
+        rgb(164, 6, 6) 0px -1px 0px,
+        rgb(164, 6, 6) -1px 0px 0px,
+        rgb(164, 6, 6) 0px 1px 0px,
+        rgb(164, 6, 6) 1px 0px 0px !important;
 }
 .ui.heart.rating .icon.selected,
 .ui.heart.rating .icon.selected.active {
     background-image: initial !important;
     background-color: initial !important;
     color: rgb(255, 69, 26) !important;
-    text-shadow: rgb(136, 1, 1) 0px -1px 0px,
-    rgb(136, 1, 1) -1px 0px 0px,
-    rgb(136, 1, 1) 0px 1px 0px,
-    rgb(136, 1, 1) 1px 0px 0px !important;
+    text-shadow:
+        rgb(136, 1, 1) 0px -1px 0px,
+        rgb(136, 1, 1) -1px 0px 0px,
+        rgb(136, 1, 1) 0px 1px 0px,
+        rgb(136, 1, 1) 1px 0px 0px !important;
 }
 .ui.search > .prompt {
     outline-color: initial;
@@ -8644,8 +9020,9 @@ select.ui.dropdown {
 .ui.search > .results {
     background-image: initial;
     background-color: rgb(24, 26, 27);
-    box-shadow: rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
-    rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
+    box-shadow:
+        rgba(27, 29, 30, 0.12) 0px 2px 4px 0px,
+        rgba(27, 29, 30, 0.15) 0px 2px 10px 0px;
     border-color: rgb(60, 65, 68);
 }
 .ui.search > .results .result {
@@ -8827,4 +9204,6 @@ gr-main-header {
 .tou-6i3zyv {
     background-color: #19576c !important;
 }
-embed[type="application/pdf"][src="about:blank"] { filter: invert(100%) contrast(90%); }
+embed[type='application/pdf'][src='about:blank'] {
+    filter: invert(100%) contrast(90%);
+}

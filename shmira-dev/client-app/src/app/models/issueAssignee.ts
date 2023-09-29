@@ -1,4 +1,4 @@
 export interface IssueAssignee {
-    IssueId: string;
-    AssigneeId: string;
+    IssueId: string
+    AssigneeId: string
 }

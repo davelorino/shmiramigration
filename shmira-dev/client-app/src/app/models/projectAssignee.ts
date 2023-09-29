@@ -1,4 +1,4 @@
 export interface ProjectAssignee {
-    ProjectId: string;
-    AssigneeId: string;
+    ProjectId: string
+    AssigneeId: string
 }
