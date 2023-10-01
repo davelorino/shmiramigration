@@ -18,6 +18,7 @@ export const IssueCard = styled.div<IIssueCard>`
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 3px;
+    border: 1px solid grey;
     cursor: move !important;
     background: #181a1a !important;
     //transition: background 0.1s;
@@ -65,7 +66,7 @@ export const IssueCardSprintVersion = styled.div<IIssueCard>`
 
 export const Title = styled.p`
     padding-bottom: 11px;
-    ${font.size(13.5)}
+    ${font.size(12.5)}
     @media (max-width: 1100px) {
         ${font.size(13.5)}
     }

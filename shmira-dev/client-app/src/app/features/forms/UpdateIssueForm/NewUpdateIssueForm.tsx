@@ -93,8 +93,11 @@ export default observer(function NewUpdateIssueForm() {
     const [isSprintHovered, setIsSprintHovered] = useState(false)
     const [isReporterHovered, setIsReporterHovered] = useState(false)
     const [isAssigneeHovered, setIsAssigneeHovered] = useState(false)
+    const [isCommenterNameHoveredIndex, setIsCommenterNameHoveredIndex] = useState(99)
     const [isLogtimeHovered, setIsLogtimeHovered] = useState(false)
     const [isPriorityHovered, setIsPriorityHovered] = useState(false)
+    const [isDescriptionHovered, setIsDescriptionHovered] = useState(false)
+    const [isAddCommentHovered, setIsAddCommentHovered] = useState(false)
     const [isStatusHovered, setIsStatusHovered] = useState(false)
     const baseStyle = {
         transition: 'brightness 0.0s', // smooth transition for the brightness change
@@ -107,10 +110,23 @@ export default observer(function NewUpdateIssueForm() {
     const divStyles = {
         border: '1px solid white',
         width: '100%',
-        paddingLeft: '10px',
-        paddingTop: '10px',
-        paddingBottom: '10px',
-        filter: 'brightness(130%)',
+        paddingTop: '5px',
+        paddingBottom: '5px',
+        filter: 'brightness(130%)'
+    }
+
+    const underlineStyle = {
+        textDecoration: 'underline'
+    }
+    
+
+    
+    function toggleIsDescriptionHovered() {
+        setIsDescriptionHovered(!isDescriptionHovered)
+    }
+
+    function toggleIsAddCommentHovered() {
+        setIsAddCommentHovered(!isAddCommentHovered)
     }
 
     function toggleLogTimeEditState() {
@@ -1054,27 +1070,15 @@ export default observer(function NewUpdateIssueForm() {
                                     />
                                 )}
 
-                                <h5
-                                    style={{
-                                        marginLeft: '10px',
-                                        marginBottom: '0px',
-                                        paddingBottom: '0px',
-                                    }}
-                                >
-                                    Description
-                                </h5>
-                                <div
-                                    style={{
-                                        border: '1px solid white',
-                                        marginTop: '10px',
-                                        paddingBottom: '15px',
-                                    }}
-                                >
+                                <h5 style={{marginLeft: '10px',marginBottom: '0px',paddingBottom: '0px'}}>Description</h5>
+                                <div onMouseEnter={() => toggleIsDescriptionHovered()} onMouseLeave={() => toggleIsDescriptionHovered()} style={{...{filter: 'brightness(130%)', border: '1px solid white',marginTop: '10px',paddingBottom: '15px'}, ...( isDescriptionHovered ? hoveredStyle : {})}}>
                                     {!description_edit_state && (
                                         <InvisibleTextInput
                                             style={{
                                                 marginTop: '4px',
                                                 paddingTop: '0px',
+                                                paddingBottom: '0px',
+                                                marginBottom: '0px',
                                                 cursor: 'pointer',
                                                 display: 'flex',
                                                 maxHeight: '700px',
@@ -1087,36 +1091,17 @@ export default observer(function NewUpdateIssueForm() {
                                                 )
                                             }
                                         >
-                                            <div
-                                                style={{
-                                                    paddingTop: '8px',
-                                                    marginBottom: '20px',
-                                                    marginLeft: '12px',
-                                                    marginRight: '12px',
-                                                }}
-                                            >
-                                                {parse(
-                                                    selectedIssue!.description
-                                                )}
+                                            <div style={{paddingTop: '8px', marginBottom: '0px', paddingBottom: '0px', marginLeft: '12px', marginRight: '12px'}}>
+                                                {parse(selectedIssue!.description)}
                                             </div>
                                         </InvisibleTextInput>
                                     )}
                                     {description_edit_state && (
                                         <>
                                             <ReactQuill
-                                                style={{
-                                                    minHeight: '100px',
-                                                    maxHeight: '700px',
-                                                    marginBottom: '0px',
-                                                    paddingBottom: '10px',
-                                                }}
-                                                theme="snow"
-                                                defaultValue={
-                                                    selectedIssue!.description
-                                                }
-                                                onChange={
-                                                    setQuillDescriptionEditText
-                                                }
+                                                style={{minHeight: '200px',maxHeight: '700px',marginBottom: '0px',paddingBottom: '0px'}} theme="snow"
+                                                defaultValue={selectedIssue!.description}
+                                                onChange={setQuillDescriptionEditText}
                                             />
 
                                             <Button
@@ -1143,23 +1128,12 @@ export default observer(function NewUpdateIssueForm() {
                                         </>
                                     )}
                                 </div>
-                                <h5>Comments</h5>
+
+                                {/* COMMENTS */}
+                                <h5 style={{marginLeft: '10px', marginBottom: '8px'}}>Comments</h5>
                                 {selectedIssue!.comments!.map(
                                     (comment, index) => (
-                                        <div
-                                            key={index}
-                                            className={
-                                                commentHoveredIndex === index
-                                                    ? 'comment-hovered'
-                                                    : 'comment-default'
-                                            }
-                                            onMouseEnter={() =>
-                                                setCommentHoveredIndex(index)
-                                            }
-                                            onMouseLeave={() =>
-                                                setCommentHoveredIndex(99)
-                                            }
-                                        >
+                                        <div key={index} className={commentHoveredIndex === index ? 'comment-hovered' : 'comment-default'} onMouseEnter={() => setCommentHoveredIndex(index)} onMouseLeave={() => setCommentHoveredIndex(99)}>
                                             <div
                                                 style={{
                                                     verticalAlign: 'top',
@@ -1194,40 +1168,20 @@ export default observer(function NewUpdateIssueForm() {
                                                         )}
                                                 />
                                             </div>
-                                            <div
-                                                style={{
-                                                    paddingLeft: '20px',
-                                                    display: 'inline-block',
-                                                    paddingTop: '10px',
-                                                    width: '90%',
-                                                }}
-                                            >
-                                                <h5>
-                                                    {selectedProject!.assignees
-                                                        .find(
-                                                            (assignee) =>
-                                                                assignee.id ===
-                                                                comment.commenter_assignee_id
-                                                        )!
-                                                        .first_name.concat(
-                                                            ' ',
-                                                            selectedProject!.assignees.find(
-                                                                (assignee) =>
-                                                                    assignee.id ===
-                                                                    comment.commenter_assignee_id
-                                                            )!.second_name,
-                                                            '            ',
-                                                            moment(
-                                                                comment.comment_posted
-                                                            ).fromNow()
-                                                        )}
+                                            <div style={{paddingLeft: '20px', display: 'inline-block', paddingTop: '10px', width: '90%'}}>
+                                                <h5 
+                                                    onMouseEnter={() => setIsCommenterNameHoveredIndex(index)} 
+                                                    onMouseLeave={() => setIsCommenterNameHoveredIndex(99)} 
+                                                    style={{...{cursor: 'pointer', marginBottom: '5px'}, ...(isCommenterNameHoveredIndex === index ? underlineStyle : {})}}>
+                                                    {selectedProject!.assignees.find((assignee) => assignee.id === comment.commenter_assignee_id)!
+                                                        .first_name.concat(' ', selectedProject!.assignees.find((assignee) => assignee.id === comment.commenter_assignee_id)!.second_name
+                                                    )}
                                                 </h5>
-                                                <div
-                                                    style={{
-                                                        marginBottom: '10px',
-                                                    }}
-                                                >
+                                                <div style={{marginBottom: '5px'}}>
                                                     <p>{comment.comment}</p>
+                                                </div>
+                                                <div style={{marginBottom: '10px'}}>
+                                                    <p style={{fontSize: '10px', color: 'grey'}}>{moment(comment.comment_posted).format('DD MMM YYYY HH:MM')}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1262,402 +1216,124 @@ export default observer(function NewUpdateIssueForm() {
                                             )}
                                     />
                                 </div>
-                                <div
-                                    style={{
-                                        display: 'inline-block',
-                                        paddingLeft: '15px',
-                                        width: '95%',
-                                    }}
-                                >
-                                    <TextArea
-                                        style={{ border: '1px solid white' }}
-                                        onChange={(e) =>
-                                            setCommentState(e.target.value)
-                                        }
-                                        placeholder="Add a comment..."
-                                    />
+                                <div style={{display: 'inline-block', paddingLeft: '15px', width: '95%'}}>
+                                    <TextArea 
+                                        onMouseEnter={() => toggleIsAddCommentHovered()} onMouseLeave={() => toggleIsAddCommentHovered()}
+                                        style={{
+                                            ...{ border: '1px solid white' },
+                                            ...{filter: 'brightness(130%)'}, 
+                                            ...(isAddCommentHovered ? hoveredStyle : {})
+                                        }}
+                                    onChange={(e) => setCommentState(e.target.value)} placeholder="Add a comment..."/>
                                 </div>
-
-                                <div
-                                    style={{
-                                        marginTop: '10px',
-                                        marginRight: '0px',
-                                        float: 'right',
-                                        display: 'inline-block',
-                                    }}
-                                >
-                                    <Button
-                                        size="tiny"
-                                        content="Comment"
-                                        color="blue"
-                                        onClick={() => submitComment()}
-                                    />
-                                </div>
+                                <div style={{marginTop: '10px', marginRight: '0px', float: 'right', display: 'inline-block'}}><Button size="tiny" content="Comment" color="blue" onClick={() => submitComment()}/></div>
                             </Grid.Column>
 
                             <Grid.Column width={6}>
                                 <div style={{ paddingTop: '10px' }}></div>
-                                <div
-                                    style={{
-                                        ...divStyles,
-                                        ...baseStyle,
-                                        ...{
-                                            position: 'relative',
-                                            zIndex: '99',
-                                        },
-                                        ...(isStatusHovered
-                                            ? hoveredStyle
-                                            : {}),
-                                    }}
-                                    onMouseEnter={() =>
-                                        setIsStatusHovered(true)
-                                    }
-                                    onMouseLeave={() =>
-                                        setIsStatusHovered(false)
-                                    }
+                                {/* STATUS */}
+                                <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '99', paddingBottom: '8px'},...(isStatusHovered ? hoveredStyle : {})}}
+                                    onMouseEnter={() => setIsStatusHovered(true)}
+                                    onMouseLeave={() => setIsStatusHovered(false)}
                                 >
-                                    <h5
-                                        style={{
-                                            paddingLeft: '10px',
-                                            paddingTop: '10px',
-                                        }}
-                                    >
-                                        STATUS
-                                    </h5>
-                                    <hr
-                                        style={{
-                                            border: '1px solid white',
-                                            width: '95%',
-                                        }}
+                                    <h5 style={{ marginBottom: '5px', paddingBottom: '5px', paddingLeft: '20px',paddingTop: '10px',}}>STATUS</h5>
+                                    <hr style={{border: '1px solid white',width: '100%'}}/>
+                                    <div style={{marginLeft: '20px'}}>
+                                    <Label style={{marginRight: '0px'}}>{selectedIssue!.status}</Label>
+                                    <Dropdown downward multiple closeOnChange placeholder="" value="" label="Status" name="status" options={statusOptions}
+                                        style={{position: 'relative',zIndex: '99', marginLeft: '0px', paddingRight: '10px'}}
                                     />
-                                    <Label>{selectedIssue!.status}</Label>
-                                    <Dropdown
-                                        downward
-                                        multiple
-                                        closeOnChange
-                                        placeholder=""
-                                        value=""
-                                        label="Status"
-                                        name="status"
-                                        options={statusOptions}
-                                        style={{
-                                            position: 'relative',
-                                            zIndex: '99',
-                                        }}
-                                        //onChange={(e) => handleChangeAssignees(e)}
-                                    />
-                                    <br />
+                                    </div>
                                 </div>
                                 <div style={{ marginBottom: '20px' }} />
-                                <div
-                                    style={{
-                                        ...divStyles,
-                                        ...baseStyle,
-                                        ...{
-                                            position: 'relative',
-                                            zIndex: '98',
-                                        },
-                                        ...(isAssigneeHovered
-                                            ? hoveredStyle
-                                            : {}),
-                                    }}
-                                    onMouseEnter={() =>
-                                        setIsAssigneeHovered(true)
-                                    }
-                                    onMouseLeave={() =>
-                                        setIsAssigneeHovered(false)
-                                    }
+
+                                {/* ASSIGNEES */}
+                                <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '98',},...(isAssigneeHovered ? hoveredStyle : {})}}
+                                    onMouseEnter={() => setIsAssigneeHovered(true)}
+                                    onMouseLeave={() => setIsAssigneeHovered(false)}
                                 >
-                                    <h5
-                                        style={{
-                                            paddingLeft: '10px',
-                                            paddingTop: '10px',
-                                        }}
-                                    >
-                                        ASSIGNEES
-                                    </h5>
-                                    <hr
-                                        style={{
-                                            border: '1px solid white',
-                                            width: '95%',
-                                        }}
-                                    />
+                                    <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>ASSIGNEES</h5>
+                                    <hr style={{border: '1px solid white', width: '100%'}}/>
                                     {selectedIssue!.assignees.map(
                                         (user, index) => (
-                                            <StyledLabel
-                                                style={{
-                                                    marginBottom: '6px',
-                                                    marginRight: '4px',
-                                                }}
-                                                onClick={() => {
-                                                    removeAssigneeFromIssue(
-                                                        user.id
-                                                    )
-                                                }}
-                                            >
-                                                <AvatarIsActiveLabelBorder
-                                                    isActive={false}
-                                                    index={index}
-                                                >
-                                                    <StyledLabelAvatar
-                                                        value={user.id}
-                                                        size="25"
-                                                        name={user.first_name.concat(
-                                                            ' ',
-                                                            user.second_name
-                                                        )}
-                                                        round="25px"
-                                                        src={
-                                                            selectedProject!.assignees.find(
-                                                                (assignee) =>
-                                                                    assignee.id ===
-                                                                    user.id
-                                                            )!.photo?.url
-                                                        }
-                                                    />
+                                            <div style={{marginLeft: '20px', marginTop: '10px' }}>
+                                            <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {removeAssigneeFromIssue(user.id)}}>
+                                                <AvatarIsActiveLabelBorder isActive={false} index={index}>
+                                                    <StyledLabelAvatar value={user.id} size="25" name={user.first_name.concat(' ', user.second_name)} round="25px" src={selectedProject!.assignees.find((assignee) => assignee.id === user.id)!.photo?.url}/>
                                                 </AvatarIsActiveLabelBorder>
-
-                                                {user.first_name.concat(
-                                                    ' ',
-                                                    user.second_name
-                                                )}
-                                                <Icon
-                                                    style={{
-                                                        marginLeft: '10px',
-                                                    }}
-                                                    type="close"
-                                                />
+                                                {user.first_name.concat(' ',user.second_name)}
+                                                <Icon style={{marginLeft: '10px'}} type="close"/>
                                             </StyledLabel>
+                                            </div>
                                         )
                                     )}
-                                    <div></div>
-                                    <Dropdown
-                                        multiple
-                                        downward
-                                        placeholder="+ Add more"
-                                        value=""
-                                        label="Assign"
-                                        name="assignees"
-                                        style={{
-                                            position: 'relative',
-                                            zIndex: '99',
-                                        }}
-                                        options={formatProjectAssignees(
-                                            projectAssignees,
-                                            selectedIssue!
-                                        )}
-                                        onChange={(e) =>
-                                            handleChangeAssignees(e)
-                                        }
-                                    />
+                                    {/* Assignee Dropdown */}
+                                    <div style={{marginLeft: '20px'}}>
+                                        <Dropdown multiple downward placeholder="+ Add more" value="" label="Assign" name="assignees" style={{position: 'relative', marginTop: '0px', paddingTop: '0px', zIndex: '99'}}
+                                            options={formatProjectAssignees(projectAssignees, selectedIssue!)}
+                                            onChange={(e) => handleChangeAssignees(e)}
+                                        />
+                                    </div>
                                 </div>
                                 <div style={{ marginTop: '20px' }} />
-                                <div
-                                    style={{
-                                        ...divStyles,
-                                        ...baseStyle,
-                                        ...{
-                                            position: 'relative',
-                                            zIndex: '90',
-                                        },
-                                        ...(isReporterHovered
-                                            ? hoveredStyle
-                                            : {}),
-                                    }}
-                                    onMouseEnter={() =>
-                                        setIsReporterHovered(true)
-                                    }
-                                    onMouseLeave={() =>
-                                        setIsReporterHovered(false)
-                                    }
+
+                                {/* REPORTER */}
+                                <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '90'}, ...(isReporterHovered ? hoveredStyle : {})}}
+                                    onMouseEnter={() => setIsReporterHovered(true)}
+                                    onMouseLeave={() => setIsReporterHovered(false)}
                                 >
-                                    <h5
-                                        style={{
-                                            paddingLeft: '10px',
-                                            paddingTop: '10px',
-                                        }}
-                                    >
-                                        REPORTER
-                                    </h5>
-                                    <hr
-                                        style={{
-                                            border: '1px solid white',
-                                            width: '95%',
-                                        }}
-                                    />
-                                    {selectedIssue!.reporter_id !== null &&
-                                        selectedIssue!.reporter_id.length !==
-                                            0 && (
-                                            <StyledLabel
-                                                style={{
-                                                    marginBottom: '6px',
-                                                    marginRight: '4px',
-                                                }}
-                                                onClick={() => {
-                                                    removeReporterFromIssue(
-                                                        selectedIssue!
-                                                            .reporter_id
-                                                    )
-                                                }}
-                                            >
-                                                <AvatarIsActiveLabelBorder
-                                                    isActive={false}
-                                                    index={1}
-                                                >
-                                                    <StyledLabelAvatar
-                                                        value={
-                                                            selectedIssue!
-                                                                .reporter_id
-                                                        }
-                                                        size="25"
+                                    <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>REPORTER</h5>
+                                    <hr style={{border: '1px solid white', width: '100%'}}/>
+                                    {selectedIssue!.reporter_id !== null && selectedIssue!.reporter_id.length !== 0 && (
+                                        <div style={{marginLeft: '20px'}}>
+                                            <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {removeReporterFromIssue(selectedIssue!.reporter_id)}}>
+                                                <AvatarIsActiveLabelBorder isActive={false} index={1}>
+                                                    <StyledLabelAvatar value={selectedIssue!.reporter_id} size="25"
                                                         name={selectedProject!.assignees
-                                                            .find(
-                                                                (assignee) =>
-                                                                    assignee.id ===
-                                                                    selectedIssue!
-                                                                        .reporter_id
-                                                            )!
-                                                            .first_name.concat(
-                                                                ' ',
-                                                                selectedProject!.assignees.find(
-                                                                    (
-                                                                        assignee
-                                                                    ) =>
-                                                                        assignee.id ===
-                                                                        selectedIssue!
-                                                                            .reporter_id
-                                                                )!.second_name
-                                                            )}
+                                                            .find((assignee) => assignee.id === selectedIssue!.reporter_id)!
+                                                            .first_name.concat(' ', selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.second_name)}
                                                         round="25px"
-                                                        src={
-                                                            selectedProject!.assignees.find(
-                                                                (assignee) =>
-                                                                    assignee.id ===
-                                                                    selectedIssue!
-                                                                        .reporter_id
-                                                            )!.photo?.url
-                                                        }
+                                                        src={selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.photo?.url}
                                                     />
                                                 </AvatarIsActiveLabelBorder>
 
-                                                {selectedProject!.assignees
-                                                    .find(
-                                                        (assignee) =>
-                                                            assignee.id ===
-                                                            selectedIssue!
-                                                                .reporter_id
-                                                    )!
-                                                    .first_name.concat(
-                                                        ' ',
-                                                        selectedProject!.assignees.find(
-                                                            (assignee) =>
-                                                                assignee.id ===
-                                                                selectedIssue!
-                                                                    .reporter_id
-                                                        )!.second_name
-                                                    )}
-                                                <Icon
-                                                    style={{
-                                                        marginLeft: '10px',
-                                                    }}
-                                                    type="close"
-                                                />
+                                                {selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.first_name.concat(' ',selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.second_name)}
+                                                <Icon style={{marginLeft: '10px'}} type="close" />
                                             </StyledLabel>
+                                        </div>
                                         )}
-                                    <div></div>
-                                    <Dropdown
-                                        downward
-                                        multiple
-                                        closeOnChange
-                                        placeholder="Select reporter"
-                                        value=""
-                                        label="Assign"
-                                        name="reporter"
-                                        style={{
-                                            position: 'relative',
-                                            zIndex: '99',
-                                        }}
-                                        options={formatProjectReporters(
-                                            projectAssignees,
-                                            selectedIssue!
-                                        )}
-                                        onChange={(e) =>
-                                            handleChangeReporter(e)
-                                        }
-                                    />
-                                    <div></div>
+                                    <div style={{marginLeft: '20px'}}>
+                                        <Dropdown downward multiple closeOnChange placeholder="Select reporter" value="" label="Assign" name="reporter"
+                                            style={{marginTop: '0px', paddingTop: '0px', position: 'relative', zIndex: '99'}}
+                                            options={formatProjectReporters(projectAssignees,selectedIssue!)}
+                                            onChange={(e) => handleChangeReporter(e)}
+                                        />
+                                    </div>
                                 </div>
                                 <br />
-                                <div
-                                    style={{
-                                        ...divStyles,
-                                        ...baseStyle,
-                                        ...(isSprintHovered
-                                            ? hoveredStyle
-                                            : {}),
-                                    }}
-                                    onMouseEnter={() =>
-                                        setIsSprintHovered(true)
-                                    }
-                                    onMouseLeave={() =>
-                                        setIsSprintHovered(false)
-                                    }
-                                >
-                                    <InvisibleTextInput
-                                        onClick={toggleLogTimeEditState}
-                                        fontsize={12}
-                                        style={{ cursor: 'pointer' }}
-                                    >
-                                        <div
-                                            style={{
-                                                paddingTop: '10px',
-                                                paddingBottom: '10px',
-                                            }}
-                                        >
-                                            <h5
-                                                style={{
-                                                    marginLeft: '5px',
-                                                    //paddingLeft: '5px',
-                                                    marginBottom: '5px',
-                                                    paddingBottom: '5px',
-                                                }}
-                                            >
-                                                LOG TIME
-                                            </h5>
-                                            <hr
-                                                style={{
-                                                    border: '1px solid white',
-                                                    width: '95%',
-                                                }}
-                                            />
-                                            <div
-                                                style={{ paddingRight: '10px' }}
-                                            >
-                                                <UpdateIssueFormTrackingWidget />
-                                            </div>
+
+                                {/* LOG TIME */}
+                                <div style={{...divStyles, ...baseStyle, ...(isSprintHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsSprintHovered(true)} onMouseLeave={() => setIsSprintHovered(false)}>
+                                    <InvisibleTextInput onClick={toggleLogTimeEditState} fontsize={12} style={{ cursor: 'pointer' }}>
+                                        <div style={{paddingBottom: '10px'}}>
+                                            <h5 style={{paddingTop: '10px', marginLeft: '20px', marginBottom: '5px', paddingBottom: '5px'}}>LOG TIME</h5>
+                                        
+                                            <hr style={{border: '1px solid white', width: '100%'}}/>
+                                            <div style={{marginLeft: '10px', paddingRight: '10px' }}><UpdateIssueFormTrackingWidget /></div>
                                         </div>
                                     </InvisibleTextInput>
 
                                     {/* LOG TIME */}
                                     {log_time_edit_state && (
-                                        <>
+                                        <div style={{width: '90%', marginLeft: '20px'}}>
+                                            <h5>Time Spent</h5>
                                             <div className="inline fields">
-                                                <label>Days</label>
+                                                <label style={{fontSize: '11px'}}>Days</label>
+                                                <Field style={{width: '60px', height: '30px'}} type="number" name="days_logged " onChange={(e: any) => setSelectedIssueLoggedDays(e.target.value)}/>
+                                            <label style={{marginLeft: '7px', fontSize: '11px'}}>Hours</label>
                                                 <Field
                                                     type="number"
-                                                    placeholder="0d"
-                                                    name="days_logged "
-                                                    onChange={(e: any) =>
-                                                        setSelectedIssueLoggedDays(
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                />
-
-                                                <label>Hours</label>
-                                                <Field
-                                                    type="number"
-                                                    placeholder="0h"
+                                                    style={{width: '60px', height: '30px'}}
                                                     name="hours_logged"
                                                     onChange={(e: any) =>
                                                         setSelectedIssueLoggedHours(
@@ -1666,10 +1342,10 @@ export default observer(function NewUpdateIssueForm() {
                                                     }
                                                 />
 
-                                                <label>Minutes</label>
+                                                <label style={{marginLeft: '7px', fontSize: '11px'}}>Minutes</label>
                                                 <Field
                                                     type="number"
-                                                    placeholder="0m"
+                                                    style={{width: '60px', height: '30px'}}
                                                     name="minutes_logged"
                                                     onChange={(e: any) =>
                                                         setSelectedIssueLoggedMinutes(
@@ -1681,10 +1357,10 @@ export default observer(function NewUpdateIssueForm() {
 
                                             <h5>Time Remaining</h5>
                                             <div className="inline fields">
-                                                <label>Days</label>
+                                                <label style={{fontSize: '11px'}}>Days</label>
                                                 <Field
                                                     type="number"
-                                                    placeholder="0d"
+                                                    style={{width: '60px', height: '30px'}}
                                                     name="days_remaining"
                                                     onChange={(e: any) =>
                                                         setSelectedIssueRemainingDays(
@@ -1693,10 +1369,10 @@ export default observer(function NewUpdateIssueForm() {
                                                     }
                                                 />
 
-                                                <label>Hours</label>
+                                                <label style={{marginLeft: '7px', fontSize: '11px'}}>Hours</label>
                                                 <Field
                                                     type="number"
-                                                    placeholder="0h"
+                                                    style={{width: '60px', height: '30px'}}
                                                     name="hours_remaining"
                                                     onChange={(e: any) =>
                                                         setSelectedIssueRemainingHours(
@@ -1705,10 +1381,10 @@ export default observer(function NewUpdateIssueForm() {
                                                     }
                                                 />
 
-                                                <label>Minutes</label>
+                                                <label style={{marginLeft: '7px', fontSize: '11px'}}>Minutes</label>
                                                 <Field
                                                     type="number"
-                                                    placeholder="0m"
+                                                    style={{width: '60px', height: '30px'}}
                                                     name="minutes_remaining"
                                                     onChange={(e: any) =>
                                                         setSelectedIssueRemainingMinutes(
@@ -1738,77 +1414,24 @@ export default observer(function NewUpdateIssueForm() {
 
                                             <br />
                                             <br />
-                                        </>
+                                        </div>
                                     )}
                                 </div>
-                                <div
-                                    style={{ width: '100%', marginTop: '20px' }}
-                                >
-                                    <div
-                                        style={{
-                                            ...divStyles,
-                                            ...baseStyle,
-                                            ...{
-                                                position: 'relative',
-                                                zIndex: '98',
-                                            },
-                                            ...(isLogtimeHovered
-                                                ? hoveredStyle
-                                                : {}),
-                                        }}
-                                        onMouseEnter={() =>
-                                            setIsLogtimeHovered(true)
-                                        }
-                                        onMouseLeave={() =>
-                                            setIsLogtimeHovered(false)
-                                        }
+                                {/* SPRINT */}
+                                <div style={{ width: '100%', marginTop: '20px' }}>
+                                    <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '98'}, ...(isLogtimeHovered ? hoveredStyle : {})}}
+                                        onMouseEnter={() => setIsLogtimeHovered(true)}
+                                        onMouseLeave={() => setIsLogtimeHovered(false)}
                                     >
-                                        <h5 style={{ verticalAlign: 'top' }}>
-                                            SPRINT
-                                        </h5>
-                                        <hr
-                                            style={{
-                                                border: '1px solid white',
-                                                width: '95%',
-                                            }}
-                                        />
-                                        <StyledLabel
-                                            style={{ marginRight: '0px' }}
-                                        >
-                                            <p
-                                                style={{
-                                                    verticalAlign: 'top',
-                                                    paddingBottom: '3px',
-                                                    paddingTop: '3px',
-                                                }}
-                                            >
-                                                {
-                                                    selectedProject!.sprints.find(
-                                                        (sprint) =>
-                                                            sprint.id ===
-                                                            selectedIssue!
-                                                                .sprint_id
-                                                    )!.name
-                                                }
+                                        <h5 style={{ marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>SPRINT</h5>
+                                        <hr style={{border: '1px solid white', width: '100%'}}/>
+                                        <StyledLabel style={{ marginLeft: '20px', marginRight: '0px' }}>
+                                            <p style={{verticalAlign: 'top', paddingBottom: '3px', paddingTop: '3px'}}>
+                                                {selectedProject!.sprints.find((sprint) => sprint.id === selectedIssue!.sprint_id)!.name}
                                             </p>
                                         </StyledLabel>
-                                        <Dropdown
-                                            downward
-                                            multiple
-                                            closeOnChange
-                                            placeholder=""
-                                            value=""
-                                            label="Sprint"
-                                            name="sprint"
-                                            style={{
-                                                marginLeft: '0px',
-                                                paddingLeft: '0px',
-                                                position: 'relative',
-                                                zIndex: '99',
-                                            }}
-                                            options={reformatSprintOptions(
-                                                selectedProject!.sprints
-                                            )}
+                                        <Dropdown downward multiple closeOnChange placeholder="" value="" label="Sprint" name="sprint" style={{marginLeft: '0px', paddingLeft: '0px', position: 'relative', zIndex: '99'}}
+                                            options={reformatSprintOptions(selectedProject!.sprints)}
                                         />
                                     </div>
                                     <div style={{ marginBottom: '20px' }} />
@@ -1827,66 +1450,73 @@ export default observer(function NewUpdateIssueForm() {
                                             setIsPriorityHovered(false)
                                         }
                                     >
-                                        <h5>PRIORITY</h5>
+                                        <h5 style={{marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>PRIORITY</h5>
                                         <hr
                                             style={{
                                                 border: '1px solid white',
                                             }}
                                         />
-                                        <StyledLabel>
-                                            <IssuePriorityIcon
-                                                priority={
-                                                    selectedIssue!.priority
-                                                }
+                                        <div style={{marginBottom: '0pxx', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>
+                                            <StyledLabel>
+                                                <IssuePriorityIcon
+                                                    priority={
+                                                        selectedIssue!.priority
+                                                    }
+                                                />
+                                                <p
+                                                    style={{
+                                                        paddingBottom: '3px',
+                                                        paddingLeft: '5px',
+                                                        display: 'inline-block',
+                                                    }}
+                                                >
+                                                    {selectedIssue!.priority}
+                                                </p>
+                                            </StyledLabel>
+                                            <Dropdown
+                                                downward
+                                                multiple
+                                                closeOnChange
+                                                placeholder=""
+                                                value=""
+                                                label="Priority"
+                                                name="priority"
+                                                options={priorityOptions}
                                             />
-                                            <p
-                                                style={{
-                                                    paddingBottom: '3px',
-                                                    paddingLeft: '5px',
-                                                    display: 'inline-block',
-                                                }}
-                                            >
-                                                {selectedIssue!.priority}
-                                            </p>
-                                        </StyledLabel>
-                                        <Dropdown
-                                            downward
-                                            multiple
-                                            closeOnChange
-                                            placeholder=""
-                                            value=""
-                                            label="Priority"
-                                            name="priority"
-                                            options={priorityOptions}
-                                        />
+                                        </div>
                                     </div>
                                 </div>
-                                <p
-                                    style={{
-                                        marginTop: '30px',
-                                        fontSize: '13px',
-                                        color: 'grey',
-                                    }}
-                                >
-                                    {'Created '.concat(
-                                        moment(
-                                            selectedIssue!.created_at
-                                        ).fromNow()
-                                    )}
-                                </p>
-                                <p
-                                    style={{
-                                        marginTop: '15px',
-                                        fontSize: '13px',
-                                        color: 'grey',
-                                    }}
-                                >
-                                    {'Last updated '.concat(
-                                        moment(
-                                            selectedIssue!.updated_at
-                                        )?.fromNow()
-                                    )}
-                                </p>
+                                <div style={{textAlign: 'right'}}>
+                                    <p
+                                        style={{
+                                            marginTop: '10px',
+                                            marginBottom: '0px',
+                                            fontSize: '13px',
+                                            paddingBottom: '0px',
+                                            color: 'grey',
+                                        }}
+                                    >
+                                        {'Created '.concat(
+                                            moment(
+                                                selectedIssue!.created_at
+                                            ).fromNow()
+                                        )}
+                                    </p>
+                                    <p
+                                        style={{
+                                            paddingTop: '10px',
+                                            marginTop: '0px',
+                                            fontSize: '13px',
+                                            color: 'grey',
+                                        }}
+                                    >
+                                        {'Last updated '.concat(
+                                            moment(
+                                                selectedIssue!.updated_at
+                                            )?.fromNow()
+                                        )}
+                                    </p>
+                                </div>
                             </Grid.Column>
                         </Grid>
                     </Form>

@@ -81,21 +81,19 @@ export default observer(function ProjectBoardListIssue({
                                 left: '0px',
                             }}
                         ></div>
-                        {renderSelectedIssueType(issue)}
-
-                        <IssuePriorityIcon
-                            priority={issue.priority}
-                        ></IssuePriorityIcon>
-                        <div
-                            style={{
-                                display: 'inline-block',
-                                paddingBottom: '0px',
-                                marginRight: '5px',
-                                float: 'right',
-                                clear: 'both',
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                        
+                            <div style={{marginTop: '9px'}}>
+                                {renderSelectedIssueType(issue)}
+                                <IssuePriorityIcon  priority={issue.priority}></IssuePriorityIcon>
+                            </div>
+                            <div style={{
+                                    marginLeft: 'auto',
+                                    marginRight: '10px'
                             }}
                         >
                             {issue.assignees.map((assignee, index) => (
+                                <div style={{display: 'inline'}}>
                                 <AvatarIsActiveLabelBorder
                                     isActive={false}
                                     index={index}
@@ -115,7 +113,9 @@ export default observer(function ProjectBoardListIssue({
                                         round="24px"
                                     />
                                 </AvatarIsActiveLabelBorder>
+                                </div>
                             ))}
+                        </div>
                         </div>
                     </IssueCard>
                 </div>
