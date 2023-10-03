@@ -14,11 +14,7 @@ import { Sprint } from '../../../models/sprint'
 import { Issue } from '../../../models/issue'
 import * as Yup from 'yup'
 import { Assignee } from '../../../models/assignee'
-import {
-    StyledLabelAvatar,
-    StyledAvatar,
-    AvatarIsActiveLabelBorder,
-} from '../../filters/Styles'
+import { StyledLabelAvatar, StyledAvatar, AvatarIsActiveLabelBorder } from '../../filters/Styles'
 import { InvisibleTextInput, StyledInput } from '../../../shared/form/Styles'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
@@ -165,10 +161,7 @@ export default observer(function NewUpdateIssueForm() {
         return estimated_duration
     }
 
-    const formatProjectAssignees = (
-        projectAssignees: Assignee[],
-        issue: Issue
-    ) => {
+    const formatProjectAssignees = (projectAssignees: Assignee[], issue: Issue) => {
         var unassigned_assignees: string[] = []
         var all_assignee_ids: string[] = []
         var assigned_assignees: string[] = []
@@ -299,17 +292,22 @@ export default observer(function NewUpdateIssueForm() {
         }))
 
     function handleSprintChange(sprint_id: string) {
+        console.log("New sprint id:");
+        console.log(sprint_id);
+        console.log("Sprint issue to remove:");
         var sprint_issue_to_remove = {
             sprint_id: selectedIssue!.sprint_id,
             issue_id: selectedIssue!.id,
             issue_name: selectedIssue!.name,
         }
-
+        console.log(sprint_issue_to_remove);
+        console.log("Sprint issue to add:");
         var sprint_issue_to_add = {
             sprint_id: sprint_id,
             issue_id: selectedIssue!.id,
             issue_name: selectedIssue!.name,
         }
+        console.log(sprint_issue_to_add);
 
         selectedIssue!.sprint_id = sprint_id
 
@@ -1417,7 +1415,8 @@ export default observer(function NewUpdateIssueForm() {
                                         </div>
                                     )}
                                 </div>
-                                {/* SPRINT */}
+
+                    {/* SPRINT */}
                                 <div style={{ width: '100%', marginTop: '20px' }}>
                                     <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '98'}, ...(isLogtimeHovered ? hoveredStyle : {})}}
                                         onMouseEnter={() => setIsLogtimeHovered(true)}
@@ -1432,9 +1431,12 @@ export default observer(function NewUpdateIssueForm() {
                                         </StyledLabel>
                                         <Dropdown downward multiple closeOnChange placeholder="" value="" label="Sprint" name="sprint" style={{marginLeft: '0px', paddingLeft: '0px', position: 'relative', zIndex: '99'}}
                                             options={reformatSprintOptions(selectedProject!.sprints)}
+                                            
                                         />
                                     </div>
                                     <div style={{ marginBottom: '20px' }} />
+
+                    {/* PRIORITY */}
                                     <div
                                         style={{
                                             ...divStyles,
