@@ -9,6 +9,7 @@ import Icon from '../../images/Icon'
 import { AccountFormValues } from '../../models/account'
 import { Invitation } from '../../models/invitation'
 import { v4 as uuid } from 'uuid'
+import nodemailer from 'nodemailer';
 
 export default observer(function InviteCollaboratorForm() {
     const { userStore, accountStore, issueStore, commonStore } = useStore()

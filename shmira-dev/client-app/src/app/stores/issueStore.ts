@@ -560,8 +560,7 @@ export default class IssueStore {
         }
         delete issue_to_send['assignees']
         delete issue_to_send['comments']
-        console.log("issueStore: issue_to_send:")
-        console.log(issue_to_send);
+        
         var issue_to_update: any = {
             issue: issue_to_send,
             source_sprint_id: source_sprint_id,
@@ -569,8 +568,7 @@ export default class IssueStore {
             issue_name: issue_to_send.name,
             issue_id: issue_to_send.id,
         }
-        console.log("issueStore: issue_to_update:")
-        console.log(issue_to_update);
+        
         try {
             await agent.Sprints.moveIssueToDifferentSprint(issue_to_update)
             await this.loadIssues()
