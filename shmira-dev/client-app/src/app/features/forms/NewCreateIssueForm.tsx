@@ -53,6 +53,7 @@ export default observer(function NewCreateIssueForm() {
     var [selectedIssuePriority, setSelectedIssuePriority] = useState('')
     var [selectedIssueStatus, setSelectedIssueStatus] = useState('')
     var [selectedIssueSprint, setSelectedIssueSprint] = useState('')
+    var [selectedIssueSprintName, setSelectedIssueSprintName] = useState('')
     var [selectedIssueEstimatedDays, setSelectedIssueEstimatedDays] = useState(0)
     var [selectedIssueEstimatedHours, setSelectedIssueEstimatedHours] = useState(0)
     var [selectedIssueEstimatedMinutes, setSelectedIssueEstimatedMinutes] = useState(0)
@@ -287,7 +288,7 @@ export default observer(function NewCreateIssueForm() {
             value: sprint.id,
             text: sprint.name,
             content: (
-                <HoverDiv onClick={() => setSelectedIssueSprint(sprint.id)}>
+                <HoverDiv onClick={() => {setSelectedIssueSprint(sprint.id); setSelectedIssueSprintName(sprint.name); }}>
                     <StyledLabel>{sprint.name}</StyledLabel>
                 </HoverDiv>
             ),
@@ -1196,79 +1197,72 @@ export default observer(function NewCreateIssueForm() {
                                 </div>
                                 )}
                             </div>
+
+                {/* SPRINT */}
                                 <div style={{ marginTop: '20px' }}>
-                                    <div
-                                        style={{
-                                            display: 'inline-block',
-                                            width: '50%',
-                                        }}
-                                    >
-                                        <h5>SPRINT</h5>
-                                        <StyledLabel>
-                                            <p
-                                                style={{
-                                                    paddingBottom: '3px',
-                                                    paddingTop: '3px',
-                                                }}
-                                            >
-                                                {
-                                                    selectedProject!.sprints.find(
-                                                        (sprint) =>
-                                                            sprint.id ===
-                                                            selectedIssueSprint
-                                                    )?.name
-                                                }
+                                    <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '98'}, ...(isLogtimeHovered ? hoveredStyle : {})}}
+                                            onMouseEnter={() => setIsLogtimeHovered(true)}
+                                            onMouseLeave={() => setIsLogtimeHovered(false)}
+                                        >
+                                        <h5 style={{ marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>SPRINT</h5>
+                                        <hr style={{border: '1px solid white', width: '100%'}}/>
+                                        <StyledLabel style={{ marginLeft: '20px', marginRight: '0px' }}>
+                                            <p style={{verticalAlign: 'top', paddingBottom: '3px', paddingTop: '3px'}}>
+                                                {selectedIssueSprintName}
                                             </p>
                                         </StyledLabel>
-                                        <Dropdown
-                                            downward
-                                            multiple
-                                            closeOnChange
-                                            placeholder=""
-                                            value=""
-                                            label="Sprint"
-                                            name="sprint"
-                                            options={reformatSprintOptions(
-                                                allSprints
-                                            )}
+                                        <Dropdown downward multiple closeOnChange placeholder="" value="" label="Sprint" name="sprint" style={{marginLeft: '0px', paddingLeft: '0px', position: 'relative', zIndex: '99'}}
+                                            options={reformatSprintOptions(selectedProject!.sprints)}        
                                         />
                                     </div>
+
+                {/* PRIORITY */}
                                     <div
                                         style={{
-                                            display: 'inline-block',
-                                            width: '50%',
+                                            ...{marginTop: '20px'},
+                                            ...divStyles,
+                                            ...baseStyle,
+                                            ...(isPriorityHovered
+                                                ? hoveredStyle
+                                                : {}),
                                         }}
+                                        onMouseEnter={() =>
+                                            setIsPriorityHovered(true)
+                                        }
+                                        onMouseLeave={() =>
+                                            setIsPriorityHovered(false)
+                                        }
                                     >
-                                        <h5>PRIORITY</h5>
-                                        <StyledLabel>
-                                            <IssuePriorityIcon
-                                                priority={selectedIssuePriority}
-                                            />
-                                            <p
-                                                style={{
-                                                    paddingBottom: '3px',
-                                                    paddingLeft: '5px',
-                                                    display: 'inline-block',
-                                                }}
-                                            >
-                                                {selectedIssuePriority}
-                                            </p>
-                                        </StyledLabel>
-
-                                        <Dropdown
-                                            downward
-                                            multiple
-                                            closeOnChange
-                                            placeholder=""
-                                            value=""
-                                            label="Priority"
-                                            name="priority"
-                                            options={priorityOptions}
+                                        <h5 style={{marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>PRIORITY</h5>
+                                        <hr
+                                            style={{
+                                                border: '1px solid white',
+                                            }}
                                         />
+                                        <div style={{marginBottom: '0pxx', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>
+                                            <StyledLabel>
+                                                <IssuePriorityIcon priority={selectedIssuePriority}/>
+                                                <p style={{paddingBottom: '3px', paddingLeft: '5px', display: 'inline-block'}}>
+                                                    {selectedIssuePriority}
+                                                </p>
+                                            </StyledLabel>
+                                            <Dropdown
+                                                downward
+                                                multiple
+                                                closeOnChange
+                                                placeholder=""
+                                                value=""
+                                                label="Priority"
+                                                name="priority"
+                                                options={priorityOptions}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <br />
                                 <br />
+
+
                                 <Button
                                     style={{ marginRight: '10px' }}
                                     color="blue"
