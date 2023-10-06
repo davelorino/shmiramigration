@@ -26,7 +26,7 @@ interface Props {
 }
 
 export default observer(function SprintSectionContainer({ sprint }: Props) {
-    const { smallModalStore, modalStore, issueStore } = useStore()
+    const { smallModalStore, mediumModalStore, modalStore, issueStore } = useStore()
     const { selectSprint, selectedSprint, updateSprint, selectedProject } =
         issueStore
     var history = useHistory()
@@ -97,7 +97,7 @@ export default observer(function SprintSectionContainer({ sprint }: Props) {
                                                         issueStore.selectSprint(
                                                             sprint.id
                                                         )
-                                                        modalStore.openModal(
+                                                        mediumModalStore.openMediumModal(
                                                             <AddDatesToSprintForm />
                                                         )
                                                     }}
@@ -172,7 +172,7 @@ export default observer(function SprintSectionContainer({ sprint }: Props) {
                                                         issueStore.selectSprint(
                                                             sprint.id
                                                         )
-                                                        modalStore.openModal(
+                                                        mediumModalStore.openMediumModal(
                                                             <AddDatesToSprintForm />
                                                         )
                                                     }}

@@ -4,11 +4,16 @@ import Icon from '../../images/Icon'
 import { color } from '../../shared/utils/styles'
 import { font } from '../../shared/utils/styles'
 
-export const StyledLabel = styled(Label)`
+interface ILabel {
+    size: string;
+}
+
+export const StyledLabel = styled(Label)<ILabel>`
     cursor: pointer;
     &:hover {
         filter: brightness(1.2) !important;
     }
+    size: ${(props) => props.size};
 `
 
 export const HoverDiv = styled.div`

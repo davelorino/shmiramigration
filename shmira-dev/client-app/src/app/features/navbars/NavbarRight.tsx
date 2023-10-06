@@ -175,7 +175,7 @@ export default observer(function NavbarRight() {
                 </p>
             </Item>
             <div style={{ paddingTop: 12 }}></div>
-            <hr style={{ backgroundColor: '#000000' }} />
+            {/*<hr style={{ backgroundColor: '#000000' }} />*/}
             <Item onClick={() => history.push(`/`)}>
                 <Icon type="board" size={18} top={0} left={3} />
                 <ItemText>Board</ItemText>

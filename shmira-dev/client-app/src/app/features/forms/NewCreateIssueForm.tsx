@@ -189,6 +189,13 @@ export default observer(function NewCreateIssueForm() {
                                 project_assignee.second_name
                             )}
                             round="20px"
+                            src={
+                                selectedProject!.assignees.find(
+                                    (assignee) =>
+                                        assignee.id ===
+                                        project_assignee.id
+                                )!.photo?.url
+                            }
                         />
                     </AvatarIsActiveLabelBorder>
                     {project_assignee.first_name.concat(
@@ -254,29 +261,25 @@ export default observer(function NewCreateIssueForm() {
         return assignees_to_display!.map((project_assignee, index) => ({
             key: project_assignee.id,
             value: project_assignee.id,
-            text: project_assignee.first_name.concat(
-                ' ',
-                project_assignee.second_name
-            ),
+            text: project_assignee.first_name.concat(' ', project_assignee.second_name),
             content: (
-                <HoverDiv
-                    onClick={() => addReporterToIssue(project_assignee.id)}
-                >
+                <HoverDiv onClick={() => addReporterToIssue(project_assignee.id)}>
                     <AvatarIsActiveLabelBorder isActive={false} index={index}>
-                        <StyledLabelAvatar
-                            value={project_assignee.id}
-                            size="20"
-                            name={project_assignee.first_name.concat(
-                                ' ',
-                                project_assignee.second_name
-                            )}
+                        <StyledLabelAvatar 
+                            value={project_assignee.id} 
+                            size="20" 
+                            name={project_assignee.first_name.concat(' ', project_assignee.second_name)} 
                             round="20px"
+                            src={
+                                selectedProject!.assignees.find(
+                                    (assignee) =>
+                                        assignee.id ===
+                                        project_assignee.id
+                                )!.photo?.url
+                            }
                         />
                     </AvatarIsActiveLabelBorder>
-                    {project_assignee.first_name.concat(
-                        ' ',
-                        project_assignee.second_name
-                    )}
+                    {project_assignee.first_name.concat(' ', project_assignee.second_name)}
                 </HoverDiv>
             ),
         }))
@@ -499,6 +502,7 @@ export default observer(function NewCreateIssueForm() {
     }
 
     function handleCreateIssue() {
+        var sprint_id_check = selectedIssueSprint !== '' ? selectedIssueSprint : selectedProject!.sprints.find(s => s.name === 'Backlog')!.id;
         var issue_to_create: any = {
             id: uuid(),
             name: selectedIssueName,
@@ -537,13 +541,13 @@ export default observer(function NewCreateIssueForm() {
                 selectedIssueEstimatedHours,
                 selectedIssueEstimatedMinutes
             ),
-            sprint_id: selectedIssueSprint,
+            sprint_id: sprint_id_check,
         }
 
         delete issue_to_create['assignees']
 
         var sprint_issue = {
-            sprint_id: selectedIssueSprint,
+            sprint_id: sprint_id_check,
             issue_id: issue_to_create.id,
             issue_name: issue_to_create.name,
         }
@@ -878,11 +882,11 @@ export default observer(function NewCreateIssueForm() {
                                 </div>
 
                         {/* COMMENTS */}
-                                <h5 style={{marginLeft: '10px', marginBottom: '8px'}}>Comments</h5>
-                                <div style={{ marginTop: '20px' }}></div>
+                        <div style={{ marginTop: '20px', cursor: 'not-allowed', marginLeft: '10px', marginBottom: '8px'}}>
+                                <h5 style={{cursor: 'not-allowed'}}>Comments</h5>
                                 <div style={{ display: 'inline-block' }}>
                                     <StyledAvatar
-                                        style={{ paddingTop: '12px' }}
+                                        style={{ paddingTop: '12px', cursor: 'not-allowed' }}
                                         size="30"
                                         round="16px"
                                         src={
@@ -908,20 +912,22 @@ export default observer(function NewCreateIssueForm() {
                                             )}
                                     />
                                 </div>
-                                <div style={{display: 'inline-block', paddingLeft: '15px', width: '95%'}}>
+                                <div style={{cursor: 'not-allowed', display: 'inline-block', paddingLeft: '15px', width: '95%'}}>
                                     <TextArea 
                                         onMouseEnter={() => toggleIsAddCommentHovered()} onMouseLeave={() => toggleIsAddCommentHovered()}
                                         style={{
-                                            ...{ border: '1px solid white' },
+                                            ...{ border: '1px solid white', cursor: 'not-allowed' },
                                             ...{filter: 'brightness(130%)'}, 
-                                            ...(isAddCommentHovered ? hoveredStyle : {})
+                                            //...(isAddCommentHovered ? hoveredStyle : {})
                                         }}
                                     onChange={(e) => setCommentState(e.target.value)} placeholder="Add a comment..."/>
                                 </div>
-                                <div style={{marginTop: '10px', marginRight: '0px', float: 'right', display: 'inline-block'}}><Button size="tiny" content="Comment" color="blue" onClick={() => submitComment()}/></div>
+                                <div style={{cursor: 'not-allowed', marginTop: '10px', marginRight: '0px', float: 'right', display: 'inline-block'}}><Button style={{cursor: 'not-allowed'}} size="tiny" content="Comment" color="blue" onClick={() => submitComment()}/></div>
+                    </div>
                             </Grid.Column>
                             <Grid.Column width={6}>
                                 <div style={{ paddingTop: '10px' }} />
+                    
                     {/* STATUS */}
                                 <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '99', paddingBottom: '8px'},...(isStatusHovered ? hoveredStyle : {})}}
                                     onMouseEnter={() => setIsStatusHovered(true)}
@@ -957,7 +963,9 @@ export default observer(function NewCreateIssueForm() {
                                         <div style={{marginLeft: '20px', marginTop: '10px' }}>
                                         <StyledLabel style={{marginBottom: '6px', marginRight: '4px'}} onClick={() => {removeAssigneeFromIssue(user_id)}}>
                                             <AvatarIsActiveLabelBorder isActive={false} index={index}>
-                                                <StyledLabelAvatar value={selectedProject!.assignees.find((assignee) => assignee.id === user_id)!.id} size="20" round="20px"
+                                                <StyledLabelAvatar
+                                                 src={selectedProject!.assignees.find((assignee) => assignee.id === user_id)!.photo?.url}
+                                                 value={selectedProject!.assignees.find((assignee) => assignee.id === user_id)!.id} size="20" round="20px"
                                                     name={selectedProject!.assignees.find((assignee) => assignee.id === user_id)!
                                                         .first_name.concat(' ', selectedProject!.assignees.find((assignee) => assignee.id === user_id)!.second_name)}
                                                 />
@@ -1019,6 +1027,7 @@ export default observer(function NewCreateIssueForm() {
                                     closeOnChange
                                     placeholder="Select reporter"
                                     value=""
+                                    style={{zIndex: '99'}}
                                     label="Assign"
                                     name="reporter"
                                     options={formatProjectReporters(
@@ -1030,7 +1039,7 @@ export default observer(function NewCreateIssueForm() {
                             </div>
                             <br />
             {/* ESTIMATED DURATION */}
-                            <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '90'}, ...(isEstimatedDurationHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsEstimatedDurationHovered(true)} onMouseLeave={() => setIsEstimatedDurationHovered(false)}>
+                            <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '1'}, ...(isEstimatedDurationHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsEstimatedDurationHovered(true)} onMouseLeave={() => setIsEstimatedDurationHovered(false)}>
                                 <h5 style={{paddingTop: '10px', marginLeft: '20px', marginBottom: '5px', paddingBottom: '5px'}}>ESTIMATED DURATION</h5>
                                 <hr style={{border: '1px solid white', width: '100%'}}/>
                                 
@@ -1098,54 +1107,19 @@ export default observer(function NewCreateIssueForm() {
                                             />
 
                                             <label style={{marginLeft: '7px', fontSize: '11px'}}>Hours</label>
-                                            <Field
-                                                type="number"
-                                                style={{width: '60px', height: '30px'}}
-                                                name="hours_logged"
-                                                onChange={(e: any) =>
-                                                    setSelectedIssueLoggedHours(
-                                                        e.target.value
-                                                    )
-                                                }
-                                            />
+                                            <Field type="number" style={{width: '60px', height: '30px'}} name="hours_logged" onChange={(e: any) => setSelectedIssueLoggedHours(e.target.value)}/>
 
                                             <label style={{marginLeft: '7px', fontSize: '11px'}}>Minutes</label>
-                                            <Field
-                                                type="number"
-                                                style={{width: '60px', height: '30px'}}
-                                                name="minutes_logged"
-                                                onChange={(e: any) =>
-                                                    setSelectedIssueLoggedMinutes(
-                                                        e.target.value
-                                                    )
-                                                }
-                                            />
+                                            <Field type="number" style={{width: '60px', height: '30px'}} name="minutes_logged" onChange={(e: any) => setSelectedIssueLoggedMinutes(e.target.value)}/>
                                         </div>
 
                                         <h5>Time Remaining</h5>
                                         <div className="inline fields">
                                             <label style={{marginLeft: '7px', fontSize: '11px'}}>Days</label>
-                                            <Field
-                                                type="number"
-                                                name="days_remaining"
-                                                onChange={(e: any) =>
-                                                    setSelectedIssueRemainingDays(
-                                                        e.target.value
-                                                    )
-                                                }
-                                            />
+                                            <Field type="number" name="days_remaining" onChange={(e: any) => setSelectedIssueRemainingDays(e.target.value)}/>
 
                                             <label style={{marginLeft: '7px', fontSize: '11px'}}>Hours</label>
-                                            <Field
-                                                type="number"
-                                                style={{width: '60px', height: '30px'}}
-                                                name="hours_remaining"
-                                                onChange={(e: any) =>
-                                                    setSelectedIssueRemainingHours(
-                                                        e.target.value
-                                                    )
-                                                }
-                                            />
+                                            <Field type="number" style={{width: '60px', height: '30px'}} name="hours_remaining" onChange={(e: any) => setSelectedIssueRemainingHours(e.target.value)}/>
 
                                             <label style={{marginLeft: '7px', fontSize: '11px'}}>Minutes</label>
                                             <Field type="number" style={{width: '60px', height: '30px'}} name="minutes_remaining" onChange={(e: any) => setSelectedIssueRemainingMinutes(e.target.value)}/>

@@ -1,14 +1,18 @@
-.comment-default {
-    width: 100%;
-    margin-bottom: 5px;
-    border: 1px solid white;
-    filter: brightness(130%);
-    transition: filter 0s;
-}
+.custom-datepicker {
+    position: relative;
+  }
+  
+  .custom-datepicker::before {
+    content: "";
+    position: absolute;
+    color: 'white';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
 
-.comment-hovered {
-    filter: brightness(165%);
-    width: 100%;
-    margin-bottom: 5px;
-    border: 1px solid white;
-}
+  .react-datepicker__input-container input {
+    text-align: center !important;
+  }
