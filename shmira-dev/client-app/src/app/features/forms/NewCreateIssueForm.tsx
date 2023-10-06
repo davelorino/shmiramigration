@@ -91,7 +91,6 @@ export default observer(function NewCreateIssueForm() {
     }
 
     const divStyles = {
-        border: '1px solid white',
         width: '100%',
         paddingTop: '5px',
         paddingBottom: '5px',
@@ -933,7 +932,7 @@ export default observer(function NewCreateIssueForm() {
                                     onMouseEnter={() => setIsStatusHovered(true)}
                                     onMouseLeave={() => setIsStatusHovered(false)}
                                 >
-                                    <h5 style={{ marginBottom: '5px', paddingBottom: '5px', paddingLeft: '20px',paddingTop: '10px',}}>STATUS</h5>
+                                    <h5 style={{ marginBottom: '5px', paddingBottom: '5px', paddingLeft: '20px',paddingTop: '10px',}}>Status</h5>
                                     <hr style={{border: '1px solid white',width: '100%'}}/>
                                     <div style={{marginLeft: '20px'}}>
                                     <Label style={{marginRight: '0px'}}>{selectedIssueStatus}</Label>
@@ -946,7 +945,7 @@ export default observer(function NewCreateIssueForm() {
                                         label="Status"
                                         name="status"
                                         options={statusOptions}
-                                        style={{position: 'relative',zIndex: '99', marginLeft: '0px', paddingRight: '10px'}}
+                                        style={{position: 'relative',zIndex: '99', marginLeft: '-15px', paddingRight: '10px'}}
                                     />
                                     </div>
                                 </div>
@@ -957,7 +956,7 @@ export default observer(function NewCreateIssueForm() {
                                     onMouseEnter={() => setIsAssigneeHovered(true)}
                                     onMouseLeave={() => setIsAssigneeHovered(false)}
                                 >
-                                    <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>ASSIGNEES</h5>
+                                    <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>Assignees</h5>
                                     <hr style={{border: '1px solid white', width: '100%'}}/>
                                     {selectedAssignees.map((user_id, index) => (
                                         <div style={{marginLeft: '20px', marginTop: '10px' }}>
@@ -995,7 +994,7 @@ export default observer(function NewCreateIssueForm() {
                                     onMouseEnter={() => setIsReporterHovered(true)}
                                     onMouseLeave={() => setIsReporterHovered(false)}
                                 >
-                                    <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>REPORTER</h5>
+                                    <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>Reporter</h5>
                                     <hr style={{border: '1px solid white', width: '100%'}}/>
 
                                 {selectedReporter !== null && selectedReporter.length !== 0 && (
@@ -1003,6 +1002,7 @@ export default observer(function NewCreateIssueForm() {
                                         <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}}>
                                             <AvatarIsActiveLabelBorder isActive={false} index={1}>
                                                 <StyledLabelAvatar value={selectedReporter} size="20" round="20px"
+                                                    src={selectedProject!.assignees.find((assignee) => assignee.id === selectedReporter)!.photo?.url}
                                                     name={selectedProject!.assignees
                                                         .find((assignee) => assignee.id === selectedReporter)!.first_name
                                                         .concat(' ', selectedProject!.assignees
@@ -1040,7 +1040,7 @@ export default observer(function NewCreateIssueForm() {
                             <br />
             {/* ESTIMATED DURATION */}
                             <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '1'}, ...(isEstimatedDurationHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsEstimatedDurationHovered(true)} onMouseLeave={() => setIsEstimatedDurationHovered(false)}>
-                                <h5 style={{paddingTop: '10px', marginLeft: '20px', marginBottom: '5px', paddingBottom: '5px'}}>ESTIMATED DURATION</h5>
+                                <h5 style={{paddingTop: '10px', marginLeft: '20px', marginBottom: '5px', paddingBottom: '5px'}}>Estimated Duration</h5>
                                 <hr style={{border: '1px solid white', width: '100%'}}/>
                                 
                                 <div style={{width: '90%', marginLeft: '20px'}}>
@@ -1082,7 +1082,7 @@ export default observer(function NewCreateIssueForm() {
                                 <div style={{...divStyles, ...baseStyle, ...(isSprintHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsSprintHovered(true)} onMouseLeave={() => setIsSprintHovered(false)}>
                                     <InvisibleTextInput onClick={toggleLogTimeEditState} fontsize={12} style={{ cursor: 'pointer' }}>
                                         <div style={{paddingBottom: '10px'}}>
-                                            <h5 style={{paddingTop: '10px', marginLeft: '20px', marginBottom: '5px', paddingBottom: '5px'}}>LOG TIME</h5>
+                                            <h5 style={{paddingTop: '10px', marginLeft: '20px', marginBottom: '5px', paddingBottom: '5px'}}>Log Time</h5>
                                         
                                             <hr style={{border: '1px solid white', width: '100%'}}/>
                                             <div style={{marginLeft: '10px', paddingRight: '10px' }}></div>
@@ -1138,14 +1138,14 @@ export default observer(function NewCreateIssueForm() {
                                             onMouseEnter={() => setIsLogtimeHovered(true)}
                                             onMouseLeave={() => setIsLogtimeHovered(false)}
                                         >
-                                        <h5 style={{ marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>SPRINT</h5>
+                                        <h5 style={{ marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>Sprint</h5>
                                         <hr style={{border: '1px solid white', width: '100%'}}/>
                                         <StyledLabel style={{ marginLeft: '20px', marginRight: '0px' }}>
                                             <p style={{verticalAlign: 'top', paddingBottom: '3px', paddingTop: '3px'}}>
                                                 {selectedIssueSprintName}
                                             </p>
                                         </StyledLabel>
-                                        <Dropdown downward multiple closeOnChange placeholder="" value="" label="Sprint" name="sprint" style={{marginLeft: '0px', paddingLeft: '0px', position: 'relative', zIndex: '99'}}
+                                        <Dropdown downward multiple closeOnChange placeholder="" value="" label="Sprint" name="sprint" style={{marginLeft: '-15px', paddingLeft: '0px', position: 'relative', zIndex: '99'}}
                                             options={reformatSprintOptions(selectedProject!.sprints)}        
                                         />
                                     </div>
@@ -1156,7 +1156,7 @@ export default observer(function NewCreateIssueForm() {
                                         onMouseEnter={() => setIsPriorityHovered(true)}
                                         onMouseLeave={() => setIsPriorityHovered(false)}
                                     >
-                                        <h5 style={{marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>PRIORITY</h5>
+                                        <h5 style={{marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>Priority</h5>
                                         <hr style={{border: '1px solid white'}}/>
                                         <div style={{marginBottom: '0pxx', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>
                                             <StyledLabel>
@@ -1165,7 +1165,7 @@ export default observer(function NewCreateIssueForm() {
                                                     {selectedIssuePriority}
                                                 </p>
                                             </StyledLabel>
-                                            <Dropdown downward multiple closeOnChange placeholder="" value="" label="Priority" name="priority" options={priorityOptions}/>
+                                            <Dropdown style={{marginLeft: '-20px'}} downward multiple closeOnChange placeholder="" value="" label="Priority" name="priority" options={priorityOptions}/>
                                         </div>
                                     </div>
                                 </div>
