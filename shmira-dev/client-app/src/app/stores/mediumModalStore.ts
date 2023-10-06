@@ -25,4 +25,5 @@ export default class MediumModalStore {
         this.mediumModal.open = false
         this.mediumModal.body = null
     }
+
 }

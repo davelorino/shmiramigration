@@ -17,7 +17,7 @@ import { SprintIssue } from '../../models/sprintissue'
 import { v4 as uuid } from 'uuid'
 
 export default observer(function ProjectForm() {
-    const { issueStore, userStore, mediumModalStore } = useStore()
+    const { issueStore, userStore, mediumModalStore, modalStore } = useStore()
     const {
         selectedProject,
         allSprints,
@@ -122,6 +122,7 @@ export default observer(function ProjectForm() {
                                 disabled={isSubmitting || !isValid || !dirty}
                                 loading={loading}
                                 floated="right"
+                                //onClick={mediumModalStore.closeMediumModal}
                                 color="blue"
                                 type="submit"
                                 size="tiny"

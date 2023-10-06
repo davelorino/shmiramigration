@@ -48,10 +48,10 @@ export default observer(function SprintBoardListIssue({ issue, index }: Props) {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     onClick={() => {
-                        issueStore.selectIssue(issue.id)
-                        console.log('This is the issue =')
-                        console.log(issue)
-                        modalStore.openModal(<NewUpdateIssueForm />)
+                        issueStore.selectIssue(issue.id);
+                        console.log('This is the issue =');
+                        (issue ? console.log(issue) : console.log("no issue found"));
+                        modalStore.openModal(<NewUpdateIssueForm />);
                     }}
                 >
                     <IssueCardSprintVersion

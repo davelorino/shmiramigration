@@ -8,6 +8,7 @@ import { ProjectSprintAndBacklog } from '../models/projectSprintAndBacklog'
 import { SprintIssue } from '../models/sprintissue'
 import { IssueAssignee } from '../models/issueAssignee'
 import { store } from './store'
+//import { MediumModalStore } from './mediumModalStore'
 import agent from '../api/agent'
 import moment from 'moment-timezone'
 
@@ -488,7 +489,7 @@ export default class IssueStore {
                 this.loadIssues()
                 this.editMode = false
                 this.loading = false
-                store.modalStore.closeModal()
+                store.mediumModalStore.closeMediumModal()
             })
         } catch (error) {
             console.log(error)
@@ -529,12 +530,21 @@ export default class IssueStore {
             await agent.Sprints.update(sprint)
             await this.loadProject(this.selectedProject!.id)
             runInAction(() => {
+                console.log("Action 1 Start")
                 this.sprintRegistry.set(sprint.id, sprint)
+                console.log("Action 1 Complete")
+            })
+            runInAction(() => {
+                console.log("Action 2 Start")
                 var project_id = this.selectedProject!.id
                 var current_project = this.projectRegistry.get(project_id)
                 this.tempProject = current_project
                 this.selectedProject! = this.tempProject
                 this.loading = false
+                console.log("Action 2 Complete")
+                console.log("Project id =")
+                console.log(project_id)
+                store.mediumModalStore.closeMediumModal();
             })
         } catch (error) {
             console.log(error)
@@ -549,7 +559,8 @@ export default class IssueStore {
         destination_sprint_id: string,
         issue_name: string,
         issue_id: string,
-        issue: Issue
+        issue: Issue,
+        //sprint: any
     ) => {
         this.loading = true
         var issue_to_send: any = {
@@ -599,10 +610,12 @@ export default class IssueStore {
             await this.loadProject(this.selectedProject!.id)
             runInAction(() => {
                 var project_id = this.selectedProject!.id
+                var project_id = this.selectedProject!.id
                 var current_project = this.projectRegistry.get(project_id)
                 this.tempProject = current_project
                 this.selectedProject! = this.tempProject
                 store.modalStore.closeModal()
+                store.smallModalStore.closeSmallModal()
                 this.loading = false
             })
         } catch (error) {

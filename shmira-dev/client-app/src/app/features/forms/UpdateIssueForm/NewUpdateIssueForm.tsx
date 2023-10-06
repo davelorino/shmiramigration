@@ -104,7 +104,6 @@ export default observer(function NewUpdateIssueForm() {
     }
 
     const divStyles = {
-        border: '1px solid white',
         width: '100%',
         paddingTop: '5px',
         paddingBottom: '5px',
@@ -196,6 +195,15 @@ export default observer(function NewUpdateIssueForm() {
             ),
             content: (
                 <HoverDiv
+                    style={{
+                        fontSize: '12px', 
+                        marginLeft: '0px',
+                        paddingLeft: '0px',
+                        paddingTop: '0px', 
+                        paddingBottom: '0px', 
+                        marginTop: '0px', 
+                        marginBottom: '0px'
+                    }} 
                     onClick={() => addAssigneeToIssue(project_assignee.id)}
                 >
                     <AvatarIsActiveLabelBorder isActive={false} index={index}>
@@ -255,25 +263,42 @@ export default observer(function NewUpdateIssueForm() {
                 project_assignee.second_name
             ),
             content: (
-                <HoverDiv
-                    onClick={() => addReporterToIssue(project_assignee.id)}
-                >
-                    <AvatarIsActiveLabelBorder isActive={false} index={index}>
-                        <StyledLabelAvatar
-                            value={project_assignee.id}
-                            size="20"
-                            name={project_assignee.first_name.concat(
-                                ' ',
-                                project_assignee.second_name
-                            )}
-                            round="20px"
-                            src={project_assignee.photo?.url}
-                        />
-                    </AvatarIsActiveLabelBorder>
-                    {project_assignee.first_name.concat(
-                        ' ',
-                        project_assignee.second_name
-                    )}
+                <HoverDiv  
+                    style={{
+                        fontSize: '12px', 
+                        marginLeft: '0px',
+                        paddingLeft: '0px',
+                        paddingTop: '0px', 
+                        paddingBottom: '0px', 
+                        marginTop: '0px', 
+                        marginBottom: '0px'
+                    }} 
+                    onClick={() => addReporterToIssue(project_assignee.id)}>
+                    <div style={{display: 'inline-block'}}>
+                        <div style={{display: 'inline'}}>
+                        <AvatarIsActiveLabelBorder isActive={false} index={index}
+                            style={{marginTop: '0px', marginBottom: '0px', paddingLeft: '0px', marginLeft: '0px'}}
+                            >
+                            <StyledLabelAvatar
+                                value={project_assignee.id}
+                                size="20"
+                                style={{marginTop: '0px', marginBottom: '0px', paddingLeft: '0px', marginLeft: '0px'}}
+                                name={project_assignee.first_name.concat(
+                                    ' ',
+                                    project_assignee.second_name
+                                )}
+                                round="20px"
+                                src={project_assignee.photo?.url}
+                            />
+                        </AvatarIsActiveLabelBorder>
+                        </div>
+                        <div style={{display: 'inline', paddingTop: '6px'}}>
+                        {project_assignee.first_name.concat(
+                            ' ',
+                            project_assignee.second_name
+                        )}
+                        </div>
+                    </div>
                 </HoverDiv>
             ),
         }))
@@ -285,7 +310,7 @@ export default observer(function NewUpdateIssueForm() {
             value: sprint.id,
             text: sprint.name,
             content: (
-                <HoverDiv onClick={() => handleSprintChange(sprint.id)}>
+                <HoverDiv style={{paddingTop: '0px', paddingBottom: '0px', marginTop: '0px', marginBottom: '0px'}} onClick={() => handleSprintChange(sprint.id)}>
                     <StyledLabel>{sprint.name}</StyledLabel>
                 </HoverDiv>
             ),
@@ -315,12 +340,15 @@ export default observer(function NewUpdateIssueForm() {
             .tz(moment(), 'Australia/Sydney')
             .toISOString(true)
 
+        var sprint = selectedProject!.sprints.filter(s => s.id === sprint_id)
+
         updateIssueAndSprint(
             sprint_issue_to_remove.sprint_id,
             sprint_issue_to_add.sprint_id,
             sprint_issue_to_add.issue_name,
             sprint_issue_to_add.issue_id,
-            selectedIssue!
+            selectedIssue!,
+            //sprint
         )
     }
 
@@ -507,6 +535,7 @@ export default observer(function NewUpdateIssueForm() {
             text: 'Low',
             content: (
                 <StyledLabel
+                    size='small'
                     style={{ minWidth: '90px' }}
                     onClick={() => {
                         changeIssuePriority('Low')
@@ -531,6 +560,7 @@ export default observer(function NewUpdateIssueForm() {
             text: 'Medium',
             content: (
                 <StyledLabel
+                    size='small'
                     style={{ minWidth: '90px' }}
                     onClick={() => {
                         changeIssuePriority('Medium')
@@ -555,6 +585,7 @@ export default observer(function NewUpdateIssueForm() {
             text: 'High',
             content: (
                 <StyledLabel
+                    size='small'
                     style={{ minWidth: '90px' }}
                     onClick={() => {
                         changeIssuePriority('High')
@@ -1234,15 +1265,19 @@ export default observer(function NewUpdateIssueForm() {
                                     onMouseEnter={() => setIsStatusHovered(true)}
                                     onMouseLeave={() => setIsStatusHovered(false)}
                                 >
-                                    <h5 style={{ marginBottom: '5px', paddingBottom: '5px', paddingLeft: '20px',paddingTop: '10px',}}>STATUS</h5>
-                                    <hr style={{border: '1px solid white',width: '100%'}}/>
-                                    <div style={{marginLeft: '20px'}}>
-                                    <Label style={{marginRight: '0px'}}>{selectedIssue!.status}</Label>
-                                    <Dropdown downward multiple closeOnChange placeholder="" value="" label="Status" name="status" options={statusOptions}
-                                        style={{position: 'relative',zIndex: '99', marginLeft: '0px', paddingRight: '10px'}}
-                                    />
+                                    <div style={{marginTop: '5px', marginBottom: '56x', display: 'flex', alignItems: 'center', height: '100%'}}>
+                                        <h4 style={{ paddingLeft: '20px'}}>Status</h4>
                                     </div>
+                                    <hr style={{ border: '1px solid white', width: '100%'}}/>
+                                    <div style={{display: 'flex', marginLeft: '20px'}}>
+                                        <Label size='small' style={{marginRight: '0px'}}>{selectedIssue!.status}</Label>
+                                        <Dropdown downward multiple closeOnChange placeholder="" value="" label="Status" name="status" options={statusOptions}
+                                            style={{position: 'relative',zIndex: '99', marginLeft: '-20px', paddingRight: '10px'}}
+                                        />
+                                    </div>
+                                    
                                 </div>
+                                
                                 <div style={{ marginBottom: '20px' }} />
 
                                 {/* ASSIGNEES */}
@@ -1250,27 +1285,31 @@ export default observer(function NewUpdateIssueForm() {
                                     onMouseEnter={() => setIsAssigneeHovered(true)}
                                     onMouseLeave={() => setIsAssigneeHovered(false)}
                                 >
-                                    <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>ASSIGNEES</h5>
+                                    <div style={{marginTop: '5px', marginBottom: '56x', display: 'flex', alignItems: 'center', height: '100%'}}>
+                                        <h4 style={{ paddingLeft: '20px'}}>Assignees</h4>
+                                    </div>
                                     <hr style={{border: '1px solid white', width: '100%'}}/>
                                     {selectedIssue!.assignees.map(
                                         (user, index) => (
-                                            <div style={{marginLeft: '20px', marginTop: '10px' }}>
-                                            <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {removeAssigneeFromIssue(user.id)}}>
+                                            <div style={{marginLeft: '20px', marginTop: '2px' }}>
+                                            <StyledLabel size='small' style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {removeAssigneeFromIssue(user.id)}}>
                                                 <AvatarIsActiveLabelBorder isActive={false} index={index}>
-                                                    <StyledLabelAvatar value={user.id} size="25" name={user.first_name.concat(' ', user.second_name)} round="25px" src={selectedProject!.assignees.find((assignee) => assignee.id === user.id)!.photo?.url}/>
+                                                    <StyledLabelAvatar value={user.id} size="20" name={user.first_name.concat(' ', user.second_name)} round="25px" src={selectedProject!.assignees.find((assignee) => assignee.id === user.id)!.photo?.url}/>
                                                 </AvatarIsActiveLabelBorder>
                                                 {user.first_name.concat(' ',user.second_name)}
-                                                <Icon style={{marginLeft: '10px'}} type="close"/>
+                                                <Icon style={{marginLeft: '5px', paddingTop: '0px', marginTop: '0px'}} type="close"/>
                                             </StyledLabel>
                                             </div>
                                         )
                                     )}
                                     {/* Assignee Dropdown */}
                                     <div style={{marginLeft: '20px'}}>
+                                    {selectedIssue?.assignees.length !== selectedProject!.assignees.length &&
                                         <Dropdown multiple downward placeholder="+ Add more" value="" label="Assign" name="assignees" style={{position: 'relative', marginTop: '0px', paddingTop: '0px', zIndex: '99'}}
                                             options={formatProjectAssignees(projectAssignees, selectedIssue!)}
                                             onChange={(e) => handleChangeAssignees(e)}
                                         />
+                                    }
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '20px' }} />
@@ -1280,13 +1319,15 @@ export default observer(function NewUpdateIssueForm() {
                                     onMouseEnter={() => setIsReporterHovered(true)}
                                     onMouseLeave={() => setIsReporterHovered(false)}
                                 >
-                                    <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>REPORTER</h5>
+                                    <div style={{marginTop: '5px', marginBottom: '56x', display: 'flex', alignItems: 'center', height: '100%'}}>
+                                        <h4 style={{ paddingLeft: '20px'}}>Reporter</h4>
+                                    </div>
                                     <hr style={{border: '1px solid white', width: '100%'}}/>
                                     {selectedIssue!.reporter_id !== null && selectedIssue!.reporter_id.length !== 0 && (
                                         <div style={{marginLeft: '20px'}}>
-                                            <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {removeReporterFromIssue(selectedIssue!.reporter_id)}}>
+                                            <StyledLabel size='small' style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {removeReporterFromIssue(selectedIssue!.reporter_id)}}>
                                                 <AvatarIsActiveLabelBorder isActive={false} index={1}>
-                                                    <StyledLabelAvatar value={selectedIssue!.reporter_id} size="25"
+                                                    <StyledLabelAvatar value={selectedIssue!.reporter_id} size="20"
                                                         name={selectedProject!.assignees
                                                             .find((assignee) => assignee.id === selectedIssue!.reporter_id)!
                                                             .first_name.concat(' ', selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.second_name)}
@@ -1296,13 +1337,13 @@ export default observer(function NewUpdateIssueForm() {
                                                 </AvatarIsActiveLabelBorder>
 
                                                 {selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.first_name.concat(' ',selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.second_name)}
-                                                <Icon style={{marginLeft: '10px'}} type="close" />
+                                                <Icon style={{marginLeft: '5px'}} type="close" />
                                             </StyledLabel>
                                         </div>
                                         )}
-                                    <div style={{marginLeft: '20px'}}>
+                                    <div style={{fontSize: '8', marginLeft: '20px'}}>
                                         <Dropdown downward multiple closeOnChange placeholder="Select reporter" value="" label="Assign" name="reporter"
-                                            style={{marginTop: '0px', paddingTop: '0px', position: 'relative', zIndex: '99'}}
+                                            style={{fontSize: '8', marginTop: '0px', paddingTop: '0px', position: 'relative', zIndex: '99'}}
                                             options={formatProjectReporters(projectAssignees,selectedIssue!)}
                                             onChange={(e) => handleChangeReporter(e)}
                                         />
@@ -1311,10 +1352,12 @@ export default observer(function NewUpdateIssueForm() {
                                 <br />
 
                                 {/* LOG TIME */}
-                                <div style={{...divStyles, ...baseStyle, ...(isSprintHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsSprintHovered(true)} onMouseLeave={() => setIsSprintHovered(false)}>
+                                <div style={{...{zIndex: '1'}, ...divStyles, ...baseStyle, ...(isSprintHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsSprintHovered(true)} onMouseLeave={() => setIsSprintHovered(false)}>
                                     <InvisibleTextInput onClick={toggleLogTimeEditState} fontsize={12} style={{ cursor: 'pointer' }}>
-                                        <div style={{paddingBottom: '10px'}}>
-                                            <h5 style={{paddingTop: '10px', marginLeft: '20px', marginBottom: '5px', paddingBottom: '5px'}}>LOG TIME</h5>
+                                        <div style={{paddingBottom: '0px'}}>
+                                        <div style={{marginTop: '5px', marginBottom: '5px', display: 'flex', alignItems: 'center', height: '100%'}}>
+                                        <h4 style={{ paddingLeft: '20px'}}>Log Time</h4>
+                                        </div>
                                         
                                             <hr style={{border: '1px solid white', width: '100%'}}/>
                                             <div style={{marginLeft: '10px', paddingRight: '10px' }}><UpdateIssueFormTrackingWidget /></div>
@@ -1422,14 +1465,16 @@ export default observer(function NewUpdateIssueForm() {
                                         onMouseEnter={() => setIsLogtimeHovered(true)}
                                         onMouseLeave={() => setIsLogtimeHovered(false)}
                                     >
-                                        <h5 style={{ marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>SPRINT</h5>
+                                        <div style={{marginTop: '5px', marginBottom: '5px', display: 'flex', alignItems: 'center', height: '100%'}}>
+                                            <h4 style={{ paddingLeft: '20px'}}>Sprint</h4>
+                                        </div>
                                         <hr style={{border: '1px solid white', width: '100%'}}/>
-                                        <StyledLabel style={{ marginLeft: '20px', marginRight: '0px' }}>
+                                        <StyledLabel size='small' style={{ marginLeft: '20px', marginRight: '0px' }}>
                                             <p style={{verticalAlign: 'top', paddingBottom: '3px', paddingTop: '3px'}}>
                                                 {selectedProject!.sprints.find((sprint) => sprint.id === selectedIssue!.sprint_id)!.name}
                                             </p>
                                         </StyledLabel>
-                                        <Dropdown downward multiple closeOnChange placeholder="" value="" label="Sprint" name="sprint" style={{marginLeft: '0px', paddingLeft: '0px', position: 'relative', zIndex: '99'}}
+                                        <Dropdown downward multiple closeOnChange placeholder="" value="" label="Sprint" name="sprint" style={{marginLeft: '-15px', paddingLeft: '0px', position: 'relative', zIndex: '99'}}
                                             options={reformatSprintOptions(selectedProject!.sprints)}
                                             
                                         />
@@ -1452,14 +1497,16 @@ export default observer(function NewUpdateIssueForm() {
                                             setIsPriorityHovered(false)
                                         }
                                     >
-                                        <h5 style={{marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>PRIORITY</h5>
+                                        <div style={{marginTop: '5px', marginBottom: '5px', display: 'flex', alignItems: 'center', height: '100%'}}>
+                                            <h4 style={{ paddingLeft: '20px'}}>Priority</h4>
+                                        </div>
                                         <hr
                                             style={{
                                                 border: '1px solid white',
                                             }}
                                         />
                                         <div style={{marginBottom: '0pxx', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>
-                                            <StyledLabel>
+                                            <StyledLabel size='small'>
                                                 <IssuePriorityIcon
                                                     priority={
                                                         selectedIssue!.priority
@@ -1478,6 +1525,7 @@ export default observer(function NewUpdateIssueForm() {
                                             <Dropdown
                                                 downward
                                                 multiple
+                                                style={{marginLeft: '-22px'}}
                                                 closeOnChange
                                                 placeholder=""
                                                 value=""

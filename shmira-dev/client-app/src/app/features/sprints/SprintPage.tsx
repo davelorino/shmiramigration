@@ -206,6 +206,7 @@ export default observer(function SprintPage() {
             var issueToUpdateSanitized: any = {
                 ...issueToUpdate,
             }
+            //var sprint = selectedProject!.sprints.filter(s => s.id === destination_sprint_id)
             delete issueToUpdateSanitized['assignees']
             delete issueToUpdateSanitized['comments']
             updateIssueAndSprint(
@@ -213,7 +214,8 @@ export default observer(function SprintPage() {
                 destination_sprint_id,
                 issueToUpdate!.name,
                 issueToUpdate!.id,
-                issueToUpdateSanitized!
+                issueToUpdateSanitized!,
+                //sprint
             )
         }
     }

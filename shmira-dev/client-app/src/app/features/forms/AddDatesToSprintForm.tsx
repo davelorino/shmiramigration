@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Button } from 'semantic-ui-react'
-import { Formik, Form, ErrorMessage, Field } from 'formik'
+import { Formik, Form, ErrorMessage, Field, useField, useFormikContext } from 'formik'
 import { useStore } from '../../stores/store'
 import { observer } from 'mobx-react-lite'
 import { Sprint } from '../../models/sprint'
@@ -10,9 +10,12 @@ import { InvisibleTextInput, StyledInput } from '../../shared/form/Styles'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import parse from 'html-react-parser'
+import './Styles'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default observer(function AddDatesToSprintForm() {
-    const { issueStore, modalStore } = useStore()
+    const { issueStore, modalStore, mediumModalStore } = useStore()
     const {
         selectedProject,
         createSprint,
@@ -36,6 +39,11 @@ export default observer(function AddDatesToSprintForm() {
         issues: [],
     }
 
+    var [selectedStartDate, setSelectedStartDate] = useState(new Date());  // Defaults to today's date
+    var [selectedEndDateDate, setSelectedEndDate] = useState(new Date());  // Defaults to today's date
+
+    //selectedSprint?.date_start ? selectedStartDate = selectedSprint?.date_start : 
+
     const [sprint, setSprint] = useState(initialState)
     var [sprint_name, setSprintName] = useState('Give this sprint a name')
     var [sprint_description, setSprintDescription] = useState(
@@ -44,8 +52,7 @@ export default observer(function AddDatesToSprintForm() {
     var [sprint_start_date, setSprintStartDate] = useState('')
     var [sprint_end_date, setSprintEndDate] = useState('')
     var [sprint_title_edit_state, setSprintTitleEditState] = useState(false)
-    var [sprint_description_edit_state, setSprintDescriptionEditState] =
-        useState(false)
+    var [sprint_description_edit_state, setSprintDescriptionEditState] = useState(false)
 
     function toggleSprintDescriptionEditState() {
         setSprintDescriptionEditState(!sprint_description_edit_state)
@@ -56,18 +63,39 @@ export default observer(function AddDatesToSprintForm() {
     }
 
     function handleAddSprintDates() {
-        var current_sprint: Partial<Sprint> = {
-            ...selectedSprint!,
-        }
+        var current_sprint: Partial<Sprint> = {...selectedSprint!}
 
-        current_sprint.date_start = new Date(sprint_start_date).toISOString()
-        current_sprint.date_end = new Date(sprint_end_date).toISOString()
-        selectedSprint!.date_start = new Date(sprint_start_date).toISOString()
-        selectedSprint!.date_end = new Date(sprint_end_date).toISOString()
+        current_sprint.date_start = displayStartDate().toISOString()
+        current_sprint.date_end = displayEndDate().toISOString()
+        selectedSprint!.date_start = displayStartDate().toISOString()
+        selectedSprint!.date_end = displayEndDate().toISOString()
         var updated_sprint: any = current_sprint
         delete updated_sprint['issues']
         updateSprint(updated_sprint)
         modalStore.closeModal()
+    }
+
+    function displayStartDate() {
+        if(selectedSprint!.date_start !== '0001-01-01T00:00:00' && (sprint_start_date === '')) {
+            console.log("Start 1")
+            return new Date(selectedSprint!.date_start)
+        }
+        if(sprint_start_date === '') {
+            console.log('Start 2')
+            return new Date()
+        }
+        console.log('Start 3')
+        return new Date(sprint_start_date)
+    }
+
+    function displayEndDate() {
+        if(selectedSprint!.date_end !== '0001-01-01T00:00:00' && (sprint_end_date === '')) {
+            return new Date(selectedSprint!.date_end)
+        }
+        if(sprint_end_date === '') {
+            return new Date()
+        }
+        return new Date(sprint_end_date)
     }
 
     function updateSprintDescription(sprint_description: string) {
@@ -95,6 +123,8 @@ export default observer(function AddDatesToSprintForm() {
         modalStore.closeModal()
     }
 
+
+
     return (
         <div>
             <Formik
@@ -106,10 +136,10 @@ export default observer(function AddDatesToSprintForm() {
                     <Form className="ui form" autoComplete="off">
                         {!sprint_title_edit_state && (
                             <InvisibleTextInput
-                                fontsize={20}
+                                fontsize={18}
                                 onClick={() => toggleSprintTitleEditState()}
                             >
-                                <h1
+                                <h3
                                     style={{
                                         paddingTop: '10px',
                                         paddingBottom: '10px',
@@ -117,7 +147,7 @@ export default observer(function AddDatesToSprintForm() {
                                     }}
                                 >
                                     {selectedSprint!.name}
-                                </h1>
+                                </h3>
                             </InvisibleTextInput>
                         )}
 
@@ -138,9 +168,11 @@ export default observer(function AddDatesToSprintForm() {
                         {!sprint_description_edit_state && (
                             <InvisibleTextInput
                                 style={{
+                                    border: '1px solid white',
+                                    cursor: 'pointer',
                                     display: 'flex',
-                                    maxHeight: '700px',
-                                    minHeight: '300px',
+                                    maxHeight: '400px',
+                                    minHeight: '100px',
                                 }}
                                 fontsize={14}
                                 onClick={() =>
@@ -149,10 +181,13 @@ export default observer(function AddDatesToSprintForm() {
                             >
                                 <div
                                     style={{
-                                        paddingTop: '20px',
+                                        display: 'flex',
+                                        paddingTop: '10px',
                                         marginBottom: '20px',
                                         marginLeft: '12px',
                                         marginRight: '12px',
+                                        color: 'grey',
+                                        fontSize: '10'
                                     }}
                                 >
                                     {parse(selectedSprint!.description)}
@@ -163,17 +198,18 @@ export default observer(function AddDatesToSprintForm() {
                             <>
                                 <ReactQuill
                                     style={{
-                                        minHeight: '300px',
-                                        maxHeight: '700px',
+                                        minHeight: '100px',
+                                        maxHeight: '400px',
                                     }}
                                     theme="snow"
                                     defaultValue={selectedSprint!.description}
                                     onChange={setSprintDescription}
                                 />
-                                <br />
+
                                 <Button
                                     size="mini"
-                                    content="Save"
+                                    content="Confirm"
+                                    style={{marginBottom: '10px'}}
                                     color="blue"
                                     onClick={() => {
                                         updateSprintDescription(
@@ -185,59 +221,50 @@ export default observer(function AddDatesToSprintForm() {
                             </>
                         )}
 
-                        <div className="inline fields">
-                            <label>Start Date</label>
-                            <Field
-                                style={{
-                                    width: '18%',
-                                }}
-                                type="date"
-                                placeholder=""
-                                name="start_date"
-                                onChange={(e: any) =>
-                                    setSprintStartDate(e.target.value)
-                                }
-                            />
-                            <label
-                                style={{
-                                    marginLeft: '25px',
-                                }}
-                            >
-                                End Date
-                            </label>
-                            <Field
-                                style={{
-                                    width: '18%',
-                                }}
-                                type="date"
-                                placeholder=""
-                                name="end_date"
-                                onChange={(e: any) =>
-                                    setSprintEndDate(e.target.value)
-                                }
-                            />
+                        <div style={{marginTop: '15px', marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+                            <div style={{display: 'flex', flexDirection: 'column', marginRight: '20px' }}>
+                                <label style={{textAlign: 'center'}}>Start Date</label>
+                                <DatePicker
+                                    selected={displayStartDate()}
+                                    onChange={(date: any) => {setSprintStartDate(date)}}
+                                    dateFormat="yyyy-MM-dd"
+                                />
+                                
+                            </div>
 
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <label style={{textAlign: 'center'}}>End Date</label>
+                                <DatePicker
+                                    selected={displayEndDate()}
+                                    onChange={(date: any) => {setSprintEndDate(date)}}
+                                    dateFormat="yyyy-MM-dd"
+                                />
+                            </div>
+                        
+                        </div>
+                        <div style={{marginTop: '10px', paddingBottom: '25px'}}>
                             <Button
-                                style={{
-                                    marginLeft: '200px',
-                                }}
                                 loading={loading}
                                 floated="right"
-                                positive
+                                size="small"
+                                color='blue'
+                                //positive
                                 onClick={() => {
-                                    handleAddSprintDates()
-                                    modalStore.closeModal
+                                    handleAddSprintDates();
+                                    
                                 }}
-                                content="Submit"
+                                content="Confirm"
                             />
                             <Button
-                                onClick={modalStore.closeModal}
+                                onClick={() => mediumModalStore.closeMediumModal()}
                                 floated="right"
+                                size="small"
                                 type="button"
                                 content="Cancel"
                             />
                         </div>
-                        <div />
+                        
+                        
                     </Form>
                 )}
             </Formik>
