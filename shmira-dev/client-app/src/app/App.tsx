@@ -101,7 +101,7 @@ function App() {
                 {
                     <div
                         style={{
-                            filter: 'brightness(130%)',
+                            filter: 'brightness(135%)',
                             marginTop: '0px',
                             marginBottom: '0px',
                             paddingTop: '0px',

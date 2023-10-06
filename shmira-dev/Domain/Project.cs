@@ -31,6 +31,5 @@ namespace Domain
 
         public ICollection<ProjectAssignee> assignees { get; set; } = new List<ProjectAssignee>();
 
-
     }
 }

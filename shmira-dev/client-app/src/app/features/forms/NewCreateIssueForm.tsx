@@ -300,26 +300,9 @@ export default observer(function NewCreateIssueForm() {
             value: 'Story',
             text: 'Story',
             content: (
-                <HoverDiv
-                    style={{
-                        display: 'inline-block',
-                    }}
-                    onClick={() => setSelectedIssueType('Story')}
-                >
-                    <IssueTypeIcon
-                        color="#65BA43 !important"
-                        type="story"
-                        size={14}
-                    />
-                    <div
-                        style={{
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Story
-                    </div>
+                <HoverDiv style={{display: 'inline-block'}} onClick={() => setSelectedIssueType('Story')}>
+                    <IssueTypeIcon color="#65BA43 !important" type="story" size={14}/>
+                    <div style={{paddingLeft: '7px', alignContent: 'center', display: 'inline-block'}}>Story</div>
                 </HoverDiv>
             ),
         },
@@ -1165,33 +1148,10 @@ export default observer(function NewCreateIssueForm() {
                                             />
 
                                             <label style={{marginLeft: '7px', fontSize: '11px'}}>Minutes</label>
-                                            <Field
-                                                type="number"
-                                                style={{width: '60px', height: '30px'}}
-                                                name="minutes_remaining"
-                                                onChange={(e: any) =>
-                                                    setSelectedIssueRemainingMinutes(
-                                                        e.target.value
-                                                    )
-                                                }
-                                            />
+                                            <Field type="number" style={{width: '60px', height: '30px'}} name="minutes_remaining" onChange={(e: any) => setSelectedIssueRemainingMinutes(e.target.value)}/>
                                         </div>
-
-                                        <Button
-                                            size="mini"
-                                            content="Save"
-                                            color="blue"
-                                            onClick={() => {
-                                                /* TO DO: updateLoggedTime(); */ toggleLogTimeEditState()
-                                            }}
-                                        />
-                                        <Button
-                                            size="mini"
-                                            content="Cancel"
-                                            onClick={() =>
-                                                toggleLogTimeEditState()
-                                            }
-                                        />
+                                        <Button size="mini" content="Save" color="blue" onClick={() => {/* TO DO: updateLoggedTime(); */ toggleLogTimeEditState()}}/>
+                                        <Button size="mini" content="Cancel" onClick={() => toggleLogTimeEditState()}/>
                                     <br />
                                     <br />
                                 </div>
@@ -1218,27 +1178,12 @@ export default observer(function NewCreateIssueForm() {
 
                 {/* PRIORITY */}
                                     <div
-                                        style={{
-                                            ...{marginTop: '20px'},
-                                            ...divStyles,
-                                            ...baseStyle,
-                                            ...(isPriorityHovered
-                                                ? hoveredStyle
-                                                : {}),
-                                        }}
-                                        onMouseEnter={() =>
-                                            setIsPriorityHovered(true)
-                                        }
-                                        onMouseLeave={() =>
-                                            setIsPriorityHovered(false)
-                                        }
+                                        style={{...{marginTop: '20px'}, ...divStyles, ...baseStyle, ...(isPriorityHovered ? hoveredStyle : {})}}
+                                        onMouseEnter={() => setIsPriorityHovered(true)}
+                                        onMouseLeave={() => setIsPriorityHovered(false)}
                                     >
                                         <h5 style={{marginBottom: '5px', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>PRIORITY</h5>
-                                        <hr
-                                            style={{
-                                                border: '1px solid white',
-                                            }}
-                                        />
+                                        <hr style={{border: '1px solid white'}}/>
                                         <div style={{marginBottom: '0pxx', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>
                                             <StyledLabel>
                                                 <IssuePriorityIcon priority={selectedIssuePriority}/>
@@ -1246,32 +1191,13 @@ export default observer(function NewCreateIssueForm() {
                                                     {selectedIssuePriority}
                                                 </p>
                                             </StyledLabel>
-                                            <Dropdown
-                                                downward
-                                                multiple
-                                                closeOnChange
-                                                placeholder=""
-                                                value=""
-                                                label="Priority"
-                                                name="priority"
-                                                options={priorityOptions}
-                                            />
+                                            <Dropdown downward multiple closeOnChange placeholder="" value="" label="Priority" name="priority" options={priorityOptions}/>
                                         </div>
                                     </div>
                                 </div>
                                 <br />
                                 <br />
-
-
-                                <Button
-                                    style={{ marginRight: '10px' }}
-                                    color="blue"
-                                    size="small"
-                                    loading={loading}
-                                    floated="right"
-                                    content={'Create Issue'}
-                                    onClick={() => handleCreateIssue()}
-                                ></Button>
+                                <Button style={{ marginRight: '10px' }} color="blue" size="small" loading={loading} floated="right" content={'Create Issue'} onClick={() => handleCreateIssue()}></Button>
                             </Grid.Column>
                         </Grid>
                     </Form>
