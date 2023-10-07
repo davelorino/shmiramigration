@@ -68,5 +68,20 @@ namespace API.Controllers
                 }));
         }
 
+        [HttpPut("add_assignee_to_project")]
+        public async Task<IActionResult> AddAssigneeToProject(FrontEndProjectAssignee project_assignee)
+        {
+            return Ok(await Mediator.Send(new AddAssigneeToProject.Command{
+                project_assignee = project_assignee
+            }));
+        }    
+
+        [HttpPut("remove_assignee_from_project")]
+        public async Task<IActionResult> RemoveAssigneeFromProject(FrontEndProjectAssignee project_assignee)
+        {
+            return Ok(await Mediator.Send(new RemoveAssigneeFromProject.Command{
+                project_assignee = project_assignee
+            }));
+        }    
     }
 }

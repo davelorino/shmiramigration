@@ -61,6 +61,8 @@ const Issues = {
         requests.put(`issues/add_assignee_to_issue`, issue_assignee),
     removeAssigneeFromIssue: (issue_assignee: any) =>
         requests.put(`issues/remove_assignee_from_issue`, issue_assignee),
+    removeAssigneeFromIssues: (issue_assignees: any) =>
+        requests.put(`issues/remove_assignee_from_issues`, issue_assignees)
 }
 
 const Invites = {
@@ -110,6 +112,10 @@ const Projects = {
         requests.put(`projects/add_sprint_to_project`, project_sprint),
     addAssigneesToProject: (project_assignees: any) =>
         requests.put(`projects/add_assignees_to_project`, project_assignees),
+    addAssigneeToProject: (project_assignee: any) => 
+        requests.put(`projects/add_assignee_to_project`, project_assignee),
+    removeAssigneeFromProject: (project_assignee: any) => 
+        requests.put(`projects/remove_assignee_from_project`, project_assignee)    
 }
 
 const Sprints = {

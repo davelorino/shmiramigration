@@ -7,10 +7,14 @@ import { Comment } from '../models/comment'
 import { ProjectSprintAndBacklog } from '../models/projectSprintAndBacklog'
 import { SprintIssue } from '../models/sprintissue'
 import { IssueAssignee } from '../models/issueAssignee'
+import { ProjectAssignee } from '../models/projectAssignee'
 import { store } from './store'
 //import { MediumModalStore } from './mediumModalStore'
 import agent from '../api/agent'
 import moment from 'moment-timezone'
+
+
+  
 
 export default class IssueStore {
     projectRegistry = new Map<string, Project>()
@@ -19,11 +23,14 @@ export default class IssueStore {
     issueRegistry2 = new Map<string, Issue>()
     relevant_sprints = new Map<string, Sprint>()
     selectedProject: Project | undefined = undefined
+
     filteredProject: any = undefined
     tempProject: any = undefined
     activeUsers: string[] = []
     selectedIssue: Issue | undefined = undefined
     selectedSprint: Sprint | undefined = undefined
+    allAssignees: Assignee[] | undefined = undefined
+    allIssuesInProject: Issue[] | undefined = undefined
     editMode = false
     loading = false
     loadingInitial = true
@@ -53,6 +60,20 @@ export default class IssueStore {
         this.loadingInitial = state
     }
 
+    getUniqueAssigneesInWholeOrganization(projects: {assignees: Assignee[]}[]) {
+        // Flatten the array
+        const allAssignees = projects.reduce<Assignee[]>((acc, project) => {
+            return acc.concat(project.assignees);
+          }, []);
+      
+        // Deduplicate the array
+        let uniqueAssignees = allAssignees.filter((assignee, index, array) => {
+          return index === array.findIndex(a => a.id === assignee.id);
+        });
+      
+        return uniqueAssignees;
+      }
+
     private setIssue = (issue: Issue) => {
         this.issueRegistry.set(issue.id, issue)
     }
@@ -75,12 +96,11 @@ export default class IssueStore {
         try {
             const projects = await agent.Projects.list()
             runInAction(() => {
+                this.allAssignees = this.getUniqueAssigneesInWholeOrganization(projects);
                 projects.forEach((project: Project) => {
                     this.projectRegistry.set(project.id, project)
                 })
-                if (
-                    window.localStorage.getItem('selected_project_id') !== null
-                ) {
+                if (window.localStorage.getItem('selected_project_id') !== null) {
                     this.selectProject(
                         window.localStorage.getItem('selected_project_id')!
                     )
@@ -427,6 +447,27 @@ export default class IssueStore {
         }
     }
 
+    removeAssigneeFromIssues = async (issue_assignees: IssueAssignee[]) => {
+        this.loading = true
+        try {
+            await agent.Issues.removeAssigneeFromIssues(issue_assignees)
+            await this.loadProjects()
+            await this.loadIssues()
+            runInAction(() => {
+                var project_id = this.selectedProject!.id
+                var current_project = this.projectRegistry.get(project_id)
+                this.tempProject = current_project
+                this.selectedProject! = this.tempProject
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
     addAssigneeToIssue = async (issue_assignee: IssueAssignee) => {
         this.loading = true
         var issue_to_update: any = {
@@ -441,6 +482,48 @@ export default class IssueStore {
         try {
             await agent.Issues.update(issue_to_update)
             await agent.Issues.addAssigneeToIssue(issue_assignee)
+            await this.loadProjects()
+            await this.loadIssues()
+            runInAction(() => {
+                var project_id = this.selectedProject!.id
+                var current_project = this.projectRegistry.get(project_id)
+                this.tempProject = current_project
+                this.selectedProject! = this.tempProject
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    addAssigneeToProject = async (project_assignee: ProjectAssignee) => {
+        this.loading = true       
+        try {
+            await agent.Projects.addAssigneeToProject(project_assignee)
+            await this.loadProjects()
+            await this.loadIssues()
+            runInAction(() => {
+                var project_id = this.selectedProject!.id
+                var current_project = this.projectRegistry.get(project_id)
+                this.tempProject = current_project
+                this.selectedProject! = this.tempProject
+                this.loading = false
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(() => {
+                this.loading = false
+            })
+        }
+    }
+
+    removeAssigneeFromProject = async (project_assignee: ProjectAssignee) => {
+        this.loading = true      
+        try {
+            await agent.Projects.removeAssigneeFromProject(project_assignee)
             await this.loadProjects()
             await this.loadIssues()
             runInAction(() => {

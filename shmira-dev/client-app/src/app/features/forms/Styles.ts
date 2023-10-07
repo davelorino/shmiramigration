@@ -8,6 +8,9 @@ interface ILabel {
     size: string;
 }
 
+
+
+
 export const StyledLabel = styled(Label)<ILabel>`
     cursor: pointer;
     &:hover {
@@ -15,13 +18,18 @@ export const StyledLabel = styled(Label)<ILabel>`
     }
     size: ${(props) => props.size};
 `
-
-export const HoverDiv = styled.div`
+interface IHoverDiv {
+    height?: number;
+    padding?: number;
+}
+export const HoverDiv = styled.div<IHoverDiv>`
     width: 100%;
-    height: 100;
+    height: ${(props) => (props.height ? `${props.height}px` : '100%')};
+    padding: ${(props) => (props.padding ? `${props.padding}px ${props.padding}px` : '0px 0px')};   
     cursor: pointer;
     &:hover {
-        backdrop-filter: brightness(1.2) !important;
+        backdrop-filter: brightness(1.5) !important;
+        border: 1px solid white !important;
     }
 `
 

@@ -317,16 +317,11 @@ export default observer(function NewUpdateIssueForm() {
         }))
 
     function handleSprintChange(sprint_id: string) {
-        console.log("New sprint id:");
-        console.log(sprint_id);
-        console.log("Sprint issue to remove:");
         var sprint_issue_to_remove = {
             sprint_id: selectedIssue!.sprint_id,
             issue_id: selectedIssue!.id,
             issue_name: selectedIssue!.name,
         }
-        console.log(sprint_issue_to_remove);
-        console.log("Sprint issue to add:");
         var sprint_issue_to_add = {
             sprint_id: sprint_id,
             issue_id: selectedIssue!.id,
@@ -1525,6 +1520,7 @@ export default observer(function NewUpdateIssueForm() {
                                             <Dropdown
                                                 downward
                                                 multiple
+                                                className="custom-dropdown"
                                                 style={{marginLeft: '-22px'}}
                                                 closeOnChange
                                                 placeholder=""
