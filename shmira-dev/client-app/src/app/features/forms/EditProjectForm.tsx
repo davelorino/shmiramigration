@@ -4,7 +4,10 @@ import { Formik, Form, ErrorMessage, Field } from 'formik'
 import { useStore } from '../../stores/store'
 import { observer } from 'mobx-react-lite'
 import { Project } from '../../models/project'
+import { Assignee } from '../../models/assignee'
+import { IssueAssignee } from '../../models/issueAssignee'
 import * as Yup from 'yup'
+import { HoverDiv } from './Styles'
 import { StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../filters/Styles'
 import { InvisibleTextInput, StyledInput } from '../../shared/form/Styles'
 import ReactQuill from 'react-quill'
@@ -14,6 +17,8 @@ import Icon from '../../images/Icon/index'
 import { StyledLabel } from './Styles'
 import 'quill-mention/dist/quill.mention.css'
 import 'quill-mention'
+import './Styles.css';
+import moment from 'moment'
 
 export default observer(function NewUpdateIssueForm() {
     const { issueStore, userStore, commonStore } = useStore()
@@ -65,6 +70,64 @@ export default observer(function NewUpdateIssueForm() {
         /* TODO updateProject(updatedProject); */
     }
 
+    const formatOrganizationtAssignees = (
+        // All assignees in the organization
+        organizationAssignees: Assignee[], 
+        // All assignees currently assigned to the project
+        projectAssignees: Assignee[]
+        ) => {
+
+        var unassigned_assignees: Assignee[] = []
+        var assigned_assignees: string[] = []
+
+        projectAssignees.map((assignee) => {
+            assigned_assignees.push(assignee.id)
+        })
+
+        organizationAssignees.map((assignee) => {
+            if (!assigned_assignees.includes(assignee.id))
+                unassigned_assignees.push(assignee)
+        })
+
+
+        return unassigned_assignees!.map((project_assignee, index) => ({
+            key: project_assignee.id,
+            value: project_assignee.id,
+            text: project_assignee.first_name.concat(
+                ' ',
+                project_assignee.second_name
+            ),
+            content: (
+                <HoverDiv
+                    style={{
+                        height: 30,
+                        fontSize: '12px', 
+                        padding: 5
+                    }} 
+                    onClick={() => addAssigneeToProject(project_assignee.id)}
+                >
+                    <AvatarIsActiveLabelBorder isActive={false} index={index}>
+                        <StyledLabelAvatar
+                            value={project_assignee.id}
+                            size="20"
+                            name={project_assignee.first_name.concat(
+                                ' ',
+                                project_assignee.second_name
+                            )}
+                            round="20px"
+
+                            src={project_assignee.photo?.url}
+                        />
+                    </AvatarIsActiveLabelBorder>
+                    {project_assignee.first_name.concat(
+                        ' ',
+                        project_assignee.second_name
+                    )}
+                </HoverDiv>
+            ),
+        }))
+    }
+
     /*
     const removeAssigneeFromProject = (user_id: string) => {
 
@@ -86,6 +149,8 @@ export default observer(function NewUpdateIssueForm() {
     }
     */
 
+    var organisationAssignees = issueStore.allAssignees;
+
     const updateProjectDescription = () => {
         var current_project: Partial<Project> = {
             ...selectedProject!,
@@ -105,6 +170,92 @@ export default observer(function NewUpdateIssueForm() {
         selectedProject!.description = quillDescriptionEditText
 
         /* TODO updateProject(updatedProject); */
+    }
+
+    function collectIssueIdsByAssigneeId(assignee_id: string) {
+
+        console.log("Inside the collect function, return assignee id =");
+        console.log(assignee_id);
+        var issueIds: string[] = [];
+      
+        issueStore.issuesByDate.forEach(issue => {
+            console.log("Issue Ids");
+            console.log(issue.id);
+            if (issue.assignees.some(assignee => assignee.id === assignee_id)) {
+                issueIds.push(issue.id);
+                //issue.updated_at = moment.tz(moment(), 'Australia/Sydney').toISOString(true);
+            }
+        });
+        return issueIds;
+      }
+
+    function removeAssigneeFromIssues(assignee_id: string) {
+
+        console.log("Assignee Id =");
+        console.log(assignee_id);
+        var issue_ids_to_remove_assignee_from: string[] = collectIssueIdsByAssigneeId(assignee_id);
+        console.log("Issue ids =");
+        console.log(issue_ids_to_remove_assignee_from);
+        /*
+        selectedIssue!.updated_at = moment
+            .tz(moment(), 'Australia/Sydney')
+            .toISOString(true)
+        */
+        var issue_assignees_to_remove: IssueAssignee[] = [];
+        issue_ids_to_remove_assignee_from.map(issue_id => {
+            var issue_assignee_to_remove = {
+                AssigneeId: assignee_id,
+                IssueId: issue_id
+            }
+            issue_assignees_to_remove.push(issue_assignee_to_remove);
+        })
+
+        console.log("Issue assignees to remove");
+        console.log(issue_assignees_to_remove);
+
+        issueStore.removeAssigneeFromIssues(issue_assignees_to_remove);
+    }
+
+    const addAssigneeToProject = (assignee_id: string) => {
+        var assignee_to_add = issueStore.allAssignees!.find(
+            (assignee) =>
+                assignee.id.toString().toLowerCase() ===
+                assignee_id.toLowerCase()
+        )
+
+        selectedProject!.assignees.push(assignee_to_add!)
+
+        var project_assignee_to_add = {
+            AssigneeId: assignee_id,
+            ProjectId: selectedProject!.id,
+        }
+
+        console.log("Project assignee to add")
+        console.log(project_assignee_to_add)
+
+        issueStore.addAssigneeToProject(project_assignee_to_add)
+    }
+
+    const removeAssigneeFromProject = (assignee_id: string) => {
+        var assignee_to_remove = issueStore.allAssignees!.find(
+            (assignee) =>
+                assignee.id.toString().toLowerCase() ===
+                assignee_id.toLowerCase()
+        )
+
+        selectedProject!.assignees = selectedProject!.assignees.filter(
+            (assignee) => assignee.id !== assignee_to_remove!.id
+        )
+
+        var project_assignee_to_remove = {
+            AssigneeId: assignee_to_remove!.id,
+            ProjectId: selectedProject!.id,
+        }
+
+        console.log("Project assignee to add")
+        console.log(project_assignee_to_remove)
+
+        issueStore.removeAssigneeFromProject(project_assignee_to_remove)
     }
 
     /*
@@ -133,6 +284,7 @@ export default observer(function NewUpdateIssueForm() {
     const handleChangeReporter = (e: any) => {
         setSelectedReporter(e.target.value)
     }
+
 
     return (
         <div>
@@ -306,10 +458,13 @@ export default observer(function NewUpdateIssueForm() {
                                             )}
 
                                             <Icon
+
                                                 style={{ marginLeft: '10px' }}
                                                 type="close"
-                                            />
+                                                onClick={() => {removeAssigneeFromIssues(user.id); removeAssigneeFromProject(user.id)}}
+                                            /> 
                                         </StyledLabel>
+
                                     )
                                 )}
 
@@ -317,10 +472,12 @@ export default observer(function NewUpdateIssueForm() {
                                 <Dropdown
                                     multiple
                                     downward
+                                    search selection
                                     placeholder="+ Add more"
                                     value=""
                                     label="Assign"
                                     name="assignees"
+                                    options={formatOrganizationtAssignees(organisationAssignees!, projectAssignees)}
                                     onChange={(e) => handleChangeAssignees(e)}
                                 />
                             </Grid.Column>

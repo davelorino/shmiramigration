@@ -159,6 +159,8 @@ export default observer(function CreateIssueForm() {
         }
     }
 
+    
+
     const reformatProjectOptions = (allProjects: Project[]) =>
         allProjects.map((project) => ({
             key: project.id,

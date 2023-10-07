@@ -12,3 +12,15 @@
   .react-datepicker__input-container {
     border: 1px solid white !important;
   }
+
+  .ui.dropdown.visible .menu {
+    max-height: 300px !important;
+    overflow-y: auto !important;
+  }
+
+  .ui.dropdown .menu > .item {
+    padding: 0px 0px 0px 0px !important; /* or whatever other styles you wish to apply */
+    margin: 0px 0px 0px 0px !important;
+    /*line-height: 2.5 !important; /* Adjust as needed */
+    height: 50px !important; /* Adjust as needed */
+}

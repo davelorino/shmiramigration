@@ -92,6 +92,13 @@ namespace API.Controllers
             return Ok(await Mediator.Send(new RemoveAssigneeFromIssue.Command{issue_assignee = issue_assignee}));
         }
 
+        [HttpPut("remove_assignee_from_issues")]
+        public async Task<IActionResult> RemoveAssigneeFromIssues(List<FrontendIssueAssignees> issue_assignees)
+        {
+
+            return Ok(await Mediator.Send(new RemoveAssigneeFromIssues.Command{issue_assignees = issue_assignees}));
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIssue(Guid Id)
         {
