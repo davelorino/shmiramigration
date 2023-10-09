@@ -7,8 +7,41 @@ import '../Login/login.css'
 import { InvisibleTextInput, StyledInput } from '../../../shared/form/Styles'
 import PhotoWidgetDropZone from './PhotoWidgetDropZone'
 import PhotoWidgetCropper from './PhotoWidgetCropper'
-import Avatar from 'react-avatar'
-import BetterIcon from '../../../images/BetterIcon'
+import { Project } from '../../../models/project';
+import { Account } from '../../../models/account';
+import { 
+    OuterEditProfilePictureContainer, 
+    InnerEditProfilePictureContainer,
+    UploadProfileImageContainer,
+    CropAndResizeProfileImageContainer,
+    PreviewUploadedProfileImageContainer,
+    ProfilePhotoUploadDropZone,
+    ProfilePhotoCropAndResizeZone,
+    ProfilePhotoPreviewZone,
+    ConfirmSetNewProfileButtonContainer,
+    ChangePasswordHeading,
+    ChangePasswordContainer,
+    TextInputHeading,
+    EnterPasswordInput,
+    SubmitChangePasswordButton,
+    EditProfileOuterContainer,
+    EditProfileAvatarAndNameDisplay,
+    EditProfileViewAvatar,
+    OuterProfileNameAndEmailDisplay,
+    InnerProfileNameAndEmailDisplay,
+    DisplayProfileNameHeading,
+    EditProfilePencilIcon,
+    EmailAddressPTag,
+    EditProfileATag,
+    OuterFirstNameInputContainer,
+    OuterSurnameInputContainer,
+    OuterEmailInputContainer,
+    InvisibleEditPersonalDetailsTextInput,
+    InvisibleEditPersonalDetailsTextInputPTag,
+    EditPersonalDetailsTextInput,
+    EditProfilePictureButton,
+    EditProfilePictureHeading
+ } from './Styles'
 
 export default observer(function ProfileEditForm() {
     const [files, setFiles] = useState<any>([])
@@ -68,132 +101,175 @@ export default observer(function ProfileEditForm() {
         uploadPhoto(file)
     }
 
+    function findPhotoUrl(selectedProject: Project) {
+        return selectedProject!.assignees.find((assignee: any) => assignee.id_app_user === commonStore.account_id)!.photo ? 
+        issueStore.selectedProject!.assignees.find((assignee: any) => assignee.id_app_user === commonStore.account_id)!.photo.url : ''
+    }   
+
+    function findProfileFullName(allAccounts: Account[]) {
+        return accountStore.allAccounts
+            .find((account) => account.id === commonStore.account_id)!.first_name
+            .concat(' ', accountStore.allAccounts.find((account) => account.id === commonStore.account_id)!.second_name
+        )
+    }
+
     return (
-        <div className="darkreader" style={{ width: '100%', backgroundColor: 'transparent' }}>
+        <div >
             <div style={{cursor: 'pointer'}} onMouseEnter={() => toggleProfileDetailsHoverState()} onMouseLeave={() => toggleProfileDetailsHoverState()}>
-                <div onClick={() => toggleEditPersonalDetailsState(true)} style={{width: '100%', backgroundColor: 'transparent', display: 'flex', flexWrap: 'wrap', padding: '15px', backgroundRepeat: 'no-repeat',backgroundPosition: 'center',backgroundSize: 'cover',position: 'relative',zIndex: '1'}}>
-                    <div style={{marginRight:'30px', width: '5%', display: 'inline-block'}}> 
-                        <Avatar style={{marginTop: '7px',marginRight: '0px',marginBottom: '10px',cursor: 'pointer'}} size="70" round="30px"
-                            src={issueStore.selectedProject!.assignees.find(
-                                    (assignee: any) => assignee.id_app_user === commonStore.account_id
-                                )!.photo ? issueStore.selectedProject!.assignees.find(
-                                        (assignee: any) => assignee.id_app_user === commonStore.account_id)!.photo.url : ''}
-                            name={accountStore.allAccounts.find(
-                                    (account) => account.id === commonStore.account_id
-                                )!.first_name.concat(' ', accountStore.allAccounts.find((account) => account.id === commonStore.account_id)!.second_name
-                                )}
+                <EditProfileOuterContainer onClick={() => toggleEditPersonalDetailsState(true)}>
+                    <EditProfileAvatarAndNameDisplay>
+                        <EditProfileViewAvatar  size="70" round="30px"
+                            src={findPhotoUrl(issueStore.selectedProject!)}
+                            name={findProfileFullName(accountStore.allAccounts)}
                         />
-                    </div>
+                    </EditProfileAvatarAndNameDisplay>
 
                     {/* Profile Name and Email Div */}
-                    <div style={{display: 'inline-block', width: '75%', paddingTop: '15px', marginBottom: '10px' }}>
+                    <OuterProfileNameAndEmailDisplay >
+
                         {/* Name and Surname */}
-                        <div style={{display: 'inline-block'}}>
-                            <h4 style={{display: 'inline', marginTop: '0px', marginBottom: '0px', marginLeft: '0px' }}>{accountStore.account!.first_name.concat(' ').concat(accountStore.account!.second_name)}</h4>
-                            {profile_details_hover_state && (
-                                <BetterIcon style={{display: 'inline',bottom: '0px',marginLeft: '5px',verticalAlign: 'middle',marginBottom: '0px'}} top="0" size="11" code="\1F58B" /* Pencil Icon *//>
-                            )}
-                        </div>
-                        {/* Email Address */}
-                        <div >
-                            <p  style={{color: 'grey', paddingTop: '0px', paddingBottom: '0px', marginBottom: '0px', marginTop:'0px'}}>{accountStore.account!.email}</p>
-                            <a style={{marginTop: '0px', paddingTop: '0px', fontSize: '10px'}}>Edit Profile</a>
-                        </div>
-                        
-                    </div>
-                </div>    
+                        <InnerProfileNameAndEmailDisplay >
+                            <DisplayProfileNameHeading>{findProfileFullName(accountStore.allAccounts)}</DisplayProfileNameHeading>
+                            {profile_details_hover_state && (<EditProfilePencilIcon top="0" size="11" code="\1F58B" />)}
+                        </InnerProfileNameAndEmailDisplay>
+
+                        {/* Email Address & Edit Profile */}
+                        <EmailAddressPTag>{accountStore.account!.email}</EmailAddressPTag>
+                        <EditProfileATag>Edit Profile</EditProfileATag> 
+
+                    </OuterProfileNameAndEmailDisplay>
+                </EditProfileOuterContainer>    
+
                 { edit_personal_details_state && (  
                 <div style={{marginLeft: '30px', marginRight: '30px'}}>  
                     <div style={{display: 'inline'}}>                 
                         {/* Enter name and surname text inputs */}
-                        <div style={{ marginTop: '5px',display: 'inline-block',width: '30%',marginBottom: '10px',marginRight: '5px'}}>
-                            <h5 style={{marginLeft: '5px', marginBottom: '5px'}}>First Name</h5>
+                        <OuterFirstNameInputContainer>
+                            <TextInputHeading>First Name</TextInputHeading>
                             {!first_name_edit_state && (
-                                <InvisibleTextInput style={{border: '1px solid white',display: 'flex',maxHeight: '40px',minHeight: '30px',marginTop: '0px'}} fontsize={12} onClick={() => toggleFirstNameEditState()}><p style={{color: 'grey', paddingTop: '5px', paddingBottom: '5px', paddingLeft: '10px'}}> {accountStore.account!.first_name}</p></InvisibleTextInput>
+                                <InvisibleEditPersonalDetailsTextInput fontsize={12} onClick={() => toggleFirstNameEditState()}>
+                                    <InvisibleEditPersonalDetailsTextInputPTag>
+                                        {accountStore.account!.first_name}
+                                    </InvisibleEditPersonalDetailsTextInputPTag>
+                                </InvisibleEditPersonalDetailsTextInput>
                             )}
                             {first_name_edit_state && (
-                                <input autoFocus type="text" name="first_name" onChange={(e) => { setError('')}} onBlur={() => toggleFirstNameEditState()} style={{border: '0.5px solid',marginBottom: '10px',color: 'white',backgroundColor: 'transparent',position: 'relative',width: '100%',lineHeight: '1.2',height: '30px',display: 'block',fontSize: '16px',padding: '0 5px 0 5px'}}/>
+                                <EditPersonalDetailsTextInput autoFocus type="text" name="first_name" onChange={(e) => { setError('')}} onBlur={() => toggleFirstNameEditState()} />
                             )}
-                        </div>
-                        <div style={{marginTop: '5px',display: 'inline-block',width: '30%',marginBottom: '10px'}}>
-                            <h5 style={{marginBottom: '5px', marginLeft: '5px'}}>Surname</h5>
+                        </OuterFirstNameInputContainer>
+                        <OuterSurnameInputContainer >
+                            <TextInputHeading>Surname</TextInputHeading>
                             {!second_name_edit_state && (
-                                <InvisibleTextInput style={{border: '1px solid white',display: 'flex',maxHeight: '40px',minHeight: '30px',marginTop: '0px'}} fontsize={14} onClick={() => toggleSecondNameEditState()}><p style={{color: 'grey',paddingTop: '5px', paddingBottom: '0px', paddingLeft: '10px'}}>{accountStore.account!.second_name}</p></InvisibleTextInput>
+                                <InvisibleEditPersonalDetailsTextInput fontsize={14} onClick={() => toggleSecondNameEditState()}>
+                                    <InvisibleEditPersonalDetailsTextInputPTag>
+                                        {accountStore.account!.second_name}
+                                    </InvisibleEditPersonalDetailsTextInputPTag>
+                                </InvisibleEditPersonalDetailsTextInput>
                             )}
                             {second_name_edit_state && (
-                                <input autoFocus type="text" name="second_name" onChange={(e) => {setError('')}} onBlur={() => toggleSecondNameEditState()} style={{border: '0.5px solid', marginBottom: '10px', color: 'white', backgroundColor: 'transparent', position: 'relative', width: '100%', lineHeight: '1.2', height: '30px', display: 'block', fontSize: '16px', padding: '0 5px 0 5px'}}/>
+                                <EditPersonalDetailsTextInput autoFocus type="text" name="second_name" onChange={(e) => {setError('')}} onBlur={() => toggleSecondNameEditState()} />
                             )}
-                        </div>
+                        </OuterSurnameInputContainer>
                         <br />
-                        <div style={{marginTop: '0px',display: 'inline-block',width: '30%',marginBottom: '10px'}}>
-                            <h5 style={{marginLeft: '5px', marginBottom: '5px'}}>Email</h5>
+                        <OuterEmailInputContainer>
+                            <TextInputHeading>Email</TextInputHeading>
                             {!emailEditState && (
-                                <InvisibleTextInput style={{border: '1px solid white',display: 'flex',maxHeight: '40px',minHeight: '30px',marginTop: '0px'}} fontsize={14} onClick={() => toggleEmailEditState()}><p style={{color: 'grey',paddingTop: '5px',paddingBottom: '0px',paddingLeft: '10px'}}>{accountStore.account!.email}</p></InvisibleTextInput>
+                                <InvisibleEditPersonalDetailsTextInput fontsize={14} onClick={() => toggleEmailEditState()}>
+                                    <InvisibleEditPersonalDetailsTextInputPTag>
+                                        {accountStore.account!.email}
+                                    </InvisibleEditPersonalDetailsTextInputPTag>
+                                </InvisibleEditPersonalDetailsTextInput>
                             )}
                             {emailEditState && (
-                                <input autoFocus type="text" name="email" onChange={(e) => {setError('')}} onBlur={() => toggleEmailEditState()} style={{border: '0.5px solid',marginBottom: '10px',color: 'white',backgroundColor: 'transparent',position: 'relative',width: '100%',lineHeight: '1.2',height: '30px',display: 'block',fontSize: '16px',padding: '0 5px 0 5px'}}/>
+                                <EditPersonalDetailsTextInput autoFocus type="text" name="email" onChange={(e) => {setError('')}} onBlur={() => toggleEmailEditState()}/>
                             )}
-                        </div>
+                        </OuterEmailInputContainer>
                         
                     </div>
                     <br/>
                     <div style={{display: 'inline'}}>
-                        <div onClick={() => togglePictureEditState()} style={{marginTop: '0px',display: 'inline-block',width: '50%', marginLeft: '5px', marginBottom: '10px'}}>
-                                <h5 style={{marginLeft: '5px', marginBottom: '0px'}}><a>Edit Profile Picture</a></h5>
-                        </div>
+                        <EditProfilePictureButton onClick={() => togglePictureEditState()} >
+                                <EditProfilePictureHeading >
+                                    <a>Edit Profile Picture</a>
+                                </EditProfilePictureHeading>
+                        </EditProfilePictureButton>
                     </div>
                  <br />
                 {/* Profile Image Heading */}
                 {profile_picture_edit_state && (
 
                 <>
-                {/*<div style={{marginTop: '5px',width: '100%'}}><h5>Profile Image</h5></div>*/}
-                <div style={{marginTop: '0px', paddingLeft: '10px', paddingRight: '10px', paddingBottom: '10px',width: '100%',border: "1px solid white" }}>
+                <OuterEditProfilePictureContainer>
                     {/* Upload, crop/resize and preview squares */}
-                    <div style={{display: 'flex',flexWrap: 'wrap',alignItems: 'center',justifyContent: 'center',width: '100%',height: '400px'}}>
-                        {/* Upload */}
-                        <div style={{width: '33%',paddingRight: '20px',display: 'flex',flexWrap: 'wrap',justifyContent: 'center'}}><h4>Upload</h4></div>
-                        {/* Crop and resize */}
-                        <div style={{width: '33%',paddingRight: '20px',display: 'flex',flexWrap: 'wrap',justifyContent: 'center'}}><h4>Crop & Resize</h4></div>
-                        {/* Preview */}
-                        <div style={{width: '34%',paddingRight: '20px',display: 'flex',flexWrap: 'wrap',justifyContent: 'center'}}><h4>Preview</h4></div>
+                    <InnerEditProfilePictureContainer>
+
+                        {/* Upload profile photo heading */}
+                        <UploadProfileImageContainer>
+                            <h4>Upload</h4>
+                        </UploadProfileImageContainer>
+
+                        {/* Crop and resize profile photo heading */}
+                        <CropAndResizeProfileImageContainer>
+                            <h4>Crop & Resize</h4>
+                        </CropAndResizeProfileImageContainer>
+
+                        {/* Preview profile photo heading */}
+                        <PreviewUploadedProfileImageContainer>
+                            <h4>Preview</h4>
+                        </PreviewUploadedProfileImageContainer>
+
                         {/* Drop zone (import photo) */}
-                        <div style={{width: '33%',paddingRight: '20px',display: 'flex',flexWrap: 'wrap',justifyContent: 'center'}}><PhotoWidgetDropZone setFiles={setFiles} /></div>
-                        {/* Crop photo */}
-                        <div style={{width: '33%',paddingRight: '20px',display: 'flex',flexWrap: 'wrap',justifyContent: 'center'}}>{files && files.length > 0 && (<PhotoWidgetCropper setCropper={setCropper} imagePreview={files[0].preview}/>)}</div>
+                        <ProfilePhotoUploadDropZone>
+                            <PhotoWidgetDropZone setFiles={setFiles} />
+                        </ProfilePhotoUploadDropZone>
+
+                        {/* Crop and resize photo */}
+                        <ProfilePhotoCropAndResizeZone>
+                            {files && files.length > 0 && (
+                                <PhotoWidgetCropper setCropper={setCropper} imagePreview={files[0].preview}/>
+                            )}
+                        </ProfilePhotoCropAndResizeZone>
+
                         {/* Preview photo */}
-                        <div className="img-preview" style={{minHeight: '300px',width: '34%',overflow: 'hidden'}}></div>
-                    </div>
-                </div>
+                        <ProfilePhotoPreviewZone className="img-preview" />
+
+                    </InnerEditProfilePictureContainer>
+                </OuterEditProfilePictureContainer>
+
                 {/* Upload button */}
-                <div style={{clear: 'both',width: '100%',display: 'inline-block'}}>
+                <ConfirmSetNewProfileButtonContainer>
                     {files && files.length > 0 && (
                         <>
                             <Button disabled={uploading} floated="right" onClick={() => {setFiles([]); togglePictureEditState()}} icon="close"/>
                             <Button loading={uploading} floated="right" color="blue" onClick={() => {onCrop; togglePictureEditState()}} icon="check"/>
                         </>
                     )}
-                </div>
+                </ConfirmSetNewProfileButtonContainer>
                 </>
                 )}
-                <div onClick={() => toggleChangePasswordEditState()} style={{marginTop: '0px',display: 'inline-block',width: '50%', marginLeft: '5px', marginBottom: '10px'}}>
-                    <h5 style={{marginLeft: '5px', marginBottom: '5px'}}><a>Change Password</a></h5>
-                </div>
+                <ChangePasswordHeading onClick={() => toggleChangePasswordEditState()}>
+                    <TextInputHeading>
+                        <a>Change Password</a>
+                    </TextInputHeading>
+                </ChangePasswordHeading>
+
                 {change_password_edit_state && (
-                    <div style={{marginLeft: '15px', width: '20%'}}>
-                    <h5 style={{marginLeft: '5px', marginBottom: '5px'}}>Old Password</h5>
-                    <input type="password" autoFocus name="oldpassword" onChange={(e) => {setError('')}} style={{border: '0.5px solid',marginBottom: '0px',color: 'white',backgroundColor: 'transparent',position: 'relative',width: '100%',lineHeight: '1.2',height: '25px',display: 'block',fontSize: '16px',padding: '0 5px 0 5px'}}/>
+
+                    <ChangePasswordContainer>
+
+                        <TextInputHeading>Old Password</TextInputHeading>
+                        <EnterPasswordInput type="password" autoFocus name="oldpassword" onChange={(e) => {setError('')}}/>
+                        
+                        <TextInputHeading>New Password</TextInputHeading>
+                        <EnterPasswordInput type="password" autoFocus name="newpassword" onChange={(e) => {setError('')}}/>
+                        
+                        <TextInputHeading>New Password Again</TextInputHeading>
+                        <EnterPasswordInput type="password" autoFocus name="newpasswordagain" onChange={(e) => {setError('')}}/>
                     
-                    <h5 style={{marginLeft: '5px', marginBottom: '5px'}}>New Password</h5>
-                    <input type="password" autoFocus name="newpassword" onChange={(e) => {setError('')}} style={{border: '0.5px solid',marginBottom: '0px',color: 'white',backgroundColor: 'transparent',position: 'relative',width: '100%',lineHeight: '1.2',height: '25px',display: 'block',fontSize: '16px',padding: '0 5px 0 5px'}}/>
-                    
-                    <h5 style={{marginLeft: '5px', marginBottom: '5px'}}>New Password Again</h5>
-                    <input type="password" autoFocus name="newpasswordagain" onChange={(e) => {setError('')}} style={{border: '0.5px solid',marginBottom: '0px',color: 'white',backgroundColor: 'transparent',position: 'relative',width: '100%',lineHeight: '1.2',height: '25px',display: 'block',fontSize: '16px',padding: '0 5px 0 5px'}}/>
-                    
-                    </div>
+                    </ChangePasswordContainer>
                 )}
                 <br/>
-                <Button size="mini" content="Save" color="blue" style={{ marginBottom: '5px', marginLeft: '0px' }} onClick={() => {toggleEditPersonalDetailsState(false);}}/>
+                <SubmitChangePasswordButton size="mini" content="Save" color="blue" onClick={() => {toggleEditPersonalDetailsState(false);}}/>
             </div>
             )}
         </div>

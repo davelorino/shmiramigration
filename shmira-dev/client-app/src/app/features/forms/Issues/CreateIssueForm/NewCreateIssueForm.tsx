@@ -8,18 +8,31 @@ import * as Yup from 'yup'
 import { Assignee } from '../../../../models/assignee'
 import { StyledLabelAvatar, StyledAvatar, AvatarIsActiveLabelBorder} from '../../../filters/Styles'
 import { InvisibleTextInput, StyledInput } from '../../../../shared/form/Styles'
-import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import parse from 'html-react-parser'
 import Icon from '../../../../images/Icon/index'
 import IssuePriorityIcon from '../../../../images/IssuePriorityIcon'
-import IssueTypeIcon from '../../../../images/IssueTypeIcon'
 import { StyledLabel } from '../../Styles'
 import { HoverDiv } from '../../Styles'
 import { v4 as uuid } from 'uuid'
 import moment from 'moment-timezone'
 import './Styles.css'
-import UpdateIssueFormTrackingWidget from '../UpdateIssueFormTimeTrackingWidget'
+
+// Utils
+import { getAssigneePhoto, getAssigneeName, submitComment } from './Utils/utils'
+
+// Subcomponents 
+import IssueTypeSelector from './Subcomponents/IssueTypeSelector'
+import IssueTitle from './Subcomponents/IssueTitle'
+import IssueDescription from './Subcomponents/IssueDescription'
+import SelectedIssueType from './Subcomponents/SelectedIssueType'
+import CommentInput from './Subcomponents/CommentInput'
+import IssueReporter from './Subcomponents/IssueReporter'
+
+// Constants
+import { IssueTypeOptions } from './Constants/IssueTypeOptions'
+import { IssueStatusOptions } from './Constants/IssueStatusOptions'
+import { IssuePriorityOptions } from './Constants/IssuePriorityOptions'
+import { IssueAssignees } from './Constants/IssueAssignees'
 
 export default observer(function NewCreateIssueForm() {
     const { issueStore, modalStore, commonStore, userStore } = useStore()
@@ -34,12 +47,8 @@ export default observer(function NewCreateIssueForm() {
 
     var projectAssignees = selectedProject!.assignees
 
-    var [selectedIssueName, setSelectedIssueName] = useState(
-        'Give this issue a new name'
-    )
-    var [selectedIssueDescription, setSelectedIssueDescription] = useState(
-        'Give this issue a detailed description.'
-    )
+    var [selectedIssueName, setSelectedIssueName] = useState('Give this issue a new name')
+    var [selectedIssueDescription, setSelectedIssueDescription] = useState('Give this issue a detailed description.')
     var [selectedIssuePriority, setSelectedIssuePriority] = useState('')
     var [selectedIssueStatus, setSelectedIssueStatus] = useState('')
     var [selectedIssueSprint, setSelectedIssueSprint] = useState('')
@@ -118,86 +127,6 @@ export default observer(function NewCreateIssueForm() {
         console.log('Creating issue...')
     }
 
-    const formatProjectAssignees = ( projectAssignees: Assignee[], selected_assignees: any) => {
-        var unassigned_assignees: string[] = []
-        var all_assignee_ids: string[] = []
-        var assigned_assignees: string[] = []
-
-        projectAssignees.map((assignee) => {
-            all_assignee_ids.push(assignee.id)
-        })
-
-        selected_assignees.map((assignee: any) => {
-            assigned_assignees.push(assignee)
-        })
-
-        all_assignee_ids.map((assignee) => {
-            if (!assigned_assignees.includes(assignee))
-                unassigned_assignees.push(assignee)
-        })
-
-        var assignees_to_display: Assignee[] = []
-
-        projectAssignees.map((pa) => {
-            if (unassigned_assignees.includes(pa.id)) {
-                assignees_to_display.push(pa)
-                console.log("2")
-            }
-        })
-
-        return assignees_to_display!.map((project_assignee, index) => ({
-            key: project_assignee.id,
-            value: project_assignee.id,
-            text: project_assignee.first_name.concat(
-                ' ',
-                project_assignee.second_name
-            ),
-            content: (
-                <HoverDiv className='assignee_reporter_label' onClick={() => addAssigneeToIssue(project_assignee.id)}>
-                    <AvatarIsActiveLabelBorder isActive={false} index={index}>
-                        <StyledLabelAvatar
-                            value={project_assignee.id}
-                            size="20"
-                            name={project_assignee.first_name.concat(
-                                ' ',
-                                project_assignee.second_name
-                            )}
-                            round="20px"
-                            src={
-                                selectedProject!.assignees.find(
-                                    (assignee) =>
-                                        assignee.id ===
-                                        project_assignee.id
-                                )!.photo?.url
-                            }
-                        />
-                    </AvatarIsActiveLabelBorder>
-                    {project_assignee.first_name.concat(
-                        ' ',
-                        project_assignee.second_name
-                    )}
-                </HoverDiv>
-            ),
-        }))
-    }
-
-    function submitComment() {
-        var comment_to_send = {
-            Id: uuid(),
-            commenter_assignee_id: commonStore.assignee_id!,
-            comment: comment_state,
-            comment_posted: moment.tz(moment().subtract(moment.duration('11:00:00')), 'Australia/Sydney').toISOString(true)
-        }
-
-        var comment_to_add = {
-            ...comment_to_send,
-            comment_posted: moment
-                .tz(moment(), 'Australia/Sydney')
-                .toISOString(true),
-        }
-        selectedIssue!.comments!.push(comment_to_add)
-        issueStore.addCommentToIssue(selectedIssue!.id, comment_to_send)
-    }
 
     const formatProjectReporters = ( projectReporters: Assignee[], selectedReporter: string ) => {
         var unassigned_reporters: string[] = []
@@ -235,7 +164,6 @@ export default observer(function NewCreateIssueForm() {
                             name={getAssigneeFullName(project_assignee)} 
                             src={getAssigneePhotoUrl(project_assignee)}
                         />
-
                     </AvatarIsActiveLabelBorder>
                     {getAssigneeFullName(project_assignee)}
                 </HoverDiv>
@@ -263,188 +191,9 @@ export default observer(function NewCreateIssueForm() {
             ),
         }))
 
-    const issueTypeOptions = [
-        {
-            key: '0',
-            value: 'Story',
-            text: 'Story',
-            content: (
-                <HoverDiv style={{display: 'inline-block'}} onClick={() => setSelectedIssueType('Story')}>
-                    <IssueTypeIcon color="#65BA43 !important" type="story" size={14}/>
-                    <div style={{paddingLeft: '7px', alignContent: 'center', display: 'inline-block'}}>Story</div>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '1',
-            value: 'Bug',
-            text: 'Bug',
-            content: (
-                <HoverDiv
-                    style={{ display: 'inline-block' }}
-                    onClick={() => setSelectedIssueType('Bug')}
-                >
-                    <IssueTypeIcon color="#E44D42" type="bug" size={14} />
-                    <div
-                        style={{
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Bug
-                    </div>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '2',
-            value: 'Task',
-            text: 'Task',
-            content: (
-                <HoverDiv
-                    style={{ display: 'inline-block' }}
-                    onClick={() => setSelectedIssueType('Task')}
-                >
-                    <IssueTypeIcon
-                        color="#4FADE6 !important"
-                        type="task"
-                        size={14}
-                    />
-                    <div
-                        style={{
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Task
-                    </div>
-                </HoverDiv>
-            ),
-        },
-    ]
 
-    const statusOptions = [
-        {
-            key: '0',
-            value: 'To Do',
-            text: 'To Do',
-            content: (
-                <HoverDiv onClick={() => setSelectedIssueStatus('To Do')}>
-                    <Label color="blue">To Do</Label>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '1',
-            value: 'In Progress',
-            text: 'In Progress',
-            content: (
-                <HoverDiv onClick={() => setSelectedIssueStatus('In Progress')}>
-                    <Label color="green">In Progress</Label>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '2',
-            value: 'Review',
-            text: 'Review',
-            content: (
-                <HoverDiv onClick={() => setSelectedIssueStatus('Review')}>
-                    <Label color="purple">In Review</Label>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '3',
-            value: 'Done',
-            text: 'Done',
-            content: (
-                <HoverDiv onClick={() => setSelectedIssueStatus('Done')}>
-                    <Label>Done</Label>
-                </HoverDiv>
-            ),
-        },
-    ]
 
-    const priorityOptions = [
-        {
-            key: '0',
-            value: 'Low',
-            text: 'Low',
-            content: (
-                <StyledLabel
-                    onClick={() => {
-                        setSelectedIssuePriority('Low')
-                    }}
-                >
-                    <IssuePriorityIcon priority="Low" />
-                    <p
-                        style={{
-                            paddingBottom: '3px',
-                            paddingLeft: '5px',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Low
-                    </p>
-                </StyledLabel>
-            ),
-        },
-        {
-            key: '1',
-            value: 'Medium',
-            text: 'Medium',
-            content: (
-                <StyledLabel
-                    onClick={() => {
-                        setSelectedIssuePriority('Medium')
-                    }}
-                >
-                    <IssuePriorityIcon priority="Medium" />
-                    <p
-                        style={{
-                            paddingBottom: '3px',
-                            paddingLeft: '5px',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Medium
-                    </p>
-                </StyledLabel>
-            ),
-        },
-        {
-            key: '2',
-            value: 'High',
-            text: 'High',
-            content: (
-                <StyledLabel
-                    onClick={() => {
-                        setSelectedIssuePriority('High')
-                    }}
-                >
-                    <IssuePriorityIcon priority="High" />
-                    <p
-                        style={{
-                            paddingBottom: '3px',
-                            paddingLeft: '5px',
-                            display: 'inline-block',
-                        }}
-                    >
-                        High
-                    </p>
-                </StyledLabel>
-            ),
-        },
-    ]
-
-    function calculateIssueTimespan(
-        input_days: any,
-        input_hours: any,
-        input_minutes: any
-    ) {
+    function calculateIssueTimespan(input_days: any, input_hours: any, input_minutes: any) {
         var days, hours, minutes
 
         input_days === 0 ? (days = 0) : (days = input_days)
@@ -480,16 +229,10 @@ export default observer(function NewCreateIssueForm() {
             project_id: selectedProject!.id,
             assignees: [],
             created_at: moment
-                .tz(
-                    moment().subtract(moment.duration('11:00:00')),
-                    'Australia/Sydney'
-                )
+                .tz(moment().subtract(moment.duration('11:00:00')), 'Australia/Sydney')
                 .toISOString(true),
             updated_at: moment
-                .tz(
-                    moment().subtract(moment.duration('11:00:00')),
-                    'Australia/Sydney'
-                )
+                .tz(moment().subtract(moment.duration('11:00:00')), 'Australia/Sydney')
                 .toISOString(true),
             description_text: '',
             time_logged: calculateIssueTimespan(
@@ -527,9 +270,6 @@ export default observer(function NewCreateIssueForm() {
             }
             issue_assignees.push(issue_assignee)
         })
-
-        console.log('Issue to create: ')
-        console.log(issue_to_create)
 
         createIssue(
             issue_to_create,
@@ -585,134 +325,10 @@ export default observer(function NewCreateIssueForm() {
         addReporterToIssue(e.target.value)
     }
 
-    function renderSelectedIssueType() {
-        if (selectedIssueType == 'Story') {
-            return (
-                <StyledLabel style={{ display: 'inline-block' }}>
-                    <IssueTypeIcon color="#65BA43" type="story" size={14} />
-                    <div
-                        style={{
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Story
-                    </div>
-                </StyledLabel>
-            )
-        }
-
-        if (selectedIssueType == 'Bug') {
-            return (
-                <StyledLabel style={{ display: 'inline-block' }}>
-                    <IssueTypeIcon color="#E44D42" type="bug" size={14} />
-                    <div
-                        style={{
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Bug
-                    </div>
-                </StyledLabel>
-            )
-        }
-
-        if (selectedIssueType == 'Task') {
-            return (
-                <StyledLabel style={{ display: 'inline-block' }}>
-                    <IssueTypeIcon color="#4FADE6" type="task" size={14} />
-                    <div
-                        style={{
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Task
-                    </div>
-                </StyledLabel>
-            )
-        }
-    }
-
-    function parseTimeSpan(timespan: string) {
-        var days = timespan.substring(0, timespan.indexOf('.'))
-
-        if (days === null) {
-            days = '0'
-        }
-        var days_string = ''
-        if (days === '001') {
-            days_string = 'day'
-        } else {
-            days_string = 'days'
-        }
-
-        var hours = timespan.substring(
-            timespan.indexOf('.') + 1,
-            timespan.indexOf(':')
-        )
-
-        if (hours === null) {
-            hours = '0'
-        }
-        var hours_string = ''
-        if (hours === '01') {
-            hours_string = 'hour'
-        } else hours_string = 'hours'
-
-        var timespan_minus_days_and_hours = timespan.substring(
-            timespan.indexOf(':') + 1,
-            timespan.length
-        )
-
-        var minutes = timespan_minus_days_and_hours.substring(0, timespan_minus_days_and_hours.indexOf(':'))
-
-        if (minutes === null) {
-            minutes = '0'
-        }
-        var minutes_string = ''
-        if (minutes === '01') {
-            minutes_string = 'minute'
-        } else {
-            minutes_string = 'minutes'
-        }
-        var time_span = ''
-
-        if (days === '0' && hours === '0') {
-            time_span = minutes.concat(' ', minutes_string)
-        } else if (days === '0') {
-            time_span = hours.concat(
-                ' ',
-                hours_string,
-                ' ',
-                minutes,
-                ' ',
-                minutes_string
-            )
-        } else {
-            time_span = days.concat(
-                ' ',
-                days_string,
-                ' ',
-                parseInt(hours).toString(),
-                ' ',
-                hours_string,
-                ' ',
-                parseInt(minutes).toString(),
-                ' ',
-                minutes_string
-            )
-        }
-
-        return time_span
-    }
 
     return (
         <div>
+        
             <Formik validationSchema={validationSchema} enableReinitialize initialValues={issue} onSubmit={(values) => handleFormSubmit(values, allSprints)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
@@ -721,81 +337,36 @@ export default observer(function NewCreateIssueForm() {
 
         {/* ISSUE TYPE LABEL */}
 
-                                {renderSelectedIssueType()}
+                                <SelectedIssueType selectedIssueType={selectedIssueType}/>
 
         {/* ISSUE TYPE SELECTOR - Task, Story, Bug */}
-
-                                <div style={{ display: 'inline-block' }}>
-                                    <Dropdown downward multiple closeOnChange placeholder="" value="" label="Status" name="status" style={{color: '#FFFFFF', marginTop: '15px', marginBottom: '5px'}} options={issueTypeOptions}/>
-                                </div>
+                                <IssueTypeSelector issueTypeOptions={IssueTypeOptions({setSelectedIssueType, selectedIssueType})} />
 
         {/* ISSUE TITLE */}
-
-                                {!issue_title_edit_state && (
-                                    <InvisibleTextInput fontsize={20} onClick={() => toggleIssueTitleEditor(issue_title_edit_state)}>
-                                        <h3 style={{paddingTop: '15px', paddingLeft: '5px'}}>
-                                            {selectedIssueName}
-                                        </h3>
-                                    </InvisibleTextInput>
-                                )}
-                            
-        {/* ISSUE TITLE TEXT INPUT */}
-
-                                {issue_title_edit_state && (
-                                    <StyledInput defaultValue={selectedIssueName} autoFocus onChange={(e: any) => setSelectedIssueName(e.target.value)} onBlur={() => {toggleIssueTitleEditor(issue_title_edit_state)}}/>
-                                )}
-
-        {/* DESCRIPTION HEADING */}
-
-                                <h5 style={{marginLeft: '10px',marginBottom: '0px',paddingBottom: '0px'}}>Description</h5>
-                                <div onMouseEnter={() => toggleIsDescriptionHovered()} onMouseLeave={() => toggleIsDescriptionHovered()} style={{...{filter: 'brightness(130%)', border: '1px solid white',marginTop: '10px',paddingBottom: '15px'}, ...( isDescriptionHovered ? hoveredStyle : {})}}>
+                                <IssueTitle issue_title_edit_state={issue_title_edit_state} setSelectedIssueName={setSelectedIssueName} toggleIssueTitleEditor={toggleIssueTitleEditor} selectedIssueName={selectedIssueName} />
                                 
-        {/* DESCRIPTION */}
-
-                                    {!description_edit_state && (
-                                        <InvisibleTextInput
-                                            style={{marginTop: '4px', paddingTop: '0px', paddingBottom: '0px', marginBottom: '0px', cursor: 'pointer', display: 'flex', maxHeight: '700px', minHeight: '200px'}}
-                                            fontsize={14}
-                                            onClick={() => toggleDescriptionEditor(description_edit_state)}
-                                        >
-                                            <div style={{paddingTop: '8px', marginBottom: '0px', marginLeft: '12px', marginRight: '12px'}}>
-                                                {parse(selectedIssueDescription)}
-                                            </div>
-                                        </InvisibleTextInput>
-                                    )}
-            
-        {/* DESCRIPTION WSIWYG INPUT */}
-
-                                    {description_edit_state && (
-                                        <>
-                                            <ReactQuill style={{minHeight: '200px', maxHeight: '700px', marginBottom: '0px', paddingBottom: '0px'}} theme="snow" defaultValue={selectedIssueDescription} onChange={setSelectedIssueDescription}/>
-                                            <Button size="mini" content="Save" color="blue" style={{ marginLeft: '15px' }} onClick={() => {toggleDescriptionEditor(description_edit_state)}}/>
-                                        </>
-                                    )}
-                                </div>
-
+        {/* ISSUE DESCRIPTION */}
+                                <IssueDescription 
+                                    toggleIsDescriptionHovered={toggleIsDescriptionHovered}
+                                    isDescriptionHovered={isDescriptionHovered}
+                                    description_edit_state={description_edit_state}
+                                    setSelectedIssueDescription={setSelectedIssueDescription}
+                                    toggleDescriptionEditor={toggleDescriptionEditor}
+                                    selectedIssueDescription={selectedIssueDescription}
+                                />
+                                
         {/* COMMENT INPUT */}
+                                <CommentInput 
+                                    getAssigneePhoto={getAssigneePhoto}
+                                    getAssigneeName={getAssigneeName}
+                                    project_assignees={selectedProject!.assignees}
+                                    account_id={commonStore!.account_id!}
+                                    toggleIsAddCommentHovered={toggleIsAddCommentHovered}
+                                    setCommentState={setCommentState}
+                                    submitComment={submitComment}
+                                    />
 
-                                <div style={{ marginTop: '20px', cursor: 'not-allowed', marginLeft: '10px', marginBottom: '8px'}}>
-                                        <h5 style={{cursor: 'not-allowed'}}>Comments</h5>
-                                        <div style={{ display: 'inline-block' }}>
-                                            <StyledAvatar style={{ paddingTop: '12px', cursor: 'not-allowed' }} size="30" round="16px"
-                                                src={selectedProject!.assignees.find((assignee) => assignee.id_app_user === commonStore.account_id)?.photo?.url}
-                                                name={selectedProject!.assignees
-                                                    .find((assignee) => assignee.id_app_user === commonStore.account_id)!.first_name
-                                                    .concat(' ', selectedProject!.assignees.find((assignee) => assignee.id_app_user === commonStore.account_id)!.second_name)
-                                                }
-                                            />
-                                        </div>
-                                        <div style={{cursor: 'not-allowed', display: 'inline-block', paddingLeft: '15px', width: '95%'}}>
-                                            <TextArea 
-                                                onMouseEnter={() => toggleIsAddCommentHovered()} onMouseLeave={() => toggleIsAddCommentHovered()}
-                                                style={{...{ border: '1px solid white', cursor: 'not-allowed' }, ...{filter: 'brightness(130%)'}}}
-                                                onChange={(e) => setCommentState(e.target.value)} placeholder="Add a comment..."/>
-                                        </div>
-                                        <div style={{cursor: 'not-allowed', marginTop: '10px', marginRight: '0px', float: 'right', display: 'inline-block'}}><Button style={{cursor: 'not-allowed'}} size="tiny" content="Comment" color="blue" onClick={() => submitComment()}/></div>
-                                </div>
-
+                           
                             </Grid.Column>
                             <Grid.Column width={6}>
                                 <div style={{ paddingTop: '10px' }} />
@@ -810,7 +381,7 @@ export default observer(function NewCreateIssueForm() {
                                     <hr style={{border: '1px solid white',width: '100%'}}/>
                                     <div style={{marginLeft: '20px'}}>
                                     <Label style={{marginRight: '0px'}}>{selectedIssueStatus}</Label>
-                                    <Dropdown downward multiple closeOnChange placeholder="" value="" label="Status" name="status" options={statusOptions} style={{position: 'relative',zIndex: '99', marginLeft: '-15px', paddingRight: '10px'}}/>
+                                    <Dropdown downward multiple closeOnChange placeholder="" value="" label="Status" name="status" options={IssueStatusOptions({setSelectedIssueStatus, selectedIssueStatus})} style={{position: 'relative',zIndex: '99', marginLeft: '-15px', paddingRight: '10px'}}/>
                                     </div>
                                 </div>
                     
@@ -848,13 +419,22 @@ export default observer(function NewCreateIssueForm() {
                                     <div style={{marginLeft: '20px'}}>
                                         <Dropdown multiple downward placeholder="+ Add more" value="" label="Assign" name="assignees"
                                             style={{position: 'relative', marginTop: '0px', paddingTop: '0px', zIndex: '99'}}
-                                            options={formatProjectAssignees(projectAssignees, selectedAssignees)}
+                                            options={IssueAssignees({projectAssignees, selectedAssignees, addAssigneeToIssue, selectedProject})}
                                         />
                                     </div>
                                 </div>
                                 
                                 
         {/* REPORTER LABEL */}
+                                <IssueReporter 
+                                    isReporterHovered
+                                    setIsReporterHovered
+                                    selectedReporter 
+                                    setSelectedReporter 
+                                    project_assignees={selectedProject!.assignees}
+                                    account_id={commonStore!.account_id!}
+                                />
+                                {/*
                                 <div style={{ marginTop: '20px' }} />
                                 <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '90'}, ...(isReporterHovered ? hoveredStyle : {})}}
                                     onMouseEnter={() => setIsReporterHovered(true)}
@@ -887,7 +467,7 @@ export default observer(function NewCreateIssueForm() {
                                         </div>
                                     )}
 
-        {/* SELECT REPORTER DROPDOWN */}
+        
 
                                     <div style={{marginLeft: '20px'}}>
                                     <Dropdown downward multiple closeOnChange placeholder="Select reporter" value="" style={{zIndex: '99'}} label="Assign" name="reporter"
@@ -895,6 +475,7 @@ export default observer(function NewCreateIssueForm() {
                                     />
                                     </div>
                                 </div>
+                            */}
                             <br />
         {/* ESTIMATED DURATION */}
                             <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '1'}, ...(isEstimatedDurationHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsEstimatedDurationHovered(true)} onMouseLeave={() => setIsEstimatedDurationHovered(false)}>
@@ -1032,7 +613,7 @@ export default observer(function NewCreateIssueForm() {
 
         {/* PRIORITY DROPDOWN SELECTOR */}
 
-                                            <Dropdown style={{marginLeft: '-20px'}} downward multiple closeOnChange placeholder="" value="" label="Priority" name="priority" options={priorityOptions}/>
+                                            <Dropdown style={{marginLeft: '-20px'}} downward multiple closeOnChange placeholder="" value="" label="Priority" name="priority" options={IssuePriorityOptions({setSelectedIssuePriority})}/>
                                         </div>
                                     </div>
                                 </div>
