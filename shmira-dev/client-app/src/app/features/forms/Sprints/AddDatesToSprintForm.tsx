@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react'
 import { Button } from 'semantic-ui-react'
 import { Formik, Form, ErrorMessage, Field, useField, useFormikContext } from 'formik'
-import { useStore } from '../../stores/store'
+import { useStore } from '../../../stores/store'
 import { observer } from 'mobx-react-lite'
-import { Sprint } from '../../models/sprint'
+import { Sprint } from '../../../models/sprint'
 import * as Yup from 'yup'
 import { v4 as uuid } from 'uuid'
-import { InvisibleTextInput, StyledInput } from '../../shared/form/Styles'
+import { InvisibleTextInput, StyledInput } from '../../../shared/form/Styles'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import parse from 'html-react-parser'
-import './Styles'
+import '../Styles'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 

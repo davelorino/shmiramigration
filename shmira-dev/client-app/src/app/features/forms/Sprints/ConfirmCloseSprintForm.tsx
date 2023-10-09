@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Button } from 'semantic-ui-react'
 import { Formik, Form, ErrorMessage, Field } from 'formik'
-import { useStore } from '../../stores/store'
+import { useStore } from '../../../stores/store'
 import { observer } from 'mobx-react-lite'
-import { ProjectSprintAndBacklog } from '../../models/projectSprintAndBacklog'
+import { ProjectSprintAndBacklog } from '../../../models/projectSprintAndBacklog'
 import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
 

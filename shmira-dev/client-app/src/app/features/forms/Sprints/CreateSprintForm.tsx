@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Button, Header } from 'semantic-ui-react'
 import { Formik, Form } from 'formik'
-import { useStore } from '../../stores/store'
+import { useStore } from '../../../stores/store'
 import { observer } from 'mobx-react-lite'
 import * as Yup from 'yup'
-import MyTextInput from '../../shared/form/MyTextInput'
+import MyTextInput from '../../../shared/form/MyTextInput'
 import { v4 as uuid } from 'uuid'
 
 export default observer(function SprintForm() {

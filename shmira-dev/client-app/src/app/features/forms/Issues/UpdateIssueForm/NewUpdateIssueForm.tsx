@@ -8,22 +8,22 @@ import {
     TextArea,
 } from 'semantic-ui-react'
 import { Formik, Form, ErrorMessage, Field } from 'formik'
-import { useStore } from '../../../stores/store'
+import { useStore } from '../../../../stores/store'
 import { observer } from 'mobx-react-lite'
-import { Sprint } from '../../../models/sprint'
-import { Issue } from '../../../models/issue'
+import { Sprint } from '../../../../models/sprint'
+import { Issue } from '../../../../models/issue'
 import * as Yup from 'yup'
-import { Assignee } from '../../../models/assignee'
-import { StyledLabelAvatar, StyledAvatar, AvatarIsActiveLabelBorder } from '../../filters/Styles'
-import { InvisibleTextInput, StyledInput } from '../../../shared/form/Styles'
+import { Assignee } from '../../../../models/assignee'
+import { StyledLabelAvatar, StyledAvatar, AvatarIsActiveLabelBorder } from '../../../filters/Styles'
+import { InvisibleTextInput, StyledInput } from '../../../../shared/form/Styles'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import parse from 'html-react-parser'
-import Icon from '../../../images/Icon/index'
-import IssuePriorityIcon from '../../../images/IssuePriorityIcon'
-import IssueTypeIcon from '../../../images/IssueTypeIcon'
-import { StyledLabel } from '../Styles'
-import { HoverDiv } from '../Styles'
+import Icon from '../../../../images/Icon/index'
+import IssuePriorityIcon from '../../../../images/IssuePriorityIcon'
+import IssueTypeIcon from '../../../../images/IssueTypeIcon'
+import { StyledLabel } from '../../Styles'
+import { HoverDiv } from '../../Styles'
 import UpdateIssueFormTrackingWidget from '../UpdateIssueFormTimeTrackingWidget'
 import moment from 'moment'
 import 'quill-mention/dist/quill.mention.css'
@@ -196,13 +196,16 @@ export default observer(function NewUpdateIssueForm() {
             content: (
                 <HoverDiv
                     style={{
+                        height: 33,
                         fontSize: '12px', 
                         marginLeft: '0px',
-                        paddingLeft: '0px',
-                        paddingTop: '0px', 
-                        paddingBottom: '0px', 
+                        marginRight: '4px',
+                        paddingLeft: '6px',
+                        paddingTop: '6px', 
+                        paddingBottom: '6px', 
                         marginTop: '0px', 
-                        marginBottom: '0px'
+                        marginBottom: '0px',
+                        alignContent: 'center'
                     }} 
                     onClick={() => addAssigneeToIssue(project_assignee.id)}
                 >
@@ -218,10 +221,12 @@ export default observer(function NewUpdateIssueForm() {
                             src={project_assignee.photo?.url}
                         />
                     </AvatarIsActiveLabelBorder>
+                    <div style={{paddingTop: '5px', marginTop: '5px', display: 'inline'}}> 
                     {project_assignee.first_name.concat(
                         ' ',
                         project_assignee.second_name
                     )}
+                    </div>
                 </HoverDiv>
             ),
         }))
@@ -265,13 +270,17 @@ export default observer(function NewUpdateIssueForm() {
             content: (
                 <HoverDiv  
                     style={{
+                        height: 33,
                         fontSize: '12px', 
                         marginLeft: '0px',
-                        paddingLeft: '0px',
-                        paddingTop: '0px', 
-                        paddingBottom: '0px', 
+                        marginRight: '2px',
+                        paddingLeft: '6px',
+                        paddingTop: '6px', 
+                        paddingRight: '9px',
+                        paddingBottom: '6px', 
                         marginTop: '0px', 
-                        marginBottom: '0px'
+                        marginBottom: '0px',
+                        alignContent: 'center'
                     }} 
                     onClick={() => addReporterToIssue(project_assignee.id)}>
                     <div style={{display: 'inline-block'}}>
@@ -1300,7 +1309,8 @@ export default observer(function NewUpdateIssueForm() {
                                     {/* Assignee Dropdown */}
                                     <div style={{marginLeft: '20px'}}>
                                     {selectedIssue?.assignees.length !== selectedProject!.assignees.length &&
-                                        <Dropdown multiple downward placeholder="+ Add more" value="" label="Assign" name="assignees" style={{position: 'relative', marginTop: '0px', paddingTop: '0px', zIndex: '99'}}
+                                        <Dropdown multiple 
+                                            downward placeholder="+ Add more" value="" label="Assign" name="assignees" style={{position: 'relative', marginTop: '0px', paddingTop: '0px', zIndex: '99'}}
                                             options={formatProjectAssignees(projectAssignees, selectedIssue!)}
                                             onChange={(e) => handleChangeAssignees(e)}
                                         />
@@ -1456,7 +1466,7 @@ export default observer(function NewUpdateIssueForm() {
 
                     {/* SPRINT */}
                                 <div style={{ width: '100%', marginTop: '20px' }}>
-                                    <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '98'}, ...(isLogtimeHovered ? hoveredStyle : {})}}
+                                    <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '50'}, ...(isLogtimeHovered ? hoveredStyle : {})}}
                                         onMouseEnter={() => setIsLogtimeHovered(true)}
                                         onMouseLeave={() => setIsLogtimeHovered(false)}
                                     >

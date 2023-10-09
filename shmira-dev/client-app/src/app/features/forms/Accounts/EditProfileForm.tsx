@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from 'semantic-ui-react'
-import { useStore } from '../../stores/store'
+import { useStore } from '../../../stores/store'
 import { observer } from 'mobx-react-lite'
 import 'react-quill/dist/quill.snow.css'
-import './login/login.css'
-import { InvisibleTextInput, StyledInput } from '../../shared/form/Styles'
+import '../Login/login.css'
+import { InvisibleTextInput, StyledInput } from '../../../shared/form/Styles'
 import PhotoWidgetDropZone from './PhotoWidgetDropZone'
 import PhotoWidgetCropper from './PhotoWidgetCropper'
 import Avatar from 'react-avatar'
-import BetterIcon from '../../images/BetterIcon'
+import BetterIcon from '../../../images/BetterIcon'
 
 export default observer(function ProfileEditForm() {
     const [files, setFiles] = useState<any>([])

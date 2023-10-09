@@ -1,12 +1,10 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
-import styled from 'styled-components'
 import { Container, Modal } from 'semantic-ui-react'
-import { css } from 'styled-components'
 import './images/fontStyles.css'
-import IssueDashboard from './features/dashboards/IssuesDashboard'
+import IssueDashboard from './pages/kanban/KanbanBoard'
 import InsightsDashboard from './features/dashboards/InsightsDashboard'
-import SprintPage from './features/sprints/SprintPage'
-import GanttPage from './features/gantt/GanttPage'
+import SprintPage from './pages/sprints/SprintPage'
+import GanttPage from './pages/gantt/GanttPage'
 import LoadingComponent from './images/LoadingComponent'
 import NavBarTop from './features/navbars/NavBarTop'
 import { useStore } from './stores/store'
@@ -14,12 +12,12 @@ import { observer } from 'mobx-react-lite'
 import ModalContainer from './shared/modals/ModalContainer'
 import MediumModalContainer from './shared/modals/MediumModalContainer'
 import SmallModalContainer from './shared/modals/SmallModalContainer'
-import NavbarRight from './features/navbars/NavbarRight'
+import NavbarRight from './features/navbars/NavbarLeft'
 import AboutPage from './features/About'
 import { Route } from 'react-router-dom'
-import LoginForm from './features/forms/login/LoginForm'
+import LoginForm from './features/forms/Login/LoginForm'
 import backgroundImage3 from './images/shmirabackground3.jpg'
-import ActivateAccountForm from './features/forms/login/ActivateAccountForm'
+import ActivateAccountForm from './features/forms/Login/ActivateAccountForm'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../darkmode.css'
@@ -33,21 +31,15 @@ function App() {
         commonStore.loadInitial()
     }, [])
 
-    if (
-        issueStore.loadingInitial ||
-        (commonStore.assignee_id === null &&
-            (accountStore.accountsLoading || issueStore.loadingInitial))
-    )
+    {/* If the data is loading, display the loading page */}
+    if (issueStore.loadingInitial || (commonStore.assignee_id === null && (accountStore.accountsLoading || issueStore.loadingInitial)))
         return (
-            <>
-                <LoadingComponent content="Loading..." />
-            </>
+            <LoadingComponent content="Loading..." />
         )
 
+    {/* If theres no stored login token and the page isn't loading, display the login page */}
     if (
-        commonStore.token === null &&
-        !accountStore.accountsLoading &&
-        !issueStore.loadingInitial
+        commonStore.token === null && !accountStore.accountsLoading && !issueStore.loadingInitial
     ) {
         {
             console.log('App started')
@@ -62,8 +54,7 @@ function App() {
                     display: 'flex',
                     flexWrap: 'wrap',
                     justifyContent: 'center',
-                    backgroundPosition: 'center',
-                    //backgroundRepeat: 'no-repeat'
+                    backgroundPosition: 'center'
                 }}
             >
                 <div
@@ -91,7 +82,9 @@ function App() {
                 </div>
             </div>
         )
-    } else if (
+    } 
+    // if the data is loaded and a project is selected, display the app
+    else if (
         issueStore.selectedProject! !== undefined &&
         !accountStore.accountsLoading &&
         !issueStore.loadingInitial
@@ -99,15 +92,7 @@ function App() {
         return (
             <div>
                 {
-                    <div
-                        style={{
-                            filter: 'brightness(135%)',
-                            marginTop: '0px',
-                            marginBottom: '0px',
-                            paddingTop: '0px',
-                            paddingBottom: '0px',
-                        }}
-                    >
+                    <div className="app_brightness">
                         <ModalContainer />
                         <SmallModalContainer />
                         <MediumModalContainer />
@@ -115,10 +100,7 @@ function App() {
                         <NavbarRight />
                         <Container style={{ paddingTop: '7em' }}>
                             <Route exact path="/" component={IssueDashboard} />
-                            <Route
-                                path="/insights"
-                                component={InsightsDashboard}
-                            />
+                            <Route path="/insights" component={InsightsDashboard}/>
                             <Route path="/sprints" component={SprintPage} />
                             <Route path="/gantt" component={GanttPage} />
                             <Route path="/about" component={AboutPage} />
@@ -147,122 +129,3 @@ function App() {
 
 export default observer(App)
 
-const font = {
-    regular: 'font-family: "CircularStdBook"; font-weight: normal;',
-    medium: 'font-family: "CircularStdMedium"; font-weight: normal;',
-    bold: 'font-family: "CircularStdBold"; font-weight: normal;',
-    black: 'font-family: "CircularStdBlack"; font-weight: normal;',
-    size: (size: any) => `font-size: ${size}px;`,
-}
-
-const Bottom = styled.div`
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    width: 100%;
-`
-
-const color = {
-    primary: '#0052cc', // Blue
-    success: '#0B875B', // green
-    danger: '#E13C3C', // red
-    warning: '#F89C1C', // orange
-    secondary: '#F4F5F7', // light grey
-
-    textDarkest: '#172b4d',
-    textDark: '#42526E',
-    textMedium: '#5E6C84',
-    textLight: '#8993a4',
-    textLink: '#0052cc',
-
-    backgroundDarkPrimary: '#0747A6',
-    backgroundMedium: '#dfe1e6',
-    backgroundLight: '#ebecf0',
-    backgroundLightest: '#F4F5F7',
-    backgroundLightPrimary: '#D2E5FE',
-    backgroundLightSuccess: '#E4FCEF',
-
-    borderLightest: '#dfe1e6',
-    borderLight: '#C1C7D0',
-    borderInputFocus: '#4c9aff',
-}
-
-const sizes = {
-    appNavBarLeftWidth: 64,
-    secondarySideBarWidth: 230,
-    minViewportWidth: 1000,
-}
-
-const zIndexValues = {
-    modal: 1000,
-    dropdown: 101,
-    navLeft: 100,
-}
-
-const mixin = {
-    hardwareAccelerate: css`
-        transform: translateZ(0);
-    `,
-    cover: css`
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    `,
-    clickable: css`
-        cursor: pointer;
-        user-select: none;
-    `,
-}
-
-const NavLeft = styled.aside`
-    z-index: ${zIndexValues.navLeft};
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    height: 100vh;
-    width: ${sizes.appNavBarLeftWidth}px;
-    background: ${color.backgroundDarkPrimary};
-    transition: all 0.1s;
-    ${mixin.hardwareAccelerate}
-    &:hover {
-        width: 200px;
-        box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.6);
-    }
-`
-const Item = styled.div`
-    position: relative;
-    width: 100%;
-    height: 42px;
-    line-height: 42px;
-    padding-left: 64px;
-    color: #deebff;
-    transition: color 0.1s;
-    ${mixin.clickable}
-    &:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
-    i {
-        position: absolute;
-        left: 18px;
-    }
-`
-
-const ItemText = styled.div`
-    position: relative;
-    right: 12px;
-    visibility: hidden;
-    opacity: 0;
-    text-transform: uppercase;
-    transition: all 0.1s;
-    transition-property: right, visibility, opacity;
-    ${font.bold}
-    ${font.size(12)}
-${NavLeft}:hover & {
-        right: 0;
-        visibility: visible;
-        opacity: 1;
-    }
-`

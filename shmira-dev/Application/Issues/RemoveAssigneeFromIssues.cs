@@ -36,23 +36,23 @@ namespace Application.Issues
                 foreach(var issue_assignee in request.issue_assignees){
                     
                      var issue = await _context.Issues
-                    .Include(a => a.assignees)
-                    .ThenInclude(ia => ia.Assignee) // Include nested navigation property
-                    .FirstOrDefaultAsync(x => x.Id.ToString() == issue_assignee.IssueId);
+                        .Include(a => a.assignees)
+                        .ThenInclude(ia => ia.Assignee) // Include nested navigation property
+                        .FirstOrDefaultAsync(x => x.Id.ToString() == issue_assignee.IssueId);
 
                     // More log...
 
                     var assignee = await _context.Assignees
-                    .FirstOrDefaultAsync(x => x.Id.ToString() == issue_assignee.AssigneeId);
+                        .FirstOrDefaultAsync(x => x.Id.ToString() == issue_assignee.AssigneeId);
 
                     // More log...
 
                     var the_issue_assignee_to_remove = issue.assignees
-                    .FirstOrDefault(ia => ia.AssigneeId == assignee.Id && ia.IssueId == issue.Id);
+                        .FirstOrDefault(ia => ia.AssigneeId == assignee.Id && ia.IssueId == issue.Id);
 
                     if (the_issue_assignee_to_remove != null)
                     {
-                    _context.Remove(the_issue_assignee_to_remove); // Mark for deletion
+                        _context.Remove(the_issue_assignee_to_remove); // Mark for deletion
                     }
                 }
 

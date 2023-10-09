@@ -7,7 +7,7 @@ import 'react-quill/dist/quill.snow.css'
 import './login.css'
 import Icon from '../../../images/Icon'
 import { AccountFormValues } from '../../../models/account'
-import SignupForm from './SignupForm'
+import SignupForm from '../Accounts/SignupForm'
 import queryString from 'query-string'
 import { useLocation, useHistory } from 'react-router-dom'
 

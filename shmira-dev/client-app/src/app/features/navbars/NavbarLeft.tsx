@@ -6,8 +6,9 @@ import BetterIcon from '../../images/BetterIcon'
 import '../../images/fontStyles.css'
 import { NavLink, useHistory } from 'react-router-dom'
 import { useStore } from '../../stores/store'
-import EditProjectForm from '../forms/EditProjectForm'
+import EditProjectForm from '../forms/Projects/EditProjectForm'
 import { observer } from 'mobx-react-lite'
+import './Styles.css'
 
 export default observer(function NavbarRight() {
     const { issueStore, mediumModalStore } = useStore()

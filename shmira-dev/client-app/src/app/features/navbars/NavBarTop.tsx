@@ -8,14 +8,15 @@ import Icon from '../../images/Icon'
 import styled from 'styled-components'
 import { useStore } from '../../stores/store'
 import { observer } from 'mobx-react-lite'
-import NewCreateIssueForm from '../../features/forms/NewCreateIssueForm'
-import EditProfileForm from '../../features/forms/EditProfileForm'
-import InviteCollaboratorForm from '../../features/forms/InviteCollaborator'
-import ProjectForm from '../../features/forms/ProjectForm'
-import InviteConfirmationForm from '../../features/forms/InviteConfirmationForm'
+import NewCreateIssueForm from '../forms/Issues/CreateIssueForm/NewCreateIssueForm'
+import EditProfileForm from '../forms/Accounts/EditProfileForm'
+import InviteCollaboratorForm from '../forms/Invites/InviteCollaborator'
+import ProjectForm from '../forms/Projects/CreateProjectForm'
+import InviteConfirmationForm from '../forms/Invites/InviteConfirmationForm'
 import { v4 as uuid } from 'uuid'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
+import './Styles.css'
 import { useHistory } from 'react-router-dom'
 
 const Item = styled.div`
@@ -48,12 +49,12 @@ const FirstItem = styled.div`
 
 const StyledDropdownItem = styled(Dropdown.Item)`
     width: 100%;
-    height: 20px;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    height: 10px;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
-    line-height: 20px;
+    /*line-height: 20px;*/
     padding-left: 16px;
     transition: color 0.1s;
     &:hover {

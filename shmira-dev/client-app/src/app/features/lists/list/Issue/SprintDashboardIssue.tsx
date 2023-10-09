@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd'
 import { useStore } from '../../../../stores/store'
 import { observer } from 'mobx-react-lite'
 import { Issue } from '../../../../models/issue'
-import NewUpdateIssueForm from '../../../forms/UpdateIssueForm/NewUpdateIssueForm'
+import NewUpdateIssueForm from '../../../forms/Issues/UpdateIssueForm/NewUpdateIssueForm'
 import {
     StyledAvatar,
     AvatarIsActiveLabelBorder,

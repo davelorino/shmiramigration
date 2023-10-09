@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Segment, Button, Header, Dropdown } from 'semantic-ui-react'
 import { Formik, Form, ErrorMessage, Field } from 'formik'
-import { useStore } from '../../stores/store'
+import { useStore } from '../../../stores/store'
 import { observer } from 'mobx-react-lite'
-import { ProjectAssignee } from '../../models/projectAssignee'
+import { ProjectAssignee } from '../../../models/projectAssignee'
 import * as Yup from 'yup'
-import MyTextInput from '../../shared/form/MyTextInput'
-import MyMultipleSelectInput from '../../shared/form/MyMultiSelectInput'
+import MyTextInput from '../../../shared/form/MyTextInput'
+import MyMultipleSelectInput from '../../../shared/form/MyMultiSelectInput'
 import { v4 as uuid } from 'uuid'
-import { Project } from '../../models/project'
+import { Project } from '../../../models/project'
 
 export default observer(function NewUserForm() {
     const { issueStore, modalStore, userStore } = useStore()

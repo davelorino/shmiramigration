@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useState } from 'react'
 import { Segment, Button, Header, Dropdown } from 'semantic-ui-react'
 import { Formik, Form, ErrorMessage, Field } from 'formik'
-import { useStore } from '../../stores/store'
+import { useStore } from '../../../stores/store'
 import { observer } from 'mobx-react-lite'
-import { Assignee } from '../../models/assignee'
+import { Assignee } from '../../../models/assignee'
 import * as Yup from 'yup'
-import MyMultipleSelectInput from '../../shared/form/MyMultiSelectInput'
-import { Project } from '../../models/project'
-import { ProjectAssignee } from '../../models/projectAssignee'
+import MyMultipleSelectInput from '../../../shared/form/MyMultiSelectInput'
+import { Project } from '../../../models/project'
+import { ProjectAssignee } from '../../../models/projectAssignee'
 
 export default observer(function GrantUserAccessForm() {
     const { issueStore, userStore, modalStore } = useStore()

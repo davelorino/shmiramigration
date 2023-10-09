@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Button, Label } from 'semantic-ui-react'
-import { useStore } from '../../stores/store'
+import { useStore } from '../../../stores/store'
 import { observer } from 'mobx-react-lite'
 import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
-import './login/login.css'
-import Icon from '../../images/Icon'
-import { AccountFormValues } from '../../models/account'
-import { Invitation } from '../../models/invitation'
+import '../Login/login.css'
+import Icon from '../../../images/Icon'
+import { AccountFormValues } from '../../../models/account'
+import { Invitation } from '../../../models/invitation'
 import { v4 as uuid } from 'uuid'
 import nodemailer from 'nodemailer';
 

@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import { Button, Grid, Dropdown, Input, TextArea } from 'semantic-ui-react'
 import { Formik, Form, ErrorMessage, Field } from 'formik'
-import { useStore } from '../../stores/store'
+import { useStore } from '../../../stores/store'
 import { observer } from 'mobx-react-lite'
-import { Project } from '../../models/project'
-import { Assignee } from '../../models/assignee'
-import { IssueAssignee } from '../../models/issueAssignee'
+import { Project } from '../../../models/project'
+import { Assignee } from '../../../models/assignee'
+import { IssueAssignee } from '../../../models/issueAssignee'
 import * as Yup from 'yup'
-import { HoverDiv } from './Styles'
-import { StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../filters/Styles'
-import { InvisibleTextInput, StyledInput } from '../../shared/form/Styles'
+import { HoverDiv } from '../Styles'
+import { StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../../filters/Styles'
+import { InvisibleTextInput, StyledInput } from '../../../shared/form/Styles'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import parse from 'html-react-parser'
-import Icon from '../../images/Icon/index'
-import { StyledLabel } from './Styles'
+import Icon from '../../../images/Icon/index'
+import { StyledLabel } from '../Styles'
 import 'quill-mention/dist/quill.mention.css'
 import 'quill-mention'
-import './Styles.css';
+import '../Styles.css';
 import moment from 'moment'
 
 export default observer(function NewUpdateIssueForm() {
@@ -287,6 +287,7 @@ export default observer(function NewUpdateIssueForm() {
 
 
     return (
+        
         <div>
             <Formik
                 validationSchema={validationSchema}

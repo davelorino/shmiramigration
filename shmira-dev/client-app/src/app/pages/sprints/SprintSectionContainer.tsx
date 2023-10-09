@@ -10,12 +10,12 @@ import {
 } from './Styles'
 import Icon from '../../images/Icon'
 import BetterIcon from '../../images/BetterIcon'
-import SprintDashboardIssue from '../lists/list/Issue/SprintDashboardIssue'
+import SprintDashboardIssue from '../../features/lists/list/Issue/SprintDashboardIssue'
 import { Droppable } from 'react-beautiful-dnd'
-import SprintForm from '../forms/SprintForm'
-import AddDatesToSprintForm from '../forms/AddDatesToSprintForm'
-import ConfirmCloseSprintForm from '../forms/ConfirmCloseSprintForm'
-import NewCreateIssueForm from '../forms/NewCreateIssueForm'
+import SprintForm from '../../features/forms/Sprints/CreateSprintForm'
+import AddDatesToSprintForm from '../../features/forms/Sprints/AddDatesToSprintForm'
+import ConfirmCloseSprintForm from '../../features/forms/Sprints/ConfirmCloseSprintForm'
+import NewCreateIssueForm from '../../features/forms/Issues/CreateIssueForm/NewCreateIssueForm'
 import moment from 'moment'
 
 interface Props {

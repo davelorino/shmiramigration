@@ -9,7 +9,7 @@ import Icon from '../../../images/Icon'
 import SignUpButton from '../../../images/SignUpButton'
 import { GoogleLoginButton } from 'react-social-login-buttons'
 import { AccountFormValues } from '../../../models/account'
-import SignupForm from './SignupForm'
+import SignupForm from '../Accounts/SignupForm'
 
 export default observer(function LoginForm() {
     const { userStore, accountStore, issueStore } = useStore()

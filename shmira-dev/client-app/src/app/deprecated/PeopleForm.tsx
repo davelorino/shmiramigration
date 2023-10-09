@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Form } from 'formik'
 import { Select } from 'semantic-ui-react'
-import NewUserForm from './CreatePeopleForm'
-import GrantUserAccessForm from './GrantAccessToProjectForm'
+import NewUserForm from '../features/forms/Accounts/CreatePeopleForm'
+import GrantUserAccessForm from '../features/forms/Projects/GrantAccessToProjectForm'
 
 export default observer(function PeopleForm() {
     const peopleFormOptions = [

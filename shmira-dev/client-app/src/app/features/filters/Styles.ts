@@ -1,11 +1,64 @@
 import styled, { css } from 'styled-components'
 import { Input } from 'semantic-ui-react'
 import Avatar from 'react-avatar'
+import { FaChartLine } from 'react-icons/fa'
 
 export const SearchFilter = styled(Input)`
-    margin-left: 40px;
-    margin-bottom: 20px;
-    margin-right: 30px;
+    margin-left: 40px !important;
+    margin-bottom: 20px !important;
+    margin-right: 30px !important;
+`
+
+export const SearchTextInput = styled(Input)`
+    margin-left: 10px !important; 
+    margin-right: 20px !important;
+`
+
+export const LinkToInsightsIcon = styled(FaChartLine)`
+    cursor: pointer !important;
+    color: #deebff !important;
+    float: right !important;
+    top: 10px !important;
+    display: inline-block !important;
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+    bottom: 0px !important;
+`
+
+export const OnlyMyIssuesFilter = styled.div`
+    cursor: pointer !important;
+    color: #deebff;
+    margin-left: 30px !important;
+    align-items: center !important;
+    padding-top: 15px !important;
+    display: inline-block !important;
+`
+
+export const ClearAllFilters = styled.div`
+    cursor: pointer;
+    color: #deebff;
+    margin-left: 15px;
+    align-items: center;
+    padding-top: 15px;
+    display: inline-block;
+`
+
+export const LinkToInsightsPage = styled.div`
+    margin-top: 18px;
+    margin-right: 10px;
+    float: right;
+    display: inline-block;
+`
+
+export const LinkToInsightsPageText = styled.p`
+    cursor: pointer;
+    color: #deebff;
+    float: right;
+    bottom: 5px;
+    margin-right: 8px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    display: inline-block;
 `
 
 interface IStyledAvatar {
