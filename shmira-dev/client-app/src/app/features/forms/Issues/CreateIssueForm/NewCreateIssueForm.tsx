@@ -27,6 +27,7 @@ import IssueDescription from './Subcomponents/IssueDescription'
 import SelectedIssueType from './Subcomponents/SelectedIssueType'
 import CommentInput from './Subcomponents/CommentInput'
 import IssueReporter from './Subcomponents/IssueReporter'
+import IssueStatus from './Subcomponents/IssueStatus'
 
 // Constants
 import { IssueTypeOptions } from './Constants/IssueTypeOptions'
@@ -128,56 +129,7 @@ export default observer(function NewCreateIssueForm() {
     }
 
 
-    const formatProjectReporters = ( projectReporters: Assignee[], selectedReporter: string ) => {
-        var unassigned_reporters: string[] = []
-        var all_assignee_ids: string[] = []
-        var assigned_reporter: string
 
-        projectReporters.map((reporter) => {
-            all_assignee_ids.push(reporter.id)
-        })
-
-        assigned_reporter = selectedReporter
-
-        all_assignee_ids.map((assignee_id) => {
-            if (assignee_id !== assigned_reporter) {
-                unassigned_reporters.push(assignee_id)
-            }
-        })
-
-        var assignees_to_display: Assignee[] = []
-
-        projectReporters.map((pr) => {
-            if (unassigned_reporters.includes(pr.id)) {
-                assignees_to_display.push(pr)
-            }
-        })
-
-        return assignees_to_display!.map((project_assignee, index) => ({
-            key: project_assignee.id,
-            value: project_assignee.id,
-            text: getAssigneeFullName(project_assignee),
-            content: (
-                <HoverDiv onClick={() => addReporterToIssue(project_assignee.id)} className='assignee_reporter_label'>
-                    <AvatarIsActiveLabelBorder isActive={false} index={index}>
-                        <StyledLabelAvatar value={project_assignee.id} size="20" round="20px" 
-                            name={getAssigneeFullName(project_assignee)} 
-                            src={getAssigneePhotoUrl(project_assignee)}
-                        />
-                    </AvatarIsActiveLabelBorder>
-                    {getAssigneeFullName(project_assignee)}
-                </HoverDiv>
-            ),
-        }))
-    }
-
-    function getAssigneePhotoUrl(project_assignee: Assignee) {
-        return selectedProject!.assignees.find((assignee) => assignee.id === project_assignee.id)!.photo?.url
-    }
-
-    function getAssigneeFullName(project_assignee: Assignee) {
-        return project_assignee.first_name.concat(' ', project_assignee.second_name)
-    }
 
     const reformatSprintOptions = (allSprints: Sprint[]) =>
         selectedProject!.sprints.map((sprint) => ({
@@ -373,17 +325,13 @@ export default observer(function NewCreateIssueForm() {
                     
         {/* STATUS */}
 
-                                <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '99', paddingBottom: '8px'},...(isStatusHovered ? hoveredStyle : {})}}
-                                    onMouseEnter={() => setIsStatusHovered(true)}
-                                    onMouseLeave={() => setIsStatusHovered(false)}
-                                >
-                                    <h5 style={{ marginBottom: '5px', paddingBottom: '5px', paddingLeft: '20px',paddingTop: '10px',}}>Status</h5>
-                                    <hr style={{border: '1px solid white',width: '100%'}}/>
-                                    <div style={{marginLeft: '20px'}}>
-                                    <Label style={{marginRight: '0px'}}>{selectedIssueStatus}</Label>
-                                    <Dropdown downward multiple closeOnChange placeholder="" value="" label="Status" name="status" options={IssueStatusOptions({setSelectedIssueStatus, selectedIssueStatus})} style={{position: 'relative',zIndex: '99', marginLeft: '-15px', paddingRight: '10px'}}/>
-                                    </div>
-                                </div>
+                                <IssueStatus 
+                                    isStatusHovered
+                                    setIsStatusHovered
+                                    selectedIssueStatus
+                                    setSelectedIssueStatus 
+                                    projectAssignees={selectedProject!.assignees}
+                                />
                     
         {/* ASSIGNEES LABELS */}
 
@@ -434,49 +382,8 @@ export default observer(function NewCreateIssueForm() {
                                     project_assignees={selectedProject!.assignees}
                                     account_id={commonStore!.account_id!}
                                 />
-                                {/*
-                                <div style={{ marginTop: '20px' }} />
-                                <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '90'}, ...(isReporterHovered ? hoveredStyle : {})}}
-                                    onMouseEnter={() => setIsReporterHovered(true)}
-                                    onMouseLeave={() => setIsReporterHovered(false)}
-                                >
-                                    <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>Reporter</h5>
-                                    <hr style={{border: '1px solid white', width: '100%'}}/>
-
-                                    {selectedReporter !== null && selectedReporter.length !== 0 && (
-                                        <div style={{ marginLeft: '20px' }} >
-                                            <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}}>
-                                                <AvatarIsActiveLabelBorder isActive={false} index={1}>
-                                                    <StyledLabelAvatar value={selectedReporter} size="20" round="20px"
-                                                        src={selectedProject!.assignees.find((assignee) => assignee.id === selectedReporter)!.photo?.url}
-                                                        name={selectedProject!.assignees
-                                                            .find((assignee) => assignee.id === selectedReporter)!.first_name
-                                                            .concat(' ', selectedProject!.assignees
-                                                            .find((assignee) => assignee.id === selectedReporter)!.second_name)}
-                                                    />
-                                                </AvatarIsActiveLabelBorder>
-
-                                                {selectedProject!.assignees
-                                                    .find((assignee) => assignee.id === selectedReporter)!.first_name
-                                                    .concat(' ', selectedProject!.assignees
-                                                    .find((assignee) => assignee.id === selectedReporter)!.second_name)
-                                                }
-
-                                                <Icon style={{ marginLeft: '10px' }} type="close"/>
-                                            </StyledLabel>
-                                        </div>
-                                    )}
-
-        
-
-                                    <div style={{marginLeft: '20px'}}>
-                                    <Dropdown downward multiple closeOnChange placeholder="Select reporter" value="" style={{zIndex: '99'}} label="Assign" name="reporter"
-                                        options={formatProjectReporters(selectedProject!.assignees, selectedReporter)}
-                                    />
-                                    </div>
-                                </div>
-                            */}
-                            <br />
+                                
+                                <br />
         {/* ESTIMATED DURATION */}
                             <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '1'}, ...(isEstimatedDurationHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsEstimatedDurationHovered(true)} onMouseLeave={() => setIsEstimatedDurationHovered(false)}>
                                 <h5 style={{paddingTop: '10px', marginLeft: '20px', marginBottom: '5px', paddingBottom: '5px'}}>Estimated Duration</h5>

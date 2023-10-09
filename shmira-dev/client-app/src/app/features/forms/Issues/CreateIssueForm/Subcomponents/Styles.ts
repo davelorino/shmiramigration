@@ -76,3 +76,17 @@ export const divStyles = {
     paddingBottom: '5px',
     filter: 'brightness(130%)'
 }
+
+export const IssueStatusDropdown = styled(Dropdown)`
+    position: relative;
+    zIndex: 99;
+    margin-left: -15px;
+    padding-right: 10px;
+`
+
+export const StatusHeading = styled.h5`
+    margin-bottom: 5px; 
+    padding-bottom: 5px; 
+    padding-left: 20px;
+    padding-top: 10px;
+`
