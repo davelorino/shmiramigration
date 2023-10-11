@@ -24,21 +24,51 @@ import IssuePriorityIcon from '../../../../images/IssuePriorityIcon'
 import IssueTypeIcon from '../../../../images/IssueTypeIcon'
 import { StyledLabel } from '../../Styles'
 import { HoverDiv } from '../../Styles'
-import UpdateIssueFormTrackingWidget from '../UpdateIssueFormTimeTrackingWidget'
+import UpdateIssueFormTrackingWidget from '../Subcomponents/UpdateIssueFormTimeTrackingWidget'
 import moment from 'moment'
 import 'quill-mention/dist/quill.mention.css'
 import 'quill-mention'
 import { v4 as uuid } from 'uuid'
 import './Styles.css'
 
+// NEW IMPORTS 
+import './Styles.css'
+
+// Utils
+import { 
+    getAssigneePhoto, 
+    getAssigneeName, 
+    submitComment,
+    addAssigneeToIssue,
+    addReporterToIssue,
+    removeAssigneeFromIssue,
+    changeIssueType
+} from '../Utils/utils'
+
+// Subcomponents 
+import IssueTypeSelector from '../Subcomponents/IssueTypeSelector'
+import IssueTitle from '../Subcomponents/IssueTitle'
+import IssueDescription from '../Subcomponents/IssueDescription'
+import SelectedIssueType from '../Subcomponents/SelectedIssueType'
+import CommentInput from '../Subcomponents/CommentInput'
+import IssueReporter from '../Subcomponents/IssueReporter'
+import IssueAssignee from '../Subcomponents/IssueAssignee'
+import IssueStatus from '../Subcomponents/IssueStatus'
+import EstimatedDurationInput from '../Subcomponents/EstimatedDuration'
+import LogTimeInput from '../Subcomponents/LogTime'
+import SprintSelector from '../Subcomponents/SprintSelector'
+import IssuePriority from '../Subcomponents/IssuePriority'
+
+// Constants
+import { IssueTypeOptions } from '../Constants/IssueTypeOptions'
+import { IssueTypeOptions2 } from '../Constants/IssueTypeOptions'
+import { IssueAssignees } from '../Constants/IssueAssignees'
+import { IssueReporters } from '../Constants/IssueReporters'
+import { SprintOptions } from '../Constants/SprintOptions'
+
 export default observer(function NewUpdateIssueForm() {
     const { issueStore, userStore, commonStore } = useStore()
-    const {
-        selectedIssue,
-        selectedProject,
-        updateIssue,
-        updateIssueAndSprint,
-    } = issueStore
+    const { selectedIssue, selectedProject, updateIssue, updateIssueAndSprint } = issueStore
 
     const { allUsers } = userStore
 
@@ -75,14 +105,10 @@ export default observer(function NewUpdateIssueForm() {
     var [log_time_edit_state, setLogTimeEditState] = useState(false)
     var [selectedIssueLoggedDays, setSelectedIssueLoggedDays] = useState(0)
     var [selectedIssueLoggedHours, setSelectedIssueLoggedHours] = useState(0)
-    var [selectedIssueLoggedMinutes, setSelectedIssueLoggedMinutes] =
-        useState(0)
-    var [selectedIssueRemainingDays, setSelectedIssueRemainingDays] =
-        useState(0)
-    var [selectedIssueRemainingHours, setSelectedIssueRemainingHours] =
-        useState(0)
-    var [selectedIssueRemainingMinutes, setSelectedIssueRemainingMinutes] =
-        useState(0)
+    var [selectedIssueLoggedMinutes, setSelectedIssueLoggedMinutes] = useState(0)
+    var [selectedIssueRemainingDays, setSelectedIssueRemainingDays] = useState(0)
+    var [selectedIssueRemainingHours, setSelectedIssueRemainingHours] = useState(0)
+    var [selectedIssueRemainingMinutes, setSelectedIssueRemainingMinutes] = useState(0)
     var [comment_edit_state, setCommentEditState] = useState(false)
     var [comment_state, setCommentState] = useState('')
     const [commentHoveredIndex, setCommentHoveredIndex] = useState(99) // To track which div is hovered
@@ -356,6 +382,7 @@ export default observer(function NewUpdateIssueForm() {
         )
     }
 
+        /*
     const issueTypeOptions = [
         {
             key: '0',
@@ -428,6 +455,7 @@ export default observer(function NewUpdateIssueForm() {
             ),
         },
     ]
+    */
 
     function renderSelectedIssueType() {
         if (selectedIssue!.issue_type == 'Story') {
@@ -634,6 +662,7 @@ export default observer(function NewUpdateIssueForm() {
         updateIssue(updatedIssue)
     }
 
+    /*
     const changeIssueType = (issue_type: string) => {
         var current_issue: Partial<Issue> = {
             ...selectedIssue!,
@@ -653,6 +682,7 @@ export default observer(function NewUpdateIssueForm() {
 
         updateIssue(updatedIssue)
     }
+    */
 
     const removeReporterFromIssue = (user_id: string) => {
         selectedIssue!.reporter_id = ''
@@ -1032,22 +1062,16 @@ export default observer(function NewUpdateIssueForm() {
 
     return (
         <div>
-            <Formik
-                validationSchema={validationSchema}
-                enableReinitialize
-                initialValues={issue}
-                onSubmit={(values) => console.log(values)}
-            >
-                {({ handleSubmit, isValid, isSubmitting, dirty }) => (
-                    <Form
-                        className="ui form"
-                        onSubmit={handleSubmit}
-                        autoComplete="off"
-                    >
+            <Formik enableReinitialize initialValues={issue} onSubmit={(values) => console.log(values)}>
+                {({ handleSubmit }) => (
+                    <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
                         <Grid>
                             <Grid.Column width={10}>
-                                {renderSelectedIssueType()}
+                                
+                                {/*renderSelectedIssueType()}*/}
 
+                                <SelectedIssueType selectedIssueType={selectedIssue!.issue_type}/>
+                                
                                 <div style={{ display: 'inline-block' }}>
                                     <Dropdown
                                         downward
@@ -1057,7 +1081,7 @@ export default observer(function NewUpdateIssueForm() {
                                         value=""
                                         label="Status"
                                         name="status"
-                                        options={issueTypeOptions}
+                                        options={IssueTypeOptions2({mode: "update", selectedIssue, changeIssueType, updateIssue })}
                                         style={{
                                             color: '#FFFFFF',
                                             marginTop: '15px',
@@ -1066,6 +1090,9 @@ export default observer(function NewUpdateIssueForm() {
                                         //onChange={(e) => handleChangeAssignees(e)}
                                     />
                                 </div>
+                                    
+
+
                                 {!issue_title_edit_state && (
                                     <InvisibleTextInput
                                         style={{

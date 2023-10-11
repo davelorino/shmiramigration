@@ -1,17 +1,18 @@
-import { Assignee } from '../../../../../models/assignee'
-import { Project } from '../../../../../models/project'
-import { HoverDiv } from '../../../Styles'
-import { StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../../../../filters/Styles'
-import '../Styles.css'
+import { Assignee } from '../../../../models/assignee'
+import { Project } from '../../../../models/project'
+import { HoverDiv } from '../../Styles'
+import { StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../../../filters/Styles'
+import './Styles.css'
 
 interface Props {
     projectAssignees: Assignee[]
-    selectedAssignees: any | undefined
+    selectedAssignees: string[]
+    setSelectedAssignees: any
     addAssigneeToIssue: any
     selectedProject: Project | undefined
 }
 
-export const IssueAssignees = ({ projectAssignees, selectedAssignees, addAssigneeToIssue, selectedProject }: Props ) => {
+export const IssueAssignees = ({ projectAssignees, selectedAssignees, setSelectedAssignees, addAssigneeToIssue, selectedProject }: Props ) => {
     var unassigned_assignees: string[] = []
     var all_assignee_ids: string[] = []
     var assigned_assignees: string[] = []
@@ -42,7 +43,7 @@ export const IssueAssignees = ({ projectAssignees, selectedAssignees, addAssigne
         value: project_assignee.id,
         text: project_assignee.first_name.concat(' ', project_assignee.second_name),
         content: (
-            <HoverDiv className='assignee_reporter_label' onClick={() => addAssigneeToIssue(project_assignee.id)}>
+            <HoverDiv className='assignee_reporter_label' onClick={() => addAssigneeToIssue(project_assignee.id, selectedAssignees, setSelectedAssignees)}>
                 <AvatarIsActiveLabelBorder isActive={false} index={index}>
                     <StyledLabelAvatar
                         value={project_assignee.id}

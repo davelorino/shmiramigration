@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { Assignee } from '../../../../../models/assignee'
+import { Assignee } from '../../../../models/assignee'
 import { Label, Dropdown } from 'semantic-ui-react'
 import { IssueStatusOptions } from '../Constants/IssueStatusOptions'
 import {     
@@ -15,7 +15,7 @@ import './Styles.css'
 interface Props {
     isStatusHovered: boolean
     setIsStatusHovered: any 
-    selectedIssueStatus: boolean
+    selectedIssueStatus: string
     setSelectedIssueStatus: any
     projectAssignees: Assignee[]
 }

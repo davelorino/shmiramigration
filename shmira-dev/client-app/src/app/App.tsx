@@ -21,6 +21,7 @@ import ActivateAccountForm from './features/forms/Login/ActivateAccountForm'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../darkmode.css'
+import "./Styles.css"
 
 function App() {
     const { issueStore, commonStore, accountStore } = useStore()

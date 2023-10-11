@@ -13,6 +13,7 @@ import {
     LinkToInsightsPageText,
     LinkToInsightsIcon
 } from './Styles'
+import '../../Styles.css'
 
 export default observer(function ProjectBoardFilters() {
     const { issueStore, commonStore } = useStore();

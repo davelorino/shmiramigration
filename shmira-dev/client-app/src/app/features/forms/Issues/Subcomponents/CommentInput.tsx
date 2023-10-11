@@ -1,11 +1,10 @@
 import { observer } from 'mobx-react-lite'
-import { Assignee } from '../../../../../models/assignee'
+import { Assignee } from '../../../../models/assignee'
 import { TextArea } from 'semantic-ui-react'
 import { CommentInputOuterContainer, SubmitCommentContainerOnCreateIssueForm } from './Styles'
 import './Styles.css'
-import { StyledAvatar, StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../../../../filters/Styles'
+import { StyledAvatar } from '../../../filters/Styles'
 import { Button } from 'semantic-ui-react'
-import { submitComment } from '../Utils/utils'
 
 interface Props {
     getAssigneePhoto: any
@@ -31,9 +30,10 @@ export default observer(function CommentInput({
             <h5 style={{cursor: 'not-allowed'}}>Comments</h5>
             <div style={{ display: 'inline-block' }}>
                 <StyledAvatar style={{ paddingTop: '12px', cursor: 'not-allowed' }} size="30" round="16px"
-                    src={getAssigneePhoto({project_assignees, account_id})}
-                    name={getAssigneeName({ project_assignees, account_id })}
+                    src={getAssigneePhoto({project_assignees, id: account_id, account_type: ""})}
+                    name={getAssigneeName({ project_assignees, id: account_id, account_type: "" })}
                 />
+                
             </div>
             <div style={{cursor: 'not-allowed', display: 'inline-block', paddingLeft: '15px', width: '95%'}}>
                 <TextArea 

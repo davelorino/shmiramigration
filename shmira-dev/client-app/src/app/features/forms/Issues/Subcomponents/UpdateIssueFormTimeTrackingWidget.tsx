@@ -5,9 +5,9 @@ import {
     BarCont,
     Bar,
     Values,
-} from '../Styles'
+} from '../../Styles'
 import { observer } from 'mobx-react-lite'
-import { useStore } from '../../../stores/store'
+import { useStore } from '../../../../stores/store'
 
 function convertTimespanToMinutes(timespan: string) {
     if (timespan == '00:00:00') {

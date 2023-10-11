@@ -1,12 +1,13 @@
-import IssuePriorityIcon from '../../../../../images/IssuePriorityIcon'
-import { StyledLabel } from '../../../Styles'
+import IssuePriorityIcon from '../../../../images/IssuePriorityIcon'
+import { StyledLabel } from '../../Styles'
 
 
 interface Props {
     setSelectedIssuePriority: any
+    selectedIssuePriority: string
 }
 
-export const IssuePriorityOptions = ( { setSelectedIssuePriority }: Props ) => {
+export const IssuePriorityOptions = ( { setSelectedIssuePriority, selectedIssuePriority }: Props ) => {
     return(
         [
             {

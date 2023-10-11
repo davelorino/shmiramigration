@@ -424,6 +424,7 @@ export default class IssueStore {
             )!,
         }
         delete issue_to_update['assignees']
+        delete issue_to_update['comments']
         issue_to_update.updated_at = moment
             .tz(moment(), 'Australia/Sydney')
             .toISOString(true)
@@ -476,6 +477,7 @@ export default class IssueStore {
             )!,
         }
         delete issue_to_update['assignees']
+        delete issue_to_update['comments']
         issue_to_update.updated_at = moment
             .tz(moment(), 'Australia/Sydney')
             .toISOString(true)

@@ -70,6 +70,7 @@ export const StyledAvatar = styled(Avatar)`
         //transform: translateY(-3px);
     }
     cursor: pointer;
+    filter: brightness(80%);
     //margin-left: -6px;
 `
 
@@ -78,6 +79,7 @@ export const StyledLabelAvatar = styled(Avatar)`
         //transform: translateY(-3px);
     }
     cursor: pointer;
+    filter: brightness(85%);
     margin-right: 12px;
     //margin-left: -6px;
 `

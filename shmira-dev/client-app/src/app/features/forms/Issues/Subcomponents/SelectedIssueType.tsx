@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import './Styles.css'
-import { StyledLabel } from '../../../Styles'
-import IssueTypeIcon from '../../../../../images/IssueTypeIcon'
+import { StyledLabel } from '../../Styles'
+import IssueTypeIcon from '../../../../images/IssueTypeIcon'
 
 interface Props {
     selectedIssueType: string | undefined

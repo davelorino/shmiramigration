@@ -1,20 +1,20 @@
-import { Assignee } from '../../../../../models/assignee'
-import { HoverDiv } from '../../../Styles'
-import { StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../../../../filters/Styles'
+import { Assignee } from '../../../../models/assignee'
+import { HoverDiv } from '../../Styles'
+import { StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../../../filters/Styles'
 import './Styles.css'
 import { 
-    addReporterToIssue,
     getAssigneeFullName, 
     getAssigneePhotoUrl
 } from '../Utils/utils'
 
 interface Props {
     projectReporters: Assignee[]
-    selectedReporter: any | undefined
+    selectedReporter: string
     setSelectedReporter: any
+    addReporterToIssue: any
 }
 
-export const IssueReporters = ({ projectReporters, selectedReporter, setSelectedReporter }: Props ) => {
+export const IssueReporters = ({ projectReporters, selectedReporter, setSelectedReporter, addReporterToIssue }: Props ) => {
 
 
     var unassigned_reporters: string[] = []
@@ -46,7 +46,7 @@ export const IssueReporters = ({ projectReporters, selectedReporter, setSelected
         value: project_assignee.id,
         text: getAssigneeFullName(project_assignee),
         content: (
-            <HoverDiv onClick={() => addReporterToIssue(project_assignee.id, setSelectedReporter, selectedReporter)} className='assignee_reporter_label'>
+            <HoverDiv onClick={() => addReporterToIssue(project_assignee.id, selectedReporter, setSelectedReporter)} className='assignee_reporter_label'>
                 <AvatarIsActiveLabelBorder isActive={false} index={index}>
                     <StyledLabelAvatar value={project_assignee.id} size="20" round="20px" 
                         name={getAssigneeFullName(project_assignee)} 

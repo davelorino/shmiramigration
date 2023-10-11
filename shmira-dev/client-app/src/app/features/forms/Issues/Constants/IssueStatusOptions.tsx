@@ -1,7 +1,7 @@
 
-import { HoverDiv } from '../../../Styles'
+import { HoverDiv } from '../../Styles'
 import { Label } from 'semantic-ui-react'
-import IssueTypeIcon from '../../../../../images/IssueTypeIcon'
+import IssueTypeIcon from '../../../../images/IssueTypeIcon'
 
 interface Props {
     setSelectedIssueStatus: any

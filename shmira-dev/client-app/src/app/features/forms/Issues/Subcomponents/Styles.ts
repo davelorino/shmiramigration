@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Segment, Button, Label, Grid, Dropdown, TextArea } from 'semantic-ui-react'
-import { InvisibleTextInput, StyledInput } from '../../../../../shared/form/Styles'
+import { InvisibleTextInput, StyledInput } from '../../../../shared/form/Styles'
 import ReactQuill from 'react-quill'
 
 export const IssueTypeContainer = styled.div`

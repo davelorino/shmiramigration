@@ -2,7 +2,7 @@
 import { observer } from 'mobx-react-lite'
 import { IssueTypeDropdownSelector } from './Styles'
 import './Styles.css'
-import { InvisibleTextInput, StyledInput } from '../../../../../shared/form/Styles'
+import { InvisibleTextInput, StyledInput } from '../../../../shared/form/Styles'
 
 interface Props {
     issue_title_edit_state: boolean
