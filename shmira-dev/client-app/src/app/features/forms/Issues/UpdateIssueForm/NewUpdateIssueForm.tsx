@@ -186,6 +186,7 @@ export default observer(function NewUpdateIssueForm() {
         return estimated_duration
     }
 
+    /*
     const formatProjectAssignees = (projectAssignees: Assignee[], issue: Issue) => {
         var unassigned_assignees: string[] = []
         var all_assignee_ids: string[] = []
@@ -257,6 +258,7 @@ export default observer(function NewUpdateIssueForm() {
             ),
         }))
     }
+    */
 
     const formatProjectReporters = (
         projectReporters: Assignee[],
@@ -769,7 +771,7 @@ export default observer(function NewUpdateIssueForm() {
 
         issueStore.removeAssigneeFromIssue(issue_assignee_to_remove)
     }
-
+    /*
     const addAssigneeToIssue = (assignee_id: string) => {
         var assignee_to_add = allUsers.find(
             (assignee) =>
@@ -790,6 +792,7 @@ export default observer(function NewUpdateIssueForm() {
 
         issueStore.addAssigneeToIssue(issue_assignee_to_add)
     }
+    */
 
     const updateIssueTitle = () => {
         var current_issue: Partial<Issue> = {
@@ -1071,7 +1074,7 @@ export default observer(function NewUpdateIssueForm() {
                                 {/*renderSelectedIssueType()}*/}
 
                                 <SelectedIssueType selectedIssueType={selectedIssue!.issue_type}/>
-                                
+                                <IssueTypeSelector issueTypeOptions={IssueTypeOptions2({mode: "update", selectedIssue, changeIssueType, updateIssue })} />
                                 <div style={{ display: 'inline-block' }}>
                                     <Dropdown
                                         downward
@@ -1309,9 +1312,25 @@ export default observer(function NewUpdateIssueForm() {
                                     
                                 </div>
                                 
+                                <IssueAssignee 
+                                    mode="update"
+                                    isAssigneeHovered={isAssigneeHovered}
+                                    setIsAssigneeHovered={setIsAssigneeHovered}
+                                    selectedAssignees={selectedAssignees!}
+                                    setSelectedAssignees={setSelectedAssignees}
+                                    project_assignees={selectedProject!.assignees}
+                                    account_id={commonStore.account_id!}
+                                    removeAssigneeFromIssue={removeAssigneeFromIssue}
+                                    addAssigneeToIssue={addAssigneeToIssue}
+                                    IssueAssignees={IssueAssignees}
+                                    selectedProject={selectedProject!}  
+                                    selectedIssue={selectedIssue!}
+                                    />
+                                
+                                {/*
                                 <div style={{ marginBottom: '20px' }} />
 
-                                {/* ASSIGNEES */}
+                                
                                 <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '98',},...(isAssigneeHovered ? hoveredStyle : {})}}
                                     onMouseEnter={() => setIsAssigneeHovered(true)}
                                     onMouseLeave={() => setIsAssigneeHovered(false)}
@@ -1333,7 +1352,7 @@ export default observer(function NewUpdateIssueForm() {
                                             </div>
                                         )
                                     )}
-                                    {/* Assignee Dropdown */}
+                                    //Assignees Dropdown
                                     <div style={{marginLeft: '20px'}}>
                                     {selectedIssue?.assignees.length !== selectedProject!.assignees.length &&
                                         <Dropdown multiple 
@@ -1345,7 +1364,7 @@ export default observer(function NewUpdateIssueForm() {
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '20px' }} />
-
+                                */}
                                 {/* REPORTER */}
                                 <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '90'}, ...(isReporterHovered ? hoveredStyle : {})}}
                                     onMouseEnter={() => setIsReporterHovered(true)}

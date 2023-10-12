@@ -75,20 +75,62 @@ export function addReporterToIssue (assignee_id: string, selectedReporter: strin
     }
 }
 
+interface CreateAddAssigneeToIssueProps {
+    mode: "create"
+    assignee_id: string 
+    selectedAssignees: Assignee[] 
+    setSelectedAssignees: any
+}
 
-export const addAssigneeToIssue = (assignee_id: string, selectedAssignees: string[], setSelectedAssignees: any) => {
-    var assignees_to_set: string[] = []
+interface UpdateAddAssigneeToIssueProps {
+    mode: "update"
+    assignee_id: string 
+    selectedAssignees: Assignee[] 
+    selectedIssue: Issue
+    addAssigneeToIssue: any
+    allUsers: any
+}
 
-    if (selectedAssignees.length > 0) {
-        selectedAssignees.map((assignee_id) => {
-            assignees_to_set.push(assignee_id)
-        })
+type AddAssigneeToIssueProps = CreateAddAssigneeToIssueProps | UpdateAddAssigneeToIssueProps;
+
+export const addAssigneeToIssue = (props: AddAssigneeToIssueProps) => {
+    
+    if(props.mode === "create"){
+        var assignees_to_set: string[] = []
+
+        if (props.selectedAssignees.length > 0) {
+            props.selectedAssignees.map((assignee_id) => {
+                assignees_to_set.push(props.assignee_id)
+            })
+        }
+
+        if (!assignees_to_set.includes(props.assignee_id)) {
+            assignees_to_set.push(props.assignee_id)
+        }
+        props.setSelectedAssignees(assignees_to_set)
     }
+    if(props.mode === "update") 
+    {
+        var assignees_to_set: string[] = []
 
-    if (!assignees_to_set.includes(assignee_id)) {
-        assignees_to_set.push(assignee_id)
+        var assignee_to_add = props.allUsers.find(
+            (assignee: Assignee) =>
+                assignee.id.toString().toLowerCase() ===
+                props.assignee_id.toLowerCase()
+        )
+
+        props.selectedIssue!.assignees.push(assignee_to_add!)
+
+        props.selectedIssue!.updated_at = moment
+            .tz(moment(), 'Australia/Sydney')
+            .toISOString(true)
+
+        var issue_assignee_to_add = {
+            AssigneeId: props.assignee_id,
+            IssueId: props.selectedIssue!.id,
+        }
+        props.addAssigneeToIssue(issue_assignee_to_add)
     }
-    setSelectedAssignees(assignees_to_set)
 }
 
 
@@ -124,7 +166,7 @@ export const changeIssueType = (
     selectedIssue!.updated_at = moment
         .tz(moment(), 'Australia/Sydney')
         .toISOString(true)
-    console.log("Issue to update:")
+    console.log("Changing issue type")
     console.log(updatedIssue)
     updateIssue(updatedIssue)
 }

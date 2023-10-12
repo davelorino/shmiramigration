@@ -263,6 +263,7 @@ export default observer(function NewCreateIssueForm() {
                     
         {/* ASSIGNEES LABELS */}
                                 <IssueAssignee 
+                                    mode="create"
                                     isAssigneeHovered={isAssigneeHovered}
                                     setIsAssigneeHovered={setIsAssigneeHovered}
                                     selectedAssignees={selectedAssignees}
