@@ -736,8 +736,6 @@ export default class IssueStore {
                 .tz(moment(), 'Australia/Sydney')
                 .toISOString(true),
         }
-        delete issueToSend['assignees']
-        delete issueToSend['comments']
         try {
             await agent.Issues.update(issueToSend)
             await this.loadProject(this.selectedProject!.id)

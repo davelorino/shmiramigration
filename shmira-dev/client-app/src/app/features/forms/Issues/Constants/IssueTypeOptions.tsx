@@ -80,7 +80,7 @@ interface CreateIssueProps {
                 value: 'Story',
                 text: 'Story',
                 content: (
-                    <HoverDiv className='assignee_reporter_label' onClick={() => props.changeIssueType(props.selectedIssue!, 'Story', updateIssue)}>
+                    <HoverDiv className='assignee_reporter_label' onClick={() => {props.selectedIssue!.issue_type = 'Story'; props.changeIssueType(props.selectedIssue!, 'Story', updateIssue);}}>
                         <IssueTypeIcon color="#65BA43 !important" type="story" size={14}/>
                         <div className='issue_icon'>Story</div>
                     </HoverDiv>
@@ -91,7 +91,7 @@ interface CreateIssueProps {
                 value: 'Bug',
                 text: 'Bug',
                 content: (
-                    <HoverDiv className='assignee_reporter_label' onClick={() => props.changeIssueType(props.selectedIssue!, 'Bug', updateIssue)}>
+                    <HoverDiv className='assignee_reporter_label' onClick={() => {props.selectedIssue!.issue_type = 'Bug'; props.changeIssueType(props.selectedIssue!, 'Bug', updateIssue);}}>
                         <IssueTypeIcon color="#E44D42" type="bug" size={14} />
                         <div className='issue_icon'>
                             Bug
@@ -104,7 +104,7 @@ interface CreateIssueProps {
                 value: 'Task',
                 text: 'Task',
                 content: (
-                    <HoverDiv className='assignee_reporter_label' onClick={() => props.changeIssueType(props.selectedIssue!, 'Task', updateIssue)}>
+                    <HoverDiv className='assignee_reporter_label' onClick={() => {props.selectedIssue!.issue_type = 'Task'; props.changeIssueType(props.selectedIssue!, 'Task', updateIssue)}}>
                         <IssueTypeIcon color="#4FADE6 !important" type="task" size={14}/>
                         <div className='issue_icon'>
                             Task

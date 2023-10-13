@@ -151,23 +151,24 @@ export const changeIssueType = (
     issue_type: string,
     updateIssue: any
     ) => {
+
+    selectedIssue!.issue_type = issue_type
     var current_issue: Partial<Issue> = {
         ...selectedIssue!,
     }
 
     delete current_issue['assignees']
+    delete current_issue['comments']
 
     current_issue.issue_type = issue_type
 
     var updatedIssue: any = current_issue
 
-    selectedIssue!.issue_type = issue_type
-
     selectedIssue!.updated_at = moment
         .tz(moment(), 'Australia/Sydney')
         .toISOString(true)
-    console.log("Changing issue type")
-    console.log(updatedIssue)
+    //console.log("Changing issue type")
+    //console.log(updatedIssue)
     updateIssue(updatedIssue)
 }
 

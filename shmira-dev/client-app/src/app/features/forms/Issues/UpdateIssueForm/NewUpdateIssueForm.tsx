@@ -67,10 +67,9 @@ import { IssueReporters } from '../Constants/IssueReporters'
 import { SprintOptions } from '../Constants/SprintOptions'
 
 export default observer(function NewUpdateIssueForm() {
-    const { issueStore, userStore, commonStore } = useStore()
+    const { issueStore, commonStore } = useStore()
     const { selectedIssue, selectedProject, updateIssue, updateIssueAndSprint } = issueStore
 
-    const { allUsers } = userStore
 
     const initialState = selectedIssue ?? {
         id: '',
@@ -160,12 +159,6 @@ export default observer(function NewUpdateIssueForm() {
         input_minutes: any
     ) {
         var days, hours, minutes
-        console.log('Input days')
-        console.log(input_days)
-        console.log('Input hours')
-        console.log(input_hours)
-        console.log('Input minutes')
-        console.log(input_minutes)
         input_days === 0 ? (days = 0) : (days = input_days)
         input_hours === 0 ? (hours = 0) : (hours = input_hours)
         input_minutes === 0 ? (minutes = 0) : (minutes = input_minutes)
@@ -186,80 +179,7 @@ export default observer(function NewUpdateIssueForm() {
         return estimated_duration
     }
 
-    /*
-    const formatProjectAssignees = (projectAssignees: Assignee[], issue: Issue) => {
-        var unassigned_assignees: string[] = []
-        var all_assignee_ids: string[] = []
-        var assigned_assignees: string[] = []
-
-        projectAssignees.map((assignee) => {
-            all_assignee_ids.push(assignee.id)
-        })
-
-        issue.assignees.map((assignee) => {
-            assigned_assignees.push(assignee.id)
-        })
-
-        all_assignee_ids.map((assignee) => {
-            if (!assigned_assignees.includes(assignee))
-                unassigned_assignees.push(assignee)
-        })
-
-        var assignees_to_display: Assignee[] = []
-
-        projectAssignees.map((pa) => {
-            if (unassigned_assignees.includes(pa.id)) {
-                assignees_to_display.push(pa)
-            }
-        })
-
-        return assignees_to_display!.map((project_assignee, index) => ({
-            key: project_assignee.id,
-            value: project_assignee.id,
-            text: project_assignee.first_name.concat(
-                ' ',
-                project_assignee.second_name
-            ),
-            content: (
-                <HoverDiv
-                    style={{
-                        height: 33,
-                        fontSize: '12px', 
-                        marginLeft: '0px',
-                        marginRight: '4px',
-                        paddingLeft: '6px',
-                        paddingTop: '6px', 
-                        paddingBottom: '6px', 
-                        marginTop: '0px', 
-                        marginBottom: '0px',
-                        alignContent: 'center'
-                    }} 
-                    onClick={() => addAssigneeToIssue(project_assignee.id)}
-                >
-                    <AvatarIsActiveLabelBorder isActive={false} index={index}>
-                        <StyledLabelAvatar
-                            value={project_assignee.id}
-                            size="20"
-                            name={project_assignee.first_name.concat(
-                                ' ',
-                                project_assignee.second_name
-                            )}
-                            round="20px"
-                            src={project_assignee.photo?.url}
-                        />
-                    </AvatarIsActiveLabelBorder>
-                    <div style={{paddingTop: '5px', marginTop: '5px', display: 'inline'}}> 
-                    {project_assignee.first_name.concat(
-                        ' ',
-                        project_assignee.second_name
-                    )}
-                    </div>
-                </HoverDiv>
-            ),
-        }))
-    }
-    */
-
+   
     const formatProjectReporters = (
         projectReporters: Assignee[],
         issue: Issue
@@ -384,132 +304,6 @@ export default observer(function NewUpdateIssueForm() {
         )
     }
 
-        /*
-    const issueTypeOptions = [
-        {
-            key: '0',
-            value: 'Story',
-            text: 'Story',
-            content: (
-                <HoverDiv
-                    style={{ display: 'inline-block' }}
-                    onClick={() => changeIssueType('Story')}
-                >
-                    <IssueTypeIcon color="#65BA43" type="story" size={14} />
-                    <div
-                        style={{
-                            color: '#FFFFFF',
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                            marginRight: '0px',
-                        }}
-                    >
-                        Story
-                    </div>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '1',
-            value: 'Bug',
-            text: 'Bug',
-            content: (
-                <HoverDiv
-                    style={{ display: 'inline-block' }}
-                    onClick={() => changeIssueType('Bug')}
-                >
-                    <IssueTypeIcon color="#E44D42" type="bug" size={14} />
-                    <div
-                        style={{
-                            color: '#FFFFFF',
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Bug
-                    </div>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '2',
-            value: 'Task',
-            text: 'Task',
-            content: (
-                <HoverDiv
-                    style={{ display: 'inline-block' }}
-                    onClick={() => changeIssueType('Task')}
-                >
-                    <IssueTypeIcon color="#4FADE6" type="task" size={14} />
-                    <div
-                        style={{
-                            color: '#FFFFFF',
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Task
-                    </div>
-                </HoverDiv>
-            ),
-        },
-    ]
-    */
-
-    function renderSelectedIssueType() {
-        if (selectedIssue!.issue_type == 'Story') {
-            return (
-                <StyledLabel style={{ display: 'inline-block' }}>
-                    <IssueTypeIcon color="#65BA43" type="story" size={14} />
-                    <div
-                        style={{
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Story
-                    </div>
-                </StyledLabel>
-            )
-        }
-
-        if (selectedIssue!.issue_type == 'Bug') {
-            return (
-                <StyledLabel style={{ display: 'inline-block' }}>
-                    <IssueTypeIcon color="#E44D42" type="bug" size={14} />
-                    <div
-                        style={{
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Bug
-                    </div>
-                </StyledLabel>
-            )
-        }
-        if (selectedIssue!.issue_type == 'Task') {
-            return (
-                <StyledLabel style={{ display: 'inline-block' }}>
-                    <IssueTypeIcon color="#4FADE6" type="task" size={14} />
-                    <div
-                        style={{
-                            paddingLeft: '7px',
-                            alignContent: 'center',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Task
-                    </div>
-                </StyledLabel>
-            )
-        }
-    }
 
     const statusOptions = [
         {
@@ -1075,6 +869,7 @@ export default observer(function NewUpdateIssueForm() {
 
                                 <SelectedIssueType selectedIssueType={selectedIssue!.issue_type}/>
                                 <IssueTypeSelector issueTypeOptions={IssueTypeOptions2({mode: "update", selectedIssue, changeIssueType, updateIssue })} />
+                                {/*
                                 <div style={{ display: 'inline-block' }}>
                                     <Dropdown
                                         downward
@@ -1093,7 +888,7 @@ export default observer(function NewUpdateIssueForm() {
                                         //onChange={(e) => handleChangeAssignees(e)}
                                     />
                                 </div>
-                                    
+                                */}
 
 
                                 {!issue_title_edit_state && (

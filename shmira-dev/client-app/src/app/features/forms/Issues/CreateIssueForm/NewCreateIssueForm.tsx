@@ -32,7 +32,7 @@ import SprintSelector from '../Subcomponents/SprintSelector'
 import IssuePriority from '../Subcomponents/IssuePriority'
 
 // Constants
-import { IssueTypeOptions } from '../Constants/IssueTypeOptions'
+import { IssueTypeOptions2 } from '../Constants/IssueTypeOptions'
 import { IssueAssignees } from '../Constants/IssueAssignees'
 import { IssueReporters } from '../Constants/IssueReporters'
 import { SprintOptions } from '../Constants/SprintOptions'
@@ -214,7 +214,7 @@ export default observer(function NewCreateIssueForm() {
 
         {/* ISSUE TYPE SELECTOR - Task, Story, Bug */}
                                 <IssueTypeSelector 
-                                    issueTypeOptions={IssueTypeOptions({setSelectedIssueType, selectedIssueType})} 
+                                    issueTypeOptions={IssueTypeOptions2({mode: "create", setSelectedIssueType, selectedIssueType})} 
                                 />
 
         {/* ISSUE TITLE */}
