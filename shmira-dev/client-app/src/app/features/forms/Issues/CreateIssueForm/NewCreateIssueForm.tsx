@@ -218,7 +218,8 @@ export default observer(function NewCreateIssueForm() {
                                 />
 
         {/* ISSUE TITLE */}
-                                <IssueTitle 
+                                <IssueTitle
+                                    mode='create' 
                                     issue_title_edit_state={issue_title_edit_state} 
                                     setSelectedIssueName={setSelectedIssueName} 
                                     toggleIssueTitleEditor={toggleIssueTitleEditor} 

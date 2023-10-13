@@ -42,7 +42,8 @@ import {
     addAssigneeToIssue,
     addReporterToIssue,
     removeAssigneeFromIssue,
-    changeIssueType
+    changeIssueType,
+    updateIssueTitle
 } from '../Utils/utils'
 
 // Subcomponents 
@@ -458,27 +459,6 @@ export default observer(function NewUpdateIssueForm() {
         updateIssue(updatedIssue)
     }
 
-    /*
-    const changeIssueType = (issue_type: string) => {
-        var current_issue: Partial<Issue> = {
-            ...selectedIssue!,
-        }
-
-        delete current_issue['assignees']
-
-        current_issue.issue_type = issue_type
-
-        var updatedIssue: any = current_issue
-
-        selectedIssue!.issue_type = issue_type
-
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        updateIssue(updatedIssue)
-    }
-    */
 
     const removeReporterFromIssue = (user_id: string) => {
         selectedIssue!.reporter_id = ''
@@ -545,54 +525,7 @@ export default observer(function NewUpdateIssueForm() {
         issueStore.updateIssue(updated_issue)
     }
 
-    /*
-    const removeAssigneeFromIssue = (user_id: string) => {
-        selectedIssue!.assignees = selectedIssue!.assignees.filter(
-            (assignee) => assignee.id.toString().toLowerCase() !== user_id
-        )
-
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        var issue_assignee_to_remove = {
-            AssigneeId: user_id,
-            IssueId: selectedIssue!.id,
-        }
-
-        var updated_issue: any = {
-            ...selectedIssue!,
-        }
-
-        issueStore.removeAssigneeFromIssue(issue_assignee_to_remove)
-    }
-    */
-
-
-    const updateIssueTitle = () => {
-        var current_issue: Partial<Issue> = {
-            ...selectedIssue!,
-        }
-
-        delete current_issue['assignees']
-
-        if (issueTitle === '') {
-            toggleIssueTitleEditor(issue_title_edit_state)
-            return
-        }
-        current_issue.name = issueTitle
-
-        var updatedIssue: any = current_issue
-
-        selectedIssue!.name = issueTitle
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        updateIssue(updatedIssue)
-
-        toggleIssueTitleEditor(issue_title_edit_state)
-    }
+   
 
     const extractTimespanObject = (timespan: string) => {
         var days = timespan.substring(0, timespan.indexOf('.'))
@@ -726,10 +659,6 @@ export default observer(function NewUpdateIssueForm() {
         setIssueTitleEditState(!issue_title_edit_state)
     }
 
-    const handleChangeAssignees = (e: any) => {
-        setSelectedAssignees(e.target.value)
-    }
-
     const handleChangeReporter = (e: any) => {
         setSelectedReporter(e.target.value)
     }
@@ -832,11 +761,7 @@ export default observer(function NewUpdateIssueForm() {
         return time_span
     }
 
-    const handleLogTimeEditDivClick = () => {
-        if (log_time_edit_state === false) {
-            toggleLogTimeEditState
-        }
-    }
+
 
     return (
         <div>
@@ -846,68 +771,23 @@ export default observer(function NewUpdateIssueForm() {
                         <Grid>
                             <Grid.Column width={10}>
                                 
-                                {/*renderSelectedIssueType()}*/}
-
+            {/* ISSUE TYPE */}
                                 <SelectedIssueType selectedIssueType={selectedIssue!.issue_type}/>
-                                <IssueTypeSelector issueTypeOptions={IssueTypeOptions2({mode: "update", selectedIssue, changeIssueType, updateIssue })} />
-                                {/*
-                                <div style={{ display: 'inline-block' }}>
-                                    <Dropdown
-                                        downward
-                                        multiple
-                                        closeOnChange
-                                        placeholder=""
-                                        value=""
-                                        label="Status"
-                                        name="status"
-                                        options={IssueTypeOptions2({mode: "update", selectedIssue, changeIssueType, updateIssue })}
-                                        style={{
-                                            color: '#FFFFFF',
-                                            marginTop: '15px',
-                                            marginBottom: '5px',
-                                        }}
-                                        //onChange={(e) => handleChangeAssignees(e)}
-                                    />
-                                </div>
-                                */}
+                                <IssueTypeSelector 
+                                    issueTypeOptions={IssueTypeOptions2({mode: "update", selectedIssue, changeIssueType, updateIssue })} 
+                                />
 
-
-                                {!issue_title_edit_state && (
-                                    <InvisibleTextInput
-                                        style={{
-                                            cursor: 'pointer',
-                                            marginBottom: '5px',
-                                            marginTop: '5px',
-                                        }}
-                                        fontsize={17}
-                                        onClick={() =>
-                                            toggleIssueTitleEditor(
-                                                issue_title_edit_state
-                                            )
-                                        }
-                                    >
-                                        <h3
-                                            style={{
-                                                paddingTop: '15px',
-                                                paddingLeft: '5px',
-                                            }}
-                                        >
-                                            {selectedIssue!.name}
-                                        </h3>
-                                    </InvisibleTextInput>
-                                )}
-                                {issue_title_edit_state && (
-                                    <StyledInput
-                                        defaultValue={selectedIssue!.name}
-                                        autoFocus
-                                        onChange={(e: any) =>
-                                            setIssueTitleState(e.target.value)
-                                        }
-                                        onBlur={() => {
-                                            updateIssueTitle()
-                                        }}
-                                    />
-                                )}
+            {/* ISSUE TITLE */}                
+                                <IssueTitle
+                                    mode='update' 
+                                    issue_title_edit_state={issue_title_edit_state}
+                                    toggleIssueTitleEditor={toggleIssueTitleEditor}
+                                    issueTitle={issueTitle}
+                                    setIssueTitleState={setIssueTitleState}
+                                    selectedIssue={selectedIssue!}
+                                    updateIssueTitle={updateIssueTitle}
+                                />
+                                
 
                                 <h5 style={{marginLeft: '10px',marginBottom: '0px',paddingBottom: '0px'}}>Description</h5>
                                 <div onMouseEnter={() => toggleIsDescriptionHovered()} onMouseLeave={() => toggleIsDescriptionHovered()} style={{...{filter: 'brightness(130%)', border: '1px solid white',marginTop: '10px',paddingBottom: '15px'}, ...( isDescriptionHovered ? hoveredStyle : {})}}>

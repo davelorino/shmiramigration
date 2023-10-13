@@ -205,8 +205,41 @@ export const changeIssueType = (
     selectedIssue!.updated_at = moment
         .tz(moment(), 'Australia/Sydney')
         .toISOString(true)
-    //console.log("Changing issue type")
-    //console.log(updatedIssue)
+
     updateIssue(updatedIssue)
+}
+
+interface UpdateIssueTitleEditorInterface {
+    selectedIssue: Issue 
+    issueTitle: string 
+    toggleIssueTitleEditor: any 
+    issue_title_edit_state: boolean 
+    updateIssue: any
+}
+
+export const updateIssueTitle = (props: UpdateIssueTitleEditorInterface) => {
+    var current_issue: Partial<Issue> = {
+        ...props.selectedIssue!,
+    }
+
+    delete current_issue['assignees']
+    delete current_issue['comments']
+
+    if (props.issueTitle === '') {
+        props.toggleIssueTitleEditor(props.issue_title_edit_state)
+        return
+    }
+    current_issue.name = props.issueTitle
+
+    var updatedIssue: any = current_issue
+
+    props.selectedIssue!.name = props.issueTitle
+    props.selectedIssue!.updated_at = moment
+        .tz(moment(), 'Australia/Sydney')
+        .toISOString(true)
+
+    props.updateIssue(updatedIssue)
+
+    props.toggleIssueTitleEditor(props.issue_title_edit_state)
 }
 
