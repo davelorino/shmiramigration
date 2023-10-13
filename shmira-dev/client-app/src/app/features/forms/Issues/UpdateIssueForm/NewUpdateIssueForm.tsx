@@ -545,6 +545,7 @@ export default observer(function NewUpdateIssueForm() {
         issueStore.updateIssue(updated_issue)
     }
 
+    /*
     const removeAssigneeFromIssue = (user_id: string) => {
         selectedIssue!.assignees = selectedIssue!.assignees.filter(
             (assignee) => assignee.id.toString().toLowerCase() !== user_id
@@ -565,28 +566,8 @@ export default observer(function NewUpdateIssueForm() {
 
         issueStore.removeAssigneeFromIssue(issue_assignee_to_remove)
     }
-    /*
-    const addAssigneeToIssue = (assignee_id: string) => {
-        var assignee_to_add = allUsers.find(
-            (assignee) =>
-                assignee.id.toString().toLowerCase() ===
-                assignee_id.toLowerCase()
-        )
-
-        selectedIssue!.assignees.push(assignee_to_add!)
-
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        var issue_assignee_to_add = {
-            AssigneeId: assignee_id,
-            IssueId: selectedIssue!.id,
-        }
-
-        issueStore.addAssigneeToIssue(issue_assignee_to_add)
-    }
     */
+
 
     const updateIssueTitle = () => {
         var current_issue: Partial<Issue> = {

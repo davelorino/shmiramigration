@@ -52,6 +52,7 @@ interface UpdateIssueProps {
 type IssueFormProps = CreateIssueProps | UpdateIssueProps;
 
 export default observer(function IssueAssignee(props: IssueFormProps) {
+    const { issueStore } = useStore()
     if(props.mode === "create"){
     return (
     <>
@@ -64,7 +65,7 @@ export default observer(function IssueAssignee(props: IssueFormProps) {
             <hr style={{border: '1px solid white', width: '100%'}}/>
             {props.selectedAssignees.map((user_id: any, index: any) => (
                 <div style={{marginLeft: '20px', marginTop: '6px' }}>
-                <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {props.removeAssigneeFromIssue(user_id, props.selectedAssignees, props.setSelectedAssignees)}}>
+                <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {props.removeAssigneeFromIssue({mode: "create", assignee_id: user_id, selectedAssignees: props.selectedAssignees, setSelectedAssignees: props.setSelectedAssignees})}}>
                     <AvatarIsActiveLabelBorder isActive={false} index={index}>
                         <StyledLabelAvatar
                             src={getAssigneePhoto({ project_assignees: props.selectedProject!.assignees, id: user_id, account_type: "Assignee Id" }) }
@@ -107,7 +108,7 @@ export default observer(function IssueAssignee(props: IssueFormProps) {
                     <div style={{marginLeft: '20px', marginTop: '6px' }}>
                     {console.log("User id: ")}
                     {console.log(user.id)}
-                    <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {props.removeAssigneeFromIssue(user.id, props.selectedAssignees, props.setSelectedAssignees)}}>
+                    <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {props.removeAssigneeFromIssue({mode: "update", assignee_id: user.id, selectedIssue: props.selectedIssue, removeAssigneeFromIssue: issueStore.removeAssigneeFromIssue})}}>
                         <AvatarIsActiveLabelBorder isActive={false} index={index}>
                             <StyledLabelAvatar
                                 src={getAssigneePhoto({ project_assignees: props.selectedProject!.assignees, id: user?.id, account_type: "Assignee Id" }) }

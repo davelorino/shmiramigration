@@ -133,16 +133,54 @@ export const addAssigneeToIssue = (props: AddAssigneeToIssueProps) => {
     }
 }
 
+interface CreateRemoveAssigneeFromIssueProps {
+    mode: "create"
+    assignee_id: string
+    selectedAssignees: string[]
+    setSelectedAssignees: any
+}
 
-export const removeAssigneeFromIssue = (assignee_id: string, selectedAssignees: string[], setSelectedAssignees: any) => {
-    var assignees_to_set: string[] = []
+interface UpdateRemoveAssigneeFromIssueProps {
+    mode: "update"
+    assignee_id: string
+    selectedIssue: Issue 
+    removeAssigneeFromIssue: any
+}
 
-    selectedAssignees.map((current_assignee_id) => {
-        if (current_assignee_id !== assignee_id) {
-            assignees_to_set.push(current_assignee_id)
+type RemoveAssigneeFromIssueProps = CreateRemoveAssigneeFromIssueProps | UpdateRemoveAssigneeFromIssueProps;
+
+export const removeAssigneeFromIssue = (props: RemoveAssigneeFromIssueProps) => {
+    if(props.mode === "create"){
+        var assignees_to_set: string[] = []
+
+        props.selectedAssignees.map((current_assignee_id) => {
+            if (current_assignee_id !== props.assignee_id) {
+                assignees_to_set.push(current_assignee_id)
+            }
+        })
+        props.setSelectedAssignees(assignees_to_set)
+    }
+    if(props.mode === "update"){
+        props.selectedIssue!.assignees = props.selectedIssue!.assignees.filter(
+            (assignee) => assignee.id.toString().toLowerCase() !== props.assignee_id
+        )
+        props.selectedIssue!.updated_at = moment
+            .tz(moment(), 'Australia/Sydney')
+            .toISOString(true)
+
+        var issue_assignee_to_remove = {
+            AssigneeId: props.assignee_id,
+            IssueId: props.selectedIssue!.id,
         }
-    })
-    setSelectedAssignees(assignees_to_set)
+
+        var updated_issue: any = {
+            ...props.selectedIssue!,
+        }
+
+        props.removeAssigneeFromIssue(issue_assignee_to_remove)
+
+    }
+    
 }
 
 
