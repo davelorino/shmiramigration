@@ -243,3 +243,29 @@ export const updateIssueTitle = (props: UpdateIssueTitleEditorInterface) => {
     props.toggleIssueTitleEditor(props.issue_title_edit_state)
 }
 
+
+
+export const updateIssueDescription = (selectedIssue: Issue, quillDescriptionEditText: any, updateIssue: any) => {
+    var current_issue: Partial<Issue> = {
+        ...selectedIssue!,
+    }
+
+    delete current_issue['assignees']
+    delete current_issue['comments']
+
+    if (quillDescriptionEditText === '') {
+        return
+    }
+
+    current_issue.description = quillDescriptionEditText
+
+    var updatedIssue: any = current_issue
+
+    selectedIssue!.description = quillDescriptionEditText
+
+    selectedIssue!.updated_at = moment
+        .tz(moment(), 'Australia/Sydney')
+        .toISOString(true)
+
+    updateIssue(updatedIssue)
+}

@@ -1,6 +1,5 @@
 
 import { observer } from 'mobx-react-lite'
-import { IssueTypeDropdownSelector } from './Styles'
 import { Issue } from '../../../../models/issue'
 import './Styles.css'
 import { useStore } from '../../../../stores/store'

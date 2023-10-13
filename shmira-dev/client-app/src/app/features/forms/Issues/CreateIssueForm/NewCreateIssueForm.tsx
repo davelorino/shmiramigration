@@ -228,6 +228,7 @@ export default observer(function NewCreateIssueForm() {
                                 
         {/* ISSUE DESCRIPTION */}
                                 <IssueDescription 
+                                    mode="create"
                                     toggleIsDescriptionHovered={toggleIsDescriptionHovered}
                                     isDescriptionHovered={isDescriptionHovered}
                                     description_edit_state={description_edit_state}

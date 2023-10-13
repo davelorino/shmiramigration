@@ -43,7 +43,8 @@ import {
     addReporterToIssue,
     removeAssigneeFromIssue,
     changeIssueType,
-    updateIssueTitle
+    updateIssueTitle,
+    updateIssueDescription
 } from '../Utils/utils'
 
 // Subcomponents 
@@ -435,30 +436,6 @@ export default observer(function NewUpdateIssueForm() {
         },
     ]
 
-    const updateIssueDescription = () => {
-        var current_issue: Partial<Issue> = {
-            ...selectedIssue!,
-        }
-
-        delete current_issue['assignees']
-
-        if (quillDescriptionEditText === '') {
-            return
-        }
-
-        current_issue.description = quillDescriptionEditText
-
-        var updatedIssue: any = current_issue
-
-        selectedIssue!.description = quillDescriptionEditText
-
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        updateIssue(updatedIssue)
-    }
-
 
     const removeReporterFromIssue = (user_id: string) => {
         selectedIssue!.reporter_id = ''
@@ -788,65 +765,18 @@ export default observer(function NewUpdateIssueForm() {
                                     updateIssueTitle={updateIssueTitle}
                                 />
                                 
-
-                                <h5 style={{marginLeft: '10px',marginBottom: '0px',paddingBottom: '0px'}}>Description</h5>
-                                <div onMouseEnter={() => toggleIsDescriptionHovered()} onMouseLeave={() => toggleIsDescriptionHovered()} style={{...{filter: 'brightness(130%)', border: '1px solid white',marginTop: '10px',paddingBottom: '15px'}, ...( isDescriptionHovered ? hoveredStyle : {})}}>
-                                    {!description_edit_state && (
-                                        <InvisibleTextInput
-                                            style={{
-                                                marginTop: '4px',
-                                                paddingTop: '0px',
-                                                paddingBottom: '0px',
-                                                marginBottom: '0px',
-                                                cursor: 'pointer',
-                                                display: 'flex',
-                                                maxHeight: '700px',
-                                                minHeight: '200px',
-                                            }}
-                                            fontsize={14}
-                                            onClick={() =>
-                                                toggleDescriptionEditor(
-                                                    description_edit_state
-                                                )
-                                            }
-                                        >
-                                            <div style={{paddingTop: '8px', marginBottom: '0px', paddingBottom: '0px', marginLeft: '12px', marginRight: '12px'}}>
-                                                {parse(selectedIssue!.description)}
-                                            </div>
-                                        </InvisibleTextInput>
-                                    )}
-                                    {description_edit_state && (
-                                        <>
-                                            <ReactQuill
-                                                style={{minHeight: '200px',maxHeight: '700px',marginBottom: '0px',paddingBottom: '0px'}} theme="snow"
-                                                defaultValue={selectedIssue!.description}
-                                                onChange={setQuillDescriptionEditText}
-                                            />
-
-                                            <Button
-                                                size="mini"
-                                                content="Save"
-                                                color="blue"
-                                                style={{ marginLeft: '15px' }}
-                                                onClick={() => {
-                                                    updateIssueDescription()
-                                                    toggleDescriptionEditor(
-                                                        description_edit_state
-                                                    )
-                                                }}
-                                            />
-                                            <Button
-                                                size="mini"
-                                                content="Cancel"
-                                                onClick={() =>
-                                                    toggleDescriptionEditor(
-                                                        description_edit_state
-                                                    )
-                                                }
-                                            />
-                                        </>
-                                    )}
-                                </div>
+                                <IssueDescription 
+                                    mode="update"
+                                    toggleIsDescriptionHovered={toggleIsDescriptionHovered}
+                                    isDescriptionHovered={isDescriptionHovered}
+                                    description_edit_state={description_edit_state}
+                                    selectedIssueDescription={quillDescriptionEditText}
+                                    setSelectedIssueDescription={setQuillDescriptionEditText}
+                                    toggleDescriptionEditor={toggleDescriptionEditor}
+                                    selectedIssue={selectedIssue!}
+                                    updateIssueDescription={updateIssueDescription}
+                                />
+                               
 
                                 {/* COMMENTS */}
                                 <h5 style={{marginLeft: '10px', marginBottom: '8px'}}>Comments</h5>
