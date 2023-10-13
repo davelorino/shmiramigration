@@ -2,6 +2,7 @@ import { Assignee } from '../../../../models/assignee'
 import { Project } from '../../../../models/project'
 import { Issue } from '../../../../models/issue'
 import { HoverDiv } from '../../Styles'
+import { useStore } from '../../../../stores/store'
 import { StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../../../filters/Styles'
 import './Styles.css'
 
@@ -27,6 +28,7 @@ interface UpdateIssueProps {
 type IssueAssigneesProps = CreateIssueProps | UpdateIssueProps;
 
 export const IssueAssignees = ( props: IssueAssigneesProps ) => {
+    const { issueStore } = useStore()
     if(props.mode === "create"){
         var unassigned_assignees: string[] = []
         var all_assignee_ids: string[] = []
@@ -58,7 +60,16 @@ export const IssueAssignees = ( props: IssueAssigneesProps ) => {
             value: project_assignee.id,
             text: project_assignee.first_name.concat(' ', project_assignee.second_name),
             content: (
-                <HoverDiv className='assignee_reporter_label' onClick={() => props.addAssigneeToIssue(project_assignee.id, props.selectedAssignees, props.setSelectedAssignees)}>
+                <HoverDiv className='assignee_reporter_label' 
+                    onClick={() => 
+                        props.addAssigneeToIssue({
+                            mode: "create", 
+                            assignee_id: project_assignee.id, 
+                            selectedAssignees: props.selectedAssignees, 
+                            setSelectedAssignees: props.setSelectedAssignees
+                        })
+                    }
+                    >
                     <AvatarIsActiveLabelBorder isActive={false} index={index}>
                         <StyledLabelAvatar
                             value={project_assignee.id}
@@ -109,8 +120,15 @@ export const IssueAssignees = ( props: IssueAssigneesProps ) => {
             ),
             content: (
                 <HoverDiv className="assignee_reporter_label"
-                    
-                    onClick={() => props.addAssigneeToIssue(project_assignee.id)}
+                    onClick={() => 
+                        props.addAssigneeToIssue({
+                            mode: "update", 
+                            assignee_id: project_assignee.id, 
+                            selectedIssue: props.selectedIssue, 
+                            addAssigneeToIssue: issueStore.addAssigneeToIssue, 
+                            allUsers: props.selectedProject!.assignees 
+                        })
+                    }
                 >
                     <AvatarIsActiveLabelBorder isActive={false} index={index}>
                         <StyledLabelAvatar

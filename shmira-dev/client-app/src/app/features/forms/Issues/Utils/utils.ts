@@ -36,6 +36,8 @@ interface GetAssigneePhotoProps {
 }
 
 export function getAssigneePhoto({ project_assignees, id, account_type }:GetAssigneePhotoProps ) {
+    console.log("getAssigneePhoto Function:")
+    console.log(id)
     if(account_type === "Assignee Id") {
         return project_assignees.find((assignee) => assignee.id === id)!.photo?.url
     } 
@@ -78,14 +80,13 @@ export function addReporterToIssue (assignee_id: string, selectedReporter: strin
 interface CreateAddAssigneeToIssueProps {
     mode: "create"
     assignee_id: string 
-    selectedAssignees: Assignee[] 
+    selectedAssignees: string[] 
     setSelectedAssignees: any
 }
 
 interface UpdateAddAssigneeToIssueProps {
     mode: "update"
     assignee_id: string 
-    selectedAssignees: Assignee[] 
     selectedIssue: Issue
     addAssigneeToIssue: any
     allUsers: any
@@ -100,7 +101,7 @@ export const addAssigneeToIssue = (props: AddAssigneeToIssueProps) => {
 
         if (props.selectedAssignees.length > 0) {
             props.selectedAssignees.map((assignee_id) => {
-                assignees_to_set.push(props.assignee_id)
+                assignees_to_set.push(assignee_id)
             })
         }
 
@@ -115,8 +116,7 @@ export const addAssigneeToIssue = (props: AddAssigneeToIssueProps) => {
 
         var assignee_to_add = props.allUsers.find(
             (assignee: Assignee) =>
-                assignee.id.toString().toLowerCase() ===
-                props.assignee_id.toLowerCase()
+                assignee.id === props.assignee_id
         )
 
         props.selectedIssue!.assignees.push(assignee_to_add!)

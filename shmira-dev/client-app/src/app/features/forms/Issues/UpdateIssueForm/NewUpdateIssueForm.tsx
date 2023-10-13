@@ -1311,7 +1311,6 @@ export default observer(function NewUpdateIssueForm() {
                                     </div>
                                     
                                 </div>
-                                
                                 <IssueAssignee 
                                     mode="update"
                                     isAssigneeHovered={isAssigneeHovered}
@@ -1327,44 +1326,7 @@ export default observer(function NewUpdateIssueForm() {
                                     selectedIssue={selectedIssue!}
                                     />
                                 
-                                {/*
-                                <div style={{ marginBottom: '20px' }} />
-
-                                
-                                <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '98',},...(isAssigneeHovered ? hoveredStyle : {})}}
-                                    onMouseEnter={() => setIsAssigneeHovered(true)}
-                                    onMouseLeave={() => setIsAssigneeHovered(false)}
-                                >
-                                    <div style={{marginTop: '5px', marginBottom: '56x', display: 'flex', alignItems: 'center', height: '100%'}}>
-                                        <h4 style={{ paddingLeft: '20px'}}>Assignees</h4>
-                                    </div>
-                                    <hr style={{border: '1px solid white', width: '100%'}}/>
-                                    {selectedIssue!.assignees.map(
-                                        (user, index) => (
-                                            <div style={{marginLeft: '20px', marginTop: '2px' }}>
-                                            <StyledLabel size='small' style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {removeAssigneeFromIssue(user.id)}}>
-                                                <AvatarIsActiveLabelBorder isActive={false} index={index}>
-                                                    <StyledLabelAvatar value={user.id} size="20" name={user.first_name.concat(' ', user.second_name)} round="25px" src={selectedProject!.assignees.find((assignee) => assignee.id === user.id)!.photo?.url}/>
-                                                </AvatarIsActiveLabelBorder>
-                                                {user.first_name.concat(' ',user.second_name)}
-                                                <Icon style={{marginLeft: '5px', paddingTop: '0px', marginTop: '0px'}} type="close"/>
-                                            </StyledLabel>
-                                            </div>
-                                        )
-                                    )}
-                                    //Assignees Dropdown
-                                    <div style={{marginLeft: '20px'}}>
-                                    {selectedIssue?.assignees.length !== selectedProject!.assignees.length &&
-                                        <Dropdown multiple 
-                                            downward placeholder="+ Add more" value="" label="Assign" name="assignees" style={{position: 'relative', marginTop: '0px', paddingTop: '0px', zIndex: '99'}}
-                                            options={formatProjectAssignees(projectAssignees, selectedIssue!)}
-                                            onChange={(e) => handleChangeAssignees(e)}
-                                        />
-                                    }
-                                    </div>
-                                </div>
-                                <div style={{ marginTop: '20px' }} />
-                                */}
+                               
                                 {/* REPORTER */}
                                 <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '90'}, ...(isReporterHovered ? hoveredStyle : {})}}
                                     onMouseEnter={() => setIsReporterHovered(true)}

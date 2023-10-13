@@ -481,6 +481,10 @@ export default class IssueStore {
         issue_to_update.updated_at = moment
             .tz(moment(), 'Australia/Sydney')
             .toISOString(true)
+        console.log("Issue to update")
+        console.log(issue_to_update)
+        console.log("Issue assignee")
+        console.log(issue_assignee)
         try {
             await agent.Issues.update(issue_to_update)
             await agent.Issues.addAssigneeToIssue(issue_assignee)

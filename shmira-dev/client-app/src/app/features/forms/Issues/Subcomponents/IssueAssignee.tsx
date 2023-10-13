@@ -7,6 +7,7 @@ import Icon from '../../../../images/Icon/index'
 import { StyledLabelAvatar, AvatarIsActiveLabelBorder } from '../../../filters/Styles'
 import { StyledLabel } from '../../Styles'
 import { Dropdown } from 'semantic-ui-react'
+import { useStore } from '../../../../stores/store'
 import { 
     addReporterToIssue,
     getAssigneeName, 
@@ -97,25 +98,27 @@ export default observer(function IssueAssignee(props: IssueFormProps) {
             <>
             <div style={{ marginBottom: '20px' }} />
             <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '98',},...(props.isAssigneeHovered ? hoveredStyle : {})}}
-                onMouseEnter={() => props.setIsAssigneeHovered(true)}
-                onMouseLeave={() => props.setIsAssigneeHovered(false)}
+                //onMouseEnter={() => props.setIsAssigneeHovered(true)}
+                //onMouseLeave={() => props.setIsAssigneeHovered(false)}
             >
                 <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>Assignees</h5>
                 <hr style={{border: '1px solid white', width: '100%'}}/>
-                {props.selectedAssignees.map((user_id: any, index: any) => (
+                {props.selectedIssue.assignees.map((user: any, index: any) => (
                     <div style={{marginLeft: '20px', marginTop: '6px' }}>
-                    <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {props.removeAssigneeFromIssue(user_id, props.selectedAssignees, props.setSelectedAssignees)}}>
+                    {console.log("User id: ")}
+                    {console.log(user.id)}
+                    <StyledLabel style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {props.removeAssigneeFromIssue(user.id, props.selectedAssignees, props.setSelectedAssignees)}}>
                         <AvatarIsActiveLabelBorder isActive={false} index={index}>
                             <StyledLabelAvatar
-                                src={getAssigneePhoto({ project_assignees: props.selectedProject!.assignees, id: user_id, account_type: "Assignee Id" }) }
-                                value={props.selectedProject!.assignees.find((assignee) => assignee.id === user_id)!.id} size="20" round="20px"
-                                name={getAssigneeName({ project_assignees: props.selectedProject!.assignees, id: user_id, account_type: "Assignee Id" })}
+                                src={getAssigneePhoto({ project_assignees: props.selectedProject!.assignees, id: user?.id, account_type: "Assignee Id" }) }
+                                value={props.selectedProject!.assignees.find((assignee) => assignee.id === user?.id)!.id} size="20" round="20px"
+                                name={getAssigneeName({ project_assignees: props.selectedProject!.assignees, id: user?.id, account_type: "Assignee Id" })}
                             />
                         </AvatarIsActiveLabelBorder>
                         {props.selectedProject!.assignees
-                            .find((assignee) => assignee.id === user_id)!.first_name
+                            .find((assignee) => assignee.id === user.id)!.first_name
                             .concat(' ', props.selectedProject!.assignees
-                            .find((assignee) => assignee.id === user_id)!.second_name)}
+                            .find((assignee) => assignee.id === user.id)!.second_name)}
                         <Icon style={{ marginLeft: '10px' }} type="close"/>
                     </StyledLabel>
                     </div>
