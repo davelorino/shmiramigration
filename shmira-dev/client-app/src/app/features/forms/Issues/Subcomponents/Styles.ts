@@ -56,6 +56,10 @@ export const hoveredStyle = {
     backgroundFilter: 'brightness(165%)'
 }
 
+export const underlineStyle = {
+    textDecoration: 'underline'
+}
+
 export const CommentInputOuterContainer = styled.div`
     margin-top: 20px;
     cursor: not-allowed;

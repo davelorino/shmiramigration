@@ -269,3 +269,4 @@ export const updateIssueDescription = (selectedIssue: Issue, quillDescriptionEdi
 
     updateIssue(updatedIssue)
 }
+

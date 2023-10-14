@@ -640,6 +640,7 @@ export default observer(function NewUpdateIssueForm() {
         setSelectedReporter(e.target.value)
     }
 
+    /*
     function submitComment() {
         var comment_to_send = {
             Id: uuid(),
@@ -662,84 +663,9 @@ export default observer(function NewUpdateIssueForm() {
         selectedIssue!.comments!.push(comment_to_add)
         issueStore.addCommentToIssue(selectedIssue!.id, comment_to_send)
     }
+    */
 
-    function parseTimeSpan(timespan: string) {
-        var days = timespan.substring(0, timespan.indexOf('.'))
-
-        if (days === null) {
-            days = '0'
-        }
-        var days_string = ''
-        if (days === '001') {
-            days_string = 'day'
-        } else {
-            days_string = 'days'
-        }
-
-        var hours = timespan.substring(
-            timespan.indexOf('.') + 1,
-            timespan.indexOf(':')
-        )
-
-        if (hours === null) {
-            hours = '0'
-        }
-        var hours_string = ''
-        if (hours === '01') {
-            hours_string = 'hour'
-        } else hours_string = 'hours'
-
-        var timespan_minus_days_and_hours = timespan.substring(
-            timespan.indexOf(':') + 1,
-            timespan.length
-        )
-
-        var minutes = timespan_minus_days_and_hours.substring(
-            0,
-            timespan_minus_days_and_hours.indexOf(':')
-        )
-
-        if (minutes === null) {
-            minutes = '0'
-        }
-        var minutes_string = ''
-        if (minutes === '01') {
-            minutes_string = 'minute'
-        } else {
-            minutes_string = 'minutes'
-        }
-        var time_span = ''
-
-        if (days === '0' && hours === '0') {
-            time_span = minutes.concat(' ', minutes_string)
-        } else if (days === '0') {
-            time_span = hours.concat(
-                ' ',
-                hours_string,
-                ' ',
-                minutes,
-                ' ',
-                minutes_string
-            )
-        } else {
-            time_span = days.concat(
-                ' ',
-                days_string,
-                ' ',
-                parseInt(hours).toString(),
-                ' ',
-                hours_string,
-                ' ',
-                parseInt(minutes).toString(),
-                ' ',
-                minutes_string
-            )
-        }
-        return time_span
-    }
-
-
-
+    
     return (
         <div>
             <Formik enableReinitialize initialValues={issue} onSubmit={(values) => console.log(values)}>
@@ -779,42 +705,38 @@ export default observer(function NewUpdateIssueForm() {
                                
 
                                 {/* COMMENTS */}
+                                <CommentInput 
+                                    mode='update'
+                                    getAssigneePhoto={getAssigneePhoto}
+                                    getAssigneeName={getAssigneeName}
+                                    selectedIssue={selectedIssue!}
+                                    selectedProject={selectedProject!}
+                                    project_assignees={selectedProject!.assignees}
+                                    account_id={commonStore.account_id!}
+                                    assignee_id={commonStore.assignee_id!}
+                                    toggleIsAddCommentHovered={toggleIsAddCommentHovered}
+                                    comment_state={comment_state}
+                                    setCommentState={setCommentState}
+                                    submitComment={submitComment}
+                                    addCommentToIssue={issueStore.addCommentToIssue}
+                                    commentHoveredIndex={commentHoveredIndex}
+                                    setCommentHoveredIndex={setCommentHoveredIndex}
+                                    isCommenterNameHoveredIndex={isCommenterNameHoveredIndex}
+                                    setIsCommenterNameHoveredIndex={setIsCommenterNameHoveredIndex}
+                                    />
+                                {/*
                                 <h5 style={{marginLeft: '10px', marginBottom: '8px'}}>Comments</h5>
                                 {selectedIssue!.comments!.map(
                                     (comment, index) => (
                                         <div key={index} className={commentHoveredIndex === index ? 'comment-hovered' : 'comment-default'} onMouseEnter={() => setCommentHoveredIndex(index)} onMouseLeave={() => setCommentHoveredIndex(99)}>
-                                            <div
-                                                style={{
-                                                    verticalAlign: 'top',
-                                                    display: 'inline-block',
-                                                    paddingLeft: '10px',
-                                                    paddingTop: '10px',
-                                                }}
-                                            >
+                                            <div style={{verticalAlign: 'top', display: 'inline-block', paddingLeft: '10px', paddingTop: '10px'}}>
                                                 <StyledAvatar
                                                     size="30"
                                                     round="16px"
-                                                    src={
-                                                        selectedProject!.assignees.find(
-                                                            (assignee) =>
-                                                                assignee.id ===
-                                                                comment.commenter_assignee_id
-                                                        )!.photo?.url
-                                                    }
+                                                    src={selectedProject!.assignees.find((assignee) => assignee.id === comment.commenter_assignee_id)!.photo?.url}
                                                     name={selectedProject!.assignees
-                                                        .find(
-                                                            (assignee) =>
-                                                                assignee.id ===
-                                                                comment.commenter_assignee_id
-                                                        )!
-                                                        .first_name.concat(
-                                                            ' ',
-                                                            selectedProject!.assignees.find(
-                                                                (assignee) =>
-                                                                    assignee.id ===
-                                                                    comment.commenter_assignee_id
-                                                            )!.second_name
-                                                        )}
+                                                        .find((assignee) => assignee.id === comment.commenter_assignee_id)!.first_name
+                                                        .concat(' ', selectedProject!.assignees.find((assignee) => assignee.id === comment.commenter_assignee_id)!.second_name)}
                                                 />
                                             </div>
                                             <div style={{paddingLeft: '20px', display: 'inline-block', paddingTop: '10px', width: '90%'}}>
@@ -875,7 +797,9 @@ export default observer(function NewUpdateIssueForm() {
                                         }}
                                     onChange={(e) => setCommentState(e.target.value)} placeholder="Add a comment..."/>
                                 </div>
+                            
                                 <div style={{marginTop: '10px', marginRight: '0px', float: 'right', display: 'inline-block'}}><Button size="tiny" content="Comment" color="blue" onClick={() => submitComment()}/></div>
+                            */}
                             </Grid.Column>
 
                             <Grid.Column width={6}>

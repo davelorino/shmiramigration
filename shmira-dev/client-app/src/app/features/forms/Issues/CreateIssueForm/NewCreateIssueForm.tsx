@@ -239,6 +239,7 @@ export default observer(function NewCreateIssueForm() {
                                 
         {/* COMMENT INPUT */}
                                 <CommentInput 
+                                    mode='create'
                                     getAssigneePhoto={getAssigneePhoto}
                                     getAssigneeName={getAssigneeName}
                                     project_assignees={selectedProject!.assignees}
