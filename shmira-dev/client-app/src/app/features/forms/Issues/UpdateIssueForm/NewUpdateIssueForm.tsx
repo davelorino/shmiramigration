@@ -42,6 +42,7 @@ import {
     addAssigneeToIssue,
     addReporterToIssue,
     removeAssigneeFromIssue,
+    removeReporterFromIssue,
     changeIssueType,
     updateIssueTitle,
     updateIssueDescription,
@@ -138,12 +139,6 @@ export default observer(function NewUpdateIssueForm() {
         paddingBottom: '5px',
         filter: 'brightness(130%)'
     }
-
-    const underlineStyle = {
-        textDecoration: 'underline'
-    }
-    
-
     
     function toggleIsDescriptionHovered() {
         setIsDescriptionHovered(!isDescriptionHovered)
@@ -181,88 +176,6 @@ export default observer(function NewUpdateIssueForm() {
 
         let estimated_duration = days + '.' + hours + ':' + minutes + ':' + '00'
         return estimated_duration
-    }
-
-   
-    const formatProjectReporters = (
-        projectReporters: Assignee[],
-        issue: Issue
-    ) => {
-        var unassigned_reporters: string[] = []
-        var all_assignee_ids: string[] = []
-        var assigned_reporter: string
-
-        projectReporters.map((reporter) => {
-            all_assignee_ids.push(reporter.id)
-        })
-
-        assigned_reporter = issue.reporter_id
-
-        all_assignee_ids.map((assignee_id) => {
-            if (assignee_id !== assigned_reporter) {
-                unassigned_reporters.push(assignee_id)
-            }
-        })
-
-        var assignees_to_display: Assignee[] = []
-
-        projectReporters.map((pr) => {
-            if (unassigned_reporters.includes(pr.id)) {
-                assignees_to_display.push(pr)
-            }
-        })
-
-        return assignees_to_display!.map((project_assignee, index) => ({
-            key: project_assignee.id,
-            value: project_assignee.id,
-            text: project_assignee.first_name.concat(
-                ' ',
-                project_assignee.second_name
-            ),
-            content: (
-                <HoverDiv  
-                    style={{
-                        height: 33,
-                        fontSize: '12px', 
-                        marginLeft: '0px',
-                        marginRight: '2px',
-                        paddingLeft: '6px',
-                        paddingTop: '6px', 
-                        paddingRight: '9px',
-                        paddingBottom: '6px', 
-                        marginTop: '0px', 
-                        marginBottom: '0px',
-                        alignContent: 'center'
-                    }} 
-                    onClick={() => addReporterToIssue(project_assignee.id)}>
-                    <div style={{display: 'inline-block'}}>
-                        <div style={{display: 'inline'}}>
-                        <AvatarIsActiveLabelBorder isActive={false} index={index}
-                            style={{marginTop: '0px', marginBottom: '0px', paddingLeft: '0px', marginLeft: '0px'}}
-                            >
-                            <StyledLabelAvatar
-                                value={project_assignee.id}
-                                size="20"
-                                style={{marginTop: '0px', marginBottom: '0px', paddingLeft: '0px', marginLeft: '0px'}}
-                                name={project_assignee.first_name.concat(
-                                    ' ',
-                                    project_assignee.second_name
-                                )}
-                                round="20px"
-                                src={project_assignee.photo?.url}
-                            />
-                        </AvatarIsActiveLabelBorder>
-                        </div>
-                        <div style={{display: 'inline', paddingTop: '6px'}}>
-                        {project_assignee.first_name.concat(
-                            ' ',
-                            project_assignee.second_name
-                        )}
-                        </div>
-                    </div>
-                </HoverDiv>
-            ),
-        }))
     }
 
     const reformatSprintOptions = (allSprints: Sprint[]) =>
@@ -387,58 +300,6 @@ export default observer(function NewUpdateIssueForm() {
         },
     ]
 
-
-    const removeReporterFromIssue = (user_id: string) => {
-        selectedIssue!.reporter_id = ''
-
-        var updated_issue: any = {
-            ...selectedIssue!,
-        }
-
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        delete updated_issue['assignees']
-
-        updated_issue.reporter = ''
-
-        issueStore.updateIssue(updated_issue)
-    }
-
-    const addReporterToIssue = (user_id: string) => {
-        selectedIssue!.reporter_id = user_id
-
-        var updated_issue: any = {
-            ...selectedIssue!,
-        }
-
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        delete updated_issue['assignees']
-
-        issueStore.updateIssue(updated_issue)
-    }
-
-    {/*
-    const changeIssueStatus = (status: string) => {
-        selectedIssue!.status = status
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        var updated_issue: any = {
-            ...selectedIssue!,
-        }
-
-        delete updated_issue['assignees']
-
-        issueStore.updateIssue(updated_issue)
-    }
-    */}
-
     const changeIssuePriority = (priority: string) => {
         selectedIssue!.priority = priority
 
@@ -454,8 +315,6 @@ export default observer(function NewUpdateIssueForm() {
 
         issueStore.updateIssue(updated_issue)
     }
-
-   
 
     const extractTimespanObject = (timespan: string) => {
         var days = timespan.substring(0, timespan.indexOf('.'))
@@ -656,33 +515,14 @@ export default observer(function NewUpdateIssueForm() {
 
                             <Grid.Column width={6}>
 
-                            <IssueStatus 
-                                mode='update'
-                                isStatusHovered={isStatusHovered}
-                                setIsStatusHovered={setIsStatusHovered}
-                                selectedIssue={selectedIssue!}
-                                updateIssueStatus={updateIssueStatus}
-                                />
-                            {/*
-                                <div style={{ paddingTop: '10px' }}></div>
+                                <IssueStatus 
+                                    mode='update'
+                                    isStatusHovered={isStatusHovered}
+                                    setIsStatusHovered={setIsStatusHovered}
+                                    selectedIssue={selectedIssue!}
+                                    updateIssueStatus={updateIssueStatus}
+                                    />
                                 
-                                <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '99', paddingBottom: '8px'},...(isStatusHovered ? hoveredStyle : {})}}
-                                    onMouseEnter={() => setIsStatusHovered(true)}
-                                    onMouseLeave={() => setIsStatusHovered(false)}
-                                >
-                                    <div style={{marginTop: '5px', marginBottom: '56x', display: 'flex', alignItems: 'center', height: '100%'}}>
-                                        <h4 style={{ paddingLeft: '20px'}}>Status</h4>
-                                    </div>
-                                    <hr style={{ border: '1px solid white', width: '100%'}}/>
-                                    <div style={{display: 'flex', marginLeft: '20px'}}>
-                                        <Label size='small' style={{marginRight: '0px'}}>{selectedIssue!.status}</Label>
-                                        <Dropdown downward multiple closeOnChange placeholder="" value="" label="Status" name="status" options={statusOptions}
-                                            style={{position: 'relative',zIndex: '99', marginLeft: '-20px', paddingRight: '10px'}}
-                                        />
-                                    </div>
-                                    
-                                </div>
-                            */}
                                 <IssueAssignee 
                                     mode="update"
                                     isAssigneeHovered={isAssigneeHovered}
@@ -700,42 +540,22 @@ export default observer(function NewUpdateIssueForm() {
                                 
                                
                                 {/* REPORTER */}
-                                <div style={{...divStyles, ...baseStyle, ...{position: 'relative', zIndex: '90'}, ...(isReporterHovered ? hoveredStyle : {})}}
-                                    onMouseEnter={() => setIsReporterHovered(true)}
-                                    onMouseLeave={() => setIsReporterHovered(false)}
-                                >
-                                    <div style={{marginTop: '5px', marginBottom: '56x', display: 'flex', alignItems: 'center', height: '100%'}}>
-                                        <h4 style={{ paddingLeft: '20px'}}>Reporter</h4>
-                                    </div>
-                                    <hr style={{border: '1px solid white', width: '100%'}}/>
-                                    {selectedIssue!.reporter_id !== null && selectedIssue!.reporter_id.length !== 0 && (
-                                        <div style={{marginLeft: '20px'}}>
-                                            <StyledLabel size='small' style={{marginBottom: '2px', marginRight: '4px'}} onClick={() => {removeReporterFromIssue(selectedIssue!.reporter_id)}}>
-                                                <AvatarIsActiveLabelBorder isActive={false} index={1}>
-                                                    <StyledLabelAvatar value={selectedIssue!.reporter_id} size="20"
-                                                        name={selectedProject!.assignees
-                                                            .find((assignee) => assignee.id === selectedIssue!.reporter_id)!
-                                                            .first_name.concat(' ', selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.second_name)}
-                                                        round="25px"
-                                                        src={selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.photo?.url}
-                                                    />
-                                                </AvatarIsActiveLabelBorder>
+                                <IssueReporter 
+                                    mode='update'
+                                    isReporterHovered={isReporterHovered}
+                                    setIsReporterHovered={setIsReporterHovered}
+                                    selectedIssue={selectedIssue!}
+                                    selectedProject={selectedProject!}
+                                    project_assignees={selectedProject!.assignees}
+                                    account_id={commonStore.account_id!}
+                                    addReporterToIssue={addReporterToIssue}
+                                    removeReporterFromIssue={removeReporterFromIssue}
+                                    IssueReporters={IssueReporters}
+                                    selectedReporter={selectedReporter}
+                                    setSelectedReporter={setSelectedReporter}
+                                    />
 
-                                                {selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.first_name.concat(' ',selectedProject!.assignees.find((assignee) => assignee.id === selectedIssue!.reporter_id)!.second_name)}
-                                                <Icon style={{marginLeft: '5px'}} type="close" />
-                                            </StyledLabel>
-                                        </div>
-                                        )}
-                                    <div style={{fontSize: '8', marginLeft: '20px'}}>
-                                        <Dropdown downward multiple closeOnChange placeholder="Select reporter" value="" label="Assign" name="reporter"
-                                            style={{fontSize: '8', marginTop: '0px', paddingTop: '0px', position: 'relative', zIndex: '99'}}
-                                            options={formatProjectReporters(projectAssignees,selectedIssue!)}
-                                            onChange={(e) => handleChangeReporter(e)}
-                                        />
-                                    </div>
-                                </div>
-                                <br />
-
+                                <br/>
                                 {/* LOG TIME */}
                                 <div style={{...{zIndex: '1'}, ...divStyles, ...baseStyle, ...(isSprintHovered ? hoveredStyle : {})}} onMouseEnter={() => setIsSprintHovered(true)} onMouseLeave={() => setIsSprintHovered(false)}>
                                     <InvisibleTextInput onClick={toggleLogTimeEditState} fontsize={12} style={{ cursor: 'pointer' }}>

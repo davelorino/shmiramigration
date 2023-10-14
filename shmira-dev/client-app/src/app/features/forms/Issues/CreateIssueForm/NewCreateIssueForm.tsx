@@ -284,6 +284,7 @@ export default observer(function NewCreateIssueForm() {
         {/* REPORTER LABEL */}
 
                                 <IssueReporter 
+                                    mode='create'
                                     isReporterHovered={isReporterHovered}
                                     setIsReporterHovered={setIsReporterHovered}
                                     selectedReporter={selectedReporter}

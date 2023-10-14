@@ -29,15 +29,18 @@ export function submitComment({comment_state, assignee_id, selectedIssue, addCom
     addCommentToIssue(selectedIssue!.id, comment_to_send)
 }
 
-export const updateIssueStatus = (status: string, selectedIssue: Issue, updateIssue: (updated_issue: Issue) => Partial<void>) => {
+export const updateIssueStatus = (
+    status: string, 
+    selectedIssue: Issue, 
+    updateIssue: (updated_issue: Issue) => Partial<void>
+    ) => {
+
     selectedIssue!.status = status
     selectedIssue!.updated_at = moment
         .tz(moment(), 'Australia/Sydney')
         .toISOString(true)
 
-    var updated_issue: any = {
-        ...selectedIssue!,
-    }
+    var updated_issue: any = {...selectedIssue!}
 
     delete updated_issue['assignees']
     delete updated_issue['comments']
@@ -52,11 +55,11 @@ interface GetAssigneePhotoProps {
 }
 
 export function getAssigneePhoto({ project_assignees, id, account_type }:GetAssigneePhotoProps ) {
-    console.log("getAssigneePhoto Function:")
-    console.log(id)
+
     if(account_type === "Assignee Id") {
         return project_assignees.find((assignee) => assignee.id === id)!.photo?.url
     } 
+
     return project_assignees.find((assignee) => assignee.id_app_user === id)!.photo?.url
 }
 
@@ -87,10 +90,65 @@ export function getAssigneePhotoUrl(project_assignee: Assignee, assignees: Assig
     return assignees.find((assignee) => assignee.id === project_assignee.id)!.photo?.url
 }
 
-export function addReporterToIssue (assignee_id: string, selectedReporter: string, setSelectedReporter: any) {
-    if(selectedReporter !== assignee_id){
-        setSelectedReporter(assignee_id)
+interface AddReporterCreateInterface {
+    mode: 'create'
+    assignee_id: string 
+    selectedReporter: string 
+    setSelectedReporter: (selectedReporter: string) => void 
+}
+
+interface AddReporterUpdateInterface {
+    mode: 'update'
+    assignee_id: string 
+    selectedReporter: string 
+    selectedIssue: Issue 
+    updateIssue: (updated_issue: Issue) => Promise<void>
+}
+type AddReporterProps = AddReporterCreateInterface | AddReporterUpdateInterface;
+
+export function addReporterToIssue ( props: AddReporterProps ) {
+    if(props.mode === 'create'){
+        if(props.selectedReporter !== props.assignee_id){
+            props.setSelectedReporter(props.assignee_id)
+        }
     }
+
+    if(props.mode === 'update'){
+        props.selectedIssue!.reporter_id = props.assignee_id
+
+        var updated_issue: any = {
+            ...props.selectedIssue!,
+        }
+
+        props.selectedIssue!.updated_at = moment
+            .tz(moment(), 'Australia/Sydney')
+            .toISOString(true)
+
+        delete updated_issue['assignees']
+        delete updated_issue['comments']
+
+        props.updateIssue(updated_issue)
+    }
+    
+}
+
+export function removeReporterFromIssue( selectedIssue: Issue, updateIssue: (updated_issue: Issue) => void ) {
+    selectedIssue!.reporter_id = ''
+
+        var updated_issue: any = {
+            ...selectedIssue!,
+        }
+
+        selectedIssue!.updated_at = moment
+            .tz(moment(), 'Australia/Sydney')
+            .toISOString(true)
+
+        delete updated_issue['assignees']
+        delete updated_issue['comments']
+
+        updated_issue.reporter = ''
+
+        updateIssue(updated_issue)
 }
 
 interface CreateAddAssigneeToIssueProps {
