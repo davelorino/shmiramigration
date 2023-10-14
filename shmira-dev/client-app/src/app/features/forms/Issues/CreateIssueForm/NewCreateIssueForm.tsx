@@ -316,6 +316,7 @@ export default observer(function NewCreateIssueForm() {
         {/* LOG TIME */}
 
                                 <LogTimeInput 
+                                    mode='create'
                                     isLogTimeHovered={isLogTimeHovered}
                                     setIsLogTimeHovered={setIsLogTimeHovered}
                                     log_time_edit_state={log_time_edit_state}

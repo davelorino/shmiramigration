@@ -99,8 +99,8 @@ export default observer(function IssueAssignee(props: IssueFormProps) {
             <>
             <div style={{ marginBottom: '20px' }} />
             <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '98',},...(props.isAssigneeHovered ? hoveredStyle : {})}}
-                //onMouseEnter={() => props.setIsAssigneeHovered(true)}
-                //onMouseLeave={() => props.setIsAssigneeHovered(false)}
+                onMouseEnter={() => props.setIsAssigneeHovered(true)}
+                onMouseLeave={() => props.setIsAssigneeHovered(false)}
             >
                 <h5 style={{paddingLeft: '20px', paddingTop: '10px'}}>Assignees</h5>
                 <hr style={{border: '1px solid white', width: '100%'}}/>
