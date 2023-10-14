@@ -257,6 +257,7 @@ export default observer(function NewCreateIssueForm() {
         {/* STATUS */}
 
                                 <IssueStatus 
+                                    mode='create'
                                     isStatusHovered={isStatusHovered}
                                     setIsStatusHovered={setIsStatusHovered}
                                     selectedIssueStatus={selectedIssueStatus}

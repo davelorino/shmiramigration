@@ -44,7 +44,8 @@ import {
     removeAssigneeFromIssue,
     changeIssueType,
     updateIssueTitle,
-    updateIssueDescription
+    updateIssueDescription,
+    updateIssueStatus
 } from '../Utils/utils'
 
 // Subcomponents 
@@ -62,6 +63,7 @@ import SprintSelector from '../Subcomponents/SprintSelector'
 import IssuePriority from '../Subcomponents/IssuePriority'
 
 // Constants
+import { IssueStatusOptions } from '../Constants/IssueStatusOptions'
 import { IssueTypeOptions } from '../Constants/IssueTypeOptions'
 import { IssueTypeOptions2 } from '../Constants/IssueTypeOptions'
 import { IssueAssignees } from '../Constants/IssueAssignees'
@@ -307,57 +309,6 @@ export default observer(function NewUpdateIssueForm() {
     }
 
 
-    const statusOptions = [
-        {
-            key: '0',
-            value: 'To Do',
-            text: 'To Do',
-            content: (
-                <HoverDiv onClick={() => changeIssueStatus('To Do')}>
-                    <Label style={{ minWidth: '80px' }} color="blue">
-                        To Do
-                    </Label>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '1',
-            value: 'In Progress',
-            text: 'In Progress',
-            content: (
-                <HoverDiv onClick={() => changeIssueStatus('In Progress')}>
-                    <Label style={{ minWidth: '80px' }} color="green">
-                        In Progress
-                    </Label>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '2',
-            value: 'Review',
-            text: 'Review',
-            content: (
-                <HoverDiv onClick={() => changeIssueStatus('Review')}>
-                    <Label style={{ minWidth: '80px' }} color="purple">
-                        In Review
-                    </Label>
-                </HoverDiv>
-            ),
-        },
-        {
-            key: '3',
-            value: 'Done',
-            text: 'Done',
-            content: (
-                <HoverDiv onClick={() => changeIssueStatus('Done')}>
-                    <Label style={{ alignText: 'center', minWidth: '80px' }}>
-                        Done
-                    </Label>
-                </HoverDiv>
-            ),
-        },
-    ]
-
     const priorityOptions = [
         {
             key: '0',
@@ -471,6 +422,7 @@ export default observer(function NewUpdateIssueForm() {
         issueStore.updateIssue(updated_issue)
     }
 
+    {/*
     const changeIssueStatus = (status: string) => {
         selectedIssue!.status = status
         selectedIssue!.updated_at = moment
@@ -485,6 +437,7 @@ export default observer(function NewUpdateIssueForm() {
 
         issueStore.updateIssue(updated_issue)
     }
+    */}
 
     const changeIssuePriority = (priority: string) => {
         selectedIssue!.priority = priority
@@ -639,32 +592,6 @@ export default observer(function NewUpdateIssueForm() {
     const handleChangeReporter = (e: any) => {
         setSelectedReporter(e.target.value)
     }
-
-    /*
-    function submitComment() {
-        var comment_to_send = {
-            Id: uuid(),
-            commenter_assignee_id: commonStore.assignee_id!,
-            comment: comment_state,
-            comment_posted: moment
-                .tz(
-                    moment().subtract(moment.duration('11:00:00')),
-                    'Australia/Sydney'
-                )
-                .toISOString(true),
-        }
-
-        var comment_to_add = {
-            ...comment_to_send,
-            comment_posted: moment
-                .tz(moment(), 'Australia/Sydney')
-                .toISOString(true),
-        }
-        selectedIssue!.comments!.push(comment_to_add)
-        issueStore.addCommentToIssue(selectedIssue!.id, comment_to_send)
-    }
-    */
-
     
     return (
         <div>
@@ -724,87 +651,21 @@ export default observer(function NewUpdateIssueForm() {
                                     isCommenterNameHoveredIndex={isCommenterNameHoveredIndex}
                                     setIsCommenterNameHoveredIndex={setIsCommenterNameHoveredIndex}
                                     />
-                                {/*
-                                <h5 style={{marginLeft: '10px', marginBottom: '8px'}}>Comments</h5>
-                                {selectedIssue!.comments!.map(
-                                    (comment, index) => (
-                                        <div key={index} className={commentHoveredIndex === index ? 'comment-hovered' : 'comment-default'} onMouseEnter={() => setCommentHoveredIndex(index)} onMouseLeave={() => setCommentHoveredIndex(99)}>
-                                            <div style={{verticalAlign: 'top', display: 'inline-block', paddingLeft: '10px', paddingTop: '10px'}}>
-                                                <StyledAvatar
-                                                    size="30"
-                                                    round="16px"
-                                                    src={selectedProject!.assignees.find((assignee) => assignee.id === comment.commenter_assignee_id)!.photo?.url}
-                                                    name={selectedProject!.assignees
-                                                        .find((assignee) => assignee.id === comment.commenter_assignee_id)!.first_name
-                                                        .concat(' ', selectedProject!.assignees.find((assignee) => assignee.id === comment.commenter_assignee_id)!.second_name)}
-                                                />
-                                            </div>
-                                            <div style={{paddingLeft: '20px', display: 'inline-block', paddingTop: '10px', width: '90%'}}>
-                                                <h5 
-                                                    onMouseEnter={() => setIsCommenterNameHoveredIndex(index)} 
-                                                    onMouseLeave={() => setIsCommenterNameHoveredIndex(99)} 
-                                                    style={{...{cursor: 'pointer', marginBottom: '5px'}, ...(isCommenterNameHoveredIndex === index ? underlineStyle : {})}}>
-                                                    {selectedProject!.assignees.find((assignee) => assignee.id === comment.commenter_assignee_id)!
-                                                        .first_name.concat(' ', selectedProject!.assignees.find((assignee) => assignee.id === comment.commenter_assignee_id)!.second_name
-                                                    )}
-                                                </h5>
-                                                <div style={{marginBottom: '5px'}}>
-                                                    <p>{comment.comment}</p>
-                                                </div>
-                                                <div style={{marginBottom: '10px'}}>
-                                                    <p style={{fontSize: '10px', color: 'grey'}}>{moment(comment.comment_posted).format('DD MMM YYYY HH:MM')}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                )}
-                                <div style={{ marginTop: '20px' }}></div>
-                                <div style={{ display: 'inline-block' }}>
-                                    <StyledAvatar
-                                        style={{ paddingTop: '12px' }}
-                                        size="30"
-                                        round="16px"
-                                        src={
-                                            selectedProject!.assignees.find(
-                                                (assignee) =>
-                                                    assignee.id_app_user ===
-                                                    commonStore.account_id
-                                            )?.photo?.url
-                                        }
-                                        name={selectedProject!.assignees
-                                            .find(
-                                                (assignee) =>
-                                                    assignee.id_app_user ===
-                                                    commonStore.account_id
-                                            )!
-                                            .first_name.concat(
-                                                ' ',
-                                                selectedProject!.assignees.find(
-                                                    (assignee) =>
-                                                        assignee.id_app_user ===
-                                                        commonStore.account_id
-                                                )!.second_name
-                                            )}
-                                    />
-                                </div>
-                                <div style={{display: 'inline-block', paddingLeft: '15px', width: '95%'}}>
-                                    <TextArea 
-                                        onMouseEnter={() => toggleIsAddCommentHovered()} onMouseLeave={() => toggleIsAddCommentHovered()}
-                                        style={{
-                                            ...{ border: '1px solid white' },
-                                            ...{filter: 'brightness(130%)'}, 
-                                            ...(isAddCommentHovered ? hoveredStyle : {})
-                                        }}
-                                    onChange={(e) => setCommentState(e.target.value)} placeholder="Add a comment..."/>
-                                </div>
-                            
-                                <div style={{marginTop: '10px', marginRight: '0px', float: 'right', display: 'inline-block'}}><Button size="tiny" content="Comment" color="blue" onClick={() => submitComment()}/></div>
-                            */}
+                                
                             </Grid.Column>
 
                             <Grid.Column width={6}>
+
+                            <IssueStatus 
+                                mode='update'
+                                isStatusHovered={isStatusHovered}
+                                setIsStatusHovered={setIsStatusHovered}
+                                selectedIssue={selectedIssue!}
+                                updateIssueStatus={updateIssueStatus}
+                                />
+                            {/*
                                 <div style={{ paddingTop: '10px' }}></div>
-                                {/* STATUS */}
+                                
                                 <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '99', paddingBottom: '8px'},...(isStatusHovered ? hoveredStyle : {})}}
                                     onMouseEnter={() => setIsStatusHovered(true)}
                                     onMouseLeave={() => setIsStatusHovered(false)}
@@ -821,6 +682,7 @@ export default observer(function NewUpdateIssueForm() {
                                     </div>
                                     
                                 </div>
+                            */}
                                 <IssueAssignee 
                                     mode="update"
                                     isAssigneeHovered={isAssigneeHovered}

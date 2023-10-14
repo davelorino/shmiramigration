@@ -29,6 +29,22 @@ export function submitComment({comment_state, assignee_id, selectedIssue, addCom
     addCommentToIssue(selectedIssue!.id, comment_to_send)
 }
 
+export const updateIssueStatus = (status: string, selectedIssue: Issue, updateIssue: (updated_issue: Issue) => Partial<void>) => {
+    selectedIssue!.status = status
+    selectedIssue!.updated_at = moment
+        .tz(moment(), 'Australia/Sydney')
+        .toISOString(true)
+
+    var updated_issue: any = {
+        ...selectedIssue!,
+    }
+
+    delete updated_issue['assignees']
+    delete updated_issue['comments']
+
+    updateIssue(updated_issue)
+}
+
 interface GetAssigneePhotoProps {
     project_assignees: Assignee[]
     id: string
