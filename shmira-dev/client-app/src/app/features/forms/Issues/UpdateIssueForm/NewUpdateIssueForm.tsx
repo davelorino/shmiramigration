@@ -1,15 +1,12 @@
 import { useState } from 'react'
 import { Grid } from 'semantic-ui-react'
-import { Formik, Form, ErrorMessage, Field } from 'formik'
+import { Formik, Form } from 'formik'
 import { useStore } from '../../../../stores/store'
 import { observer } from 'mobx-react-lite'
 import 'react-quill/dist/quill.snow.css'
 import moment from 'moment'
 import 'quill-mention/dist/quill.mention.css'
 import 'quill-mention'
-import './Styles.css'
-
-// NEW IMPORTS 
 import './Styles.css'
 
 // Utils
@@ -29,9 +26,8 @@ import {
     handleSprintChange
 } from '../Utils/utils'
 
-import {
-    updateLoggedTime
-} from '../Utils/timeUtils'
+// Time Utils
+import { updateLoggedTime } from '../Utils/timeUtils'
 
 // Subcomponents 
 import IssueTypeSelector from '../Subcomponents/IssueTypeSelector'
@@ -46,19 +42,15 @@ import IssueStatus from '../Subcomponents/IssueStatus'
 import SprintSelector from '../Subcomponents/SprintSelector'
 import IssuePriority from '../Subcomponents/IssuePriority'
 
-
 // Constants
-import { IssueStatusOptions } from '../Constants/IssueStatusOptions'
-import { IssueTypeOptions } from '../Constants/IssueTypeOptions'
 import { IssueTypeOptions2 } from '../Constants/IssueTypeOptions'
 import { IssueAssignees } from '../Constants/IssueAssignees'
 import { IssueReporters } from '../Constants/IssueReporters'
-import { SprintOptions } from '../Constants/SprintOptions'
+import { CreatedAtPTag, UpdatedAtPTag } from './Styles'
 
 export default observer(function NewUpdateIssueForm() {
     const { issueStore, commonStore } = useStore()
     const { selectedIssue, selectedProject, updateIssue, updateIssueAndSprint } = issueStore
-
 
     const initialState = selectedIssue ?? {
         id: '',
@@ -74,7 +66,6 @@ export default observer(function NewUpdateIssueForm() {
         sprint: '',
         assignees: [],
     }
-
 
     var [quillDescriptionEditText, setQuillDescriptionEditText] = useState('')
     var [selectedAssignees, setSelectedAssignees] = useState()
@@ -288,35 +279,12 @@ export default observer(function NewUpdateIssueForm() {
                                 </div>
                     
                                 <div style={{textAlign: 'right'}}>
-                                    <p
-                                        style={{
-                                            marginTop: '10px',
-                                            marginBottom: '0px',
-                                            fontSize: '13px',
-                                            paddingBottom: '0px',
-                                            color: 'grey',
-                                        }}
-                                    >
-                                        {'Created '.concat(
-                                            moment(
-                                                selectedIssue!.created_at
-                                            ).fromNow()
-                                        )}
-                                    </p>
-                                    <p
-                                        style={{
-                                            paddingTop: '10px',
-                                            marginTop: '0px',
-                                            fontSize: '13px',
-                                            color: 'grey',
-                                        }}
-                                    >
-                                        {'Last updated '.concat(
-                                            moment(
-                                                selectedIssue!.updated_at
-                                            )?.fromNow()
-                                        )}
-                                    </p>
+                                    <CreatedAtPTag>
+                                        {'Created '.concat(moment(selectedIssue!.created_at).fromNow())}
+                                    </CreatedAtPTag>
+                                    <UpdatedAtPTag>
+                                        {'Last updated '.concat(moment(selectedIssue!.updated_at)?.fromNow())}
+                                    </UpdatedAtPTag>
                                 </div>
                             </Grid.Column>
                         </Grid>
