@@ -197,8 +197,6 @@ export default observer(function NewCreateIssueForm() {
         )
     }
 
-
-
     return (
         <div>
         
@@ -366,7 +364,17 @@ export default observer(function NewCreateIssueForm() {
                             </div>
                             <br />
                             <br />
-                            <Button style={{ marginRight: '10px' }} color="blue" size="small" loading={loading} floated="right" content={'Create Issue'} onClick={() => handleCreateIssue()} />
+                            
+        {/* CREATE ISSUE BUTTON */}
+                            <Button 
+                                style={{ marginRight: '10px' }} 
+                                color="blue" 
+                                size="small" 
+                                loading={loading} 
+                                floated="right" 
+                                content={'Create Issue'} 
+                                onClick={() => handleCreateIssue()} 
+                            />
                             </Grid.Column>
                         </Grid>
                     </Form>

@@ -126,7 +126,14 @@ export default observer(function NewUpdateIssueForm() {
             {/* ISSUE TYPE */}
                                 <SelectedIssueType selectedIssueType={selectedIssue!.issue_type}/>
                                 <IssueTypeSelector 
-                                    issueTypeOptions={IssueTypeOptions2({mode: "update", selectedIssue, changeIssueType, updateIssue })} 
+                                    issueTypeOptions={
+                                        IssueTypeOptions2({
+                                            mode: "update", 
+                                            selectedIssue, 
+                                            changeIssueType, 
+                                            updateIssue 
+                                        })
+                                    } 
                                 />
 
             {/* ISSUE TITLE */}                
@@ -139,6 +146,8 @@ export default observer(function NewUpdateIssueForm() {
                                     selectedIssue={selectedIssue!}
                                     updateIssueTitle={updateIssueTitle}
                                 />
+
+            {/* ISSUE DESCRIPTION */}
                                 
                                 <IssueDescription 
                                     mode="update"
@@ -178,6 +187,8 @@ export default observer(function NewUpdateIssueForm() {
 
                             <Grid.Column width={6}>
 
+                {/* ISSUE STATUS */}
+
                                 <IssueStatus 
                                     mode='update'
                                     isStatusHovered={isStatusHovered}
@@ -185,6 +196,8 @@ export default observer(function NewUpdateIssueForm() {
                                     selectedIssue={selectedIssue!}
                                     updateIssueStatus={updateIssueStatus}
                                 />
+
+                {/* ISSUE ASSIGNEE */}
                                 
                                 <IssueAssignee 
                                     mode="update"
@@ -201,7 +214,7 @@ export default observer(function NewUpdateIssueForm() {
                                     selectedIssue={selectedIssue!}
                                 />
                                        
-                        {/* REPORTER */}
+                {/* ISSUE REPORTER */}
 
                                 <IssueReporter 
                                     mode='update'
@@ -220,7 +233,7 @@ export default observer(function NewUpdateIssueForm() {
 
                                 <br/>
                         
-                        {/* LOG TIME */}
+                {/* LOG TIME */}
                             
                                 <LogTime 
                                     mode='update'
@@ -245,38 +258,37 @@ export default observer(function NewUpdateIssueForm() {
                                     updateLoggedTime={updateLoggedTime}
                                 />
 
- 
-
-                        {/* SPRINT */}
-
+                    {/* SPRINT */}
                         
                                 <div style={{ width: '100%', marginTop: '20px' }}>
-                                <SprintSelector
-                                        mode='update'
-                                        isSprintHovered={isSprintHovered}
-                                        setIsSprintHovered={setIsSprintHovered}
-                                        selectedIssue={selectedIssue!}
-                                        selectedProject={selectedProject!}
-                                        handleSprintChange={handleSprintChange}
-                                />
+                                    <SprintSelector
+                                            mode='update'
+                                            isSprintHovered={isSprintHovered}
+                                            setIsSprintHovered={setIsSprintHovered}
+                                            selectedIssue={selectedIssue!}
+                                            selectedProject={selectedProject!}
+                                            handleSprintChange={handleSprintChange}
+                                    />
              
-                                <div style={{ marginBottom: '20px' }} />
+                                    <div style={{ marginBottom: '20px' }} />
 
-                                <div style={{ marginTop: '20px' }}>
+                                    <div style={{ marginTop: '20px' }}>
                                     
-                            {/* PRIORITY LABEL */}
-                                <IssuePriority 
-                                    mode='update'
-                                    isPriorityHovered={isPriorityHovered}
-                                    setIsPriorityHovered={setIsPriorityHovered}
-                                    selectedIssue={selectedIssue!}
-                                    updateIssuePriority={updateIssuePriority}
-                                />
+                    {/* PRIORITY LABEL */}
+                                        <IssuePriority 
+                                            mode='update'
+                                            isPriorityHovered={isPriorityHovered}
+                                            setIsPriorityHovered={setIsPriorityHovered}
+                                            selectedIssue={selectedIssue!}
+                                            updateIssuePriority={updateIssuePriority}
+                                        />
                             
-                                </div>
+                                    </div>
 
                   
                                 </div>
+                    
+                    {/* CREATED AT & UPDATED AT */}
                     
                                 <div style={{textAlign: 'right'}}>
                                     <CreatedAtPTag>
@@ -286,6 +298,8 @@ export default observer(function NewUpdateIssueForm() {
                                         {'Last updated '.concat(moment(selectedIssue!.updated_at)?.fromNow())}
                                     </UpdatedAtPTag>
                                 </div>
+
+                                
                             </Grid.Column>
                         </Grid>
                     </Form>
