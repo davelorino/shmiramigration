@@ -48,6 +48,25 @@ export const updateIssueStatus = (
     updateIssue(updated_issue)
 }
 
+export const updateIssuePriority = (
+    priority: string, 
+    selectedIssue: Issue, 
+    updateIssue: (updated_issue: Issue) => Partial<void>
+    ) => {
+
+    selectedIssue!.priority = priority
+    selectedIssue!.updated_at = moment
+        .tz(moment(), 'Australia/Sydney')
+        .toISOString(true)
+
+    var updated_issue: any = {...selectedIssue!}
+
+    delete updated_issue['assignees']
+    delete updated_issue['comments']
+
+    updateIssue(updated_issue)
+}
+
 interface GetAssigneePhotoProps {
     project_assignees: Assignee[]
     id: string

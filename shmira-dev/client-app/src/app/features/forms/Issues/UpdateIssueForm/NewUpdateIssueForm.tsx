@@ -29,7 +29,8 @@ import {
     changeIssueType,
     updateIssueTitle,
     updateIssueDescription,
-    updateIssueStatus
+    updateIssueStatus,
+    updateIssuePriority
 } from '../Utils/utils'
 
 import {
@@ -78,13 +79,6 @@ export default observer(function NewUpdateIssueForm() {
         assignees: [],
     }
 
-    const validationSchema = Yup.object({
-        name: Yup.string().required(
-            'The issue title is a required MyTextInput.'
-        ),
-    })
-
-    var projectAssignees = selectedProject!.assignees
 
     var [quillDescriptionEditText, setQuillDescriptionEditText] = useState('')
     var [selectedAssignees, setSelectedAssignees] = useState()
@@ -177,104 +171,8 @@ export default observer(function NewUpdateIssueForm() {
             sprint_issue_to_add.sprint_id,
             sprint_issue_to_add.issue_name,
             sprint_issue_to_add.issue_id,
-            selectedIssue!,
-            //sprint
+            selectedIssue!
         )
-    }
-
-
-    const priorityOptions = [
-        {
-            key: '0',
-            value: 'Low',
-            text: 'Low',
-            content: (
-                <StyledLabel
-                    size='small'
-                    style={{ minWidth: '90px' }}
-                    onClick={() => {
-                        changeIssuePriority('Low')
-                    }}
-                >
-                    <IssuePriorityIcon priority="Low" />
-                    <p
-                        style={{
-                            paddingBottom: '3px',
-                            paddingLeft: '5px',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Low
-                    </p>
-                </StyledLabel>
-            ),
-        },
-        {
-            key: '1',
-            value: 'Medium',
-            text: 'Medium',
-            content: (
-                <StyledLabel
-                    size='small'
-                    style={{ minWidth: '90px' }}
-                    onClick={() => {
-                        changeIssuePriority('Medium')
-                    }}
-                >
-                    <IssuePriorityIcon priority="Medium" />
-                    <p
-                        style={{
-                            paddingBottom: '3px',
-                            paddingLeft: '5px',
-                            display: 'inline-block',
-                        }}
-                    >
-                        Medium
-                    </p>
-                </StyledLabel>
-            ),
-        },
-        {
-            key: '2',
-            value: 'High',
-            text: 'High',
-            content: (
-                <StyledLabel
-                    size='small'
-                    style={{ minWidth: '90px' }}
-                    onClick={() => {
-                        changeIssuePriority('High')
-                    }}
-                >
-                    <IssuePriorityIcon priority="High" />
-                    <p
-                        style={{
-                            paddingBottom: '3px',
-                            paddingLeft: '5px',
-                            display: 'inline-block',
-                        }}
-                    >
-                        High
-                    </p>
-                </StyledLabel>
-            ),
-        },
-    ]
-
-    const changeIssuePriority = (priority: string) => {
-        selectedIssue!.priority = priority
-
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        var updated_issue: any = {
-            ...selectedIssue!,
-        }
-
-        delete updated_issue['assignees']
-
-        issueStore.updateIssue(updated_issue)
     }
 
     const toggleDescriptionEditor = (description_edit_state: boolean) => {
@@ -285,10 +183,6 @@ export default observer(function NewUpdateIssueForm() {
         setIssueTitleEditState(!issue_title_edit_state)
     }
 
-    const handleChangeReporter = (e: any) => {
-        setSelectedReporter(e.target.value)
-    }
-    
     return (
         <div>
             <Formik enableReinitialize initialValues={issue} onSubmit={(values) => console.log(values)}>
@@ -418,6 +312,8 @@ export default observer(function NewUpdateIssueForm() {
                                     updateLoggedTime={updateLoggedTime}
                                 />
 
+ 
+
                     {/* SPRINT */}
                                 <div style={{ width: '100%', marginTop: '20px' }}>
                                     <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '50'}, ...(isLogtimeHovered ? hoveredStyle : {})}}
@@ -438,64 +334,25 @@ export default observer(function NewUpdateIssueForm() {
                                             
                                         />
                                     </div>
+
                                     <div style={{ marginBottom: '20px' }} />
 
-                    {/* PRIORITY */}
-                                    <div
-                                        style={{
-                                            ...divStyles,
-                                            ...baseStyle,
-                                            ...(isPriorityHovered
-                                                ? hoveredStyle
-                                                : {}),
-                                        }}
-                                        onMouseEnter={() =>
-                                            setIsPriorityHovered(true)
-                                        }
-                                        onMouseLeave={() =>
-                                            setIsPriorityHovered(false)
-                                        }
-                                    >
-                                        <div style={{marginTop: '5px', marginBottom: '5px', display: 'flex', alignItems: 'center', height: '100%'}}>
-                                            <h4 style={{ paddingLeft: '20px'}}>Priority</h4>
-                                        </div>
-                                        <hr
-                                            style={{
-                                                border: '1px solid white',
-                                            }}
-                                        />
-                                        <div style={{marginBottom: '0pxx', paddingBottom: '5px', marginLeft: '20px', marginTop: '10px', verticalAlign: 'top' }}>
-                                            <StyledLabel size='small'>
-                                                <IssuePriorityIcon
-                                                    priority={
-                                                        selectedIssue!.priority
-                                                    }
-                                                />
-                                                <p
-                                                    style={{
-                                                        paddingBottom: '3px',
-                                                        paddingLeft: '5px',
-                                                        display: 'inline-block',
-                                                    }}
-                                                >
-                                                    {selectedIssue!.priority}
-                                                </p>
-                                            </StyledLabel>
-                                            <Dropdown
-                                                downward
-                                                multiple
-                                                className="custom-dropdown"
-                                                style={{marginLeft: '-22px'}}
-                                                closeOnChange
-                                                placeholder=""
-                                                value=""
-                                                label="Priority"
-                                                name="priority"
-                                                options={priorityOptions}
+                                    <div style={{ marginTop: '20px' }}>
+                                    
+                            {/* PRIORITY LABEL */}
+                                        <IssuePriority 
+                                            mode='update'
+                                            isPriorityHovered={isPriorityHovered}
+                                            setIsPriorityHovered={setIsPriorityHovered}
+                                            selectedIssue={selectedIssue!}
+                                            updateIssuePriority={updateIssuePriority}
                                             />
-                                        </div>
+                            
                                     </div>
+
+                  
                                 </div>
+                    
                                 <div style={{textAlign: 'right'}}>
                                     <p
                                         style={{

@@ -355,11 +355,11 @@ export default observer(function NewCreateIssueForm() {
                                     
         {/* PRIORITY LABEL */}
                                 <IssuePriority 
+                                    mode='create'
                                     isPriorityHovered={isPriorityHovered}
                                     setIsPriorityHovered={setIsPriorityHovered}
                                     selectedIssuePriority={selectedIssuePriority}
                                     setSelectedIssuePriority={setSelectedIssuePriority}
-                                    projectAssignees={selectedProject!.assignees}
                                     />
                         
                             </div>
