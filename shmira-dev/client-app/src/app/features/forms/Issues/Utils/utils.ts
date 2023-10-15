@@ -2,6 +2,7 @@
 import { v4 as uuid } from 'uuid'
 import moment from 'moment';
 import { Issue } from '../../../../models/issue'
+import { Project } from '../../../../models/project'
 import { Assignee } from '../../../../models/assignee'
 
 interface SubmitCommentProps {
@@ -363,3 +364,37 @@ export const updateIssueDescription = (selectedIssue: Issue, quillDescriptionEdi
     updateIssue(updatedIssue)
 }
 
+export function handleSprintChange(
+    sprint_id: string,
+    selectedIssue: Issue,
+    selectedProject: Project,
+    updateIssueAndSprint: any 
+    ) {
+    var sprint_issue_to_remove = {
+        sprint_id: selectedIssue!.sprint_id,
+        issue_id: selectedIssue!.id,
+        issue_name: selectedIssue!.name,
+    }
+    var sprint_issue_to_add = {
+        sprint_id: sprint_id,
+        issue_id: selectedIssue!.id,
+        issue_name: selectedIssue!.name,
+    }
+    console.log(sprint_issue_to_add);
+
+    selectedIssue!.sprint_id = sprint_id
+
+    selectedIssue!.updated_at = moment
+        .tz(moment(), 'Australia/Sydney')
+        .toISOString(true)
+
+    var sprint = selectedProject!.sprints.filter(s => s.id === sprint_id)
+
+    updateIssueAndSprint(
+        sprint_issue_to_remove.sprint_id,
+        sprint_issue_to_add.sprint_id,
+        sprint_issue_to_add.issue_name,
+        sprint_issue_to_add.issue_id,
+        selectedIssue!
+    )
+}

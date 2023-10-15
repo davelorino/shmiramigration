@@ -339,7 +339,8 @@ export default observer(function NewCreateIssueForm() {
 
 
         {/* SPRINT LABEL */}
-                                <SprintSelector 
+                                <SprintSelector
+                                    mode='create' 
                                     isSprintHovered={isSprintHovered}
                                     setIsSprintHovered={setIsSprintHovered}
                                     selectedIssueSprint={selectedIssueSprint}

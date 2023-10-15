@@ -1,14 +1,9 @@
-import React, { useState } from 'react'
-import { Grid, Dropdown } from 'semantic-ui-react'
+import { useState } from 'react'
+import { Grid } from 'semantic-ui-react'
 import { Formik, Form, ErrorMessage, Field } from 'formik'
 import { useStore } from '../../../../stores/store'
 import { observer } from 'mobx-react-lite'
-import { Sprint } from '../../../../models/sprint'
-import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
-import IssuePriorityIcon from '../../../../images/IssuePriorityIcon'
-import { StyledLabel } from '../../Styles'
-import { HoverDiv } from '../../Styles'
 import moment from 'moment'
 import 'quill-mention/dist/quill.mention.css'
 import 'quill-mention'
@@ -30,7 +25,8 @@ import {
     updateIssueTitle,
     updateIssueDescription,
     updateIssueStatus,
-    updateIssuePriority
+    updateIssuePriority,
+    handleSprintChange
 } from '../Utils/utils'
 
 import {
@@ -106,20 +102,6 @@ export default observer(function NewUpdateIssueForm() {
     const [isDescriptionHovered, setIsDescriptionHovered] = useState(false)
     const [isAddCommentHovered, setIsAddCommentHovered] = useState(false)
     const [isStatusHovered, setIsStatusHovered] = useState(false)
-    const baseStyle = {
-        transition: 'brightness 0.0s', // smooth transition for the brightness change
-    }
-    const hoveredStyle = {
-        filter: 'brightness(165%)',
-        backgroundFilter: 'brightness(165%)',
-    }
-
-    const divStyles = {
-        width: '100%',
-        paddingTop: '5px',
-        paddingBottom: '5px',
-        filter: 'brightness(130%)'
-    }
     
     function toggleIsDescriptionHovered() {
         setIsDescriptionHovered(!isDescriptionHovered)
@@ -133,47 +115,6 @@ export default observer(function NewUpdateIssueForm() {
         setLogTimeEditState(!log_time_edit_state)
     }
 
-    const reformatSprintOptions = (allSprints: Sprint[]) =>
-        selectedProject!.sprints.map((sprint) => ({
-            key: sprint.id,
-            value: sprint.id,
-            text: sprint.name,
-            content: (
-                <HoverDiv style={{paddingTop: '0px', paddingBottom: '0px', marginTop: '0px', marginBottom: '0px'}} onClick={() => handleSprintChange(sprint.id)}>
-                    <StyledLabel>{sprint.name}</StyledLabel>
-                </HoverDiv>
-            ),
-        }))
-
-    function handleSprintChange(sprint_id: string) {
-        var sprint_issue_to_remove = {
-            sprint_id: selectedIssue!.sprint_id,
-            issue_id: selectedIssue!.id,
-            issue_name: selectedIssue!.name,
-        }
-        var sprint_issue_to_add = {
-            sprint_id: sprint_id,
-            issue_id: selectedIssue!.id,
-            issue_name: selectedIssue!.name,
-        }
-        console.log(sprint_issue_to_add);
-
-        selectedIssue!.sprint_id = sprint_id
-
-        selectedIssue!.updated_at = moment
-            .tz(moment(), 'Australia/Sydney')
-            .toISOString(true)
-
-        var sprint = selectedProject!.sprints.filter(s => s.id === sprint_id)
-
-        updateIssueAndSprint(
-            sprint_issue_to_remove.sprint_id,
-            sprint_issue_to_add.sprint_id,
-            sprint_issue_to_add.issue_name,
-            sprint_issue_to_add.issue_id,
-            selectedIssue!
-        )
-    }
 
     const toggleDescriptionEditor = (description_edit_state: boolean) => {
         setDescriptionEditState(!description_edit_state)
@@ -220,8 +161,8 @@ export default observer(function NewUpdateIssueForm() {
                                     updateIssueDescription={updateIssueDescription}
                                 />
                                
+                {/* COMMENTS */}
 
-                                {/* COMMENTS */}
                                 <CommentInput 
                                     mode='update'
                                     getAssigneePhoto={getAssigneePhoto}
@@ -268,9 +209,9 @@ export default observer(function NewUpdateIssueForm() {
                                     selectedProject={selectedProject!}  
                                     selectedIssue={selectedIssue!}
                                 />
-                                
-                               
-                                {/* REPORTER */}
+                                       
+                        {/* REPORTER */}
+
                                 <IssueReporter 
                                     mode='update'
                                     isReporterHovered={isReporterHovered}
@@ -287,7 +228,8 @@ export default observer(function NewUpdateIssueForm() {
                                 />
 
                                 <br/>
-                                {/* LOG TIME */}
+                        
+                        {/* LOG TIME */}
                             
                                 <LogTime 
                                     mode='update'
@@ -314,41 +256,33 @@ export default observer(function NewUpdateIssueForm() {
 
  
 
-                    {/* SPRINT */}
+                        {/* SPRINT */}
+
+                        
                                 <div style={{ width: '100%', marginTop: '20px' }}>
-                                    <div style={{...divStyles,...baseStyle,...{position: 'relative',zIndex: '50'}, ...(isLogtimeHovered ? hoveredStyle : {})}}
-                                        onMouseEnter={() => setIsLogtimeHovered(true)}
-                                        onMouseLeave={() => setIsLogtimeHovered(false)}
-                                    >
-                                        <div style={{marginTop: '5px', marginBottom: '5px', display: 'flex', alignItems: 'center', height: '100%'}}>
-                                            <h4 style={{ paddingLeft: '20px'}}>Sprint</h4>
-                                        </div>
-                                        <hr style={{border: '1px solid white', width: '100%'}}/>
-                                        <StyledLabel size='small' style={{ marginLeft: '20px', marginRight: '0px' }}>
-                                            <p style={{verticalAlign: 'top', paddingBottom: '3px', paddingTop: '3px'}}>
-                                                {selectedProject!.sprints.find((sprint) => sprint.id === selectedIssue!.sprint_id)!.name}
-                                            </p>
-                                        </StyledLabel>
-                                        <Dropdown downward multiple closeOnChange placeholder="" value="" label="Sprint" name="sprint" style={{marginLeft: '-15px', paddingLeft: '0px', position: 'relative', zIndex: '99'}}
-                                            options={reformatSprintOptions(selectedProject!.sprints)}
-                                            
-                                        />
-                                    </div>
+                                <SprintSelector
+                                        mode='update'
+                                        isSprintHovered={isSprintHovered}
+                                        setIsSprintHovered={setIsSprintHovered}
+                                        selectedIssue={selectedIssue!}
+                                        selectedProject={selectedProject!}
+                                        handleSprintChange={handleSprintChange}
+                                />
+             
+                                <div style={{ marginBottom: '20px' }} />
 
-                                    <div style={{ marginBottom: '20px' }} />
-
-                                    <div style={{ marginTop: '20px' }}>
+                                <div style={{ marginTop: '20px' }}>
                                     
                             {/* PRIORITY LABEL */}
-                                        <IssuePriority 
-                                            mode='update'
-                                            isPriorityHovered={isPriorityHovered}
-                                            setIsPriorityHovered={setIsPriorityHovered}
-                                            selectedIssue={selectedIssue!}
-                                            updateIssuePriority={updateIssuePriority}
-                                            />
+                                <IssuePriority 
+                                    mode='update'
+                                    isPriorityHovered={isPriorityHovered}
+                                    setIsPriorityHovered={setIsPriorityHovered}
+                                    selectedIssue={selectedIssue!}
+                                    updateIssuePriority={updateIssuePriority}
+                                />
                             
-                                    </div>
+                                </div>
 
                   
                                 </div>
