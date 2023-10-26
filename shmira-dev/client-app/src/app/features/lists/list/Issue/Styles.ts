@@ -14,6 +14,10 @@ interface IIssueCard {
     isBeingDragged: boolean
 }
 
+export const IssueCardOuterContainer = styled.div`
+    cursor: move;
+`
+
 export const IssueCard = styled.div<IIssueCard>`
     padding: 10px;
     margin-bottom: 5px;

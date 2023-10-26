@@ -5,7 +5,7 @@ import { Issue } from '../../../models/issue'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '../../../stores/store'
 import ProjectBoardListIssue from './Issue/ProjectDashboardIssue'
-import { List, Title, Issues } from './Styles'
+import { List, Title, Issues, IssueStatusTitle, IssueCountTitle } from './Styles'
 
 interface Props {
     status: string
@@ -29,43 +29,30 @@ export default observer(function ProjectBoardList({
             {(provided) => {
                 return (
                     <List>
+
+                        {/* Render Issue Status and Issue Count */}
                         <div style={{ display: 'inline-block' }}>
-                            <Title style={{ display: 'inline-block' }}>
+                            <IssueStatusTitle>
                                 {status_name}
-                            </Title>
-                            <Title
-                                style={{
-                                    float: 'right',
-                                    marginRight: '2px',
-                                    display: 'inline-block',
-                                }}
-                            >
+                            </IssueStatusTitle>
+                            <IssueCountTitle>
                                 {
-                                    issueStore
-                                        .selectedProject!.sprints.find(
-                                            (sprint) =>
-                                                sprint.is_active === true
-                                        )!
-                                        .issues.filter(
-                                            (issue) =>
-                                                issue.status === status_name
-                                        )!.length
+                                    issueStore.selectedProject!.sprints
+                                        .find((sprint) => sprint.is_active === true)!.issues
+                                        .filter((issue) => issue.status === status_name)!.length
                                 }
-                            </Title>
+                            </IssueCountTitle>
                         </div>
-                        <Issues
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                        >
-                            {issues
-                                .sort((a, b) => a.sort_order - b.sort_order)
-                                .map((issue, index) => (
-                                    <ProjectBoardListIssue
-                                        key={issue.id}
-                                        issue={issue}
-                                        index={index}
-                                    />
-                                ))}
+
+                        {/* Render Issues */}
+                        <Issues {...provided.droppableProps} ref={provided.innerRef}>
+                            {
+                                issues
+                                    .sort((a, b) => a.sort_order - b.sort_order)
+                                    .map((issue, index) => (
+                                        <ProjectBoardListIssue key={issue.id} issue={issue} index={index}/>
+                                    ))
+                            }
                             {provided.placeholder}
                         </Issues>
                     </List>

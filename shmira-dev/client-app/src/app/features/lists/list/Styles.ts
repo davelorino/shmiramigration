@@ -20,6 +20,34 @@ export const Title = styled.div`
     ${mixin.truncateText}
 `
 
+export const NoActiveSprintColumn = styled.div`
+    font-size: 14px;
+    display: flex;
+    padding-top: 100px;
+    padding-left: 33px;
+    padding-right: 20px;
+`
+
+export const IssueStatusTitle = styled.div`
+    padding: 13px 10px 17px;
+    text-transform: uppercase;
+    color: #a1988c !important;
+    display: inline-block;
+    ${font.size(12.5)};
+    ${mixin.truncateText}
+`
+
+export const IssueCountTitle = styled.div`
+    padding: 13px 10px 17px;
+    text-transform: uppercase;
+    color: #a1988c !important;
+    display: inline-block;
+    float: right;
+    marginRight: 2px;
+    ${font.size(12.5)};
+    ${mixin.truncateText}
+`
+
 export const IssuesCount = styled.span`
     text-transform: lowercase;
     ${font.size(13)};

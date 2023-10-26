@@ -280,12 +280,7 @@ export default observer(function IssuesDashboard() {
                         <div key={sprint.id} style={{ marginLeft: 40 }}>
                             <div key={sprint.id}>
                                 {/* Sprint name */}
-                                <div
-                                    style={{
-                                        marginLeft: '10px',
-                                        display: 'inline-block',
-                                    }}
-                                >
+                                <div style={{marginLeft: '10px', display: 'inline-block'}}>
                                     {sprint.name}
                                 </div>
 

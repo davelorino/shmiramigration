@@ -3,19 +3,15 @@ import { Draggable } from 'react-beautiful-dnd'
 import { useStore } from '../../../../stores/store'
 import { observer } from 'mobx-react-lite'
 import NewUpdateIssueForm from '../../../forms/Issues/UpdateIssueForm/NewUpdateIssueForm'
-import {
-    StyledAvatar,
-    AvatarIsActiveLabelBorder,
-} from '../../../filters/Styles'
+import { StyledAvatar, AvatarIsActiveLabelBorder} from '../../../filters/Styles'
 import IssuePriorityIcon from '../../../../images/IssuePriorityIcon'
 import IssueTypeIcon from '../../../../images/IssueTypeIcon'
-
-//import { IssueTypeIcon, IssuePriorityIcon } from 'shared/components';
 
 import {
     IssueLink,
     IssueCard,
     Title,
+    IssueCardOuterContainer,
     Bottom /*, Assignees, AssigneeAvatar */,
 } from './Styles'
 import { Issue } from '../../../../models/issue'
@@ -37,79 +33,32 @@ function renderSelectedIssueType(issue: Issue) {
     }
 }
 
-export default observer(function ProjectBoardListIssue({
-    issue,
-    index,
-}: Props) {
+export default observer(function ProjectBoardListIssue({issue, index}: Props) {
     const { modalStore, issueStore } = useStore()
     const { selectedIssue, selectedProject } = issueStore
-
-    // original assignees code:
-    // const assignees = issue.userIds.map(userId => projectUsers.find(user => user.id === userId));
 
     return (
         <Draggable draggableId={issue.id} index={index} key={issue.id}>
             {(provided, snapshot) => (
-                <div
-                    style={{
-                        cursor: 'move',
-                        display: 'flex',
-                        overflow: 'hidden',
-                    }}
-                    ref={provided.innerRef}
-                    data-testid="list-issue"
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    onClick={() => {
-                        issueStore.selectIssue(issue.id)
-                        modalStore.openModal(<NewUpdateIssueForm />)
-                    }}
+                <IssueCardOuterContainer ref={provided.innerRef} data-testid="list-issue" {...provided.draggableProps} {...provided.dragHandleProps}
+                    onClick={() => {issueStore.selectIssue(issue.id); modalStore.openModal(<NewUpdateIssueForm />)}}
                 >
-                    <IssueCard
-                        isBeingDragged={
-                            snapshot.isDragging && !snapshot.isDropAnimating
-                        }
-                        style={{ overflow: 'hidden' }}
-                    >
+                    <IssueCard isBeingDragged={snapshot.isDragging && !snapshot.isDropAnimating} style={{ overflow: 'hidden' }}>
                         <Title>{issue.name}</Title>
-                        <div
-                            style={{
-                                position: 'absolute',
-                                paddingBottom: '0px',
-                                marginBottom: '0px',
-                                bottom: '0px',
-                                left: '0px',
-                            }}
-                        ></div>
+                        
                         <div style={{display: 'flex', alignItems: 'center'}}>
                         
                             <div style={{marginTop: '9px'}}>
                                 {renderSelectedIssueType(issue)}
                                 <IssuePriorityIcon  priority={issue.priority}></IssuePriorityIcon>
                             </div>
-                            <div style={{
-                                    marginLeft: 'auto',
-                                    marginRight: '10px'
-                            }}
-                        >
+                            <div style={{marginLeft: 'auto', marginRight: '10px'}}>
                             {issue.assignees.map((assignee, index) => (
                                 <div style={{display: 'inline'}}>
-                                <AvatarIsActiveLabelBorder
-                                    isActive={false}
-                                    index={index}
-                                >
-                                    <StyledAvatar
-                                        value={assignee.id}
-                                        size="24"
-                                        src={
-                                            assignee.photo
-                                                ? assignee.photo.url
-                                                : ''
-                                        }
-                                        name={assignee.first_name.concat(
-                                            ' ',
-                                            assignee.second_name
-                                        )}
+                                <AvatarIsActiveLabelBorder isActive={false} index={index}>
+                                    <StyledAvatar value={assignee.id} size="24"
+                                        src={assignee.photo ? assignee.photo.url : ''}
+                                        name={assignee.first_name.concat(' ', assignee.second_name)}
                                         round="24px"
                                     />
                                 </AvatarIsActiveLabelBorder>
@@ -118,7 +67,7 @@ export default observer(function ProjectBoardListIssue({
                         </div>
                         </div>
                     </IssueCard>
-                </div>
+                </IssueCardOuterContainer>
             )}
         </Draggable>
     )
