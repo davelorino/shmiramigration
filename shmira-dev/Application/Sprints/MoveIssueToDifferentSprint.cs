@@ -41,29 +41,17 @@ namespace Application.Sprints
             }
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                    Console.WriteLine("Step 1 - find the issue to update.");
 
                     var issue = await _context.Issues.FindAsync(request.Issue.Id);
 
-                    Console.WriteLine(issue.Id);
-
-                    Console.WriteLine("Step 2 - do a map between the issue received from the frontend and the issue found on the backend.");
-                    
                     _mapper.Map(request.Issue, issue);
 
-                    Console.WriteLine("Step 3 - Save the changes");
-
                     await _context.SaveChangesAsync();
-
-                    Console.WriteLine("Step 5 - Check source sprint");
 
                     var source_sprint = await _context.Sprints
                         .Include(i => i.issues)
                         .FirstOrDefaultAsync(x => x.Id.ToString().ToLower() == request.source_sprint_id);
 
-                    Console.WriteLine("Step 6 - Source sprint = ");
-                    Console.WriteLine(source_sprint);
-                    
                     if (source_sprint == null) return null;
 
                     var destination_sprint = await _context.Sprints
@@ -88,7 +76,6 @@ namespace Application.Sprints
                             Sprint = destination_sprint,
                             Issue = issue_updated
                         };
-                        Console.WriteLine(issueToAdd);
                         destination_sprint.issues.Add(issueToAdd);
                     }
            

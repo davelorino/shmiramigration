@@ -33,19 +33,13 @@ namespace Application.Projects
             }
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                Console.WriteLine("Current project =");
                 var current_project = await _context.Projects
                     .Include(p => p.assignees)
                     .FirstOrDefaultAsync(x => x.Id.ToString().ToLower() == request.project_assignee.ProjectId.ToLower());
 
-                Console.WriteLine(current_project.Id);
-
                 var current_assignee = await _context.Assignees
                     .FirstOrDefaultAsync(x => x.Id.ToString().ToLower() == request.project_assignee.AssigneeId.ToLower());
 
-                Console.WriteLine("Current Assignee");
-                Console.WriteLine(current_assignee.Id);
-                
                 var already_assigned = current_project.assignees.FirstOrDefault(a => a.AssigneeId.ToString().ToLower() == current_assignee.Id.ToString().ToLower());
                 
                 if(already_assigned == null){

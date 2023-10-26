@@ -14,7 +14,8 @@ import {
     submitComment,
     addAssigneeToIssue,
     addReporterToIssue,
-    removeAssigneeFromIssue
+    removeAssigneeFromIssue,
+    handleCreateIssue
 } from '../Utils/utils'
 
 // Subcomponents 
@@ -111,6 +112,7 @@ export default observer(function NewCreateIssueForm() {
 
     const [issue, setIssue] = useState(initialState)
 
+    /*
     function calculateIssueTimespan(input_days: any, input_hours: any, input_minutes: any) {
         var days, hours, minutes
 
@@ -196,6 +198,7 @@ export default observer(function NewCreateIssueForm() {
             issue_assignees
         )
     }
+    */
 
     return (
         <div>
@@ -373,7 +376,27 @@ export default observer(function NewCreateIssueForm() {
                                 loading={loading} 
                                 floated="right" 
                                 content={'Create Issue'} 
-                                onClick={() => handleCreateIssue()} 
+                                onClick={() => handleCreateIssue(
+                                    selectedIssueSprint,
+                                    selectedIssueName,
+                                    selectedIssueDescription,
+                                    selectedIssuePriority, 
+                                    selectedIssueStatus, 
+                                    selectedAssignees,
+                                    selectedReporter,
+                                    selectedIssueType,
+                                    selectedProject!,
+                                    selectedIssueLoggedDays,
+                                    selectedIssueLoggedHours,
+                                    selectedIssueLoggedMinutes,
+                                    selectedIssueEstimatedDays,
+                                    selectedIssueEstimatedHours,
+                                    selectedIssueEstimatedMinutes,
+                                    selectedIssueRemainingDays,
+                                    selectedIssueRemainingHours,
+                                    selectedIssueRemainingMinutes,
+                                    issueStore.createIssue
+                                )} 
                             />
                             </Grid.Column>
                         </Grid>

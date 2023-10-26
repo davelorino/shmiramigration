@@ -34,7 +34,6 @@ namespace Application.Projects
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
 
-
                 var project = request.Project;
 
                 _context.Projects.Add(project);
@@ -42,6 +41,7 @@ namespace Application.Projects
                 await _context.SaveChangesAsync();
 
                 return Unit.Value;
+                
             }
         }
     }

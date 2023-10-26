@@ -37,13 +37,13 @@ export default observer(function IssuesDashboard() {
         draggableId,
     }: DropResult) => {
         if (!isPositionChanged(source, destination)) return
-
-        var source_sprint_name = source!.droppableId.substring(
+        console.log("Issue Dropped")
+        let source_sprint_name = source!.droppableId.substring(
             source!.droppableId.indexOf('-') + 1,
             source!.droppableId.length
         )
 
-        var destination_status_name = destination!.droppableId.substring(
+        let destination_status_name = destination!.droppableId.substring(
             0,
             destination!.droppableId.indexOf('-')
         )
@@ -53,29 +53,32 @@ export default observer(function IssuesDashboard() {
             destination!.droppableId.length
         )
 
-        var source_sprint = selectedProject?.sprints.find(
+        let source_sprint = selectedProject?.sprints.find(
             (sprint) => sprint.name === source_sprint_name
         )
 
-        var source_sprint_id = source_sprint!.id
+        let source_sprint_id = source_sprint!.id
 
-        var destination_sprint = selectedProject?.sprints.find(
+        let destination_sprint = selectedProject?.sprints.find(
             (sprint) => sprint.name === destination_sprint_name
         )
 
-        var destination_sprint_id = destination_sprint!.id
+        let destination_sprint_id = destination_sprint!.id
 
         const issue_id = draggableId
 
-        var issueToUpdate = issuesByDate.find(
+        let issueToUpdate = issuesByDate.find(
             (issue) => issue.id.toLowerCase() === issue_id.toLowerCase()
         )
 
+        console.log("Previous index:")
+        console.log(issueToUpdate!.sort_order)
+
         var source_status_name = issueToUpdate!.status
 
-        var number_of_todo = 0
-        var number_of_inprogress = 0
-        var number_of_review = 0
+        let number_of_todo = 0
+        let number_of_inprogress = 0
+        let number_of_review = 0
 
         selectedProject!.sprints
             .filter((sprint) => sprint.name === destination_sprint_name)
@@ -170,6 +173,9 @@ export default observer(function IssuesDashboard() {
             }
         }
 
+        console.log("New sort order / index:")
+        console.log(issueToUpdate!.sort_order);
+
         var issuesToUpdate: any[] = []
 
         selectedProject!.sprints.map((sprint) => {
@@ -185,13 +191,14 @@ export default observer(function IssuesDashboard() {
 
             // Insert into destination sprint
             if (sprint.name === destination_sprint_name) {
-                /* Useful logger for debugging sorting of issues
+                {/* Useful logger for sort order debugging 
                 sprint.issues
                     .sort((a, b) => a.sort_order - b.sort_order)
                     .map((issue, index) => {
                         console.log(issue.name.concat(' index = ', index.toString()));
                 })
-                */
+                */}
+                
 
                 var splice_index = 0
                 if (issueToUpdate!.status == 'To Do') {

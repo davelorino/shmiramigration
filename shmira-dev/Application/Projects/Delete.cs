@@ -25,10 +25,15 @@ namespace Application.Projects
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
+
                 var project = await _context.Projects.FindAsync(request.Id);
+                
                 _context.Remove(project);
+                
                 await _context.SaveChangesAsync();
+                
                 return Unit.Value;
+
             }
 
         }

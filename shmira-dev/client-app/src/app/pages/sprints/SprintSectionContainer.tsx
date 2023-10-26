@@ -7,6 +7,12 @@ import {
     SprintSectionIssueContainer,
     Item,
     ItemText,
+    SprintSectionSprintName,
+    AddDatesContainer,
+    StartSprintNotAllowed,
+    CompleteSprintContainer,
+    SprintActiveOrInactiveStatusLabel,
+    StartOrCompleteSprintContainer
 } from './Styles'
 import Icon from '../../images/Icon'
 import BetterIcon from '../../images/BetterIcon'
@@ -27,12 +33,11 @@ interface Props {
 
 export default observer(function SprintSectionContainer({ sprint }: Props) {
     const { smallModalStore, mediumModalStore, modalStore, issueStore } = useStore()
-    const { selectSprint, selectedSprint, updateSprint, selectedProject } =
-        issueStore
+    const { selectSprint, selectedSprint, updateSprint, selectedProject } = issueStore
     var history = useHistory()
 
     function handleStartSprint() {
-        var current_sprint: Partial<Sprint> = {
+        let current_sprint: Partial<Sprint> = {
             ...selectedSprint!,
         }
         delete current_sprint['issues']
@@ -44,7 +49,7 @@ export default observer(function SprintSectionContainer({ sprint }: Props) {
     }
 
     function a_sprint_is_currently_active() {
-        var currently_active = false
+        let currently_active = false
         selectedProject!.sprints.map((sprint) => {
             if (sprint.is_active === true) {
                 currently_active = true
@@ -60,20 +65,8 @@ export default observer(function SprintSectionContainer({ sprint }: Props) {
                     <>
                         <SprintSection sprint_name={sprint.name}>
                             <Item>
-                                <BetterIcon
-                                    bottom="5"
-                                    left="6"
-                                    size="24"
-                                    code="\032C"
-                                />
-                                <p
-                                    style={{
-                                        fontSize: '8x !important',
-                                        display: 'relative',
-                                        paddingTop: '24px',
-                                        paddingLeft: '30px',
-                                    }}
-                                >
+                                <BetterIcon bottom="5" left="6" size="24" code="\032C"/>
+                                <SprintSectionSprintName>
                                     {sprint.name}
 
                                     {/* Non-backlog sprint (could be active or inactive) */}
@@ -83,71 +76,29 @@ export default observer(function SprintSectionContainer({ sprint }: Props) {
                                         .substr(0, 4) === '0001' &&
                                         sprint.name !== 'Backlog' && (
                                             <>
-                                                <BetterIcon
-                                                    style={{
-                                                        bottom: '0px',
-                                                        position: 'relative',
-                                                    }}
-                                                    top="0"
-                                                    size="11"
-                                                    code="\1F58B" /* Pencil Icon */
-                                                />
-                                                <div
-                                                    onClick={() => {
-                                                        issueStore.selectSprint(
-                                                            sprint.id
-                                                        )
+                                                {/* Add Dates Pencil Icon */}
+                                                <BetterIcon style={{bottom: '0px', position: 'relative'}} top="0" size="11" code="\1F58B" /* Pencil Icon *//>
+                                                <AddDatesContainer onClick={() => {issueStore.selectSprint(sprint.id)
                                                         mediumModalStore.openMediumModal(
                                                             <AddDatesToSprintForm />
-                                                        )
-                                                    }}
-                                                    style={{
-                                                        fontSize: '12px',
-                                                        display: 'inline-block',
-                                                        paddingLeft: '22px',
-                                                    }}
+                                                        )}}
                                                 >
                                                     Add dates
-                                                </div>
+                                                </AddDatesContainer>
 
                                                 {/* Start sprint if there is no currently active sprint */}
                                                 {a_sprint_is_currently_active() ===
                                                     false && (
-                                                    <div
-                                                        style={{
-                                                            cursor: 'not-allowed',
-                                                            fontSize: '12px',
-                                                            float: 'right',
-                                                            display:
-                                                                'inline-block',
-                                                            marginRight: '20px',
-                                                            paddingLeft: '0px',
-                                                        }}
-                                                    >
+                                                    <StartSprintNotAllowed>
                                                         Start sprint
-                                                    </div>
+                                                    </StartSprintNotAllowed>
                                                 )}
 
                                                 {/* Complete sprint button (renders only if sprint is active) */}
                                                 {sprint.is_active === true && (
-                                                    <div
-                                                        onClick={() =>
-                                                            smallModalStore.openSmallModal(
-                                                                <ConfirmCloseSprintForm />
-                                                            )
-                                                        }
-                                                        style={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '12px',
-                                                            float: 'right',
-                                                            display:
-                                                                'inline-block',
-                                                            marginRight: '20px',
-                                                            paddingLeft: '0px',
-                                                        }}
-                                                    >
+                                                    <CompleteSprintContainer onClick={() => smallModalStore.openSmallModal(<ConfirmCloseSprintForm />)}>
                                                         Complete sprint
-                                                    </div>
+                                                    </CompleteSprintContainer>
                                                 )}
                                             </>
                                         )}
@@ -158,115 +109,38 @@ export default observer(function SprintSectionContainer({ sprint }: Props) {
                                         .substr(0, 4) !== '0001' &&
                                         sprint.name !== 'Backlog' && (
                                             <>
-                                                <BetterIcon
-                                                    style={{
-                                                        bottom: '0px',
-                                                        position: 'relative',
-                                                    }}
-                                                    top="0"
-                                                    size="11"
-                                                    code="\1F58B" /* Pencil icon */
-                                                />
-                                                <div
-                                                    onClick={() => {
-                                                        issueStore.selectSprint(
-                                                            sprint.id
-                                                        )
-                                                        mediumModalStore.openMediumModal(
-                                                            <AddDatesToSprintForm />
-                                                        )
-                                                    }}
-                                                    style={{
-                                                        fontSize: '12px',
-                                                        display: 'inline-block',
-                                                        paddingLeft: '22px',
-                                                    }}
+                                                {/* Add Dates Pencil Icon */}
+                                                <BetterIcon style={{bottom: '0px', position: 'relative'}} top="0" size="11" code="\1F58B" /* Pencil icon *//>
+                                                <AddDatesContainer onClick={() => {issueStore.selectSprint(sprint.id)
+                                                        mediumModalStore.openMediumModal(<AddDatesToSprintForm />)}}
                                                 >
-                                                    {moment(
-                                                        sprint.date_start.substr(
-                                                            0,
-                                                            10
-                                                        )
-                                                    ).format('MMM Do')}{' '}
-                                                    -
-                                                    {' '.concat(
-                                                        moment(
-                                                            sprint.date_end.substr(
-                                                                0,
-                                                                10
-                                                            )
-                                                        ).format('MMM Do')
-                                                    )}
-                                                </div>
+                                                    {/* Date Start */}
+                                                    {moment(sprint.date_start.substr(0,10)).format('MMM Do')}{' '}-
+                                                    {/* Date End */}
+                                                    {' '.concat(moment(sprint.date_end.substr(0,10)).format('MMM Do'))}
+                                                </AddDatesContainer>
 
                                                 {/* Specify if sprint is active or inactive with a label */}
                                                 {sprint.is_active === true && (
-                                                    <div
-                                                        style={{
-                                                            fontSize: '12px',
-                                                            display:
-                                                                'inline-block',
-                                                            paddingLeft: '15px',
-                                                        }}
-                                                    >
+                                                    <SprintActiveOrInactiveStatusLabel>
                                                         Active Sprint
-                                                    </div>
+                                                    </SprintActiveOrInactiveStatusLabel>
                                                 )}
                                                 {!sprint.is_active === true && (
-                                                    <div
-                                                        style={{
-                                                            fontSize: '12px',
-                                                            display:
-                                                                'inline-block',
-                                                            paddingLeft: '15px',
-                                                        }}
-                                                    >
+                                                    <SprintActiveOrInactiveStatusLabel>
                                                         Inactive Sprint
-                                                    </div>
+                                                    </SprintActiveOrInactiveStatusLabel>
                                                 )}
                                                 {a_sprint_is_currently_active() ===
                                                     false && (
-                                                    <div
-                                                        onClick={() => {
-                                                            selectSprint(
-                                                                sprint.id
-                                                            )
-                                                            handleStartSprint()
-                                                        }}
-                                                        style={{
-                                                            fontSize: '12px',
-                                                            float: 'right',
-                                                            display:
-                                                                'inline-block',
-                                                            marginRight: '20px',
-                                                            paddingLeft: '0px',
-                                                        }}
-                                                    >
+                                                    <StartOrCompleteSprintContainer onClick={() => {selectSprint(sprint.id); handleStartSprint()}}>
                                                         Start sprint
-                                                    </div>
+                                                    </StartOrCompleteSprintContainer>
                                                 )}
                                                 {sprint.is_active === true && (
-                                                    <div
-                                                        onClick={() => {
-                                                            selectSprint(
-                                                                sprint.id
-                                                            )
-                                                            smallModalStore.openSmallModal(
-                                                                <ConfirmCloseSprintForm />
-                                                            )
-                                                        }}
-                                                        style={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '12px',
-                                                            float: 'right',
-                                                            display:
-                                                                'inline-block',
-                                                            marginRight: '20px',
-                                                            paddingLeft: '0px',
-                                                        }}
-                                                    >
+                                                    <StartOrCompleteSprintContainer onClick={() => {selectSprint(sprint.id); smallModalStore.openSmallModal(<ConfirmCloseSprintForm />)}}>
                                                         Complete sprint
-                                                    </div>
+                                                    </StartOrCompleteSprintContainer>
                                                 )}
                                             </>
                                         )}
@@ -274,70 +148,33 @@ export default observer(function SprintSectionContainer({ sprint }: Props) {
                                     {/* Backlog container */}
                                     {sprint.name === 'Backlog' && (
                                         <>
-                                            <div
-                                                onClick={() =>
-                                                    smallModalStore.openSmallModal(
-                                                        <SprintForm />
-                                                    )
-                                                }
-                                                style={{
-                                                    fontSize: '12px',
-                                                    float: 'right',
-                                                    display: 'inline-block',
-                                                    marginRight: '20px',
-                                                    paddingLeft: '0px',
-                                                }}
-                                            >
+                                            <StartOrCompleteSprintContainer onClick={() => smallModalStore.openSmallModal(<SprintForm />)}>
                                                 Create sprint
-                                            </div>
+                                            </StartOrCompleteSprintContainer>
                                         </>
                                     )}
-                                </p>
+                                </SprintSectionSprintName>
                             </Item>
 
                             {
                                 <SprintSectionIssueContainer
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
-                                    style={{
-                                        top: '0',
-                                        marginBottom: '0',
-                                        marginLeft: '22px',
-                                    }}
+                                    style={{top: '0', marginBottom: '0', marginLeft: '22px'}}
                                 >
+                                    {/* Render Issues */}
                                     {sprint.issues
-                                        .sort(
-                                            (a, b) =>
-                                                a.sort_order - b.sort_order
-                                        )
+                                        .sort((a, b) => a.sort_order - b.sort_order)
                                         .map((issue, index) => (
-                                            <SprintDashboardIssue
-                                                issue={issue}
-                                                key={issue.id}
-                                                index={index}
-                                            />
+                                            <SprintDashboardIssue issue={issue} key={issue.id} index={index}/>
                                         ))}
                                     {provided.placeholder}
                                 </SprintSectionIssueContainer>
                             }
                             <div></div>
-                            <Item
-                                onClick={() =>
-                                    modalStore.openModal(<NewCreateIssueForm />)
-                                }
-                            >
-                                <Icon
-                                    left={'11'}
-                                    top={'0'}
-                                    type="plus"
-                                    size="14"
-                                />
-                                <ItemText
-                                    style={{
-                                        paddingLeft: '36px',
-                                        bottom: '4px',
-                                    }}
-                                >
+                            <Item onClick={() => modalStore.openModal(<NewCreateIssueForm />)}>
+                                <Icon left={'11'} top={'0'} type="plus" size="14" />
+                                <ItemText style={{paddingLeft: '36px', bottom: '4px'}}>
                                     Create issue
                                 </ItemText>
                             </Item>

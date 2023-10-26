@@ -33,17 +33,14 @@ namespace Application.Projects
             }
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                Console.WriteLine("Current project =");
+
                 var project = await _context.Projects
                     .Include(a => a.assignees)
                     .ThenInclude(pa => pa.Assignee)
                     .FirstOrDefaultAsync(x => x.Id.ToString().ToLower() == request.project_assignee.ProjectId.ToLower());
-                Console.WriteLine(project.Id);
                 
-                Console.WriteLine("Current assignee =");
                 var assignee = await _context.Assignees
                     .FirstOrDefaultAsync(x => x.Id.ToString().ToLower() == request.project_assignee.AssigneeId.ToLower());
-                Console.WriteLine(assignee.Id);
 
                 var the_project_assignee_to_remove = project.assignees
                     .FirstOrDefault(pa => pa.AssigneeId.ToString() == request.project_assignee.AssigneeId);

@@ -4,6 +4,8 @@ import moment from 'moment';
 import { Issue } from '../../../../models/issue'
 import { Project } from '../../../../models/project'
 import { Assignee } from '../../../../models/assignee'
+import { SprintIssue } from '../../../../models/sprintissue';
+import { IssueAssignee } from '../../../../models/issueAssignee';
 
 interface SubmitCommentProps {
     comment_state: string
@@ -396,5 +398,118 @@ export function handleSprintChange(
         sprint_issue_to_add.issue_name,
         sprint_issue_to_add.issue_id,
         selectedIssue!
+    )
+}
+
+
+
+export function calculateIssueTimespan(input_days: any, input_hours: any, input_minutes: any) {
+    var days, hours, minutes
+
+    input_days === 0 ? (days = 0) : (days = input_days)
+    input_hours === 0 ? (hours = 0) : (hours = input_hours)
+    input_minutes === 0 ? (minutes = 0) : (minutes = input_minutes)
+
+    if (minutes >= 60) {
+        var minutes_to_hours = Math.floor(minutes / 60)
+        minutes = minutes % 60
+        hours = parseInt(hours) + minutes_to_hours
+    }
+
+    if (hours >= 24) {
+        var hours_to_days = Math.floor(hours / 24)
+        hours = hours % 24
+        days = parseInt(days) + hours_to_days
+    }
+
+    let estimated_duration = days + '.' + hours + ':' + minutes + ':' + '00'
+    return estimated_duration
+}
+
+export function handleCreateIssue(
+    selectedIssueSprint: string, 
+    selectedIssueName: string, 
+    selectedIssueDescription: string,
+    selectedIssuePriority: string, 
+    selectedIssueStatus: string, 
+    selectedAssignees: string[],
+    selectedReporter: string,
+    selectedIssueType: string, 
+    selectedProject: Project, 
+    selectedIssueLoggedDays: number, 
+    selectedIssueLoggedHours: number, 
+    selectedIssueLoggedMinutes: number, 
+    selectedIssueEstimatedDays: number, 
+    selectedIssueEstimatedHours: number, 
+    selectedIssueEstimatedMinutes: number,
+    selectedIssueRemainingDays: number, 
+    selectedIssueRemainingHours: number, 
+    selectedIssueRemainingMinutes: number,
+    createIssue: (
+        issue_to_create: Issue, 
+        sprint_id: string, 
+        sprint_issue: SprintIssue,
+        issue_assignees: IssueAssignee[]
+    ) => void
+) {
+    let sprint_id_check = selectedIssueSprint !== '' ? selectedIssueSprint : selectedProject!.sprints.find(s => s.name === 'Backlog')!.id;
+    let issue_to_create: any = {
+        id: uuid(),
+        name: selectedIssueName,
+        description: selectedIssueDescription,
+        priority: selectedIssuePriority,
+        status: selectedIssueStatus,
+        reporter_id: selectedReporter,
+        issue_type: selectedIssueType,
+        project_id: selectedProject!.id,
+        assignees: [],
+        created_at: moment
+            .tz(moment().subtract(moment.duration('11:00:00')), 'Australia/Sydney')
+            .toISOString(true),
+        updated_at: moment
+            .tz(moment().subtract(moment.duration('11:00:00')), 'Australia/Sydney')
+            .toISOString(true),
+        description_text: '',
+        time_logged: calculateIssueTimespan(
+            selectedIssueLoggedDays,
+            selectedIssueLoggedHours,
+            selectedIssueLoggedMinutes
+        ),
+        time_remaining: calculateIssueTimespan(
+            selectedIssueRemainingDays,
+            selectedIssueRemainingHours,
+            selectedIssueRemainingMinutes
+        ),
+        original_estimated_duration: calculateIssueTimespan(
+            selectedIssueEstimatedDays,
+            selectedIssueEstimatedHours,
+            selectedIssueEstimatedMinutes
+        ),
+        sprint_id: sprint_id_check,
+    }
+
+    delete issue_to_create['assignees']
+
+    let sprint_issue: SprintIssue = {
+        sprint_id: sprint_id_check,
+        issue_id: issue_to_create.id,
+        issue_name: issue_to_create.name,
+    }
+
+    let issue_assignees: any[] = []
+
+    selectedAssignees.map((selectedAssignee) => {
+        let issue_assignee: IssueAssignee = {
+            IssueId: issue_to_create.id,
+            AssigneeId: selectedAssignee,
+        }
+        issue_assignees.push(issue_assignee)
+    })
+
+    createIssue(
+        issue_to_create,
+        sprint_issue.sprint_id,
+        sprint_issue,
+        issue_assignees
     )
 }

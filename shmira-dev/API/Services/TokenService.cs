@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Security.Claims;
 using Domain;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.Extensions.Configuration;
 
 namespace API.Services
 {
@@ -24,7 +19,7 @@ namespace API.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),
-                //new Claim(ClaimTypes.NameIdentifier, user.Id),
+                
                 new Claim(ClaimTypes.Email, user.Email)
             };
 

@@ -270,11 +270,11 @@ export default observer(function NewUpdateIssueForm() {
                                             handleSprintChange={handleSprintChange}
                                     />
              
-                                    <div style={{ marginBottom: '20px' }} />
-
+                                    <div style={{ marginBottom: '20px' }}/>
                                     <div style={{ marginTop: '20px' }}>
                                     
                     {/* PRIORITY LABEL */}
+
                                         <IssuePriority 
                                             mode='update'
                                             isPriorityHovered={isPriorityHovered}
@@ -284,8 +284,6 @@ export default observer(function NewUpdateIssueForm() {
                                         />
                             
                                     </div>
-
-                  
                                 </div>
                     
                     {/* CREATED AT & UPDATED AT */}
@@ -299,7 +297,7 @@ export default observer(function NewUpdateIssueForm() {
                                     </UpdatedAtPTag>
                                 </div>
 
-                                
+
                             </Grid.Column>
                         </Grid>
                     </Form>

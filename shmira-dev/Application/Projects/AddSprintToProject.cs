@@ -36,10 +36,6 @@ namespace Application.Projects
             }
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                    Console.WriteLine("Project Id =");
-                    Console.WriteLine(request.project_id);
-                    Console.WriteLine("Sprint Id =");
-                    Console.WriteLine(request.sprint_id);
                     
                     var project = await _context.Projects
                         .Include(s => s.sprints)
@@ -72,14 +68,11 @@ namespace Application.Projects
                     };
 
                     if(request.sprint_name == "Backlog"){
-                        Console.WriteLine("Backlog sprint adder triggered");
                         project.sprints.Add(backlogSprintToAdd);
                     } else {
-                        Console.WriteLine("Existing sprint adder triggered");
                         project.sprints.Add(existingSprintToAdd);
                     }
                 
-
                     var result = await _context.SaveChangesAsync() > 0;
 
                     return result ? Result<Unit>.Success(Unit.Value) : Result<Unit>.Failure("Problem adding sprint to project.");

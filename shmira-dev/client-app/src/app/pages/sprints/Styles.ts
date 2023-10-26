@@ -58,6 +58,50 @@ export const SprintSectionIssueContainerEmpty = styled.div`
     background: #1d1f21 !important;
 `
 
+export const StartSprintNotAllowed = styled.div`
+    cursor: not-allowed;
+    font-size: 12px;
+    float: right;
+    display: inline-block;
+    margin-right: 20px;
+    padding-left: 0px;
+`
+export const CompleteSprintContainer = styled.div`
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+    display: inline-block;
+    margin-right: 20px;
+    padding-left: 0px;
+`
+
+export const SprintActiveOrInactiveStatusLabel = styled.div`
+    font-size: 12px;
+    display: inline-block;
+    padding-left: 15px;
+`
+
+export const StartOrCompleteSprintContainer = styled.div`
+    font-size: 12px;
+    float: right;
+    display: inline-block;
+    margin-right: 20px;
+    padding-left: 0px;
+`
+
+export const SprintSectionSprintName = styled.p`
+    font-size: 8x !important;
+    display: relative;
+    padding-top: 24px;
+    padding-left: 30px;
+`
+
+export const AddDatesContainer = styled.div`
+    fontSize: 12px;
+    display: inline-block;
+    padding-left: 22px;
+`
+
 export const List = styled.div`
     display: flex;
     flex-direction: column;

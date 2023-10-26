@@ -129,18 +129,10 @@ namespace API.Controllers
                 UserName = registerDto.email
             };
 
-            Console.WriteLine("Creating user");
-            Console.WriteLine(user.Email);
-            Console.WriteLine(user.first_name);
-            Console.WriteLine(user.second_name);
-            Console.WriteLine(user.UserName);
 
             var temp_password = "Pa$$w0rd";
 
             var result = await _userManager.CreateAsync(user, temp_password);
-
-            Console.WriteLine("Result is:");
-            Console.WriteLine(result);
 
             if(result.Succeeded)
             {

@@ -34,8 +34,6 @@ namespace Application.Projects
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                     
-
-
                     foreach(var project_assignee in request.project_assignees){
                         
                         var current_project = await _context.Projects
@@ -48,8 +46,7 @@ namespace Application.Projects
 
                         
                         var already_assigned = current_project.assignees.FirstOrDefault(a => a.AssigneeId.ToString().ToLower() == current_assignee.Id.ToString().ToLower());
-                        //Console.WriteLine("Already Assigned = ");
-                        //Console.WriteLine(already_assigned.AssigneeId);
+
                         if(already_assigned == null){
                             var the_project_assignee_to_add = new ProjectAssignee
                             {

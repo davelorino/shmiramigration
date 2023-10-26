@@ -32,10 +32,12 @@ namespace Application.Projects
             }
             public async Task<Result<List<ProjectDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
+                
                 var projects = await _context.Projects
                     .ProjectTo<ProjectDto>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken); 
 
+                
                 return Result<List<ProjectDto>>.Success(projects);
             }
         }
